@@ -2862,10 +2862,10 @@ public class Client extends GameEngine implements RSClient {
 					if (anIntArray981[k] == 4) {
 						int i4 = chatTextDrawingArea.method384(s);
 						int k4 = ((150 - anIntArray982[k]) * (i4 + 100)) / 150;
-						DrawingArea.setDrawingArea(334, spriteDrawX - 50, spriteDrawX + 50, 0);
+						Rasterizer2D.setDrawingArea(334, spriteDrawX - 50, spriteDrawX + 50, 0);
 						chatTextDrawingArea.method385(0, s, spriteDrawY + 1, (spriteDrawX + 50) - k4);
 						chatTextDrawingArea.method385(i3, s, spriteDrawY, (spriteDrawX + 50) - k4);
-						DrawingArea.defaultDrawingAreaSize();
+						Rasterizer2D.defaultDrawingAreaSize();
 					}
 					if (anIntArray981[k] == 5) {
 						int j4 = 150 - anIntArray982[k];
