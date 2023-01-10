@@ -60,15 +60,20 @@ public class SpawnContainer extends RSInterface {
     public void update(String message) {
         RSInterface container = get(containerInterfaceId);
         List<Integer> matches = Lists.newArrayList();
-        for (int i = 0; i < 100_000; i++) {
-            ItemDefinition def = ItemDefinition.lookup(i);
-            if (def != null && def.name != null && def.name.length() > 0 && !def.name.contains("Dwarf remains")
-                    && (message.length() == 0 || def.name.toLowerCase().contains(message))) {
-                matches.add(i + 1);
-                if (matches.size() >= containerCount - 1)
-                    break;
-            }
-        }
+		try {
+			for (int i = 0; i < 100_000; i++) {
+				ItemDefinition def = ItemDefinition.lookup(i);
+				if (def != null && def.name != null && def.name.length() > 0 && !def.name.contains("Dwarf remains")
+					&& (message.length() == 0 || def.name.toLowerCase().contains(message))) {
+					matches.add(i + 1);
+					if (matches.size() >= containerCount - 1)
+						break;
+				}
+			}
+		}catch (Exception e) {
+
+		}
+
 
         for (int index = 0; index < matches.size(); index++) {
             container.inventoryItemId[index] = matches.get(index);

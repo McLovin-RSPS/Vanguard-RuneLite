@@ -1963,6 +1963,10 @@ public final class ItemDefinition implements RSItemComposition {
 			if (cache[count].id == itemId)
 				return cache[count];
 
+		if (itemId > streamIndices.length)
+			itemId = 0;
+		if (itemId == -1)
+			itemId = 0;
 		cacheIndex = (cacheIndex + 1) % 10;
 		ItemDefinition itemDef = cache[cacheIndex];
 		if (itemId > 0)
@@ -1973,14 +1977,6 @@ public final class ItemDefinition implements RSItemComposition {
 
 		if (itemDef.noted_item_id != -1) {
 			itemDef.toNote();
-		}
-
-		if (itemDef.bought_template_id != -1) {
-			itemDef.method2789(lookup(itemDef.bought_template_id), lookup(itemDef.bought_id));
-		}
-
-		if (itemDef.placeholder_template_id != -1) {
-			itemDef.method2790(lookup(itemDef.placeholder_template_id), lookup(itemDef.placeholder_id));
 		}
 
 		customItems(itemId);
