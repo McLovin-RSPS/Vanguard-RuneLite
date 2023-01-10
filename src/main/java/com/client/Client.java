@@ -10350,7 +10350,7 @@ public class Client extends GameEngine implements RSClient {
 					if (l2 == 2)
 						npc.anInt1530 = 0;
 				} else if (i1 == -1 || npc.anim == -1
-						|| AnimationDefinition.anims[i1].forcedPriority >= AnimationDefinition.anims[npc.anim].forcedPriority) {
+					|| AnimationDefinition.anims[i1].forcedPriority >= AnimationDefinition.anims[npc.anim].forcedPriority) {
 					npc.anim = i1;
 					npc.animFrameIndex = 0;
 					npc.anInt1528 = 0;
@@ -10360,12 +10360,12 @@ public class Client extends GameEngine implements RSClient {
 				}
 			}
 			if ((l & 8) != 0) {
-				int damage = stream.method426();
+				int j1 = stream.method426();
 				int j2 = stream.method427();
-				npc.updateHitData(j2, damage, loopCycle);
+				npc.updateHitData(j2, j1, loopCycle);
 				npc.loopCycleStatus = loopCycle + 300;
-				npc.currentHealth = stream.readInt();
-				npc.maxHealth = stream.readInt();
+				npc.currentHealth = stream.readUShort();
+				npc.maxHealth = stream.readUShort();
 			}
 			if ((l & 0x80) != 0) {
 				npc.anInt1520 = stream.readUShort();
@@ -10389,9 +10389,9 @@ public class Client extends GameEngine implements RSClient {
 				npc.textCycle = 100;
 			}
 			if ((l & 0x40) != 0) {
-				int damage = stream.method427();
+				int l1 = stream.method427();
 				int k2 = stream.method428();
-				npc.updateHitData(k2, damage, loopCycle);
+				npc.updateHitData(k2, l1, loopCycle);
 				npc.loopCycleStatus = loopCycle + 300;
 				npc.currentHealth = stream.readUShort();
 				npc.maxHealth = stream.readUShort();
