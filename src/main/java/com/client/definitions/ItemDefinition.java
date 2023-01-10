@@ -74,26 +74,6 @@ public final class ItemDefinition implements RSItemComposition {
 		id = -1;
 	}
 
-	public void createCustomSprite(String img) {
-		customSpriteLocation = getCustomSprite(img);
-	}
-
-	public void createSmallCustomSprite(String img) {
-		customSmallSpriteLocation = getCustomSprite(img);
-	}
-
-
-	private byte[] getCustomSprite(String img) {
-		String location = (Sprite.location + Configuration.CUSTOM_ITEM_SPRITES_DIRECTORY + img).toLowerCase();
-		byte[] spriteData = FileOperations.readFile(location);
-		Preconditions.checkState(spriteData != null, "No sprite: " + location);
-		return spriteData;
-	}
-
-	public byte[] customSpriteLocation;
-	public byte[] customSmallSpriteLocation;
-
-
 	public static void clear() {
 		models = null;
 		sprites = null;
@@ -122,68 +102,6 @@ public final class ItemDefinition implements RSItemComposition {
 		}
 
 		System.out.println("Loaded: " + totalItems + " items");
-	}
-
-	private static ItemDefinition newCustomItems(int itemId) {
-		ItemDefinition itemDef = new ItemDefinition();
-		itemDef.setDefaults();
-		switch (itemId) {
-
-			case 30000:
-				return copy(itemDef, 30_000, 11738, "Resource box(small)", "Open");
-			case 30001:
-				return copy(itemDef, 30_001, 11738, "Resource box(medium)", "Open");
-			case 30002:
-				return copy(itemDef, 30_002, 11738, "Resource box(large)", "Open");
-			case 22375:
-				return copy(itemDef, 22375, 22374, "Mossy key");
-
-			case 33056:
-				itemDef.setDefaults();
-				itemDef.id = 33056;
-				itemDef.modelId = 65270;
-				itemDef.name = "Completionist cape";
-
-				itemDef.zoom2d = 1385;
-				itemDef.xan2d = 279;
-				itemDef.yan2d = 948;
-				itemDef.zan2d = 0;
-				itemDef.xOffset2d = 0;
-				itemDef.yOffset2d = 24;
-
-				itemDef.maleModel0 = 65297;
-				itemDef.femaleModel0 = 65316;
-				//itemDef.groundActions = new String[5];
-				//itemDef.groundActions[2] = "Take";
-				itemDef.interfaceOptions = new String[5];
-				itemDef.interfaceOptions[1] = "Wear";
-				itemDef.interfaceOptions[2] = "Teleports";
-				itemDef.interfaceOptions[3] = "Features";
-				itemDef.interfaceOptions[4] = "Drop";
-				return itemDef;
-			case 33057:
-				itemDef.setDefaults();
-				itemDef.id = 33057;
-				itemDef.modelId = 65273;
-				itemDef.name = "Completionist hood";
-
-				itemDef.zoom2d = 760;
-				itemDef.xan2d = 11;
-				itemDef.yan2d = 0;
-				itemDef.zan2d = 0;
-				itemDef.xOffset2d = 0;
-				itemDef.yOffset2d = 0;
-
-				itemDef.maleModel0 = 65292;
-				itemDef.femaleModel0 = 65310;
-				//itemDef.groundActions = new String[5];
-				//itemDef.groundActions[2] = "Take";
-				itemDef.interfaceOptions = new String[5];
-				itemDef.interfaceOptions[1] = "Wear";
-				return itemDef;
-		}
-
-		return null;
 	}
 
 	public static ItemDefinition copy(ItemDefinition itemDef, int newId, int copyingItemId, String newName, String...actions) {
@@ -215,6 +133,65 @@ public final class ItemDefinition implements RSItemComposition {
 		ItemDefinition itemDef = lookup(itemId);
 
 		switch (itemId) {
+
+			case 30000:
+				copy(itemDef, 30_000, 11738, "Resource box(small)", "Open");
+				break;
+			case 30001:
+				copy(itemDef, 30_001, 11738, "Resource box(medium)", "Open");
+				break;
+			case 30002:
+				copy(itemDef, 30_002, 11738, "Resource box(large)", "Open");
+				break;
+			case 22375:
+				copy(itemDef, 22375, 22374, "Mossy key");
+				break;
+
+			case 33056:
+				itemDef.setDefaults();
+				itemDef.id = 33056;
+				itemDef.modelId = 65270;
+				itemDef.name = "Completionist cape";
+				////itemDef.description = "A cape worn by those who've overachieved.";
+
+				itemDef.zoom2d = 1385;
+				itemDef.xan2d = 279;
+				itemDef.yan2d = 948;
+				itemDef.zan2d = 0;
+				itemDef.xOffset2d = 0;
+				itemDef.yOffset2d = 24;
+
+				itemDef.maleModel0 = 65297;
+				itemDef.femaleModel0 = 65316;
+				//itemDef.groundActions = new String[5];
+				//itemDef.groundActions[2] = "Take";
+				itemDef.interfaceOptions = new String[5];
+				itemDef.interfaceOptions[1] = "Wear";
+				itemDef.interfaceOptions[2] = "Teleports";
+				itemDef.interfaceOptions[3] = "Features";
+				itemDef.interfaceOptions[4] = "Drop";
+				break;
+			case 33057:
+				itemDef.setDefaults();
+				itemDef.id = 33057;
+				itemDef.modelId = 65273;
+				itemDef.name = "Completionist hood";
+				////itemDef.description = "A hood worn by those who've over achieved.";
+
+				itemDef.zoom2d = 760;
+				itemDef.xan2d = 11;
+				itemDef.yan2d = 0;
+				itemDef.zan2d = 0;
+				itemDef.xOffset2d = 0;
+				itemDef.yOffset2d = 0;
+
+				itemDef.maleModel0 = 65292;
+				itemDef.femaleModel0 = 65310;
+				//itemDef.groundActions = new String[5];
+				//itemDef.groundActions[2] = "Take";
+				itemDef.interfaceOptions = new String[5];
+				itemDef.interfaceOptions[1] = "Wear";
+				break;
 
 			case 26784://colossal pouch
 				itemDef.interfaceOptions = new String[] { "Fill", "Empty", "Check", null, null };
@@ -1962,7 +1939,6 @@ public final class ItemDefinition implements RSItemComposition {
 		for (int count = 0; count < 10; count++)
 			if (cache[count].id == itemId)
 				return cache[count];
-
 		if (itemId > streamIndices.length)
 			itemId = 0;
 		if (itemId == -1)
@@ -1975,35 +1951,14 @@ public final class ItemDefinition implements RSItemComposition {
 		itemDef.setDefaults();
 		itemDef.decode(item_data);
 
-		if (itemDef.noted_item_id != -1) {
+		if (itemDef.noted_item_id != -1)
 			itemDef.toNote();
-		}
 
 		customItems(itemId);
-
-		if (newCustomItems(itemId) != null) {
-			return newCustomItems(itemId);
-		}
 
 		return itemDef;
 	}
 
-	void method2790(ItemDefinition var1, ItemDefinition var2) {
-		modelId = var1.modelId * 1;
-		zoom2d = 1 * var1.zoom2d;
-		xan2d = var1.xan2d * 1;
-		yan2d = var1.yan2d * 1;
-		zan2d = var1.zan2d * 1;
-		xOffset2d = 1 * var1.xOffset2d;
-		yOffset2d = var1.yOffset2d * 1;
-		colorReplace = var1.colorReplace;
-		colorFind = var1.colorFind;
-		textureFind = var1.textureFind;
-		textureReplace = var1.textureReplace;
-		stackable = var1.stackable;
-		name = var2.name;
-		cost = 0;
-	}
 
 	void method2789(ItemDefinition var1, ItemDefinition var2) {
 		modelId = var1.modelId * 1;
@@ -2059,6 +2014,10 @@ public final class ItemDefinition implements RSItemComposition {
 		stackable = var1.stackable;
 		name = var2.name;
 		cost = 0;
+	}
+
+	public static Sprite getSmallSprite(int itemId) {
+		return getSmallSprite(itemId, 1);
 	}
 
 	public static Sprite getSprite(int itemId, int stackSize, int outlineColor, boolean noted, int border,int shadow) {
@@ -2171,87 +2130,6 @@ public final class ItemDefinition implements RSItemComposition {
 		return enabledSprite;
 	}
 
-	public static Sprite getSmallSprite(int itemId) {
-		return getSmallSprite(itemId, 1);
-	}
-
-	public static Sprite getSmallSprite(int itemId, int stackSize) {
-
-		ItemDefinition itemDef = lookup(itemId);
-		if (itemDef.countObj == null)
-			stackSize = -1;
-		if (stackSize > 1) {
-			int stack_item_id = -1;
-			for (int j1 = 0; j1 < 10; j1++)
-				if (stackSize >= itemDef.countCo[j1] && itemDef.countCo[j1] != 0)
-					stack_item_id = itemDef.countObj[j1];
-
-			if (stack_item_id != -1)
-				itemDef = lookup(stack_item_id);
-		}
-		Model model = itemDef.getModel(1);
-		if (model == null)
-			return null;
-		Sprite sprite = null;
-		if (itemDef.noted_item_id != -1) {
-			sprite = getSprite(itemDef.unnoted_item_id, 10, -1);
-			if (sprite == null)
-				return null;
-		}
-		Sprite enabledSprite = new Sprite(18, 18);
-		int centerX = Rasterizer3D.originViewX;
-		int centerY = Rasterizer3D.originViewY;
-		int[] lineOffsets = Rasterizer3D.scanOffsets;
-		int[] pixels = Rasterizer2D.pixels;
-		int width = Rasterizer2D.width;
-		int height = Rasterizer2D.height;
-		int vp_left = Rasterizer2D.leftX;
-		int vp_right = Rasterizer2D.bottomX;
-		int vp_top = Rasterizer2D.topY;
-		int vp_bottom = Rasterizer2D.bottomY;
-		Rasterizer3D.world = false;
-		Rasterizer3D.aBoolean1464 = false;
-		Rasterizer2D.initDrawingArea(18, 18, enabledSprite.myPixels);
-		Rasterizer2D.drawItemBox(0, 0, 18, 18, 0);
-		Rasterizer3D.useViewport();
-		int k3 = itemDef.zoom2d;
-
-		int l3 = Rasterizer3D.SINE[itemDef.xan2d] * k3 >> 16;
-		int i4 = Rasterizer3D.COSINE[itemDef.xan2d] * k3 >> 16;
-		Rasterizer3D.renderOnGpu = true;
-		model.renderModel(itemDef.yan2d, itemDef.zan2d, itemDef.xan2d, itemDef.xOffset2d,
-			l3 + model.modelBaseY / 2 + itemDef.yOffset2d, i4 + itemDef.yOffset2d);
-		Rasterizer3D.renderOnGpu = false;
-		enabledSprite.outline(1);
-
-		Rasterizer2D.initDrawingArea(32, 32, enabledSprite.myPixels);
-
-		if (itemDef.noted_item_id != -1) {
-			int old_w = sprite.maxWidth;
-			int old_h = sprite.maxHeight;
-			sprite.maxWidth = 18;
-			sprite.maxHeight = 18;
-			sprite.drawSprite(0, 0);
-			sprite.maxWidth = old_w;
-			sprite.maxHeight = old_h;
-		}
-
-		sprites.put(enabledSprite, itemId);
-		Rasterizer2D.initDrawingArea(height, width, pixels);
-		Rasterizer2D.setDrawingArea(vp_bottom, vp_left, vp_right, vp_top);
-		Rasterizer3D.originViewX = centerX;
-		Rasterizer3D.originViewY = centerY;
-		Rasterizer3D.scanOffsets = lineOffsets;
-		Rasterizer3D.aBoolean1464 = true;
-		Rasterizer3D.world = true;
-		if (itemDef.stackable)
-			enabledSprite.maxWidth = 18;
-		else
-			enabledSprite.maxWidth = 18;
-		enabledSprite.maxHeight = stackSize;
-		return enabledSprite;
-	}
-
 
 	public static Sprite getSprite(int itemId, int stackSize, int outlineColor) {
 		if (outlineColor == 0) {
@@ -2311,7 +2189,7 @@ public final class ItemDefinition implements RSItemComposition {
 		Rasterizer3D.renderOnGpu = true;
 		model.renderModel(itemDef.yan2d, itemDef.zan2d, itemDef.xan2d, itemDef.xOffset2d,
 			l3 + model.modelBaseY / 2 + itemDef.yOffset2d, i4 + itemDef.yOffset2d);
-		Rasterizer3D.renderOnGpu = false;
+
 		enabledSprite.outline(1);
 		if (outlineColor > 0) {
 			enabledSprite.outline(16777215);
@@ -2344,6 +2222,83 @@ public final class ItemDefinition implements RSItemComposition {
 			enabledSprite.maxWidth = 33;
 		else
 			enabledSprite.maxWidth = 32;
+		enabledSprite.maxHeight = stackSize;
+		return enabledSprite;
+	}
+
+	public static Sprite getSmallSprite(int itemId, int stackSize) {
+
+		ItemDefinition itemDef = lookup(itemId);
+		if (itemDef.countObj == null)
+			stackSize = -1;
+		if (stackSize > 1) {
+			int stack_item_id = -1;
+			for (int j1 = 0; j1 < 10; j1++)
+				if (stackSize >= itemDef.countCo[j1] && itemDef.countCo[j1] != 0)
+					stack_item_id = itemDef.countObj[j1];
+
+			if (stack_item_id != -1)
+				itemDef = lookup(stack_item_id);
+		}
+		Model model = itemDef.getModel(1);
+		if (model == null)
+			return null;
+		Sprite sprite = null;
+		if (itemDef.noted_item_id != -1) {
+			sprite = getSprite(itemDef.unnoted_item_id, 10, -1);
+			if (sprite == null)
+				return null;
+		}
+		Sprite enabledSprite = new Sprite(18, 18);
+		int centerX = Rasterizer3D.originViewX;
+		int centerY = Rasterizer3D.originViewY;
+		int[] lineOffsets = Rasterizer3D.scanOffsets;
+		int[] pixels = Rasterizer2D.pixels;
+		int width = Rasterizer2D.width;
+		int height = Rasterizer2D.height;
+		int vp_left = Rasterizer2D.leftX;
+		int vp_right = Rasterizer2D.bottomX;
+		int vp_top = Rasterizer2D.topY;
+		int vp_bottom = Rasterizer2D.bottomY;
+		Rasterizer3D.world = false;
+		Rasterizer3D.aBoolean1464 = false;
+		Rasterizer2D.initDrawingArea(18, 18, enabledSprite.myPixels);
+		Rasterizer2D.drawItemBox(0, 0, 18, 18, 0);
+		Rasterizer3D.useViewport();
+		int k3 = itemDef.zoom2d;
+
+		int l3 = Rasterizer3D.SINE[itemDef.xan2d] * k3 >> 16;
+		int i4 = Rasterizer3D.COSINE[itemDef.xan2d] * k3 >> 16;
+		Rasterizer3D.renderOnGpu = true;
+		model.renderModel(itemDef.yan2d, itemDef.zan2d, itemDef.xan2d, itemDef.xOffset2d,
+			l3 + model.modelBaseY / 2 + itemDef.yOffset2d, i4 + itemDef.yOffset2d);
+
+		enabledSprite.outline(1);
+
+		Rasterizer2D.initDrawingArea(32, 32, enabledSprite.myPixels);
+
+		if (itemDef.noted_item_id != -1) {
+			int old_w = sprite.maxWidth;
+			int old_h = sprite.maxHeight;
+			sprite.maxWidth = 18;
+			sprite.maxHeight = 18;
+			sprite.drawSprite(0, 0);
+			sprite.maxWidth = old_w;
+			sprite.maxHeight = old_h;
+		}
+
+		sprites.put(enabledSprite, itemId);
+		Rasterizer2D.initDrawingArea(height, width, pixels);
+		Rasterizer2D.setDrawingArea(vp_bottom, vp_left, vp_right, vp_top);
+		Rasterizer3D.originViewX = centerX;
+		Rasterizer3D.originViewY = centerY;
+		Rasterizer3D.scanOffsets = lineOffsets;
+		Rasterizer3D.aBoolean1464 = true;
+		Rasterizer3D.world = true;
+		if (itemDef.stackable)
+			enabledSprite.maxWidth = 18;
+		else
+			enabledSprite.maxWidth = 18;
 		enabledSprite.maxHeight = stackSize;
 		return enabledSprite;
 	}
@@ -2471,6 +2426,26 @@ public final class ItemDefinition implements RSItemComposition {
 			cached = false;
 		return cached;
 	}
+
+	public void createCustomSprite(String img) {
+		customSpriteLocation = getCustomSprite(img);
+	}
+
+	public void createSmallCustomSprite(String img) {
+		customSmallSpriteLocation = getCustomSprite(img);
+	}
+
+
+	private byte[] getCustomSprite(String img) {
+		String location = (Sprite.location + Configuration.CUSTOM_ITEM_SPRITES_DIRECTORY + img).toLowerCase();
+		byte[] spriteData = FileOperations.readFile(location);
+		Preconditions.checkState(spriteData != null, "No sprite: " + location);
+		return spriteData;
+	}
+
+	public byte[] customSpriteLocation;
+	public byte[] customSmallSpriteLocation;
+
 
 	public Model getEquippedModel(int gender) {
 		int primaryModel = maleModel0;

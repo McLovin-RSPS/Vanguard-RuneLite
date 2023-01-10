@@ -1714,6 +1714,7 @@ public class Client extends GameEngine implements RSClient {
 		if (class9 == null) {
 			return;
 		}
+
 		if (class9.type != 0 || class9.children == null || class9.isMouseoverTriggered)
 			return;
 		if (mouseX < xPosition || mouseY < yPosition || mouseX > xPosition + class9.width || mouseY > yPosition + class9.height)
@@ -1724,6 +1725,7 @@ public class Client extends GameEngine implements RSClient {
 				int drawX = class9.childX[childIndex] + xPosition;
 				int drawY = (class9.childY[childIndex] + yPosition) - j1;
 				RSInterface class9_1 = RSInterface.interfaceCache[class9.children[childIndex]];
+				HoverMenuManager.reset();
 				if (class9_1 == null) {
 					break;
 				}
@@ -1744,7 +1746,7 @@ public class Client extends GameEngine implements RSClient {
 				}
 
 				if ((class9_1.mOverInterToTrigger >= 0 || class9_1.anInt216 != 0) && mouseX >= drawX && mouseY >= drawY
-						&& mouseX < drawX + class9_1.width && mouseY < drawY + class9_1.height) {
+					&& mouseX < drawX + class9_1.width && mouseY < drawY + class9_1.height) {
 					if (class9_1.mOverInterToTrigger >= 0) {
 						anInt886 = class9_1.mOverInterToTrigger;
 					} else {
@@ -1761,8 +1763,8 @@ public class Client extends GameEngine implements RSClient {
 
 						// Inverted keybinds dropdown
 						if (class9_1.type == RSInterface.TYPE_KEYBINDS_DROPDOWN && class9_1.inverted && mouseX >= drawX
-								&& mouseX < drawX + (class9_1.dropdown.getWidth() - 16)
-								&& mouseY >= drawY - class9_1.dropdown.getHeight() - 10 && mouseY < drawY) {
+							&& mouseX < drawX + (class9_1.dropdown.getWidth() - 16)
+							&& mouseY >= drawY - class9_1.dropdown.getHeight() - 10 && mouseY < drawY) {
 							resetTabInterfaceHover();
 							int yy = mouseY - (drawY - class9_1.dropdown.getHeight());
 
@@ -1773,7 +1775,7 @@ public class Client extends GameEngine implements RSClient {
 							}
 							flag = true;
 						} else if (!class9_1.inverted && mouseX >= drawX && mouseX < drawX + (class9_1.dropdown.getWidth() - 16)
-								&& mouseY >= drawY + 19 && mouseY < drawY + 19 + class9_1.dropdown.getHeight()) {
+							&& mouseY >= drawY + 19 && mouseY < drawY + 19 + class9_1.dropdown.getHeight()) {
 							resetTabInterfaceHover();
 							int yy = mouseY - (drawY + 19);
 
@@ -1801,7 +1803,7 @@ public class Client extends GameEngine implements RSClient {
 						}
 					}
 					if (mouseX >= drawX && mouseY >= drawY && mouseX < drawX + class9_1.dropdown.getWidth() && mouseY < drawY + 24
-							&& menuActionRow == 1) {
+						&& menuActionRow == 1) {
 						class9_1.hovered = true;
 						menuActionName[menuActionRow] = class9_1.dropdown.isOpen() ? "Hide" : "Show";
 						menuActionID[menuActionRow] = 769;
@@ -1812,7 +1814,7 @@ public class Client extends GameEngine implements RSClient {
 				}
 
 				if (mouseX >= drawX && mouseY >= drawY && mouseX < drawX + (class9_1.type == 4 ? 100 : class9_1.width)
-						&& mouseY < drawY + class9_1.height) {
+					&& mouseY < drawY + class9_1.height) {
 					if (class9_1.actions != null && !class9_1.invisible && !class9_1.drawingDisabled) {
 
 						if (!(class9_1.contentType == 206 && interfaceIsSelected(class9_1))) {
@@ -1829,7 +1831,7 @@ public class Client extends GameEngine implements RSClient {
 									for (int action = class9_1.actions.length - 1; action >= 0; action--) {
 										if (class9_1.actions[action] != null) {
 											String s = class9_1.actions[action]
-													+ (class9_1.type == 4 ? " @or1@" + class9_1.message : "");
+												+ (class9_1.type == 4 ? " @or1@" + class9_1.message : "");
 
 											if (s.contains("img")) {
 												int prefix = s.indexOf("<img=");
@@ -1882,7 +1884,7 @@ public class Client extends GameEngine implements RSClient {
 					}
 				} else {
 					if (class9_1.atActionType == RSInterface.OPTION_OK && mouseX >= drawX && mouseY >= drawY && mouseX < drawX + class9_1.width
-							&& mouseY < drawY + class9_1.height) {
+						&& mouseY < drawY + class9_1.height) {
 						boolean flag = false;
 						if (class9_1.contentType != 0)
 							flag = buildFriendsListMenu(class9_1);
@@ -1893,14 +1895,14 @@ public class Client extends GameEngine implements RSClient {
 							menuActionRow++;
 						}
 						if (class9_1.type == RSInterface.TYPE_HOVER || class9_1.type == RSInterface.TYPE_CONFIG_HOVER
-								|| class9_1.type == RSInterface.TYPE_ADJUSTABLE_CONFIG
-								|| class9_1.type == RSInterface.TYPE_BOX) {
+							|| class9_1.type == RSInterface.TYPE_ADJUSTABLE_CONFIG
+							|| class9_1.type == RSInterface.TYPE_BOX) {
 							class9_1.toggled = true;
 						}
 
 					}
 					if (class9_1.atActionType == 2 && spellSelected == 0 && mouseX >= drawX && mouseY >= drawY && mouseX < drawX + class9_1.width
-							&& mouseY < drawY + class9_1.height) {
+						&& mouseY < drawY + class9_1.height) {
 						String s = class9_1.selectedActionName;
 						if (s.indexOf(" ") != -1)
 							s = s.substring(0, s.indexOf(" "));
@@ -1911,28 +1913,32 @@ public class Client extends GameEngine implements RSClient {
 					}
 					// close interface button
 					if (class9_1.atActionType == 3 && mouseX >= drawX && mouseY >= drawY && mouseX < drawX + class9_1.width
-							&& mouseY < drawY + class9_1.height) {
+						&& mouseY < drawY + class9_1.height) {
+						HoverMenuManager.reset();
 						menuActionName[menuActionRow] = "Close";
 						menuActionID[menuActionRow] = 200;
 						menuActionCmd3[menuActionRow] = class9_1.id;
 						menuActionRow++;
 					}
 					if (class9_1.atActionType == 4 && mouseX >= drawX && mouseY >= drawY && mouseX < drawX + class9_1.width
-							&& mouseY < drawY + class9_1.height) {
+						&& mouseY < drawY + class9_1.height) {
+						HoverMenuManager.reset();
 						menuActionName[menuActionRow] = class9_1.tooltip;
 						menuActionID[menuActionRow] = 169;
 						menuActionCmd3[menuActionRow] = class9_1.id;
 						menuActionRow++;
 					}
 					if (class9_1.atActionType == 5 && mouseX >= drawX && mouseY >= drawY && mouseX < drawX + class9_1.width
-							&& mouseY < drawY + class9_1.height) {
+						&& mouseY < drawY + class9_1.height) {
+						HoverMenuManager.reset();
 						menuActionName[menuActionRow] = class9_1.tooltip;
 						menuActionID[menuActionRow] = 646;
 						menuActionCmd3[menuActionRow] = class9_1.id;
 						menuActionRow++;
 					}
 					if (class9_1.atActionType == 6 && !aBoolean1149 && mouseX >= drawX && mouseY >= drawY && mouseX < drawX + class9_1.width
-							&& mouseY < drawY + class9_1.height) {
+						&& mouseY < drawY + class9_1.height) {
+						HoverMenuManager.reset();
 						menuActionName[menuActionRow] = class9_1.tooltip;
 						menuActionID[menuActionRow] = 679;
 						menuActionCmd3[menuActionRow] = class9_1.id;
@@ -1940,7 +1946,7 @@ public class Client extends GameEngine implements RSClient {
 					}
 
 					if (spellSelected == 0 && class9_1.atActionType == RSInterface.AT_ACTION_TYPE_AUTOCAST && mouseX >= drawX && mouseY >= drawY && mouseX < drawX + class9_1.width
-							&& mouseY < drawY + class9_1.height) {
+						&& mouseY < drawY + class9_1.height) {
 						menuActionName[menuActionRow] = class9_1.tooltip;
 						menuActionID[menuActionRow] = Autocast.AUTOCAST_MENU_ACTION_ID;
 						menuActionCmd3[menuActionRow] = class9_1.id;
@@ -1948,10 +1954,12 @@ public class Client extends GameEngine implements RSClient {
 					}
 
 					if (class9_1.type == 8 && mouseX >= drawX && mouseY >= drawY && mouseX < drawX + class9_1.width && mouseY < drawY + class9_1.height) {
+						HoverMenuManager.reset();
 						anInt1315 = class9_1.id;
 					}
 					if (class9_1.atActionType == 8 && !aBoolean1149 && mouseX >= drawX && mouseY >= drawY && mouseX < drawX + class9_1.width
-							&& mouseY < drawY + class9_1.height) {
+						&& mouseY < drawY + class9_1.height) {
+						HoverMenuManager.reset();
 						for (int s1 = 0; s1 < class9_1.tooltips.length; s1++) {
 								/*if (!RSInterface.interfaceCache[32007].isMouseoverTriggered) {
 									if (class9_1.id > 32016) {
@@ -1965,35 +1973,41 @@ public class Client extends GameEngine implements RSClient {
 						}
 					}
 					if (class9_1.atActionType == 9 && !aBoolean1149 && mouseX >= drawX && mouseY >= drawY && mouseX < drawX + class9_1.width
-							&& mouseY < drawY + class9_1.height) {
+						&& mouseY < drawY + class9_1.height) {
+						HoverMenuManager.reset();
 						menuActionName[menuActionRow] = class9_1.tooltip;
 						menuActionID[menuActionRow] = 1100;
 						menuActionCmd3[menuActionRow] = class9_1.id;
 						menuActionRow++;
 					}
 					if (class9_1.atActionType == 10 && !aBoolean1149 && mouseX >= drawX && mouseY >= drawY && mouseX < drawX + class9_1.width
-							&& mouseY < drawY + class9_1.height) {
+						&& mouseY < drawY + class9_1.height) {
+						HoverMenuManager.reset();
 						menuActionName[menuActionRow] = class9_1.getMenuItem().getText();
 						menuActionID[menuActionRow] = 1200;
 						menuActionCmd3[menuActionRow] = class9_1.id;
 						menuActionRow++;
 					}
 					if (class9_1.atActionType == 11 && mouseX >= drawX && mouseY >= drawY && mouseX < drawX + class9_1.width
-							&& mouseY < drawY + class9_1.height) {
+						&& mouseY < drawY + class9_1.height) {
+						HoverMenuManager.reset();
 						menuActionName[menuActionRow] = class9_1.tooltip;
 						menuActionID[menuActionRow] = 201;
 						menuActionCmd3[menuActionRow] = class9_1.id;
 						menuActionRow++;
 					}
+
+
 					if (mouseX >= drawX && mouseY >= drawY && mouseX < drawX + (class9_1.type == 4 ? 100 : class9_1.width)
-							&& mouseY < drawY + class9_1.height) {
+						&& mouseY < drawY + class9_1.height) {
 
 						if (class9_1.actions != null) {
 							if ((class9_1.type == 4 && class9_1.message.length() > 0) || class9_1.type == 5) {
 								for (int action = class9_1.actions.length - 1; action >= 0; action--) {
 									if (class9_1.actions[action] != null) {
+										HoverMenuManager.reset();
 										menuActionName[menuActionRow] = class9_1.actions[action]
-												+ (class9_1.type == 4 ? " " + class9_1.message : "");
+											+ (class9_1.type == 4 ? " " + class9_1.message : "");
 										menuActionID[menuActionRow] = 647;
 										menuActionCmd2[menuActionRow] = action;
 										menuActionCmd3[menuActionRow] = class9_1.id;
@@ -2008,7 +2022,7 @@ public class Client extends GameEngine implements RSClient {
 						for (int l2 = 0; l2 < class9_1.height; l2++) {
 							for (int i3 = 0; i3 < class9_1.width; i3++) {
 								boolean smallSprite = openInterfaceID == 26000
-										&& GrandExchange.isSmallItemSprite(class9_1.id) || class9_1.smallInvSprites;
+									&& GrandExchange.isSmallItemSprite(class9_1.id) || class9_1.smallInvSprites;
 								int size = smallSprite ? 18 : 32;
 								int j3 = drawX + i3 * (size + class9_1.invSpritePadX);
 								int k3 = drawY + l2 * (size + class9_1.invSpritePadY);
@@ -2020,16 +2034,18 @@ public class Client extends GameEngine implements RSClient {
 									mouseInvInterfaceIndex = k2;
 									lastActiveInvInterface = class9_1.id;
 									int itemID = class9_1.inventoryItemId[k2] - 1;
+
 									if (class9_1.id == 23231) {
 										itemID = (class9_1.inventoryItemId[k2] & 0x7FFF) - 1;
 									}
 									if (class9_1.inventoryItemId[k2] > 0) {
 										ItemDefinition itemDef = ItemDefinition.lookup(itemID);
+
 										boolean hasDestroyOption = false;
 										if (itemSelected == 1 && class9_1.isInventoryInterface) {
 											if (class9_1.id != anInt1284 || k2 != anInt1283) {
 												menuActionName[menuActionRow] = "Use " + selectedItemName + " with @lre@"
-														+ itemDef.name;
+													+ itemDef.name;
 												menuActionID[menuActionRow] = 870;
 												menuActionCmd1[menuActionRow] = itemDef.id;
 												menuActionCmd2[menuActionRow] = k2;
@@ -2050,9 +2066,18 @@ public class Client extends GameEngine implements RSClient {
 
 												for (int l3 = 4; l3 >= 3; l3--)
 													if (itemDef.interfaceOptions != null
-															&& itemDef.interfaceOptions[l3] != null) {
+														&& itemDef.interfaceOptions[l3] != null) {
 														menuActionName[menuActionRow] = itemDef.interfaceOptions[l3]
-																+ " @lre@" + itemDef.name;
+															+ " @lre@" + itemDef.name;
+
+														if (HoverMenuManager.shouldDraw(itemDef.id)) {
+															HoverMenuManager.showMenu = true;
+															HoverMenuManager.hintName = itemDef.name;
+															HoverMenuManager.hintId = itemDef.id;
+														} else {
+															HoverMenuManager.reset();
+														}
+
 														if (itemDef.interfaceOptions[l3].contains("Wield") || itemDef.interfaceOptions[l3].contains("Wear")) {
 															hintMenu = true;
 															hintName = itemDef.name;
@@ -2070,23 +2095,23 @@ public class Client extends GameEngine implements RSClient {
 														menuActionCmd3[menuActionRow] = class9_1.id;
 														menuActionRow++;
 													} else if (l3 == 4) {
-														if (KeyHandler.ctrlDown) {
-															menuActionName[menuActionRow] = "@lre@" + itemDef.name;
-															menuActionID[menuActionRow] = 847;
-//															System.out.println("TEST MOTHER FUCKING WORK");
-															menuActionRow++;
-														} else {
-															menuActionName[menuActionRow] = "Drop @lre@" + itemDef.name;
-															menuActionID[menuActionRow] = 847;
-															menuActionCmd1[menuActionRow] = itemDef.id;
-															menuActionCmd2[menuActionRow] = k2;
-															menuActionCmd3[menuActionRow] = class9_1.id;
-															menuActionRow++;
-														}
+														menuActionName[menuActionRow] = "Drop @lre@" + itemDef.name;
+														menuActionID[menuActionRow] = 847;
+														menuActionCmd1[menuActionRow] = itemDef.id;
+														menuActionCmd2[menuActionRow] = k2;
+														menuActionCmd3[menuActionRow] = class9_1.id;
+														menuActionRow++;
 													}
 
 											}
 											if (class9_1.usableItemInterface) {
+												if (HoverMenuManager.shouldDraw(itemDef.id)) {
+													HoverMenuManager.showMenu = true;
+													HoverMenuManager.hintName = itemDef.name;
+													HoverMenuManager.hintId = itemDef.id;
+												} else {
+													HoverMenuManager.reset();
+												}
 												hintMenu = false;
 												menuActionName[menuActionRow] = "Use @lre@" + itemDef.name;
 												menuActionID[menuActionRow] = 447;
@@ -2099,14 +2124,6 @@ public class Client extends GameEngine implements RSClient {
 												if (!hasDestroyOption && !menuOpen && shiftDrop && shiftDown) {
 													menuActionsRow("Drop @lre@" + itemDef.name, 1, 847, 2);
 													removeShiftDropOnMenuOpen = true;
-												}
-												if (!menuOpen && KeyHandler.altIsDown) {
-													Preferences preferences = Preferences.getPreferences();
-													if (preferences.groundItemTextHide.contains(itemDef.name) || preferences.groundItemTextHide.contains(itemDef.name.toLowerCase())) {
-														menuActionsRow("Show @lre@" + itemDef.name, 1, 616, 2);
-													} else {
-														menuActionsRow("Hide @lre@" + itemDef.name, 1, 616, 2);
-													}
 												}
 											}
 											if (class9_1.isInventoryInterface && itemDef.interfaceOptions != null) {
@@ -2122,7 +2139,22 @@ public class Client extends GameEngine implements RSClient {
 														}
 
 														menuActionName[menuActionRow] = itemDef.interfaceOptions[i4]
-																+ " @lre@" + itemDef.name;
+															+ " @lre@" + itemDef.name;
+
+														if (itemDef.interfaceOptions[i4].contains("Wield")
+															|| itemDef.interfaceOptions[i4].contains("Wear")
+															|| itemDef.interfaceOptions[i4].contains("Value")
+															|| itemDef.interfaceOptions[i4].contains("Examine")) {
+															HoverMenuManager.showMenu = true;
+															HoverMenuManager.hintName = itemDef.name;
+															HoverMenuManager.hintId = itemDef.id;
+														} else {
+															HoverMenuManager.reset();
+														}
+														if (HoverMenuManager.showMenu) {
+															HoverMenuManager.drawHintMenu();
+														}
+
 														if (i4 == 0)
 															menuActionID[menuActionRow] = 74;
 														if (i4 == 1)
@@ -2137,14 +2169,6 @@ public class Client extends GameEngine implements RSClient {
 															menuActionsRow("Drop @lre@" + itemDef.name, 1, 847, 2);
 															removeShiftDropOnMenuOpen = true;
 														}
-														if (!menuOpen && KeyHandler.altIsDown) {
-															Preferences preferences = Preferences.getPreferences();
-															if (preferences.groundItemTextHide.contains(itemDef.name) || preferences.groundItemTextHide.contains(itemDef.name.toLowerCase())) {
-																menuActionsRow("Show @lre@" + itemDef.name, 1, 616, 2);
-															} else {
-																menuActionsRow("Hide @lre@" + itemDef.name, 1, 616, 2);
-															}
-														}
 													}
 
 											}
@@ -2158,7 +2182,7 @@ public class Client extends GameEngine implements RSClient {
 															continue;
 														if (options[j4] != null) {
 															menuActionName[menuActionRow] = options[j4] + " @lre@"
-																	+ itemDef.name;
+																+ itemDef.name;
 															if (j4 == 0)
 																menuActionID[menuActionRow] = 632;
 															if (j4 == 1)
@@ -2188,13 +2212,13 @@ public class Client extends GameEngine implements RSClient {
 															if (modifiableXValue > 0) {// so issue is when x = 0
 																if (class9_1.actions.length < 9) {
 																	class9_1.actions = new String[]{
-																			"Withdraw-1",
-																			"Withdraw-5",
-																			"Withdraw-10",
-																			"Withdraw-All",
-																			"Withdraw-X",
-																			"Withdraw-" + modifiableXValue,
-																			"Withdraw-All-but-1"
+																		"Withdraw-1",
+																		"Withdraw-5",
+																		"Withdraw-10",
+																		"Withdraw-All",
+																		"Withdraw-X",
+																		"Withdraw-" + modifiableXValue,
+																		"Withdraw-All-but-1"
 																	};
 																} else {
 																	class9_1.actions[5] = "Withdraw-" + modifiableXValue;
@@ -2231,7 +2255,7 @@ public class Client extends GameEngine implements RSClient {
 																} else {
 																	class9_1.actions = itemDef.equipActions;
 																	menuActionName[menuActionRow] = itemDef.equipActions[j4]
-																			+ " @lre@" + itemDef.name;
+																		+ " @lre@" + itemDef.name;
 																}
 																if (j4 == 0)
 																	menuActionID[menuActionRow] = 632; // remove
@@ -2256,8 +2280,8 @@ public class Client extends GameEngine implements RSClient {
 										}
 
 										if (class9_1.parentID >= 58040 && class9_1.parentID <= 58048
-												|| class9_1.parentID >= 32100 && class9_1.parentID <= 32156
-												|| class9_1.parentID >= 32200 && class9_1.parentID <= 32222) {
+											|| class9_1.parentID >= 32100 && class9_1.parentID <= 32156
+											|| class9_1.parentID >= 32200 && class9_1.parentID <= 32222) {
 											return;
 										}
 
@@ -2273,18 +2297,28 @@ public class Client extends GameEngine implements RSClient {
 												if (System.currentTimeMillis() - debugDelay > 1000) {
 													debugDelay = System.currentTimeMillis();
 													pushMessage("<col=255>" + itemDef.name + ":</col> Male: <col=255>"
-															+ itemDef.maleModel0 + "</col> Female: <col=255>"
-															+ itemDef.femaleModel0 + "</col> Model id: <col=255>"
-															+ itemDef.modelId, 0, "");
+														+ itemDef.maleModel0 + "</col> Female: <col=255>"
+														+ itemDef.femaleModel0 + "</col> Model id: <col=255>"
+														+ itemDef.modelId, 0, "");
 													pushMessage("Zoom: <col=255>" + itemDef.zoom2d
-															+ "</col> Rotation: <col=255>x" + itemDef.xan2d + " y"
-															+ itemDef.yan2d + "", 0, "");
+														+ "</col> Rotation: <col=255>x" + itemDef.xan2d + " y"
+														+ itemDef.yan2d + "", 0, "");
 													pushMessage("Offset: <col=255>x" + itemDef.xOffset2d + " y"
-															+ itemDef.yOffset2d, 0, "");
+														+ itemDef.yOffset2d, 0, "");
 													menuActionName[menuActionRow] = "#2 (@whi@"
-															+ Arrays.toString(itemDef.colorReplace) + ")@gre@)(@whi@"
-															+ Arrays.toString(itemDef.colorFind) + ")@gre@)";
+														+ Arrays.toString(itemDef.colorReplace) + ")@gre@)(@whi@"
+														+ Arrays.toString(itemDef.colorFind) + ")@gre@)";
 												}
+											}
+
+
+											if (HoverMenuManager.shouldDraw(itemDef.id)) {
+												HoverMenuManager.showMenu = true;
+												HoverMenuManager.hintName = itemDef.name;
+												HoverMenuManager.hintId = itemDef.id;
+											}
+											if (HoverMenuManager.showMenu) {
+												HoverMenuManager.drawHintMenu();
 											}
 
 											if (localPlayer.isAdminRights()) {
@@ -14538,11 +14572,11 @@ public class Client extends GameEngine implements RSClient {
 				switch (plane) {
 					case 0:
 						markMinimap(eventIcon, ((3088 - baseX) * 4 + 2) - localPlayer.x / 32,
-								((3494 - baseY) * 4 + 2) - localPlayer.y / 32);
+							((3494 - baseY) * 4 + 2) - localPlayer.y / 32);
 						markMinimap(eventIcon, ((2607 - baseX) * 4 + 2) - localPlayer.x / 32,
-								((4773 - baseY) * 4 + 2) - localPlayer.y / 32);
+							((4773 - baseY) * 4 + 2) - localPlayer.y / 32);
 						markMinimap(eventIcon, ((3103 - baseX) * 4 + 2) - localPlayer.x / 32,
-								((3482 - baseY) * 4 + 2) - localPlayer.y / 32);
+							((3482 - baseY) * 4 + 2) - localPlayer.y / 32);
 						break;
 				}
 			}
@@ -14550,16 +14584,16 @@ public class Client extends GameEngine implements RSClient {
 				switch (plane) {
 					case 0:
 						markMinimap(minimapIcons[0], ((3086 - baseX) * 4 + 2) - localPlayer.x / 32,
-								((3498 - baseY) * 4 + 2) - localPlayer.y / 32);
+							((3498 - baseY) * 4 + 2) - localPlayer.y / 32);
 						markMinimap(minimapIcons[0], ((2832 - baseX) * 4 + 2) - localPlayer.x / 32,
-								((3798 - baseY) * 4 + 2) - localPlayer.y / 32);
+							((3798 - baseY) * 4 + 2) - localPlayer.y / 32);
 						markMinimap(minimapIcons[0], ((2982 - baseX) * 4 + 2) - localPlayer.x / 32,
-								((3643 - baseY) * 4 + 2) - localPlayer.y / 32);
+							((3643 - baseY) * 4 + 2) - localPlayer.y / 32);
 						break;
 
 					case 2:
 						markMinimap(minimapIcons[0], ((2827 - baseX) * 4 + 2) - localPlayer.x / 32,
-								((3810 - baseY) * 4 + 2) - localPlayer.y / 32);
+							((3810 - baseY) * 4 + 2) - localPlayer.y / 32);
 						break;
 				}
 			}
@@ -14658,10 +14692,15 @@ public class Client extends GameEngine implements RSClient {
 				int l4 = (destY * 4 + 2) - localPlayer.y / 32;
 				markMinimap(mapFlag, j2, l4); //764 1068
 			}
-			Rasterizer2D.drawBox((!isResized() ? xOffset + 127 : canvasWidth - 88), (!isResized() ? 83 : 80), 3, 3,
-					0xffffff);
+
 
 		}
+
+		Sprite wiki1 = new Sprite("/Interfaces/Wiki/2420");
+		Sprite wiki2 = new Sprite("/Interfaces/Wiki/2421");
+
+		Sprite teleOrb1 = new Sprite("/Interfaces/teleorb/1435");
+		Sprite teleOrb2 = new Sprite("/Interfaces/teleorb/1436");
 
 		if (!isResized()) {
 
@@ -14676,38 +14715,49 @@ public class Client extends GameEngine implements RSClient {
 		if (drawOrbs)
 			loadAllOrbs(!isResized() ? 0 + xOffset : canvasWidth - 217);
 		if (!isResized()) {
-			Sprite utilityOrb = new Sprite("orbs/utility_orb");
-			Sprite utilityOrbHover = new Sprite("orbs/utility_orb_hover");
-			Sprite donatorOrb = new Sprite("orbs/money_orb");
-			Sprite donatorOrbHover = new Sprite("orbs/money_orb_hover");
-
-			if (newHover) {
-				utilityOrbHover.drawSprite(222 - 2 + xOffset, 10 + 60);
-			} else {
-				utilityOrb.drawSprite(222 - 2+ xOffset, 10 + 60);
-			}
-
-			if (donatorHover) {
-				donatorOrbHover.drawSprite(215 - 2+ xOffset, 10 + 90);
-			} else {
-				donatorOrb.drawSprite(215 - 2+ xOffset, 10 + 90);
-			}
-
-			Sprite knowOrb = new Sprite("orbs/event_orb");
-			Sprite knowOrbHover = new Sprite("orbs/event_orb_hover");
-			// knowOrb.drawSprite(198 - 2, 17 + 110);
+			cacheSprite2[6].drawSprite(xOffset + 198 - 2, 17 + 89);//110
 			if (worldHover) {
-				knowOrbHover.drawSprite(202 - 2+ xOffset, 20 + 108);
+				cacheSprite2[1].drawSprite(xOffset + 202 - 2, 20 + 90);//111
 			} else {
-				knowOrb.drawSprite(202 - 2+ xOffset, 20 + 108);
+				cacheSprite2[0].drawSprite(xOffset + 202 - 2, 20 + 90);
+			}
+			//if (wikiHover) {
+			//	wiki2.drawSprite(185, 153);
+
+			//} else {
+			//	wiki1.drawSprite(185, 153);
+
+			//}
+
+			if (teleOrbHover) {
+				teleOrb2.drawSprite(xOffset + 192, 25);
+
+			} else {
+				teleOrb1.drawSprite(xOffset + 192, 25);
+
 			}
 		} else {
+
 
 			cacheSprite2[6].drawSprite(canvasWidth - 35, 141);
 			if (worldHover) {
 				cacheSprite2[1].drawSprite(canvasWidth - 31, 145);
 			} else {
 				cacheSprite2[0].drawSprite(canvasWidth - 31, 145);
+			}
+
+			//	if (wikiHover) {
+			//	wiki2.drawSprite(currentGameWidth - 40, 165);
+			//	} else {
+			//		wiki1.drawSprite(currentGameWidth - 40, 165);
+			//	}
+
+			if (teleOrbHover) {
+				teleOrb2.drawSprite(canvasWidth - 100, 150);
+
+			} else {
+				teleOrb1.drawSprite(canvasWidth - 100, 150);
+
 			}
 
 		}
