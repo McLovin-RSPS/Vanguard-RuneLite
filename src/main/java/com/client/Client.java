@@ -2676,7 +2676,7 @@ public class Client extends GameEngine implements RSClient {
 								skullIcons[player.skullIcon].drawSprite(spriteDrawX - 12, spriteDrawY - l);
 								l += 25;
 							}
-							if (player.headIcon < 18) {
+							if (player.headIcon < 7) {
 								headIcons[player.headIcon].drawSprite(spriteDrawX - 12, spriteDrawY - l);
 								l += 18;
 							}
@@ -2689,7 +2689,7 @@ public class Client extends GameEngine implements RSClient {
 							headIconsHint[player.hintIcon].drawSprite(spriteDrawX - 12, spriteDrawY - l);
 					}
 					if(Configuration.playerNames) {
-						if(!isResized()) {
+						if(!Client.instance.isResized()) {
 							latoBold.drawBasicString(player.displayName, (spriteDrawX - (player.displayName.length() * 5)) + 3, spriteDrawY + 7, 0x6495ed, 1);
 						}else{
 							latoBold.drawBasicString(player.displayName, (spriteDrawX -  (player.displayName.length() * 5)) + 3, spriteDrawY + 7, 0x6495ed, 1);
@@ -2709,7 +2709,7 @@ public class Client extends GameEngine implements RSClient {
 					}
 				}
 				if (((Entity) (obj)).textSpoken != null && (j >= playerCount || publicChatMode == 0
-						|| publicChatMode == 3 || publicChatMode == 1 && isFriendOrSelf(((Player) obj).displayName))) {
+					|| publicChatMode == 3 || publicChatMode == 1 && isFriendOrSelf(((Player) obj).displayName))) {
 					npcScreenPos(((Entity) (obj)), ((Entity) (obj)).height);
 					if (spriteDrawX > -1 && anInt974 < anInt975) {
 						anIntArray979[anInt974] = chatTextDrawingArea.method384(((Entity) (obj)).textSpoken) / 2;
@@ -2738,8 +2738,16 @@ public class Client extends GameEngine implements RSClient {
 							int i2 = (((Entity) (obj)).currentHealth * 30) / ((Entity) (obj)).maxHealth;
 							if (i1 > 30)
 								i1 = 30;
-							Rasterizer2D.drawPixels(5, spriteDrawY - 3, spriteDrawX - 15, 65280, i1);
-							Rasterizer2D.drawPixels(5, spriteDrawY - 3, (spriteDrawX - 15) + i1, 0xff0000, 30 - i1);
+							if (((Entity) (obj)).maxHealth >= 255) {
+								Rasterizer2D.drawPixels(5, spriteDrawY - 3, spriteDrawX - 15, 65280, i2);
+								Rasterizer2D.drawPixels(5, spriteDrawY - 3, (spriteDrawX - 15) + i2, 0xff0000, 30 - i2);
+							} else {
+								Rasterizer2D.drawPixels(5, spriteDrawY - 3, spriteDrawX - 15, 65280, i1);
+								Rasterizer2D.drawPixels(5, spriteDrawY - 3, (spriteDrawX - 15) + i1, 0xff0000, 30 - i1);
+							}
+							// DrawingArea.drawPixels(5, spriteDrawY - 3, spriteDrawX - 15, 65280, i1);
+							// DrawingArea.drawPixels(5, spriteDrawY - 3, (spriteDrawX - 15) + i1, 0xff0000,
+							// 30 - i1);
 						}
 					} catch (Exception e) {
 					}
@@ -2765,9 +2773,9 @@ public class Client extends GameEngine implements RSClient {
 							}
 							hitMarks[((Entity) (obj)).hitMarkTypes[j1]].drawSprite(spriteDrawX - 12, spriteDrawY - 12);
 							smallText.drawText(0, String.valueOf(((Entity) (obj)).hitArray[j1]), spriteDrawY + 4,
-									spriteDrawX);
+								spriteDrawX);
 							smallText.drawText(0xffffff, String.valueOf(((Entity) (obj)).hitArray[j1]), spriteDrawY + 3,
-									spriteDrawX - 1);
+								spriteDrawX - 1);
 						}
 					}
 			}
@@ -2781,9 +2789,9 @@ public class Client extends GameEngine implements RSClient {
 					flag = false;
 					for (int l2 = 0; l2 < k; l2++)
 						if (l1 + 2 > anIntArray977[l2] - anIntArray978[l2] && l1 - k2 < anIntArray977[l2] + 2
-								&& k1 - j2 < anIntArray976[l2] + anIntArray979[l2]
-								&& k1 + j2 > anIntArray976[l2] - anIntArray979[l2]
-								&& anIntArray977[l2] - anIntArray978[l2] < l1) {
+							&& k1 - j2 < anIntArray976[l2] + anIntArray979[l2]
+							&& k1 + j2 > anIntArray976[l2] - anIntArray979[l2]
+							&& anIntArray977[l2] - anIntArray978[l2] < l1) {
 							l1 = anIntArray977[l2] - anIntArray978[l2];
 							flag = true;
 						}
@@ -2847,17 +2855,17 @@ public class Client extends GameEngine implements RSClient {
 					}
 					if (anIntArray981[k] == 3) {
 						chatTextDrawingArea.method388(150 - anIntArray982[k], s, anInt1265, spriteDrawY + 1,
-								spriteDrawX + 1, 0);
+							spriteDrawX + 1, 0);
 						chatTextDrawingArea.method388(150 - anIntArray982[k], s, anInt1265, spriteDrawY, spriteDrawX,
-								i3);
+							i3);
 					}
 					if (anIntArray981[k] == 4) {
 						int i4 = chatTextDrawingArea.method384(s);
 						int k4 = ((150 - anIntArray982[k]) * (i4 + 100)) / 150;
-						Rasterizer2D.setDrawingArea(334, spriteDrawX - 50, spriteDrawX + 50, 0);
+						DrawingArea.setDrawingArea(334, spriteDrawX - 50, spriteDrawX + 50, 0);
 						chatTextDrawingArea.method385(0, s, spriteDrawY + 1, (spriteDrawX + 50) - k4);
 						chatTextDrawingArea.method385(i3, s, spriteDrawY, (spriteDrawX + 50) - k4);
-						Rasterizer2D.defaultDrawingAreaSize();
+						DrawingArea.defaultDrawingAreaSize();
 					}
 					if (anIntArray981[k] == 5) {
 						int j4 = 150 - anIntArray982[k];
@@ -2867,7 +2875,7 @@ public class Client extends GameEngine implements RSClient {
 						else if (j4 > 125)
 							l4 = j4 - 125;
 						Rasterizer2D.setDrawingArea(spriteDrawY + 5, 0, 516,
-								spriteDrawY - chatTextDrawingArea.anInt1497 - 1);
+							spriteDrawY - chatTextDrawingArea.anInt1497 - 1);
 						chatTextDrawingArea.drawText(0, s, spriteDrawY + 1 + l4, spriteDrawX);
 						chatTextDrawingArea.drawText(i3, s, spriteDrawY + l4, spriteDrawX);
 						Rasterizer2D.defaultDrawingAreaSize();
@@ -2881,6 +2889,7 @@ public class Client extends GameEngine implements RSClient {
 			e.printStackTrace();
 		}
 	}
+
 
 	private void delFriend(long l) {
 		try {
