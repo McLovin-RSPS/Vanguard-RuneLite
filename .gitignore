@@ -178,3 +178,4 @@ buildNumber.properties
 
 *.pem
 *.cert
+obfuscation_map.txt
