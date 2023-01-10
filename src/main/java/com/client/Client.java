@@ -11156,6 +11156,10 @@ public class Client extends GameEngine implements RSClient {
 				removeRoofs = true;
 			}
 			drawLoadingText(99, "Preparing game engine");
+
+
+
+
 			//startRunnable(mouseDetection, 10);
 			SceneObject.clientInstance = this;
 			ObjectDefinition.clientInstance = this;
@@ -12160,6 +12164,7 @@ public class Client extends GameEngine implements RSClient {
 													&& GrandExchange.isSmallItemSprite(class9_1.id) || class9_1.smallInvSprites;
 
 											ItemDefinition itemDef = ItemDefinition.lookup(j9);
+
 											if (smallSprite) {
 												itemSprite = ItemDefinition.getSmallSprite(j9, class9_1.inventoryAmounts[i3]);
 												if (itemDef.customSmallSpriteLocation != null)
