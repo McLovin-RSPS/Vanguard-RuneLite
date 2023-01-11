@@ -6152,8 +6152,8 @@ public class Client extends GameEngine implements RSClient {
 				if (!class9_2.ignoreConfigClicking) {
 					if (class9_2.scripts != null && class9_2.scripts[0][0] == 5) {
 						int i2 = class9_2.scripts[0][1];
-						if (variousSettings[i2] != class9_2.anIntArray212[0]) {
-							variousSettings[i2] = class9_2.anIntArray212[0];
+						if (variousSettings[i2] != class9_2.requiredValues[0]) {
+							variousSettings[i2] = class9_2.requiredValues[0];
 							method33(i2);
 							needDrawTabArea = true;
 						}
@@ -6686,8 +6686,8 @@ public class Client extends GameEngine implements RSClient {
 		RSInterface class9_2 = RSInterface.interfaceCache[910];
 		if (class9_2.scripts != null && class9_2.scripts[0][0] == 5) {
 			int i2 = class9_2.scripts[0][1];
-			if (variousSettings[i2] != class9_2.anIntArray212[0]) {
-				variousSettings[i2] = class9_2.anIntArray212[0];
+			if (variousSettings[i2] != class9_2.requiredValues[0]) {
+				variousSettings[i2] = class9_2.requiredValues[0];
 				method33(i2);
 				needDrawTabArea = true;
 			}
@@ -8649,40 +8649,6 @@ public class Client extends GameEngine implements RSClient {
 			class9.atActionType = 1;
 			return;
 		}
-		if (j == 32921) {
-			RSInterface rsInterface = class9;
-			NpcDefinition npcDisplay = NpcDefinition.lookup(PetSystem.petSelected);
-
-			rsInterface.modelRotation1 = 150;
-			rsInterface.modelRotation2 = (int) (loopCycle / 40D * 256D) & 0x7ff;
-			Model model;
-			final Model[] parts = new Model[npcDisplay.models.length];
-			for (int i = 0; i < npcDisplay.models.length; i++) {
-				parts[i] = Model.getModel(npcDisplay.models[i]);
-			}
-
-			if (parts.length == 1) {
-				model = parts[0];
-			} else {
-				model = new Model(parts.length, parts);
-			}
-
-			if (model == null) {
-				return;
-			}
-
-			int staticFrame = npcDisplay.standingAnimation;
-			model.generateBones();
-			model.scale((int) 1.5,(int) 1.5,(int) 1.5);
-			model.animate(AnimationDefinition.anims[staticFrame].primaryFrames[0]);
-
-
-//			model.light(64, 850, -30, -50, -30, true);
-			rsInterface.anInt233 = 5;
-			rsInterface.mediaID = 0;
-			RSInterface.method208(aBoolean994, model);
-			return;
-		}
 		if (j == 203) {
 			int i1 = friendsCount;
 			if (anInt900 != 2)
@@ -8754,8 +8720,8 @@ public class Client extends GameEngine implements RSClient {
 				model.generateBones();
 				model.animate(AnimationDefinition.anims[localPlayer.anInt1511].primaryFrames[0]);
 				model.light(64, 1300, 0, -570, 0, true);
-				class9.anInt233 = 5;
-				class9.mediaID = 0;
+				class9.defaultMediaType = 5;
+				class9.defaultMedia = 0;
 				RSInterface.method208(aBoolean994, model);
 			}
 			return;
@@ -8771,16 +8737,16 @@ public class Client extends GameEngine implements RSClient {
 				for (int l2 = 0; l2 < 5; l2++)
 					if (anIntArray990[l2] != 0) {
 						characterDisplay.recolor(anIntArrayArray1003[l2][0],
-								anIntArrayArray1003[l2][anIntArray990[l2]]);
+							anIntArrayArray1003[l2][anIntArray990[l2]]);
 						if (l2 == 1)
 							characterDisplay.recolor(anIntArray1204[0], anIntArray1204[anIntArray990[l2]]);
 					}
 				int staticFrame = localPlayer.anInt1511;
 				characterDisplay.generateBones();
 				characterDisplay.animate(AnimationDefinition.anims[staticFrame].primaryFrames[0]);
-				// characterDisplay.method479(64, 850, -30, -50, -30, true);
-				rsInterface.anInt233 = 5;
-				rsInterface.mediaID = 0;
+				// characterDisplay.light(64, 850, -30, -50, -30, true);
+				rsInterface.defaultMediaType = 5;
+				rsInterface.defaultMedia = 0;
 				RSInterface.method208(aBoolean994, characterDisplay);
 			}
 			return;
@@ -12018,7 +11984,7 @@ public class Client extends GameEngine implements RSClient {
 			if (rsInterface.type != 0 || rsInterface.children == null)
 				return;
 			if (rsInterface.isMouseoverTriggered && anInt1026 != rsInterface.id && anInt1048 != rsInterface.id
-					&& anInt1039 != rsInterface.id)
+				&& anInt1039 != rsInterface.id)
 				return;
 
 			int clipLeft = Rasterizer2D.leftX;
@@ -12049,7 +12015,6 @@ public class Client extends GameEngine implements RSClient {
 					if (!getUserSettings().isBountyHunter() && Arrays.stream(BOUNTY_INTERFACE_IDS).anyMatch(id -> id == class9_1.id)) {
 						continue;
 					}
-
 
 					if (class9_1.contentType > 0)
 						drawFriendsListOrWelcomeScreen(class9_1);
@@ -12103,7 +12068,7 @@ public class Client extends GameEngine implements RSClient {
 								class9_1.scrollMax = (members * 14) + 1;
 							}
 							if (rsInterface.parentID == 49000 || rsInterface.parentID == 49100 || rsInterface.parentID == 51100
-									|| rsInterface.parentID == 53100) {
+								|| rsInterface.parentID == 53100) {
 								int scrollMax = class9_1.scrollMax;
 
 								if (achievementCutoff > 1) {
@@ -12115,7 +12080,7 @@ public class Client extends GameEngine implements RSClient {
 							}
 							if (scrollbarVisible(class9_1)) {
 								drawScrollbar(class9_1.height, class9_1.scrollPosition, _y, _x + class9_1.width,
-										class9_1.scrollMax);
+									class9_1.scrollMax);
 							}
 						}
 
@@ -12175,7 +12140,7 @@ public class Client extends GameEngine implements RSClient {
 											j9 = (class9_1.inventoryItemId[i3] & 0x7FFF) - 1;
 										}
 										if (k5 > Rasterizer2D.leftX - 32 && k5 < Rasterizer2D.bottomX && j6 > Rasterizer2D.topY - 32
-												&& j6 < Rasterizer2D.bottomY || activeInterfaceType != 0 && itemDraggingSlot == i3) {
+											&& j6 < Rasterizer2D.bottomY || activeInterfaceType != 0 && itemDraggingSlot == i3) {
 											int l9 = 0;
 											if (itemSelected == 1 && anInt1283 == i3 && anInt1284 == class9_1.id)
 												l9 = 0xffffff;
@@ -12191,7 +12156,7 @@ public class Client extends GameEngine implements RSClient {
 
 											if (openInterfaceID == 29875) {
 												if (class9_1.inventoryItemId[i3] < 555
-														|| class9_1.inventoryItemId[i3] > 567 && class9_1.inventoryItemId[i3] != 9076) {
+													|| class9_1.inventoryItemId[i3] > 567 && class9_1.inventoryItemId[i3] != 9076) {
 													itemSpriteOpacity = 100;
 												}
 											}
@@ -12204,10 +12169,9 @@ public class Client extends GameEngine implements RSClient {
 											}
 
 											boolean smallSprite = openInterfaceID == 26000
-													&& GrandExchange.isSmallItemSprite(class9_1.id) || class9_1.smallInvSprites;
+												&& GrandExchange.isSmallItemSprite(class9_1.id) || class9_1.smallInvSprites;
 
 											ItemDefinition itemDef = ItemDefinition.lookup(j9);
-
 											if (smallSprite) {
 												itemSprite = ItemDefinition.getSmallSprite(j9, class9_1.inventoryAmounts[i3]);
 												if (itemDef.customSmallSpriteLocation != null)
@@ -12255,20 +12219,20 @@ public class Client extends GameEngine implements RSClient {
 														anInt1088 += i10;
 													}
 													if (j6 + j7 + 32 > Rasterizer2D.bottomY
-															&& rsInterface.scrollPosition < rsInterface.scrollMax
-															- rsInterface.height) {
+														&& rsInterface.scrollPosition < rsInterface.scrollMax
+														- rsInterface.height) {
 														int j10 = (tickDelta * ((j6 + j7 + 32) - Rasterizer2D.bottomY)) / 3;
 														if (j10 > tickDelta * 10)
 															j10 = tickDelta * 10;
 														if (j10 > rsInterface.scrollMax - rsInterface.height
-																- rsInterface.scrollPosition)
+															- rsInterface.scrollPosition)
 															j10 = rsInterface.scrollMax - rsInterface.height
-																	- rsInterface.scrollPosition;
+																- rsInterface.scrollPosition;
 														rsInterface.scrollPosition += j10;
 														anInt1088 -= j10;
 													}
 												} else if (atInventoryInterfaceType != 0 && atInventoryIndex == i3
-														&& atInventoryInterface == class9_1.id)
+													&& atInventoryInterface == class9_1.id)
 													itemSprite.drawTransparentSprite(k5, j6, 128);
 												else
 												// itemSprite.drawSprite(k5, j6);
@@ -12277,11 +12241,11 @@ public class Client extends GameEngine implements RSClient {
 												 */
 													itemSprite.drawTransparentSprite(k5, j6, itemSpriteOpacity);
 												if (class9_1.id == RSInterface.selectedItemInterfaceId
-														&& class9_1.itemSearchSelectedSlot > -1
-														&& class9_1.itemSearchSelectedSlot == i3) {
+													&& class9_1.itemSearchSelectedSlot > -1
+													&& class9_1.itemSearchSelectedSlot == i3) {
 													for (int i = 32; i > 0; i--) {
 														Rasterizer2D.method338(j6 + j7, i, 256 - Byte.MAX_VALUE, 0x395D84, i,
-																k5 + k6);
+															k5 + k6);
 													}
 													Rasterizer2D.method338(j6 + j7, 32, 256, 0x395D84, 32, k5 + k6);
 												}
@@ -12297,17 +12261,17 @@ public class Client extends GameEngine implements RSClient {
 																	int xOffset = class9_1.forceInvStackSizes ? 10 : 0;
 																	if (k10 >= 1)
 																		smallText.method385(0xFFFF00, intToKOrMil(k10), j6 + 9 + j7,
-																				xOffset+ k5 + k6);
+																			xOffset+ k5 + k6);
 																	smallText.method385(0, intToKOrMil(k10), j6 + 10 + j7, xOffset+ k5 + 1 + k6);
 																	if (k10 > 99999 && k10 < 10000000) {
 																		smallText.method385(0xFFFFFF, intToKOrMil(k10), j6 + 9 + j7,
-																				xOffset+ k5 + k6);
+																			xOffset+ k5 + k6);
 																	} else if (k10 > 9999999) {
 																		smallText.method385(0x00ff80, intToKOrMil(k10), j6 + 9 + j7,
-																				xOffset+ k5 + k6);
+																			xOffset+ k5 + k6);
 																	} else {
 																		smallText.method385(0xFFFF00, intToKOrMil(k10), j6 + 9 + j7,
-																				xOffset+ k5 + k6);
+																			xOffset+ k5 + k6);
 																	}
 																}
 															}
@@ -12345,10 +12309,10 @@ public class Client extends GameEngine implements RSClient {
 									Rasterizer2D.fillPixels(_x, class9_1.width, class9_1.height, colour, _y);
 							} else if (class9_1.aBoolean227)
 								Rasterizer2D.method335(colour, _y, class9_1.width, class9_1.height,
-										256 - (class9_1.aByte254 & 0xff), _x);
+									256 - (class9_1.aByte254 & 0xff), _x);
 							else
 								Rasterizer2D.method338(_y, class9_1.height, 256 - (class9_1.aByte254 & 0xff), colour,
-										class9_1.width, _x);
+									class9_1.width, _x);
 						} else if (class9_1.type == 4 || class9_1.type == RSInterface.TYPE_TEXT_DRAW_FROM_LEFT) {
 							TextDrawingArea textDrawingArea = class9_1.textDrawingAreas;
 							String s = class9_1.message;
@@ -12389,14 +12353,14 @@ public class Client extends GameEngine implements RSClient {
 							}
 							if (class9_1.hoverText != null && !class9_1.hoverText.isEmpty()) {
 								if (MouseHandler.mouseX > _x
-										&& MouseHandler.mouseX < _x + class9_1.textDrawingAreas.getTextWidth(class9_1.message)
-										&& MouseHandler.mouseY > _y && MouseHandler.mouseY < _y + 15) {
+									&& MouseHandler.mouseX < _x + class9_1.textDrawingAreas.getTextWidth(class9_1.message)
+									&& MouseHandler.mouseY > _y && MouseHandler.mouseY < _y + 15) {
 									s = class9_1.hoverText;
 									i4 = class9_1.hoverTextColor;
 								}
 							}
 							if((backDialogID != -1 || dialogID != -1 || class9_1.message.contains("Click here to continue")) &&
-									(rsInterface.id == backDialogID || rsInterface.id == dialogID )){
+								(rsInterface.id == backDialogID || rsInterface.id == dialogID )){
 								if(i4 == 0xffff00)
 									i4 = 255;
 								if(i4 == 49152)
@@ -12409,40 +12373,40 @@ public class Client extends GameEngine implements RSClient {
 										if (k7 == -1)
 											break;
 										if (class9_1.id < 4000 || class9_1.id > 5000 && class9_1.id != 13921
-												&& class9_1.id != 13922 && class9_1.id != 12171 && class9_1.id != 12172)
-											s = s.substring(0, k7) + methodR(extractInterfaceValues(class9_1, 0))
-													+ s.substring(k7 + 2);
+											&& class9_1.id != 13922 && class9_1.id != 12171 && class9_1.id != 12172)
+											s = s.substring(0, k7) + methodR(executeScript(class9_1, 0))
+												+ s.substring(k7 + 2);
 										else
-											s = s.substring(0, k7) + interfaceIntToString(extractInterfaceValues(class9_1, 0))
-													+ s.substring(k7 + 2);
+											s = s.substring(0, k7) + interfaceIntToString(executeScript(class9_1, 0))
+												+ s.substring(k7 + 2);
 									} while (true);
 									do {
 										int l7 = s.indexOf("%2");
 										if (l7 == -1)
 											break;
-										s = s.substring(0, l7) + interfaceIntToString(extractInterfaceValues(class9_1, 1))
-												+ s.substring(l7 + 2);
+										s = s.substring(0, l7) + interfaceIntToString(executeScript(class9_1, 1))
+											+ s.substring(l7 + 2);
 									} while (true);
 									do {
 										int i8 = s.indexOf("%3");
 										if (i8 == -1)
 											break;
-										s = s.substring(0, i8) + interfaceIntToString(extractInterfaceValues(class9_1, 2))
-												+ s.substring(i8 + 2);
+										s = s.substring(0, i8) + interfaceIntToString(executeScript(class9_1, 2))
+											+ s.substring(i8 + 2);
 									} while (true);
 									do {
 										int j8 = s.indexOf("%4");
 										if (j8 == -1)
 											break;
-										s = s.substring(0, j8) + interfaceIntToString(extractInterfaceValues(class9_1, 3))
-												+ s.substring(j8 + 2);
+										s = s.substring(0, j8) + interfaceIntToString(executeScript(class9_1, 3))
+											+ s.substring(j8 + 2);
 									} while (true);
 									do {
 										int k8 = s.indexOf("%5");
 										if (k8 == -1)
 											break;
-										s = s.substring(0, k8) + interfaceIntToString(extractInterfaceValues(class9_1, 4))
-												+ s.substring(k8 + 2);
+										s = s.substring(0, k8) + interfaceIntToString(executeScript(class9_1, 4))
+											+ s.substring(k8 + 2);
 									} while (true);
 								}
 								int l8 = s.indexOf("\\n");
@@ -12507,38 +12471,36 @@ public class Client extends GameEngine implements RSClient {
 							}
 						} else if (class9_1.type == 6) {
 							Rasterizer3D.renderOnGpu = true;
-							int k3 = Rasterizer3D.originViewX;
-							int j4 = Rasterizer3D.originViewY;
+							int centreX = Rasterizer3D.originViewX;
+							int centreY = Rasterizer3D.originViewY;
 							Rasterizer3D.originViewX = _x + class9_1.width / 2;
 							Rasterizer3D.originViewY = _y + class9_1.height / 2;
-							int i5 = Rasterizer3D.SINE[class9_1.modelRotation1] * class9_1.modelZoom >> 16;
-							int l5 = Rasterizer3D.COSINE[class9_1.modelRotation1] * class9_1.modelZoom >> 16;
-							boolean flag2 = interfaceIsSelected(class9_1);
-							int i7;
-							if (flag2)
-								i7 = class9_1.anInt258;
+							int sine = Rasterizer3D.SINE[class9_1.modelRotation1] * class9_1.modelZoom >> 16;
+							int cosine = Rasterizer3D.COSINE[class9_1.modelRotation1] * class9_1.modelZoom >> 16;
+							boolean selected = interfaceIsSelected(class9_1);
+							int emoteAnimation;
+							if (selected)
+								emoteAnimation = class9_1.secondaryAnimationId;
 							else
-								i7 = class9_1.anInt257;
+								emoteAnimation = class9_1.defaultAnimationId;
 							Model model;
-							if (i7 == -1) {
-								model = class9_1.method209(-1, -1, flag2);
+							if (emoteAnimation == -1) {
+								model = class9_1.method209(-1, -1, selected);
 							} else {
-								AnimationDefinition animation = AnimationDefinition.anims[i7];
-								if (class9_1.anInt246 >= animation.secondaryFrames.length || class9_1.anInt246 >= animation.primaryFrames.length) {
-									class9_1.anInt246 = 0; // Fixes array index out of bounds on Npc dialogues
-								}
-
-								model = class9_1.method209(animation.secondaryFrames[class9_1.anInt246],
-									animation.primaryFrames[class9_1.anInt246], flag2);
+								AnimationDefinition animation = AnimationDefinition.anims[emoteAnimation];
+								model = class9_1.method209(
+									animation.secondaryFrames[class9_1.anInt246],
+									animation.primaryFrames[class9_1.anInt246],
+									selected);
 							}
+
 							if (model != null) {
 								Rasterizer3D.world = false;
-								model.renderModel(class9_1.modelRotation2, 0, class9_1.modelRotation1, 0, i5, l5);
+								model.renderModel(class9_1.modelRotation2, 0, class9_1.modelRotation1, 0, sine, cosine);
 								Rasterizer3D.world = true;
 							}
-
-							Rasterizer3D.originViewX = k3;
-							Rasterizer3D.originViewY = j4;
+							Rasterizer3D.originViewX = centreX;
+							Rasterizer3D.originViewY = centreY;
 							Rasterizer3D.renderOnGpu = false;
 						} else if (class9_1.type == 7) {
 							TextDrawingArea textDrawingArea_1 = class9_1.textDrawingAreas;
@@ -12554,7 +12516,7 @@ public class Client extends GameEngine implements RSClient {
 										int k9 = _y + j5 * (12 + class9_1.invSpritePadY);
 										if (class9_1.centerText)
 											textDrawingArea_1.method382(class9_1.textColor, i9 + class9_1.width / 2, s2, k9,
-													class9_1.textShadow);
+												class9_1.textShadow);
 										else
 											textDrawingArea_1.method389(class9_1.textShadow, i9, class9_1.textColor, s2, k9);
 									}
@@ -12562,8 +12524,8 @@ public class Client extends GameEngine implements RSClient {
 								}
 							}
 						} else if (class9_1.type == 8
-								&& (anInt1500 == class9_1.id || anInt1044 == class9_1.id || anInt1129 == class9_1.id)
-								&& anInt1501 == 50 && !menuOpen) {
+							&& (anInt1500 == class9_1.id || anInt1044 == class9_1.id || anInt1129 == class9_1.id)
+							&& anInt1501 == 50 && !menuOpen) {
 							if (class9_1.parentID == 3917) {
 								return;
 							}
@@ -12582,36 +12544,36 @@ public class Client extends GameEngine implements RSClient {
 										int k7 = s1.indexOf("%1");
 										if (k7 == -1)
 											break;
-										s1 = s1.substring(0, k7) + interfaceIntToString(extractInterfaceValues(class9_1, 0))
-												+ s1.substring(k7 + 2);
+										s1 = s1.substring(0, k7) + interfaceIntToString(executeScript(class9_1, 0))
+											+ s1.substring(k7 + 2);
 									} while (true);
 									do {
 										int l7 = s1.indexOf("%2");
 										if (l7 == -1)
 											break;
-										s1 = s1.substring(0, l7) + interfaceIntToString(extractInterfaceValues(class9_1, 1))
-												+ s1.substring(l7 + 2);
+										s1 = s1.substring(0, l7) + interfaceIntToString(executeScript(class9_1, 1))
+											+ s1.substring(l7 + 2);
 									} while (true);
 									do {
 										int i8 = s1.indexOf("%3");
 										if (i8 == -1)
 											break;
-										s1 = s1.substring(0, i8) + interfaceIntToString(extractInterfaceValues(class9_1, 2))
-												+ s1.substring(i8 + 2);
+										s1 = s1.substring(0, i8) + interfaceIntToString(executeScript(class9_1, 2))
+											+ s1.substring(i8 + 2);
 									} while (true);
 									do {
 										int j8 = s1.indexOf("%4");
 										if (j8 == -1)
 											break;
-										s1 = s1.substring(0, j8) + interfaceIntToString(extractInterfaceValues(class9_1, 3))
-												+ s1.substring(j8 + 2);
+										s1 = s1.substring(0, j8) + interfaceIntToString(executeScript(class9_1, 3))
+											+ s1.substring(j8 + 2);
 									} while (true);
 									do {
 										int k8 = s1.indexOf("%5");
 										if (k8 == -1)
 											break;
-										s1 = s1.substring(0, k8) + interfaceIntToString(extractInterfaceValues(class9_1, 4))
-												+ s1.substring(k8 + 2);
+										s1 = s1.substring(0, k8) + interfaceIntToString(executeScript(class9_1, 4))
+											+ s1.substring(k8 + 2);
 									} while (true);
 								}
 								int l7 = s1.indexOf("\\n");
@@ -12666,7 +12628,7 @@ public class Client extends GameEngine implements RSClient {
 									xPos = canvasWidth - 8 - boxWidth;
 								}
 								if (yPos + boxHeight > canvasHeight - 118 - boxHeight + 100
-										&& yPos + boxHeight < canvasHeight - 118 - boxHeight + 120) {
+									&& yPos + boxHeight < canvasHeight - 118 - boxHeight + 120) {
 									yPos = canvasHeight - 148 - boxHeight;
 								} else if (yPos + boxHeight > canvasHeight - 118 - boxHeight + 100) {
 									yPos = canvasHeight - 118 - boxHeight;
@@ -12676,42 +12638,42 @@ public class Client extends GameEngine implements RSClient {
 							Rasterizer2D.fillPixels(xPos, boxWidth, boxHeight, 0, yPos);
 							String s2 = class9_1.message;
 							for (int j11 = yPos + textDrawingArea_2.anInt1497 + 2; s2
-									.length() > 0; j11 += textDrawingArea_2.anInt1497 + 1) {// anInt1497
+								.length() > 0; j11 += textDrawingArea_2.anInt1497 + 1) {// anInt1497
 								if (s2.indexOf("%") != -1) {
 									do {
 										int k7 = s2.indexOf("%1");
 										if (k7 == -1)
 											break;
-										s2 = s2.substring(0, k7) + interfaceIntToString(extractInterfaceValues(class9_1, 0))
-												+ s2.substring(k7 + 2);
+										s2 = s2.substring(0, k7) + interfaceIntToString(executeScript(class9_1, 0))
+											+ s2.substring(k7 + 2);
 									} while (true);
 									do {
 										int l7 = s2.indexOf("%2");
 										if (l7 == -1)
 											break;
-										s2 = s2.substring(0, l7) + interfaceIntToString(extractInterfaceValues(class9_1, 1))
-												+ s2.substring(l7 + 2);
+										s2 = s2.substring(0, l7) + interfaceIntToString(executeScript(class9_1, 1))
+											+ s2.substring(l7 + 2);
 									} while (true);
 									do {
 										int i8 = s2.indexOf("%3");
 										if (i8 == -1)
 											break;
-										s2 = s2.substring(0, i8) + interfaceIntToString(extractInterfaceValues(class9_1, 2))
-												+ s2.substring(i8 + 2);
+										s2 = s2.substring(0, i8) + interfaceIntToString(executeScript(class9_1, 2))
+											+ s2.substring(i8 + 2);
 									} while (true);
 									do {
 										int j8 = s2.indexOf("%4");
 										if (j8 == -1)
 											break;
-										s2 = s2.substring(0, j8) + interfaceIntToString(extractInterfaceValues(class9_1, 3))
-												+ s2.substring(j8 + 2);
+										s2 = s2.substring(0, j8) + interfaceIntToString(executeScript(class9_1, 3))
+											+ s2.substring(j8 + 2);
 									} while (true);
 									do {
 										int k8 = s2.indexOf("%5");
 										if (k8 == -1)
 											break;
-										s2 = s2.substring(0, k8) + interfaceIntToString(extractInterfaceValues(class9_1, 4))
-												+ s2.substring(k8 + 2);
+										s2 = s2.substring(0, k8) + interfaceIntToString(executeScript(class9_1, 4))
+											+ s2.substring(k8 + 2);
 									} while (true);
 								}
 								int l11 = s2.indexOf("\\n");
@@ -12755,14 +12717,14 @@ public class Client extends GameEngine implements RSClient {
 							}
 							if (class9_1.centerText) {
 								newRegularFont.drawCenteredString(class9_1.message, _x + class9_1.msgX, _y + class9_1.msgY,
-										flag ? class9_1.anInt216 : class9_1.textColor, 0x000000);
+									flag ? class9_1.anInt216 : class9_1.textColor, 0x000000);
 
 								// class9_1.rsFont.drawCenteredString(class9_1.message, _x + class9_1.msgX, _y +
 								// class9_1.msgY,
 								// flag ? class9_1.anInt216 : class9_1.textColor, 0);
 							} else {
 								newRegularFont.drawCenteredString(class9_1.message, _x + class9_1.msgX, _y + class9_1.msgY,
-										flag ? class9_1.anInt216 : class9_1.textColor, 0x000000);
+									flag ? class9_1.anInt216 : class9_1.textColor, 0x000000);
 								// class9_1.rsFont.drawBasicString(class9_1.message, _x + 5, _y + class9_1.msgY,
 								// flag ? class9_1.anInt216 : class9_1.textColor, 0);
 							}
@@ -12795,10 +12757,10 @@ public class Client extends GameEngine implements RSClient {
 							int xOffset = class9_1.centerText ? 3 : 16;
 							if (rsInterface.id == 41900) {
 								newRegularFont.drawCenteredString(d.getSelected(), _x + (d.getWidth() - xOffset) / 2, _y + 14,
-										fontColour, 0);
+									fontColour, 0);
 							} else {
 								newSmallFont.drawCenteredString(d.getSelected(), _x + (d.getWidth() - xOffset) / 2, _y + 14,
-										fontColour, 0);
+									fontColour, 0);
 							}
 
 							if (d.isOpen()) {
@@ -12807,9 +12769,9 @@ public class Client extends GameEngine implements RSClient {
 
 								Rasterizer2D.drawPixels(d.getHeight(), _y + 19, _x, class9_1.dropdownColours[0], d.getWidth());
 								Rasterizer2D.drawPixels(d.getHeight() - 2, _y + 20, _x + 1, class9_1.dropdownColours[1],
-										d.getWidth() - 2);
+									d.getWidth() - 2);
 								Rasterizer2D.drawPixels(d.getHeight() - 4, _y + 21, _x + 2, class9_1.dropdownColours[3],
-										d.getWidth() - 4);
+									d.getWidth() - 4);
 
 								int yy = 2;
 								for (int i = 0; i < d.getOptions().length; i++) {
@@ -12818,32 +12780,32 @@ public class Client extends GameEngine implements RSClient {
 											Rasterizer2D.drawAlphaBox(_x + 2, _y + 19 + yy, d.getWidth() - 4, 13, 0xd0914d, 80);
 										} else {
 											Rasterizer2D.drawPixels(13, _y + 19 + yy, _x + 2, class9_1.dropdownColours[4],
-													d.getWidth() - 4);
+												d.getWidth() - 4);
 										}
 										if (rsInterface.id == 41900) {
 											newRegularFont.drawCenteredString(d.getOptions()[i],
-													_x + (d.getWidth() - xOffset) / 2, _y + 29 + yy, 0xffb83f, 0);
+												_x + (d.getWidth() - xOffset) / 2, _y + 29 + yy, 0xffb83f, 0);
 										} else {
 											newSmallFont.drawCenteredString(d.getOptions()[i],
-													_x + (d.getWidth() - xOffset) / 2, _y + 29 + yy, 0xffb83f, 0);
+												_x + (d.getWidth() - xOffset) / 2, _y + 29 + yy, 0xffb83f, 0);
 										}
 
 									} else {
 										Rasterizer2D.drawPixels(13, _y + 19 + yy, _x + 2, class9_1.dropdownColours[3],
-												d.getWidth() - 4);
+											d.getWidth() - 4);
 										if (rsInterface.id == 41900) {
 											newRegularFont.drawCenteredString(d.getOptions()[i],
-													_x + (d.getWidth() - xOffset) / 2, _y + 29 + yy, 0xfe971e, 0);
+												_x + (d.getWidth() - xOffset) / 2, _y + 29 + yy, 0xfe971e, 0);
 										} else {
 											newSmallFont.drawCenteredString(d.getOptions()[i],
-													_x + (d.getWidth() - xOffset) / 2, _y + 29 + yy, 0xfe971e, 0);
+												_x + (d.getWidth() - xOffset) / 2, _y + 29 + yy, 0xfe971e, 0);
 										}
 
 									}
 									yy += 14;
 								}
 								drawScrollbar(d.getHeight() - 4, class9_1.scrollPosition, _y + 21, _x + d.getWidth() - 18,
-										d.getHeight() - 5);
+									d.getHeight() - 5);
 
 							} else {
 								cacheSprite3[downArrow].drawSprite(_x + d.getWidth() - 18, _y + 2);
@@ -12891,12 +12853,12 @@ public class Client extends GameEngine implements RSClient {
 
 									if (xx == 0) {
 										newRegularFont.drawBasicString(d.getOptions()[i], _x + 5, yPos + 14 + yy, fontColour,
-												0x2e281d);
+											0x2e281d);
 										xx = 1;
 
 									} else {
 										newRegularFont.drawBasicString(d.getOptions()[i], _x + 5 + bb, yPos + 14 + yy,
-												fontColour, 0x2e281d);
+											fontColour, 0x2e281d);
 										xx = 0;
 										yy += 15;
 									}
@@ -12906,7 +12868,7 @@ public class Client extends GameEngine implements RSClient {
 							}
 						} else if (class9_1.type == RSInterface.TYPE_ADJUSTABLE_CONFIG) {
 							if (class9_1.id != 37010) {
-								Rasterizer2D.setDrawingArea(canvasHeight, 0, canvasHeight, 0);
+								Rasterizer2D.setDrawingArea(canvasHeight, 0, canvasWidth, 0);
 							}
 							if(class9_1.id == 37100) {
 								if (_y < 41 || _y > 230) {
@@ -13032,20 +12994,12 @@ public class Client extends GameEngine implements RSClient {
 			}
 			if (rsInterface.id == 16244) {
 				if (MouseHandler.mouseX > 165 && MouseHandler.mouseX < 610 && MouseHandler.mouseY > 428 && MouseHandler.mouseY < 470) {
-					Rasterizer2D.drawAlphaBox(165, 428, 444, 42, 0xffffff, 40);
+					//DrawingArea.drawAlphaBox(165, 428, 444, 42, 0xffffff, 40);
 				}
-				// cacheSprite2[76].drawSprite1(24, 280,
-				// 200 + (int) (50 * Math.sin(tick / 15.0)));
-				// DrawingArea.drawBox(30, 400, 400, 400, 0xffffff);
 			}
 			if (tabID == 0) {
 				// TODO blue spec bar
 				// DrawingArea.drawBox(53, 250, 148, 24, 0xffffff);
-			}
-			if (!isResized()) {
-				callbacks.drawInterface(WidgetID.FIXED_VIEWPORT_GROUP_ID, Collections.emptyList());
-			} else {
-				callbacks.drawInterface(WidgetID.RESIZABLE_VIEWPORT_OLD_SCHOOL_BOX_GROUP_ID, Collections.emptyList());
 			}
 		} catch (Exception | StackOverflowError e) {
 			System.err.println(String.format("Error on interface j=%d, xPosition=%d, id=%d, yPosition=%d", scrollPosition, xPosition, rsInterface.id, yPosition));
@@ -14016,13 +13970,13 @@ public class Client extends GameEngine implements RSClient {
 			RSInterface class9_1 = RSInterface.interfaceCache[class9.children[k]];
 			if (class9_1.type == 1)
 				flag1 |= processWidgetAnimations(tick, class9_1.id);
-			if (class9_1.type == 6 && (class9_1.anInt257 != -1 || class9_1.anInt258 != -1)) {
+			if (class9_1.type == 6 && (class9_1.defaultAnimationId != -1 || class9_1.secondaryAnimationId != -1)) {
 				boolean flag2 = interfaceIsSelected(class9_1);
 				int l;
 				if (flag2)
-					l = class9_1.anInt258;
+					l = class9_1.secondaryAnimationId;
 				else
-					l = class9_1.anInt257;
+					l = class9_1.defaultAnimationId;
 				if (l != -1) {
 					AnimationDefinition animation = AnimationDefinition.anims[l];
 					for (class9_1.anInt208 += tick; class9_1.anInt208 > animation.method258(class9_1.anInt246);) {
@@ -14169,7 +14123,7 @@ public class Client extends GameEngine implements RSClient {
 			Signlink.midi = "voladjust";
 	}
 
-	private int extractInterfaceValues(RSInterface widget, int id) {
+	private int executeScript(RSInterface widget, int id) {
 		if (widget.scripts == null || id >= widget.scripts.length)
 			return -2;
 		try {
@@ -14193,7 +14147,7 @@ public class Client extends GameEngine implements RSClient {
 					RSInterface inventoryContainer = RSInterface.interfaceCache[script[counter++]];
 					int item = script[counter++];
 					if (item >= 0 && item < ItemDefinition.totalItems
-							&& (!ItemDefinition.lookup(item).members || isMembers)) {
+						&& (!ItemDefinition.lookup(item).members || isMembers)) {
 						int itemId = item + 1;
 						int actualItemId = item;
 						for (int slot = 0; slot < inventoryContainer.inventoryItemId.length; slot++) {
@@ -14244,7 +14198,7 @@ public class Client extends GameEngine implements RSClient {
 					RSInterface equipmentContainer = RSInterface.interfaceCache[script[counter++]];
 					int item = script[counter++] + 1;
 					if (item >= 0 && item < ItemDefinition.totalItems
-							&& (!ItemDefinition.lookup(item).members || isMembers)) {
+						&& (!ItemDefinition.lookup(item).members || isMembers)) {
 						for (int stored = 0; stored < equipmentContainer.inventoryItemId.length; stored++) {
 							if (equipmentContainer.inventoryItemId[stored] != item)
 								continue;
@@ -15150,19 +15104,19 @@ public class Client extends GameEngine implements RSClient {
 		spawnedObject.getLongetivity = j;
 	}
 
-	private boolean interfaceIsSelected(RSInterface class9) {
-		if (class9.anIntArray245 == null)
+	private boolean interfaceIsSelected(RSInterface widget) {
+		if (widget.valueCompareType == null)
 			return false;
-		for (int i = 0; i < class9.anIntArray245.length; i++) {
-			int j = extractInterfaceValues(class9, i);
-			int k = class9.anIntArray212[i];
-			if (class9.anIntArray245[i] == 2) {
+		for (int i = 0; i < widget.valueCompareType.length; i++) {
+			int j = executeScript(widget, i);
+			int k = widget.requiredValues[i];
+			if (widget.valueCompareType[i] == 2) {
 				if (j >= k)
 					return false;
-			} else if (class9.anIntArray245[i] == 3) {
+			} else if (widget.valueCompareType[i] == 3) {
 				if (j <= k)
 					return false;
-			} else if (class9.anIntArray245[i] == 4) {
+			} else if (widget.valueCompareType[i] == 4) {
 				if (j == k)
 					return false;
 			} else if (j != k)
@@ -16368,13 +16322,13 @@ public class Client extends GameEngine implements RSClient {
 
 				case 185:
 					int k = inStream.method436();
-					RSInterface.interfaceCache[k].anInt233 = 3;
+					RSInterface.interfaceCache[k].defaultMediaType = 3;
 					if (localPlayer.desc == null)
-						RSInterface.interfaceCache[k].mediaID = (localPlayer.anIntArray1700[0] << 25)
+						RSInterface.interfaceCache[k].defaultMedia = (localPlayer.anIntArray1700[0] << 25)
 								+ (localPlayer.anIntArray1700[4] << 20) + (localPlayer.equipment[0] << 15)
 								+ (localPlayer.equipment[8] << 10) + (localPlayer.equipment[11] << 5) + localPlayer.equipment[1];
 					else
-						RSInterface.interfaceCache[k].mediaID = (int) (0x12345678L + localPlayer.desc.npcId);
+						RSInterface.interfaceCache[k].defaultMedia = (int) (0x12345678L + localPlayer.desc.npcId);
 					incomingPacket = -1;
 					return true;
 
@@ -16742,8 +16696,8 @@ public class Client extends GameEngine implements RSClient {
 				case 75:
 					int j3 = inStream.method436();
 					int j11 = inStream.method436();
-					RSInterface.interfaceCache[j11].anInt233 = 2;
-					RSInterface.interfaceCache[j11].mediaID = j3;
+					RSInterface.interfaceCache[j11].defaultMediaType = 2;
+					RSInterface.interfaceCache[j11].defaultMedia = j3;
 					incomingPacket = -1;
 					return true;
 
@@ -17141,13 +17095,13 @@ public class Client extends GameEngine implements RSClient {
 					int i13 = inStream.readUShort();
 					int k18 = inStream.readUShort();
 					if (k18 == 65535) {
-						RSInterface.interfaceCache[i6].anInt233 = 0;
+						RSInterface.interfaceCache[i6].defaultMediaType = 0;
 						incomingPacket = -1;
 						return true;
 					} else {
 						ItemDefinition itemDef = ItemDefinition.lookup(k18);
-						RSInterface.interfaceCache[i6].anInt233 = 4;
-						RSInterface.interfaceCache[i6].mediaID = k18;
+						RSInterface.interfaceCache[i6].defaultMediaType = 4;
+						RSInterface.interfaceCache[i6].defaultMedia = k18;
 						RSInterface.interfaceCache[i6].modelRotation1 = itemDef.xan2d;
 						RSInterface.interfaceCache[i6].modelRotation2 = itemDef.yan2d;
 						RSInterface.interfaceCache[i6].modelZoom = (itemDef.zoom2d * 100) / i13;
@@ -17300,8 +17254,8 @@ public class Client extends GameEngine implements RSClient {
 				case 8:
 					int k6 = inStream.method436();
 					int l13 = inStream.readUShort();
-					RSInterface.interfaceCache[k6].anInt233 = 1;
-					RSInterface.interfaceCache[k6].mediaID = l13;
+					RSInterface.interfaceCache[k6].defaultMediaType = 1;
+					RSInterface.interfaceCache[k6].defaultMedia = l13;
 					incomingPacket = -1;
 					return true;
 
@@ -17538,7 +17492,7 @@ public class Client extends GameEngine implements RSClient {
 					int l8 = inStream.readUShort();
 					int i15 = inStream.readSignedWord();
 					RSInterface class9_4 = RSInterface.interfaceCache[l8];
-					class9_4.anInt257 = i15;
+					class9_4.defaultAnimationId = i15;
 					if (i15 == 591 || i15 == 588) {
 						class9_4.modelZoom = 900; // anInt269
 					}

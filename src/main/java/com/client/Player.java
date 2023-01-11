@@ -312,11 +312,11 @@ public final class Player extends Entity implements RSPlayer {
 		return PlayerRights.hasRightsBetween(rights, low, high);
 	}
 
-	public Model method453() {
+	public Model getHeadModel() {
 		if (!visible)
 			return null;
 		if (desc != null)
-			return desc.method160();
+			return desc.model();
 		boolean flag = false;
 		for (int i = 0; i < 12; i++) {
 			int j = equipment[i];

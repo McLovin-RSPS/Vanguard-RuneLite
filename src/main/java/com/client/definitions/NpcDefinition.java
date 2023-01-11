@@ -1381,13 +1381,13 @@ public final class NpcDefinition implements RSNPCComposition {
         }
     }
 
-    public Model method160() {
+    public Model model() {
         if (configs != null) {
             NpcDefinition entityDef = method161();
             if (entityDef == null)
                 return null;
             else
-                return entityDef.method160();
+                return entityDef.model();
         }
         if (chatheadModels == null) {
             return null;

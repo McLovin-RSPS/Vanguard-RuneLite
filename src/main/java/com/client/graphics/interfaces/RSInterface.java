@@ -82,11 +82,11 @@ public class RSInterface {
 				rsInterface.mOverInterToTrigger = -1;
 			int i1 = stream.readUnsignedByte();
 			if (i1 > 0) {
-				rsInterface.anIntArray245 = new int[i1];
-				rsInterface.anIntArray212 = new int[i1];
+				rsInterface.valueCompareType = new int[i1];
+				rsInterface.requiredValues = new int[i1];
 				for (int j1 = 0; j1 < i1; j1++) {
-					rsInterface.anIntArray245[j1] = stream.readUnsignedByte();
-					rsInterface.anIntArray212[j1] = stream.readUShort();
+					rsInterface.valueCompareType[j1] = stream.readUnsignedByte();
+					rsInterface.requiredValues[j1] = stream.readUShort();
 				}
 
 			}
@@ -202,8 +202,8 @@ public class RSInterface {
 			if (rsInterface.type == 6) {
 				int l = stream.readUnsignedByte();
 				if (l != 0) {
-					rsInterface.anInt233 = 1;
-					rsInterface.mediaID = (l - 1 << 8) + stream.readUnsignedByte();
+					rsInterface.defaultMediaType = 1;
+					rsInterface.defaultMedia = (l - 1 << 8) + stream.readUnsignedByte();
 				}
 				l = stream.readUnsignedByte();
 				if (l != 0) {
@@ -212,14 +212,14 @@ public class RSInterface {
 				}
 				l = stream.readUnsignedByte();
 				if (l != 0)
-					rsInterface.anInt257 = (l - 1 << 8) + stream.readUnsignedByte();
+					rsInterface.defaultAnimationId = (l - 1 << 8) + stream.readUnsignedByte();
 				else
-					rsInterface.anInt257 = -1;
+					rsInterface.defaultAnimationId = -1;
 				l = stream.readUnsignedByte();
 				if (l != 0)
-					rsInterface.anInt258 = (l - 1 << 8) + stream.readUnsignedByte();
+					rsInterface.secondaryAnimationId = (l - 1 << 8) + stream.readUnsignedByte();
 				else
-					rsInterface.anInt258 = -1;
+					rsInterface.secondaryAnimationId = -1;
 				rsInterface.modelZoom = stream.readUShort();
 				rsInterface.modelRotation1 = stream.readUShort();
 				rsInterface.modelRotation2 = stream.readUShort();
@@ -726,10 +726,10 @@ public class RSInterface {
 		Tab.height = sprite1.myHeight;
 		Tab.aByte254 = 0;
 		Tab.mOverInterToTrigger = -1;
-		Tab.anIntArray245 = new int[1];
-		Tab.anIntArray212 = new int[1];
-		Tab.anIntArray245[0] = 1;
-		Tab.anIntArray212[0] = configValueToActivate;
+		Tab.valueCompareType = new int[1];
+		Tab.requiredValues = new int[1];
+		Tab.valueCompareType[0] = 1;
+		Tab.requiredValues[0] = configValueToActivate;
 		Tab.scripts = new int[1][3];
 		Tab.scripts[0][0] = 5;
 		Tab.scripts[0][1] = configId;
@@ -903,10 +903,10 @@ public class RSInterface {
 		Interface.sprite2 = imageLoader(prayerSpriteID, "QuickPrayer/" + loca + "");
 		Interface.width = 34;
 		Interface.height = 34;
-		Interface.anIntArray212 = new int[1];
-		Interface.anIntArray245 = new int[1];
-		Interface.anIntArray212[0] = 1;
-		Interface.anIntArray245[0] = configId;
+		Interface.requiredValues = new int[1];
+		Interface.valueCompareType = new int[1];
+		Interface.requiredValues[0] = 1;
+		Interface.valueCompareType[0] = configId;
 		Interface.scripts = new int[1][3];
 		Interface.scripts[0][0] = 5;
 		Interface.scripts[0][1] = configFrame;
@@ -925,10 +925,10 @@ public class RSInterface {
 		Interface.sprite2 = imageLoader(prayerSpriteID, "QuickPrayer/" + loca + "");
 		Interface.width = 34;
 		Interface.height = 34;
-		Interface.anIntArray212 = new int[1];
-		Interface.anIntArray245 = new int[1];
-		Interface.anIntArray212[0] = 2;
-		Interface.anIntArray245[0] = requiredValues + 1;
+		Interface.requiredValues = new int[1];
+		Interface.valueCompareType = new int[1];
+		Interface.requiredValues[0] = 2;
+		Interface.valueCompareType[0] = requiredValues + 1;
 		Interface.scripts = new int[1][3];
 		Interface.scripts[0][0] = 2;
 		Interface.scripts[0][1] = 5;
@@ -1431,10 +1431,10 @@ public class RSInterface {
 		hover.width = Width;
 		hover.tooltip = Tooltip;
 		hover.height = Height;
-		hover.anIntArray245 = new int[1];
-		hover.anIntArray212 = new int[1];
-		hover.anIntArray245[0] = 1;
-		hover.anIntArray212[0] = configId;
+		hover.valueCompareType = new int[1];
+		hover.requiredValues = new int[1];
+		hover.valueCompareType[0] = 1;
+		hover.requiredValues[0] = configId;
 		hover.scripts = new int[1][3];
 		hover.scripts[0][0] = 5;
 		hover.scripts[0][1] = configFrame;
@@ -1541,10 +1541,10 @@ public class RSInterface {
 		Tab.height = 334;
 		Tab.opacity = (byte) 0;
 		Tab.hoverType = -1;
-		Tab.anIntArray245 = new int[1];
-		Tab.anIntArray212 = new int[1];
-		Tab.anIntArray245[0] = 1;
-		Tab.anIntArray212[0] = configId;
+		Tab.valueCompareType = new int[1];
+		Tab.requiredValues = new int[1];
+		Tab.valueCompareType[0] = 1;
+		Tab.requiredValues[0] = configId;
 		Tab.scripts = new int[1][3];
 		Tab.scripts[0][0] = 5;
 		Tab.scripts[0][1] = configFrame;
@@ -1565,10 +1565,10 @@ public class RSInterface {
 		Tab.height = height;
 		Tab.opacity = 0;
 		Tab.hoverType = -1;
-		Tab.anIntArray245 = new int[1];
-		Tab.anIntArray212 = new int[1];
-		Tab.anIntArray245[0] = 1;
-		Tab.anIntArray212[0] = configID;
+		Tab.valueCompareType = new int[1];
+		Tab.requiredValues = new int[1];
+		Tab.valueCompareType[0] = 1;
+		Tab.requiredValues[0] = configID;
 		Tab.scripts = new int[1][3];
 		Tab.scripts = new int[1][3];
 		Tab.scripts[0][0] = 5;
@@ -1794,10 +1794,10 @@ public class RSInterface {
 		rsInterface.height = 14;
 		rsInterface.aByte254 = 0;
 		rsInterface.mOverInterToTrigger = -1;
-		rsInterface.anIntArray245 = new int[1];
-		rsInterface.anIntArray212 = new int[1];
-		rsInterface.anIntArray245[0] = 3;
-		rsInterface.anIntArray212[0] = runeAmount;
+		rsInterface.valueCompareType = new int[1];
+		rsInterface.requiredValues = new int[1];
+		rsInterface.valueCompareType[0] = 3;
+		rsInterface.requiredValues[0] = runeAmount;
 		rsInterface.scripts = new int[1][4];
 		rsInterface.scripts[0][0] = 4;
 		rsInterface.scripts[0][1] = 3214;
@@ -1827,16 +1827,16 @@ public class RSInterface {
 		rsInterface.height = 20;
 		rsInterface.tooltip = "Cast @gre@" + name;
 		rsInterface.spellName = name;
-		rsInterface.anIntArray245 = new int[4];
-		rsInterface.anIntArray212 = new int[4];
-		rsInterface.anIntArray245[0] = 3;
-		rsInterface.anIntArray212[0] = ra1;
-		rsInterface.anIntArray245[1] = 3;
-		rsInterface.anIntArray212[1] = ra2;
-		rsInterface.anIntArray245[2] = 3;
-		rsInterface.anIntArray212[2] = ra3;
-		rsInterface.anIntArray245[3] = 3;
-		rsInterface.anIntArray212[3] = lvl;
+		rsInterface.valueCompareType = new int[4];
+		rsInterface.requiredValues = new int[4];
+		rsInterface.valueCompareType[0] = 3;
+		rsInterface.requiredValues[0] = ra1;
+		rsInterface.valueCompareType[1] = 3;
+		rsInterface.requiredValues[1] = ra2;
+		rsInterface.valueCompareType[2] = 3;
+		rsInterface.requiredValues[2] = ra3;
+		rsInterface.valueCompareType[3] = 3;
+		rsInterface.requiredValues[3] = lvl;
 		rsInterface.scripts = new int[4][];
 		rsInterface.scripts[0] = new int[4];
 		rsInterface.scripts[0][0] = 4;
@@ -1895,16 +1895,16 @@ public class RSInterface {
 		rsInterface.height = 20;
 		rsInterface.tooltip = "Cast @gre@" + name;
 		rsInterface.spellName = name;
-		rsInterface.anIntArray245 = new int[4];
-		rsInterface.anIntArray212 = new int[4];
-		rsInterface.anIntArray245[0] = 3;
-		rsInterface.anIntArray212[0] = ra1;
-		rsInterface.anIntArray245[1] = 3;
-		rsInterface.anIntArray212[1] = ra2;
-		rsInterface.anIntArray245[2] = 3;
-		rsInterface.anIntArray212[2] = ra3;
-		rsInterface.anIntArray245[3] = 3;
-		rsInterface.anIntArray212[3] = lvl;
+		rsInterface.valueCompareType = new int[4];
+		rsInterface.requiredValues = new int[4];
+		rsInterface.valueCompareType[0] = 3;
+		rsInterface.requiredValues[0] = ra1;
+		rsInterface.valueCompareType[1] = 3;
+		rsInterface.requiredValues[1] = ra2;
+		rsInterface.valueCompareType[2] = 3;
+		rsInterface.requiredValues[2] = ra3;
+		rsInterface.valueCompareType[3] = 3;
+		rsInterface.requiredValues[3] = lvl;
 		rsInterface.scripts = new int[4][];
 		rsInterface.scripts[0] = new int[4];
 		rsInterface.scripts[0][0] = 4;
@@ -1963,16 +1963,16 @@ public class RSInterface {
 		rsInterface.height = 20;
 		rsInterface.tooltip = "Cast @gre@" + name;
 		rsInterface.spellName = name;
-		rsInterface.anIntArray245 = new int[4];
-		rsInterface.anIntArray212 = new int[4];
-		rsInterface.anIntArray245[0] = 3;
-		rsInterface.anIntArray212[0] = ra1;
-		rsInterface.anIntArray245[1] = 3;
-		rsInterface.anIntArray212[1] = ra2;
-		rsInterface.anIntArray245[2] = 3;
-		rsInterface.anIntArray212[2] = ra3;
-		rsInterface.anIntArray245[3] = 3;
-		rsInterface.anIntArray212[3] = lvl;
+		rsInterface.valueCompareType = new int[4];
+		rsInterface.requiredValues = new int[4];
+		rsInterface.valueCompareType[0] = 3;
+		rsInterface.requiredValues[0] = ra1;
+		rsInterface.valueCompareType[1] = 3;
+		rsInterface.requiredValues[1] = ra2;
+		rsInterface.valueCompareType[2] = 3;
+		rsInterface.requiredValues[2] = ra3;
+		rsInterface.valueCompareType[3] = 3;
+		rsInterface.requiredValues[3] = lvl;
 		rsInterface.scripts = new int[4][];
 		rsInterface.scripts[0] = new int[4];
 		rsInterface.scripts[0][0] = 4;
@@ -2031,14 +2031,14 @@ public class RSInterface {
 		rsInterface.height = 20;
 		rsInterface.tooltip = "Cast @gre@" + name;
 		rsInterface.spellName = name;
-		rsInterface.anIntArray245 = new int[3];
-		rsInterface.anIntArray212 = new int[3];
-		rsInterface.anIntArray245[0] = 3;
-		rsInterface.anIntArray212[0] = ra1;
-		rsInterface.anIntArray245[1] = 3;
-		rsInterface.anIntArray212[1] = ra2;
-		rsInterface.anIntArray245[2] = 3;
-		rsInterface.anIntArray212[2] = lvl;
+		rsInterface.valueCompareType = new int[3];
+		rsInterface.requiredValues = new int[3];
+		rsInterface.valueCompareType[0] = 3;
+		rsInterface.requiredValues[0] = ra1;
+		rsInterface.valueCompareType[1] = 3;
+		rsInterface.requiredValues[1] = ra2;
+		rsInterface.valueCompareType[2] = 3;
+		rsInterface.requiredValues[2] = lvl;
 		rsInterface.scripts = new int[3][];
 		rsInterface.scripts[0] = new int[4];
 		rsInterface.scripts[0][0] = 4;
@@ -2089,14 +2089,14 @@ public class RSInterface {
 		rsInterface.height = 20;
 		rsInterface.tooltip = "Cast @gre@" + name;
 		rsInterface.spellName = name;
-		rsInterface.anIntArray245 = new int[3];
-		rsInterface.anIntArray212 = new int[3];
-		rsInterface.anIntArray245[0] = 3;
-		rsInterface.anIntArray212[0] = ra1;
-		rsInterface.anIntArray245[1] = 3;
-		rsInterface.anIntArray212[1] = ra2;
-		rsInterface.anIntArray245[2] = 3;
-		rsInterface.anIntArray212[2] = lvl;
+		rsInterface.valueCompareType = new int[3];
+		rsInterface.requiredValues = new int[3];
+		rsInterface.valueCompareType[0] = 3;
+		rsInterface.requiredValues[0] = ra1;
+		rsInterface.valueCompareType[1] = 3;
+		rsInterface.requiredValues[1] = ra2;
+		rsInterface.valueCompareType[2] = 3;
+		rsInterface.requiredValues[2] = lvl;
 		rsInterface.scripts = new int[3][];
 		rsInterface.scripts[0] = new int[4];
 		rsInterface.scripts[0][0] = 4;
@@ -2148,16 +2148,16 @@ public class RSInterface {
 		rsInterface.height = 20;
 		rsInterface.tooltip = "Cast @gre@" + name;
 		rsInterface.spellName = name;
-		rsInterface.anIntArray245 = new int[4];
-		rsInterface.anIntArray212 = new int[4];
-		rsInterface.anIntArray245[0] = 3;
-		rsInterface.anIntArray212[0] = ra1;
-		rsInterface.anIntArray245[1] = 3;
-		rsInterface.anIntArray212[1] = ra2;
-		rsInterface.anIntArray245[2] = 3;
-		rsInterface.anIntArray212[2] = ra3;
-		rsInterface.anIntArray245[3] = 3;
-		rsInterface.anIntArray212[3] = lvl;
+		rsInterface.valueCompareType = new int[4];
+		rsInterface.requiredValues = new int[4];
+		rsInterface.valueCompareType[0] = 3;
+		rsInterface.requiredValues[0] = ra1;
+		rsInterface.valueCompareType[1] = 3;
+		rsInterface.requiredValues[1] = ra2;
+		rsInterface.valueCompareType[2] = 3;
+		rsInterface.requiredValues[2] = ra3;
+		rsInterface.valueCompareType[3] = 3;
+		rsInterface.requiredValues[3] = lvl;
 		rsInterface.scripts = new int[4][];
 		rsInterface.scripts[0] = new int[4];
 		rsInterface.scripts[0][0] = 4;
@@ -2216,16 +2216,16 @@ public class RSInterface {
 		rsInterface.height = 20;
 		rsInterface.tooltip = "Cast @gre@" + name;
 		rsInterface.spellName = name;
-		rsInterface.anIntArray245 = new int[4];
-		rsInterface.anIntArray212 = new int[4];
-		rsInterface.anIntArray245[0] = 3;
-		rsInterface.anIntArray212[0] = ra1;
-		rsInterface.anIntArray245[1] = 3;
-		rsInterface.anIntArray212[1] = ra2;
-		rsInterface.anIntArray245[2] = 3;
-		rsInterface.anIntArray212[2] = ra3;
-		rsInterface.anIntArray245[3] = 3;
-		rsInterface.anIntArray212[3] = lvl;
+		rsInterface.valueCompareType = new int[4];
+		rsInterface.requiredValues = new int[4];
+		rsInterface.valueCompareType[0] = 3;
+		rsInterface.requiredValues[0] = ra1;
+		rsInterface.valueCompareType[1] = 3;
+		rsInterface.requiredValues[1] = ra2;
+		rsInterface.valueCompareType[2] = 3;
+		rsInterface.requiredValues[2] = ra3;
+		rsInterface.valueCompareType[3] = 3;
+		rsInterface.requiredValues[3] = lvl;
 		rsInterface.scripts = new int[4][];
 		rsInterface.scripts[0] = new int[4];
 		rsInterface.scripts[0][0] = 4;
@@ -2284,16 +2284,16 @@ public class RSInterface {
 		rsInterface.height = 20;
 		rsInterface.tooltip = "Cast @gre@" + name;
 		rsInterface.spellName = name;
-		rsInterface.anIntArray245 = new int[4];
-		rsInterface.anIntArray212 = new int[4];
-		rsInterface.anIntArray245[0] = 3;
-		rsInterface.anIntArray212[0] = ra1;
-		rsInterface.anIntArray245[1] = 3;
-		rsInterface.anIntArray212[1] = ra2;
-		rsInterface.anIntArray245[2] = 3;
-		rsInterface.anIntArray212[2] = ra3;
-		rsInterface.anIntArray245[3] = 3;
-		rsInterface.anIntArray212[3] = lvl;
+		rsInterface.valueCompareType = new int[4];
+		rsInterface.requiredValues = new int[4];
+		rsInterface.valueCompareType[0] = 3;
+		rsInterface.requiredValues[0] = ra1;
+		rsInterface.valueCompareType[1] = 3;
+		rsInterface.requiredValues[1] = ra2;
+		rsInterface.valueCompareType[2] = 3;
+		rsInterface.requiredValues[2] = ra3;
+		rsInterface.valueCompareType[3] = 3;
+		rsInterface.requiredValues[3] = lvl;
 		rsInterface.scripts = new int[4][];
 		rsInterface.scripts[0] = new int[4];
 		rsInterface.scripts[0][0] = 4;
@@ -2417,16 +2417,16 @@ public class RSInterface {
 		rsInterface.height = 20;
 		rsInterface.tooltip = "Cast @gre@" + name;
 		rsInterface.spellName = name;
-		rsInterface.anIntArray245 = new int[4];
-		rsInterface.anIntArray212 = new int[4];
-		rsInterface.anIntArray245[0] = 3;
-		rsInterface.anIntArray212[0] = ra1;
-		rsInterface.anIntArray245[1] = 3;
-		rsInterface.anIntArray212[1] = ra2;
-		rsInterface.anIntArray245[2] = 3;
-		rsInterface.anIntArray212[2] = ra3;
-		rsInterface.anIntArray245[3] = 3;
-		rsInterface.anIntArray212[3] = lvl;
+		rsInterface.valueCompareType = new int[4];
+		rsInterface.requiredValues = new int[4];
+		rsInterface.valueCompareType[0] = 3;
+		rsInterface.requiredValues[0] = ra1;
+		rsInterface.valueCompareType[1] = 3;
+		rsInterface.requiredValues[1] = ra2;
+		rsInterface.valueCompareType[2] = 3;
+		rsInterface.requiredValues[2] = ra3;
+		rsInterface.valueCompareType[3] = 3;
+		rsInterface.requiredValues[3] = lvl;
 		rsInterface.scripts = new int[4][];
 		rsInterface.scripts[0] = new int[4];
 		rsInterface.scripts[0][0] = 4;
@@ -2485,16 +2485,16 @@ public class RSInterface {
 		rsInterface.height = 20;
 		rsInterface.tooltip = "Cast @gre@" + name;
 		rsInterface.spellName = name;
-		rsInterface.anIntArray245 = new int[4];
-		rsInterface.anIntArray212 = new int[4];
-		rsInterface.anIntArray245[0] = 3;
-		rsInterface.anIntArray212[0] = ra1;
-		rsInterface.anIntArray245[1] = 3;
-		rsInterface.anIntArray212[1] = ra2;
-		rsInterface.anIntArray245[2] = 3;
-		rsInterface.anIntArray212[2] = ra3;
-		rsInterface.anIntArray245[3] = 3;
-		rsInterface.anIntArray212[3] = lvl;
+		rsInterface.valueCompareType = new int[4];
+		rsInterface.requiredValues = new int[4];
+		rsInterface.valueCompareType[0] = 3;
+		rsInterface.requiredValues[0] = ra1;
+		rsInterface.valueCompareType[1] = 3;
+		rsInterface.requiredValues[1] = ra2;
+		rsInterface.valueCompareType[2] = 3;
+		rsInterface.requiredValues[2] = ra3;
+		rsInterface.valueCompareType[3] = 3;
+		rsInterface.requiredValues[3] = lvl;
 		rsInterface.scripts = new int[4][];
 		rsInterface.scripts[0] = new int[4];
 		rsInterface.scripts[0][0] = 4;
@@ -2553,18 +2553,18 @@ public class RSInterface {
 		rsInterface.height = 20;
 		rsInterface.tooltip = "Cast @gre@" + name;
 		rsInterface.spellName = name;
-		rsInterface.anIntArray245 = new int[5];
-		rsInterface.anIntArray212 = new int[5];
-		rsInterface.anIntArray245[0] = 3;
-		rsInterface.anIntArray212[0] = ra1;
-		rsInterface.anIntArray245[1] = 3;
-		rsInterface.anIntArray212[1] = ra2;
-		rsInterface.anIntArray245[2] = 3;
-		rsInterface.anIntArray212[2] = ra3;
-		rsInterface.anIntArray245[3] = 3;
-		rsInterface.anIntArray212[3] = ra4;
-		rsInterface.anIntArray245[4] = 3;
-		rsInterface.anIntArray212[4] = lvl;
+		rsInterface.valueCompareType = new int[5];
+		rsInterface.requiredValues = new int[5];
+		rsInterface.valueCompareType[0] = 3;
+		rsInterface.requiredValues[0] = ra1;
+		rsInterface.valueCompareType[1] = 3;
+		rsInterface.requiredValues[1] = ra2;
+		rsInterface.valueCompareType[2] = 3;
+		rsInterface.requiredValues[2] = ra3;
+		rsInterface.valueCompareType[3] = 3;
+		rsInterface.requiredValues[3] = ra4;
+		rsInterface.valueCompareType[4] = 3;
+		rsInterface.requiredValues[4] = lvl;
 		rsInterface.scripts = new int[5][];
 		rsInterface.scripts[0] = new int[5];
 		rsInterface.scripts[0][0] = 4;
@@ -2632,16 +2632,16 @@ public class RSInterface {
 		rsInterface.height = 20;
 		rsInterface.tooltip = name.contains("Bounty") ? "Cast @gre@Teleport to Bounty Target" : "Cast @gre@" + name;
 		rsInterface.spellName = name;
-		rsInterface.anIntArray245 = new int[4];
-		rsInterface.anIntArray212 = new int[4];
-		rsInterface.anIntArray245[0] = 3;
-		rsInterface.anIntArray212[0] = ra1;
-		rsInterface.anIntArray245[1] = 3;
-		rsInterface.anIntArray212[1] = ra2;
-		rsInterface.anIntArray245[2] = 3;
-		rsInterface.anIntArray212[2] = ra3;
-		rsInterface.anIntArray245[3] = 3;
-		rsInterface.anIntArray212[3] = lvl;
+		rsInterface.valueCompareType = new int[4];
+		rsInterface.requiredValues = new int[4];
+		rsInterface.valueCompareType[0] = 3;
+		rsInterface.requiredValues[0] = ra1;
+		rsInterface.valueCompareType[1] = 3;
+		rsInterface.requiredValues[1] = ra2;
+		rsInterface.valueCompareType[2] = 3;
+		rsInterface.requiredValues[2] = ra3;
+		rsInterface.valueCompareType[3] = 3;
+		rsInterface.requiredValues[3] = lvl;
 		rsInterface.scripts = new int[4][];
 		rsInterface.scripts[0] = new int[4];
 		rsInterface.scripts[0][0] = 4;
@@ -2700,16 +2700,16 @@ public class RSInterface {
 		rsInterface.height = 20;
 		rsInterface.tooltip = "Cast @gre@" + name;
 		rsInterface.spellName = name;
-		rsInterface.anIntArray245 = new int[4];
-		rsInterface.anIntArray212 = new int[4];
-		rsInterface.anIntArray245[0] = 3;
-		rsInterface.anIntArray212[0] = ra1;
-		rsInterface.anIntArray245[1] = 3;
-		rsInterface.anIntArray212[1] = ra2;
-		rsInterface.anIntArray245[2] = 3;
-		rsInterface.anIntArray212[2] = ra3;
-		rsInterface.anIntArray245[3] = 3;
-		rsInterface.anIntArray212[3] = lvl;
+		rsInterface.valueCompareType = new int[4];
+		rsInterface.requiredValues = new int[4];
+		rsInterface.valueCompareType[0] = 3;
+		rsInterface.requiredValues[0] = ra1;
+		rsInterface.valueCompareType[1] = 3;
+		rsInterface.requiredValues[1] = ra2;
+		rsInterface.valueCompareType[2] = 3;
+		rsInterface.requiredValues[2] = ra3;
+		rsInterface.valueCompareType[3] = 3;
+		rsInterface.requiredValues[3] = lvl;
 		rsInterface.scripts = new int[4][];
 		rsInterface.scripts[0] = new int[4];
 		rsInterface.scripts[0][0] = 4;
@@ -2952,10 +2952,10 @@ public class RSInterface {
 		Tab.height = height;
 		Tab.aByte254 = 0;
 		Tab.mOverInterToTrigger = -1;
-		Tab.anIntArray245 = new int[1];
-		Tab.anIntArray212 = new int[1];
-		Tab.anIntArray245[0] = 1;
-		Tab.anIntArray212[0] = configID;
+		Tab.valueCompareType = new int[1];
+		Tab.requiredValues = new int[1];
+		Tab.valueCompareType[0] = 1;
+		Tab.requiredValues[0] = configID;
 		Tab.scripts = new int[1][3];
 		Tab.scripts[0][0] = 5;
 		Tab.scripts[0][1] = configFrame;
@@ -2977,10 +2977,10 @@ public class RSInterface {
 		Tab.height = height;
 		Tab.aByte254 = 0;
 		Tab.mOverInterToTrigger = -1;
-		Tab.anIntArray245 = new int[1];
-		Tab.anIntArray212 = new int[1];
-		Tab.anIntArray245[0] = 1;
-		Tab.anIntArray212[0] = configValueToActivate;
+		Tab.valueCompareType = new int[1];
+		Tab.requiredValues = new int[1];
+		Tab.valueCompareType[0] = 1;
+		Tab.requiredValues[0] = configValueToActivate;
 		Tab.scripts = new int[1][3];
 		Tab.scripts[0][0] = 5;
 		Tab.scripts[0][1] = configId;
@@ -3033,10 +3033,10 @@ public class RSInterface {
 		tab.sprite2 = imageLoader(1, "PRAYERGLOW");
 		tab.width = 34;
 		tab.height = 34;
-		tab.anIntArray245 = new int[1];
-		tab.anIntArray212 = new int[1];
-		tab.anIntArray245[0] = 1;
-		tab.anIntArray212[0] = configId;
+		tab.valueCompareType = new int[1];
+		tab.requiredValues = new int[1];
+		tab.valueCompareType[0] = 1;
+		tab.requiredValues[0] = configId;
 		tab.scripts = new int[1][3];
 		tab.scripts[0][0] = 5;
 		tab.scripts[0][1] = configFrame;
@@ -3056,10 +3056,10 @@ public class RSInterface {
 		tab2.sprite2 = imageLoader(spriteID, "Prayer/PRAYOFF");
 		tab2.width = 34;
 		tab2.height = 34;
-		tab2.anIntArray245 = new int[1];
-		tab2.anIntArray212 = new int[1];
-		tab2.anIntArray245[0] = 2;
-		tab2.anIntArray212[0] = requiredValues;
+		tab2.valueCompareType = new int[1];
+		tab2.requiredValues = new int[1];
+		tab2.valueCompareType[0] = 2;
+		tab2.requiredValues[0] = requiredValues;
 		tab2.scripts = new int[1][3];
 		tab2.scripts[0][0] = 2;
 		tab2.scripts[0][1] = 5;
@@ -3094,8 +3094,8 @@ public class RSInterface {
 		t.modelZoom = 580;
 		t.modelRotation1 = 150;
 		t.modelRotation2 = 0;
-		t.anInt257 = -1;
-		t.anInt258 = -1;
+		t.defaultAnimationId = -1;
+		t.secondaryAnimationId = -1;
 	}
 
 	public static void addChar(int ID, int zoom) {
@@ -3111,8 +3111,8 @@ public class RSInterface {
 		t.modelZoom = zoom;
 		t.modelRotation1 = 150;
 		t.modelRotation2 = 0;
-		t.anInt257 = -1;
-		t.anInt258 = -1;
+		t.defaultAnimationId = -1;
+		t.secondaryAnimationId = -1;
 	}
 
 	public static void addBox(int id, int byte1, boolean filled, int color, String text) {
@@ -3529,10 +3529,10 @@ public class RSInterface {
 		rsi.type = 8;
 		rsi.aString228 = text;
 		rsi.message = text2;
-		rsi.anIntArray245 = new int[1];
-		rsi.anIntArray212 = new int[1];
-		rsi.anIntArray245[0] = 1;
-		rsi.anIntArray212[0] = configId;
+		rsi.valueCompareType = new int[1];
+		rsi.requiredValues = new int[1];
+		rsi.valueCompareType[0] = 1;
+		rsi.requiredValues[0] = configId;
 		rsi.scripts = new int[1][3];
 		rsi.scripts[0][0] = 5;
 		rsi.scripts[0][1] = configFrame;
@@ -3549,10 +3549,10 @@ public class RSInterface {
 		Tab.width = 512;
 		Tab.height = 334;
 		Tab.aByte254 = (byte) 0;
-		Tab.anIntArray245 = new int[1];
-		Tab.anIntArray212 = new int[1];
-		Tab.anIntArray245[0] = 1;
-		Tab.anIntArray212[0] = configId;
+		Tab.valueCompareType = new int[1];
+		Tab.requiredValues = new int[1];
+		Tab.valueCompareType[0] = 1;
+		Tab.requiredValues[0] = configId;
 		Tab.scripts = new int[1][3];
 		Tab.scripts[0][0] = 5;
 		Tab.scripts[0][1] = configFrame;
@@ -3573,10 +3573,10 @@ public class RSInterface {
 		tab.sprite2 = sprite2;
 		tab.width = 512;
 		tab.height = 334;
-		tab.anIntArray245 = new int[1];
-		tab.anIntArray212 = new int[1];
-		tab.anIntArray245[0] = 1;
-		tab.anIntArray212[0] = configFrame;
+		tab.valueCompareType = new int[1];
+		tab.requiredValues = new int[1];
+		tab.valueCompareType[0] = 1;
+		tab.requiredValues[0] = configFrame;
 		tab.scripts = new int[1][3];
 		tab.scripts[0][0] = 5;
 		tab.scripts[0][1] = configId;
@@ -3595,10 +3595,10 @@ public class RSInterface {
 		tab.sprite2 = imageLoader(sprite1, spriteName);
 		tab.width = 512;
 		tab.height = 334;
-		tab.anIntArray245 = new int[1];
-		tab.anIntArray212 = new int[1];
-		tab.anIntArray245[0] = 1;
-		tab.anIntArray212[0] = configFrame;
+		tab.valueCompareType = new int[1];
+		tab.requiredValues = new int[1];
+		tab.valueCompareType[0] = 1;
+		tab.requiredValues[0] = configFrame;
 		tab.scripts = new int[1][3];
 		tab.scripts[0][0] = 5;
 		tab.scripts[0][1] = configId;
@@ -3617,10 +3617,10 @@ public class RSInterface {
 		tab.sprite2 = imageLoader(spriteId2, spriteName2);
 		tab.width = 512;
 		tab.height = 334;
-		tab.anIntArray245 = new int[1];
-		tab.anIntArray212 = new int[1];
-		tab.anIntArray245[0] = 1;
-		tab.anIntArray212[0] = configFrame;
+		tab.valueCompareType = new int[1];
+		tab.requiredValues = new int[1];
+		tab.valueCompareType[0] = 1;
+		tab.requiredValues[0] = configFrame;
 		tab.scripts = new int[1][3];
 		tab.scripts[0][0] = 5;
 		tab.scripts[0][1] = configId;
@@ -3753,24 +3753,46 @@ public class RSInterface {
 		childY = new int[t];
 	}
 
-	private Model method206(int i, int j) {
-		Model model = (Model) aMRUNodes_264.get((i << 16) + j);
-		if (model != null)
+	private Model getModel(int type, int mobId) {
+		Model model = (Model) models.get((type << 16) + mobId);
+
+		if (model != null) {
 			return model;
-		if (i == 1)
-			model = Model.getModel(j);
-		if (i == 2)
-			model = NpcDefinition.lookup(j).method160();
-		if (i == 3)
-			model = Client.localPlayer.method453();
-		if (i == 4)
-			model = ItemDefinition.lookup(j).getUnshadedModel(50);
-		if (i == 5)
+		}
+
+		if (type == 1) {
+			System.out.println("Normal model");
+			model = Model.getModel(mobId);
+		}
+
+		if (type == 2) {
+			System.out.println("Npc model");
+			model = NpcDefinition.lookup(mobId).model();
+		}
+
+		if (type == 3) {
+			System.out.println("Head model");
+			model = Client.localPlayer.getHeadModel();
+		}
+
+		if (type == 4) {
+			System.out.println("Item model");
+			model = ItemDefinition.lookup(mobId).getUnshadedModel(50);
+		}
+
+		if (type == 5) {
+			System.out.println("Null model");
 			model = null;
-		if (model != null)
-			aMRUNodes_264.put(model, (i << 16) + j);
+		}
+
+		if (model != null) {
+			System.out.println("Put model");
+			models.put(model, (type << 16) + mobId);
+		}
+
 		return model;
 	}
+
 
 	private static Sprite method207(int i, FileArchive streamLoader, String s) {
 		long l = (StringUtils.method585(s) << 8) + (long) i;
@@ -3791,17 +3813,19 @@ public class RSInterface {
 		int j = 5;// was parameter
 		if (flag)
 			return;
-		aMRUNodes_264.unlinkAll();
+		models.unlinkAll();
 		if (model != null && j != 4)
-			aMRUNodes_264.put(model, (j << 16) + i);
+			models.put(model, (j << 16) + i);
 	}
 
 	public Model method209(int j, int k, boolean flag) {
 		Model model;
-		if (flag)
-			model = method206(anInt255, anInt256);
-		else
-			model = method206(anInt233, mediaID);
+		if (flag) {
+			model = getModel(anInt255, anInt256);
+		} else {
+			System.out.println("Type: " + defaultMediaType);
+			model = getModel(defaultMediaType, defaultMedia);
+		}
 		if (model == null)
 			return null;
 		if (k == -1 && j == -1 && model.colors == null)
@@ -3813,7 +3837,7 @@ public class RSInterface {
 			model_1.animate(k);
 		if (j != -1)
 			model_1.animate(j);
-		model_1.light(64, 768, -50, -10, -50, true);
+		model_1.light(64, 850, -30, -50, -30, true);
 		return model_1;
 	}
 
@@ -3849,7 +3873,7 @@ public class RSInterface {
 	public static int anInt208;
 	public Sprite sprites[];
 	public static RSInterface interfaceCache[];
-	public int anIntArray212[];
+	public int requiredValues[];
 	public int contentType;// anInt214
 	public int spritesX[];
 	public int anInt216;
@@ -3862,16 +3886,16 @@ public class RSInterface {
 	public boolean centerText;
 	public int scrollPosition;
 	public String actions[];
-	public int valueCompareType[];
-	public int requiredValues[];
+
+
 	public int scripts[][];
 	public boolean aBoolean227;
 	public String aString228;
 	public int mOverInterToTrigger;
 	public int invSpritePadX;
 	public int textColor;
-	public int anInt233;
-	public int mediaID;
+	public int defaultMediaType;
+	public int defaultMedia;
 	public boolean aBoolean235;
 	public int parentID;
 	public int spellUsableOn;
@@ -3884,7 +3908,7 @@ public class RSInterface {
 	public boolean usableItemInterface;
 	public TextDrawingArea textDrawingAreas;
 	public int invSpritePadY;
-	public int anIntArray245[];
+	public int valueCompareType[];
 	public int anInt246;
 	public int spritesY[];
 	public String message;
@@ -3903,14 +3927,14 @@ public class RSInterface {
 	public byte aByte254;
 	private int anInt255;
 	private int anInt256;
-	public int anInt257;
-	public int anInt258;
+	public int defaultAnimationId;
+	public int secondaryAnimationId;
 	public boolean aBoolean259;
 	public Sprite sprite2;
 	public int scrollMax;
 	public int type;
 	public int anInt263;
-	private static final ReferenceCache aMRUNodes_264 = new ReferenceCache(30);
+	private static final ReferenceCache models = new ReferenceCache(30);
 	public int transparency = 0;
 	public int anInt265;
 	public boolean isMouseoverTriggered;
@@ -4487,8 +4511,8 @@ public class RSInterface {
 		t.modelZoom = zoom;
 		t.modelRotation1 = 150;
 		t.modelRotation2 = 0;
-		t.anInt257 = -1;
-		t.anInt258 = -1;
+		t.defaultAnimationId = -1;
+		t.secondaryAnimationId = -1;
 	}
 
 

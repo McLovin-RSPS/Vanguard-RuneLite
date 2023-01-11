@@ -307,10 +307,10 @@ public final class Interfaces extends RSInterface {
     }
 	public static void fixDefensiveAutocast() {
 		RSInterface rsi = interfaceCache[24111];
-		rsi.anIntArray212 = new int[1];
-		rsi.anIntArray212[0] = 1;
-		rsi.anIntArray245 = new int[1];
-		rsi.anIntArray245[0] = 1;
+		rsi.requiredValues = new int[1];
+		rsi.requiredValues[0] = 1;
+		rsi.valueCompareType = new int[1];
+		rsi.valueCompareType[0] = 1;
 		rsi.scripts = new int[1][3];
 		rsi.scripts[0][0] = 5;
 		rsi.scripts[0][1] = Configs.AUTOCAST_DEFENCE_CONFIG;
