@@ -14902,7 +14902,7 @@ public class Client extends GameEngine implements RSClient {
 	private void drawMoneyPouch(int xOffset) {
 
 		if (pouchHover) {
-			Rasterizer2D.fillCircle((!Client.instance.isResized() ? xOffset + 179 : canvasWidth - 49), (Client.instance.isResized() ? 142 : 168), 15, 0x6E6D6D);
+			Rasterizer2D.fillCircle((!Client.instance.isResized() ? xOffset + 179 : canvasWidth - 49), (!Client.instance.isResized() ? 142 : 168), 15, 0x6E6D6D);
 			moneyPouch.drawSprite(((!Client.instance.isResized() ? xOffset + 162 : canvasWidth - 65)), (!Client.instance.isResized() ? 127 : 153));
 			moneyPouchCoins.drawSprite((!Client.instance.isResized() ? xOffset + 170 : canvasWidth - 57), (!Client.instance.isResized() ? 134 : 160));
 			String amount = RSInterface.interfaceCache[8135].message;
