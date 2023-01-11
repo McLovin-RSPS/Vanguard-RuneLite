@@ -39,16 +39,133 @@ public final class ObjectDefinition implements RSObjectComposition {
 		objectDef.type = i;
 		objectDef.setDefaults();
 		objectDef.decode(stream);
-		//		if (i == 31561) { // Rev agility shortcut
+		if (i >= 26281 && i <= 26290) {
+			objectDef.actions = new String[] { "Choose", null, null, null, null };
+		}
+
+//		if (i == 31561) { // Rev agility shortcut
 //			objectDef.xLength = 2;
 //			objectDef.yLength = 3;
 //		}
 		switch (i) {
+
+			case 41807://portal in the powerful sea snake area
+				objectDef.name = "Welcome to the powerful sea snake";
+				objectDef.actions = new String[] { null, null, null, null, null };
+				break;
+
+			case 76://Tournament supples chest
+				objectDef.name = "Tournament supplies chest";
+				objectDef.actions = new String[] { "View", null, null, null, null };
+				break;
+
+			case 42854://bank chest in nex waiting room
+				objectDef.name = "Bank Chest";
+				objectDef.actions = new String[] { "Open", null, null, null, null };
+				break;
+
+			case 12451://Kratos chest
+				objectDef.name = "Kratos Chest";
+				break;
+
+			case 28791://Bonfire
+				objectDef.name = "Bonfire";
+				objectDef.description = "Can burn all noted logs on this bonfire for Xp/Afk Points.";
+				break;
+
+			case 4121://tarn chest
+				objectDef.name = "Tarn Razorlor Chest";
+				break;
+
+			case 32148:// Foro gloves maker
+				objectDef.actions = new String[] { "Create", null, null, null, null };
+				break;
+
+
+			case 15756://edge dung
+				objectDef.name = "Edge Dungeon";
+				break;
+
+			case 17205://Slayer chest
+				objectDef.name = "Slayer Chest";
+				objectDef.objectModels = new int[] { 60511 };
+				objectDef.actions = new String[] { "Open", null, null, null, null };
+				objectDef.animation = -1;
+
+				break;
+
+			case 26273://loyalty chest
+				objectDef.name = "Loyalty chest";
+				objectDef.actions = new String[] {"Claim", null, null, null, null};
+				break;
+
+			case 34918://Evil tree
+				objectDef.name = "Crystal tree";
+				//objectDef.anIntArray773 = new int[] { 45755 };
+				//objectDef.animation = -1;
+				objectDef.actions = new String[] {"Chop", null, null, null, null};
+				break;
+
+			case 7127://Xeric leaderboards
+				objectDef.name = "Xeric leaderboards";
+				objectDef.actions = new String[] {"View", null, null, null, null};
+				break;
+
+			case 15343://Nightmare chest
+				objectDef.name = "Nightmare chest";
+				objectDef.actions = new String[] {"Open", null, null, null, null};
+				break;
+
+			case 29067://Lms enter
+				objectDef.actions = new String[] {"Enter-LMS", null, null, null, null};
+				break;
+
+			case 2449://Afk rocks
+				objectDef.name = "Afk rocks";
+				objectDef.actions = new String[] {"Mine", null, null, null, null};
+				break;
+
+			case 33704://Afk tree
+				objectDef.name = "Afk tree";
+				objectDef.actions = new String[] {"Chop", null, null, null, null};
+				break;
+
+			case 13389://Seren chest
+				objectDef.name = "Seren chest";
+				objectDef.actions = new String[] {"Open", null, null, null, null};
+				break;
+
+			case 41020://Shooting star
+				objectDef.name = "Shooting star";
+				//objectDef.anIntArray773 = new int[] { 64906, };
+				//objectDef.animation = -1;
+				objectDef.actions = new String[] {"Mine", null, null, null, null};
+				break;
+
+			case 4387://Solak home tele
+				objectDef.name = "Home portal";
+				break;
+
+			case 27269://Solak chest
+				objectDef.name = "Solak Chest";
+				break;
+
+			case 14986://glod chest
+				objectDef.name = "Glod Chest";
+				break;
+
+			case 17436://upgrade table
+				objectDef.name = "Upgrade Table";
+				objectDef.description = "The upgrade table.";
+				objectDef.actions = new String[] { "View list", null, null, null, null };
+				break;
+
+
 			case 36201: // Raids 1 lobby entrance
 				objectDef.actions = new String[]{ "Enter", null, null, null, null};
 				break;
 			case 36062:
-				objectDef.description = "Teleports you anywhere around ArkCane.";
+				objectDef.description = "Teleports you anywhere around Vanguard.";
 				objectDef.actions = new String[] { "Activate", "Previous Location", null, null, null };
 				break;
 			case 4152:
@@ -128,22 +245,16 @@ public final class ObjectDefinition implements RSObjectComposition {
 				objectDef.name = "Outlast Entrance";
 				objectDef.actions = new String[] { "Enter", "Check Players", "Check Active", null, null };
 				break;
-			case 30943:
-				objectDef.actions = new String[] { "Upgrade", null, null, null, null };
-				break;
 			case 31624:
 				objectDef.name = "@pur@Platinum Altar";
 				break;
 			case 29064:
-				objectDef.name = "ArkCane Leaderboards";
+				objectDef.name = "RuneWars Leaderboards";
 				objectDef.actions = new String[] { "View", null, null, null, null };
 				break;
 			case 33320:
-				objectDef.name = "Eternal Flame";
-				objectDef.description = "A Secret Passageway";
-				objectDef.actions = new String[] { "Enter", null, null, null, null };
-				objectDef.recolorToReplace = null;
-				objectDef.recolorToFind = null;
+				objectDef.name = "Fire of Exchange";
+				objectDef.actions = new String[] { "Burn", "Burn Rates", null, null, null };
 				break;
 			case 33318:
 				objectDef.name = "Fire of Destruction";
@@ -154,30 +265,10 @@ public final class ObjectDefinition implements RSObjectComposition {
 				objectDef.actions = new String[] { "Unlock", null, null, null, null };
 				break;
 			case 6097:
-				objectDef.actions = new String[] { "Donate", null, null, null, null };
+				objectDef.actions = new String[] { "Donate", "Donate seeds", "Live hiscores", null, null };
 				break;
 			case 14888:
 				objectDef.name = "Jewelry Oven";
-				break;
-			case 40949:
-				objectDef.name = "Furnace";
-				objectDef.actions = new String[] { "Smelt", null, null, null, null };
-				break;
-			case 43749:
-				objectDef.name = "Legendary Zone Barrier";
-				objectDef.actions = new String[] { "Pass", null, null, null, null };
-				objectDef.interactType = false;
-				objectDef.contouredGround = true;
-				objectDef.sizeY = 1;
-				objectDef.description = "A Barrier Protecting Legendary Zone Access.";
-				break;
-			case 43751:
-				objectDef.name = "Diamond Zone Barrier";
-				objectDef.actions = new String[] { "Pass", null, null, null, null };
-				objectDef.interactType = false;
-				objectDef.contouredGround = true;
-				objectDef.sizeY = 1;
-				objectDef.description = "A Barrier Protecting Diamond Zone Access.";
 				break;
 			case 29165:
 				objectDef.name = "Coin Stack";
@@ -233,9 +324,7 @@ public final class ObjectDefinition implements RSObjectComposition {
 				objectDef.actions = new String[] { "Inspect", null, null, null, null };
 				objectDef.name = "Herbs";
 				break;
-			case 2341:
-				objectDef.actions = new String[] { null, null, null, null, null };
-				break;
+
 			case 14217:
 				objectDef.actions = new String[5];
 				break;
@@ -281,14 +370,6 @@ public final class ObjectDefinition implements RSObjectComposition {
 
 			case 26782:
 				objectDef.actions = new String[] { "Recharge", null, null, null, null };
-				break;
-
-			case 20845:
-				objectDef.objectModels = new int[] { 19201 };
-				objectDef.name = "Jack-o-Lantern";
-				objectDef.sizeX = 1;
-				objectDef.sizeY = 1;
-				objectDef.description = "A Jack-o-Lantern.";
 				break;
 
 			case 1751:
@@ -345,11 +426,14 @@ public final class ObjectDefinition implements RSObjectComposition {
 				break;
 			case 4873:
 				objectDef.name = "Wilderness Lever";
-				objectDef.sizeX = 3;
-				objectDef.sizeY = 3;
-				objectDef.ambient = 25;
+				objectDef.sizeX = 1;
+				objectDef.sizeY = 1;
+				objectDef.ambient = 1;
 				objectDef.actions = new String[] { "Enter Deep Wildy", null, null, null, null };
 				objectDef.mapscene = 3;
+				break;
+			case 29735:
+				objectDef.name = "Basic Slayer Dungeon";
 				break;
 			case 2544:
 				objectDef.name = "Dagannoth Manhole";
@@ -370,10 +454,7 @@ public final class ObjectDefinition implements RSObjectComposition {
 				objectDef.name = "Mini-Game Teleports Portal";
 				objectDef.actions = new String[] { "Teleport", null, null, null, null };
 				break;
-			case 7127:
-				objectDef.name = "Leaderboards";
-				objectDef.actions = new String[] { "Open", "Wins", "Kills", "KDR", null };
-				break;
+
 			case 4155:
 				objectDef.name = "Zul Andra Portal";
 				break;
@@ -484,36 +565,6 @@ public final class ObjectDefinition implements RSObjectComposition {
 				objectDef.textureFind = new short[] { 2 };
 				objectDef.textureReplace = new short[] { 46 };
 				break;
-
-			case 28562:
-				objectDef.name = "TzHaar Foundry";
-				break;
-
-			case 43708:
-			case 43711:
-			case 43814:
-			case 43707:
-				objectDef.actions = new String[] { "Craft", null, null, null, null };
-				objectDef.description = "It's a runecrafting guardian.";
-				break;
-			case 32541:
-				objectDef.name = "Xeric's Trials";
-				objectDef.actions = new String[] { "Challenge", null, null, null, null };
-				objectDef.description = "It's a Xeric's Champion cape.";
-				break;
-
-			case 43703:
-				objectDef.actions = new String[] { "Attune", null, null, null, null };
-				objectDef.description = "It's a Mining guardian.";
-				break;
-
-			case 31984:
-				objectDef.name = "Benji's Pet Dragon";
-				objectDef.actions = new String[] { null, null, null, null, null };
-				objectDef.description = "Use bones on me and gain double XP while I eat.";
-				break;
-
-
 		}
 		if (Client.debugModels) {
 
