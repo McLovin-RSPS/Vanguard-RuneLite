@@ -3823,7 +3823,6 @@ public class RSInterface {
 		if (flag) {
 			model = getModel(anInt255, anInt256);
 		} else {
-			System.out.println("Type: " + defaultMediaType);
 			model = getModel(defaultMediaType, defaultMedia);
 		}
 		if (model == null)
