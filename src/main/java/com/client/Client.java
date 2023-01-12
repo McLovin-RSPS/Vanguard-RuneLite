@@ -1597,7 +1597,7 @@ public class Client extends GameEngine implements RSClient {
 
 							try {
 
-								mapIconSprite[mapIconAmount] = mapFunctions[sprite];
+								mapIconSprite[mapIconAmount] = AreaDefinition.getImage(sprite);
 								anIntArray1072[mapIconAmount] = k3;
 								anIntArray1073[mapIconAmount] = l3;
 								mapIconAmount++;
@@ -17284,7 +17284,7 @@ public class Client extends GameEngine implements RSClient {
 							}
 							class9_1.inventoryItemId[j22] = inStream.method436();
 							class9_1.inventoryAmounts[j22] = i25;
-							//System.out.println(String.format("Added item [%d, %d] to container %d", class9_1.inv[j22], i25, i7));
+							System.out.println(String.format("Added item [%d, %d] to container %d", class9_1.inv[j22], i25, i7));
 						}
 						for (int j25 = j19; j25 < class9_1.inventoryItemId.length; j25++) {
 							class9_1.inventoryItemId[j25] = 0;
