@@ -110,7 +110,7 @@ public final class Interfaces extends RSInterface {
 		taskInterface.actions.loadAchievements();
 		taskInterface.build();
 
-		new QuestTab().load(defaultTextDrawingAreas);
+		//new QuestTab().load(defaultTextDrawingAreas);
 
 		fixDefensiveAutocast();
 		EventCalendar.getCalendar().load(defaultTextDrawingAreas);
@@ -185,10 +185,10 @@ public final class Interfaces extends RSInterface {
 		inter.child( inter.children.length - 1, 12323, 17, 201);
 	}
 
-    public static void fireofExchange(TextDrawingArea[] tda) {
-        RSInterface inter = addInterface(33400);
-        addSprite(33401, 0, "Interfaces/FireOfExchange/SPRITE");
-        addText(33320, "Fire of Exchange", tda, 2, 0xff9933, true, true);
+	public static void fireofExchange(TextDrawingArea[] tda) {
+		RSInterface inter = addInterface(33400);
+		addSprite(33401, 0, "Interfaces/FireOfExchange/SPRITE");
+		addText(33402, "Fire of Exchange", tda, 2, 0xff9933, true, true);
 		addHoverButton(33932, "Interfaces/HelpInterface/IMAGE", 2, 16, 16, "Close", -1, 33932, 3);
 		addHoveredButton(33933, "Interfaces/HelpInterface/IMAGE", 3, 16, 16, 33933);
 		addSprite(33406, 1, "Interfaces/FireOfExchange/SPRITE");
@@ -200,9 +200,9 @@ public final class Interfaces extends RSInterface {
 		addButton(47003, 527, "Interfaces/MysteryBox/SPRITE", "Close");
 		addText(33412, "Exchange Store", tda, 2, 0xffffff, true, true);
 		addButton(33413, 2, "Interfaces/FireOfExchange/ARROW", "Exchange Item");
-        inter.totalChildren(14);
-        setBounds(33401, 88, 77, 0, inter);
-        setBounds(33402, 260, 92, 1, inter);
+		inter.totalChildren(14);
+		setBounds(33401, 88, 77, 0, inter);
+		setBounds(33402, 260, 92, 1, inter);
 		setBounds(33932, 402, 93, 3, inter);
 		setBounds(33933, 402, 93, 4, inter);
 		setBounds(33406, 146, 139, 5, inter);
@@ -212,19 +212,19 @@ public final class Interfaces extends RSInterface {
 		setBounds(33410, 332, 159, 9, inter);
 		setBounds(33411, 261, 197, 10, inter);
 		setBounds(33412, 332, 206, 11, inter);
-        addItemContainer(33403, 1, 1, 0, 0, false);
+		addItemContainer(33403, 1, 1, 0, 0, false);
 		setBounds(33403, 150, 142, 12, inter);
 		setBounds(33413, 201, 146, 13, inter);
 
 
-        inter = addInterface(33404);
-        inter.totalChildren(1);
-        addItemContainer(33405, 4, 7, 10, 4, true,
+		inter = addInterface(33404);
+		inter.totalChildren(1);
+		addItemContainer(33405, 4, 7, 10, 4, true,
 				"Offer");
-        setBounds(33405, 16, 8, 0, inter);
+		setBounds(33405, 16, 8, 0, inter);
 
 
-    }
+	}
 
 	public static void pollInterface(TextDrawingArea tda[]) {
 		RSInterface rsi = addInterface(21406);
@@ -3695,10 +3695,6 @@ interfaceId+=5000;
 		RSInterface rsinterface = addInterface(46500);
 		addSprite(46501, 292, "Interfaces/Hiscores/BACKGROUND");
 		addText(46502, "Live Highscores", wid, 2, 0xff981f, true);
-		//addButton(46504, 46500, 298, 294, "Interfaces/Hiscores/KILLS", 69, 20, "Kills", 1, 5, 265);
-		//addConfigButton(46505, 46500, 298, 295, "Interfaces/Hiscores/DEATHS", 74, 20, "Kills", 2, 5, 265);
-		//addConfigButton(46506, 46500, 298, 296, "Interfaces/Hiscores/KDR", 60, 20, "Kills", 3, 5, 265);
-		//addConfigButton(46507, 46500, 298, 297, "Interfaces/Hiscores/BOUNTY", 100, 20, "Kills", 4, 5, 265);
 		addText(46508, "Player Name:", wid, 2, 0xff981f, true);
 		addText(46509, "Kills:", wid, 2, 0xff981f, true);
 		addText(46510, "Deaths:", wid, 2, 0xff981f, true);

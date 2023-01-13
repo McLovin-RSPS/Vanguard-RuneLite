@@ -2299,7 +2299,7 @@ public class Client extends GameEngine implements RSClient {
 													pushMessage("<col=255>" + itemDef.name + ":</col> Male: <col=255>"
 														+ itemDef.maleModel0 + "</col> Female: <col=255>"
 														+ itemDef.femaleModel0 + "</col> Model id: <col=255>"
-														+ itemDef.modelId, 0, "");
+														+ itemDef.inventory_model, 0, "");
 													pushMessage("Zoom: <col=255>" + itemDef.zoom2d
 														+ "</col> Rotation: <col=255>x" + itemDef.xan2d + " y"
 														+ itemDef.yan2d + "", 0, "");
@@ -10810,7 +10810,7 @@ public class Client extends GameEngine implements RSClient {
 				decompressors[i] = new Decompressor(Signlink.cache_dat, Signlink.cache_idx[i], i + 1);
 		}
 
-		new CacheDownloader(this).downloadCache();
+		//new CacheDownloader(this).downloadCache();
 
 		SpriteLoader1.loadSprites();
 		cacheSprite1 = SpriteLoader1.sprites;
@@ -17437,7 +17437,7 @@ public class Client extends GameEngine implements RSClient {
 					DailyRewards.get().onConfigReceived(j8, l14);
 					DonatorRewards.getInstance().onConfigChanged(j8, l14);
 					if (variousSettings[j8] != l14) {
-						QuestTab.onConfigChanged(j8, l14);
+						//QuestTab.onConfigChanged(j8, l14);
 						MonsterDropViewer.onConfigChanged(j8, l14);
 						variousSettings[j8] = l14;
 						method33(j8);
@@ -17460,7 +17460,7 @@ public class Client extends GameEngine implements RSClient {
 					DailyRewards.get().onConfigReceived(k8, byte0);
 					DonatorRewards.getInstance().onConfigChanged(k8, byte0);
 					if (variousSettings[k8] != byte0) {
-						QuestTab.onConfigChanged(k8, byte0);
+						//QuestTab.onConfigChanged(k8, byte0);
 						MonsterDropViewer.onConfigChanged(k8, byte0);
 						variousSettings[k8] = byte0;
 						method33(k8);

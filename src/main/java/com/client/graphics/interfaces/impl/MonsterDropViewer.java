@@ -13,9 +13,9 @@ public class MonsterDropViewer extends RSInterface {
         if (config == CONFIG_ID) {
             RSInterface container = RSInterface.interfaceCache[CONTAINER_ID];
             for (int index = 0; index < 80; index++) {
-               // main.child(240 + i, 34003, 175, 2 + yy);
-               // main.child(320 + i, 34004, 234, 2 + yy);
-               // main.child(400 + i, 34005, 293, 2 + yy);
+                // main.child(240 + i, 34003, 175, 2 + yy);
+                // main.child(320 + i, 34004, 234, 2 + yy);
+                // main.child(400 + i, 34005, 293, 2 + yy);
                 if (index >= value) {
                     container.children[240 + index] = EMPTY;
                     container.children[320 + index] = EMPTY;
@@ -84,9 +84,10 @@ public class MonsterDropViewer extends RSInterface {
         addText(34004, "Rarity:", tda, 0, 0xff9040, true, true);
         addText(34005, "Chance:", tda, 0, 0xff9040, true, true);
         for (int i = 0; i < 80; i++) {
-            itemGroup(34010 + i, 1, 1, 1, 1, false, false);
-            interfaceCache[34010 + i].inventoryItemId[0] = 14485;
-            interfaceCache[34010 + i].inventoryAmounts[0] = 1;
+            //addToItemGroup(itemScrollId, 6, 33, 9, 6, false, null, null, null);
+            addToItemGroup(34010 + i, 1, 1, 1, 1, false, null, null, null);
+//            interfaceCache[34010 + i].inventoryItemId[0] = 14485;
+            //           interfaceCache[34010 + i].inventoryAmounts[0] = 1;
             addText(34100 + i, "Item Name", tda, 1, 0xFFA500, false, true);
             addText(34200 + i, "1-50", tda, 0, 0xffffff, true, true);
             addText(34300 + i, "Common", tda, 0, 0xffffff, true, true);

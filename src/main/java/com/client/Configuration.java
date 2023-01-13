@@ -25,7 +25,7 @@ public class Configuration {
 	 */
 	public static final int CACHE_VERSION = 101; // Change this up one when making cache updates.
 
-	public static final String CACHE_LINK = "https://www.dropbox.com/s/2da7kxuk2i8qwma/.vanguard_v1.zip?dl=1";
+	public static final String CACHE_LINK = "";
 
 	/**
 	 * The server version. The cache path is append with a _v1/2/3 etc for the version number
@@ -38,12 +38,12 @@ public class Configuration {
 
 	public static final String CLIENT_TITLE = "Vanguard | ";
 	public static final String WEBSITE = "https://discord.gg/g6hBw3ws6w";
-	public static final String DEDICATED_SERVER_ADDRESS = LOCAL_HOST ? "158.69.62.205" : "158.69.62.205";// put ur vps ip here
+	public static final String DEDICATED_SERVER_ADDRESS = "0.0.0.0";// put ur vps ip here
 	public static final String TEST_SERVER_ADDRESS = LOCAL_HOST ? "158.69.62.205" : "158.69.62.205";
 	public static final int PORT = 43594;
 	public static final int TEST_PORT = 43595;
 	public static final int CACHE_FOLDER_VERSION = 1;
-	public static final String CACHE_NAME = "." + CLIENT_TITLE.toLowerCase() + (CACHE_FOLDER_VERSION != 1 ? "_" + CACHE_FOLDER_VERSION : "") + "_v" + SERVER_VERSION;
+	public static final String CACHE_NAME = ".vanguard";
 	public static final String DEV_CACHE_NAME = "local_cache";
 	public static final String CACHE_NAME_DEV = CACHE_NAME + "_dev";
 

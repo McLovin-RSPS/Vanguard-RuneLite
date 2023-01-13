@@ -30,7 +30,7 @@ public final class ItemDefinition implements RSItemComposition {
 	public String[] options;
 	public int xOffset2d;
 	public String name;
-	public int modelId;
+	public int inventory_model;
 	public int maleHeadModel;
 	public boolean stackable;
 	public int unnoted_item_id;
@@ -87,7 +87,7 @@ public final class ItemDefinition implements RSItemComposition {
 		Buffer1 stream = new Buffer1(archive.readFile("obj.idx"));
 
 		totalItems = stream.readUShort();
-		streamIndices = new int[totalItems + 30_000];
+		streamIndices = new int[totalItems + 20_000];
 		int offset = 2;
 
 		for (int _ctr = 0; _ctr < totalItems; _ctr++) {
@@ -110,7 +110,7 @@ public final class ItemDefinition implements RSItemComposition {
 		itemDef.name = newName;
 		itemDef.colorFind = copyItemDef.colorFind;
 		itemDef.colorReplace = copyItemDef.colorReplace;
-		itemDef.modelId = copyItemDef.modelId;
+		itemDef.inventory_model = copyItemDef.inventory_model;
 		itemDef.maleModel0 = copyItemDef.maleModel0;
 		itemDef.femaleModel0 = copyItemDef.femaleModel0;
 		itemDef.zoom2d = copyItemDef.zoom2d;
@@ -150,7 +150,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 33056:
 				itemDef.setDefaults();
 				itemDef.id = 33056;
-				itemDef.modelId = 65270;
+				itemDef.inventory_model = 65270;
 				itemDef.name = "Completionist cape";
 				////itemDef.description = "A cape worn by those who've overachieved.";
 
@@ -174,7 +174,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 33057:
 				itemDef.setDefaults();
 				itemDef.id = 33057;
-				itemDef.modelId = 65273;
+				itemDef.inventory_model = 65273;
 				itemDef.name = "Completionist hood";
 				////itemDef.description = "A hood worn by those who've over achieved.";
 
@@ -244,7 +244,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 23145:
 				itemDef.name = "Twisted crossbow";
 				//itemDef.description = "Twisted crossbow.";
-				itemDef.modelId = 62777;
+				itemDef.inventory_model = 62777;
 				itemDef.maleModel0 = 62776;
 				itemDef.femaleModel0 = 62776;
 				itemDef.zoom2d = 926;
@@ -275,7 +275,7 @@ public final class ItemDefinition implements RSItemComposition {
 
 			case 12468://New dragon kite shield
 				itemDef.name = "Dragon Kiteshield new";
-				itemDef.modelId = 13701;
+				itemDef.inventory_model = 13701;
 				itemDef.maleModel0 = 13700;
 				itemDef.femaleModel0 = 13700;
 				itemDef.zoom2d = 1560;
@@ -329,7 +329,7 @@ public final class ItemDefinition implements RSItemComposition {
 
 			case 20999:
 				itemDef.name = "Bow of faerdhinen";
-				itemDef.modelId = 42605;
+				itemDef.inventory_model = 42605;
 				itemDef.maleModel0 = 42602;
 				itemDef.femaleModel0 = 42602;
 				itemDef.zoom2d = 1570;
@@ -354,7 +354,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 24111:
 				itemDef.name = "Zilyana's godbow";
 				//itemDef.description = "A bow that belonged to Zilyana.";
-				itemDef.modelId = 53122;
+				itemDef.inventory_model = 53122;
 				itemDef.maleModel0 = 53121;
 				itemDef.femaleModel0 = 53121;
 				itemDef.zoom2d = 2000;
@@ -398,7 +398,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 24158:
 				itemDef.name = "K'ril swords";
 				//itemDef.description = "Swords dropped by the almighty K'ril.";
-				itemDef.modelId = 62556;
+				itemDef.inventory_model = 62556;
 				itemDef.maleModel0 = 62557;
 				itemDef.femaleModel0 = 62557;
 				itemDef.zoom2d = 1650;
@@ -416,7 +416,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 23582:
 				itemDef.name = "Elder multi-axe";
 				//itemDef.description = "A multifunctional axe where you can mine or woodcut with.";
-				itemDef.modelId = 49503;
+				itemDef.inventory_model = 49503;
 				itemDef.maleModel0 = 49502;
 				itemDef.femaleModel0 = 49502;
 				itemDef.interfaceOptions = new String[] { null, "Wield", null, null, "Drop" };
@@ -437,7 +437,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.setDefaults();
 				itemDef.name = "Vorkath platebody";
 				//itemDef.description = "Vorkath armour.";
-				itemDef.modelId = 53100;
+				itemDef.inventory_model = 53100;
 				itemDef.maleModel0 = 53099;
 				itemDef.femaleModel0 = 53099;
 				itemDef.zoom2d = 1513;
@@ -454,7 +454,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 24105:
 				itemDef.name = "Vorkath helmet";
 				//itemDef.description = "Vorkath armour.";
-				itemDef.modelId = 53108;
+				itemDef.inventory_model = 53108;
 				itemDef.maleModel0 = 53107;
 				itemDef.femaleModel0 = 53107;
 				itemDef.zoom2d = 1010;
@@ -471,7 +471,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 24102:
 				itemDef.name = "Vorkath platelegs";
 				//itemDef.description = "Vorkath armour.";
-				itemDef.modelId = 53102;
+				itemDef.inventory_model = 53102;
 				itemDef.maleModel0 = 53101;
 				itemDef.femaleModel0 = 53101;
 				itemDef.zoom2d = 1753;
@@ -488,7 +488,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 24103:
 				itemDef.name = "Vorkath boots";
 				//itemDef.description = "Vorkath armour.";
-				itemDef.modelId = 53104;
+				itemDef.inventory_model = 53104;
 				itemDef.maleModel0 = 53103;
 				itemDef.femaleModel0 = 53103;
 				itemDef.zoom2d = 855;
@@ -505,7 +505,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 24104:
 				itemDef.name = "Vorkath gloves";
 				//itemDef.description = "Vorkath armour.";
-				itemDef.modelId = 53106;
+				itemDef.inventory_model = 53106;
 				itemDef.maleModel0 = 53105;
 				itemDef.femaleModel0 = 53105;
 				itemDef.zoom2d = 855;
@@ -522,7 +522,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 24106:
 				itemDef.name = "Vorkath blowpipe";
 				//itemDef.description = "Vorkath blowpipe.";
-				itemDef.modelId = 53126;
+				itemDef.inventory_model = 53126;
 				itemDef.maleModel0 = 53125;
 				itemDef.femaleModel0 = 53125;
 				itemDef.zoom2d = 1158;
@@ -542,7 +542,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 24107:
 				itemDef.name = "Vorkath blowpipe(empty)";
 				//itemDef.description = "Vorkath blowpipe.";
-				itemDef.modelId = 53126;
+				itemDef.inventory_model = 53126;
 				itemDef.maleModel0 = 53125;
 				itemDef.femaleModel0 = 53125;
 				itemDef.zoom2d = 1158;
@@ -560,7 +560,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 24119:
 				itemDef.name = "Black dragon hunter crossbow";
 				//itemDef.description = "Black dragon hunter crossbow.";
-				itemDef.modelId = 53124;
+				itemDef.inventory_model = 53124;
 				itemDef.maleModel0 = 53123;
 				itemDef.femaleModel0 = 53123;
 				itemDef.zoom2d = 1554;
@@ -579,7 +579,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.setDefaults();
 				itemDef.name = "@red@Death cape";
 				//itemDef.description = "This cape gives 5% drop rate boost.";
-				itemDef.modelId = 50205;
+				itemDef.inventory_model = 50205;
 				itemDef.maleModel0 = 50205;
 				itemDef.femaleModel0 = 50205;
 				itemDef.zoom2d = 2300;
@@ -1393,7 +1393,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 15098:
 				itemDef.name = "Dice (up to 100)";
 				//itemDef.description = "A 100-sided dice.";
-				itemDef.modelId = 31223;
+				itemDef.inventory_model = 31223;
 				itemDef.zoom2d = 1104;
 				itemDef.yan2d = 215;
 				itemDef.xan2d = 94;
@@ -1464,7 +1464,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 677, 801, 43540, 43543, 43546, 43549, 43550, 43552, 43554, 43558,
 					43560, 43575 };
-				itemDef.modelId = 50030;
+				itemDef.inventory_model = 50030;
 				itemDef.maleModel0 = 50031;
 				itemDef.femaleModel0 = 50031;
 				itemDef.zoom2d = 2300;
@@ -1484,7 +1484,7 @@ public final class ItemDefinition implements RSItemComposition {
 				// 4 //7 //10 //13 //14//16//18//22 //24//39
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 7104, 9151, 911, 914, 917, 920, 921, 923, 925, 929, 931, 946 };
-				itemDef.modelId = 50032;
+				itemDef.inventory_model = 50032;
 				itemDef.maleModel0 = 50033;
 				itemDef.femaleModel0 = 50033;
 				itemDef.zoom2d = 2300;
@@ -1505,7 +1505,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 6061, 5945, 6327, 6330, 6333, 6336, 6337, 6339, 6341, 6345, 6347,
 					6362 };
-				itemDef.modelId = 50034;
+				itemDef.inventory_model = 50034;
 				itemDef.maleModel0 = 50035;
 				itemDef.femaleModel0 = 50035;
 				itemDef.zoom2d = 2300;
@@ -1526,7 +1526,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 920, 920, 51856, 51859, 51862, 51865, 51866, 51868, 51870, 51874,
 					51876, 51891 };
-				itemDef.modelId = 50036;
+				itemDef.inventory_model = 50036;
 				itemDef.maleModel0 = 50037;
 				itemDef.femaleModel0 = 50037;
 				itemDef.zoom2d = 2300;
@@ -1547,7 +1547,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 9142, 9152, 4511, 4514, 4517, 4520, 4521, 4523, 4525, 4529, 4531,
 					4546 };
-				itemDef.modelId = 50038;
+				itemDef.inventory_model = 50038;
 				itemDef.maleModel0 = 50039;
 				itemDef.femaleModel0 = 50039;
 				itemDef.zoom2d = 2300;
@@ -1568,7 +1568,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 10460, 10473, 41410, 41413, 41416, 41419, 41420, 41422, 41424,
 					41428, 41430, 41445 };
-				itemDef.modelId = 50040;
+				itemDef.inventory_model = 50040;
 				itemDef.maleModel0 = 50041;
 				itemDef.femaleModel0 = 50041;
 				itemDef.zoom2d = 2300;
@@ -1589,7 +1589,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 14775, 14792, 22026, 22029, 22032, 22035, 22036, 22038, 22040,
 					22044, 22046, 22061 };
-				itemDef.modelId = 50042;
+				itemDef.inventory_model = 50042;
 				itemDef.maleModel0 = 50043;
 				itemDef.femaleModel0 = 50043;
 				itemDef.zoom2d = 2300;
@@ -1610,7 +1610,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 8125, 9152, 4015, 4018, 4021, 4024, 4025, 4027, 4029, 4033, 4035,
 					4050 };
-				itemDef.modelId = 50044;
+				itemDef.inventory_model = 50044;
 				itemDef.maleModel0 = 50045;
 				itemDef.femaleModel0 = 50045;
 				itemDef.zoom2d = 2300;
@@ -1631,7 +1631,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 9144, 9152, 38202, 38205, 38208, 38211, 38212, 38214, 38216,
 					38220, 38222, 38237 };
-				itemDef.modelId = 50046;
+				itemDef.inventory_model = 50046;
 				itemDef.maleModel0 = 50047;
 				itemDef.femaleModel0 = 50047;
 				itemDef.zoom2d = 2300;
@@ -1652,7 +1652,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 6067, 9152, 33670, 33673, 33676, 33679, 33680, 33682, 33684,
 					33688, 33690, 33705 };
-				itemDef.modelId = 50048;
+				itemDef.inventory_model = 50048;
 				itemDef.maleModel0 = 50049;
 				itemDef.femaleModel0 = 50049;
 				itemDef.zoom2d = 2300;
@@ -1673,7 +1673,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 9145, 9156, 22414, 22417, 22420, 22423, 22424, 22426, 22428,
 					22432, 22434, 22449 };
-				itemDef.modelId = 50050;
+				itemDef.inventory_model = 50050;
 				itemDef.maleModel0 = 50051;
 				itemDef.femaleModel0 = 50051;
 				itemDef.zoom2d = 2300;
@@ -1694,7 +1694,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 818, 951, 8291, 8294, 8297, 8300, 8301, 8303, 8305, 8309, 8311,
 					8319 };
-				itemDef.modelId = 50052;
+				itemDef.inventory_model = 50052;
 				itemDef.maleModel0 = 50053;
 				itemDef.femaleModel0 = 50053;
 				itemDef.zoom2d = 2300;
@@ -1716,7 +1716,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 5262, 6020, 8472, 8475, 8478, 8481, 8482, 8484, 8486, 8490, 8492,
 					8507 };
-				itemDef.modelId = 50054;
+				itemDef.inventory_model = 50054;
 				itemDef.maleModel0 = 50055;
 				itemDef.femaleModel0 = 50055;
 				itemDef.zoom2d = 2300;
@@ -1737,7 +1737,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 43569, 43685, 6336, 6339, 6342, 6345, 6346, 6348, 6350, 6354,
 					6356, 6371 };
-				itemDef.modelId = 50056;
+				itemDef.inventory_model = 50056;
 				itemDef.maleModel0 = 50057;
 				itemDef.femaleModel0 = 50057;
 				itemDef.zoom2d = 2300;
@@ -1758,7 +1758,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 36296, 36279, 10386, 10389, 10392, 10395, 10396, 10398, 10400,
 					10404, 10406, 10421 };
-				itemDef.modelId = 50058;
+				itemDef.inventory_model = 50058;
 				itemDef.maleModel0 = 50059;
 				itemDef.femaleModel0 = 50059;
 				itemDef.zoom2d = 2300;
@@ -1778,7 +1778,7 @@ public final class ItemDefinition implements RSItemComposition {
 				// 4 //7 //10 //13 //14//16//18//22 //24//39
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 9163, 9168, 117, 120, 123, 126, 127, 127, 127, 127, 127, 127 };
-				itemDef.modelId = 50060;
+				itemDef.inventory_model = 50060;
 				itemDef.maleModel0 = 50061;
 				itemDef.femaleModel0 = 50061;
 				itemDef.zoom2d = 2300;
@@ -1799,7 +1799,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 3755, 3998, 15122, 15125, 15128, 15131, 15132, 15134, 15136,
 					15140, 15142, 15157 };
-				itemDef.modelId = 50062;
+				itemDef.inventory_model = 50062;
 				itemDef.maleModel0 = 50063;
 				itemDef.femaleModel0 = 50063;
 				itemDef.zoom2d = 2300;
@@ -1820,7 +1820,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 9152, 8128, 10318, 10321, 10324, 10327, 10328, 10330, 10332,
 					10336, 10338, 10353 };
-				itemDef.modelId = 50064;
+				itemDef.inventory_model = 50064;
 				itemDef.maleModel0 = 50065;
 				itemDef.femaleModel0 = 50065;
 				itemDef.zoom2d = 2300;
@@ -1839,7 +1839,7 @@ public final class ItemDefinition implements RSItemComposition {
 				//itemDef.description = "	A cape worn by those who've overachieved.";
 				itemDef.colorFind = new int[] { 57022, 48811 };
 				itemDef.colorReplace = new int[] { 912, 920 };
-				itemDef.modelId = 50066;
+				itemDef.inventory_model = 50066;
 				itemDef.maleModel0 = 50067;
 				itemDef.femaleModel0 = 50067;
 				itemDef.zoom2d = 2300;
@@ -1859,7 +1859,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 8115, 9148, 10386, 10389, 10392, 10395, 10396, 10398, 10400,
 					10404, 10406, 10421 };
-				itemDef.modelId = 50068;
+				itemDef.inventory_model = 50068;
 				itemDef.maleModel0 = 50069;
 				itemDef.femaleModel0 = 50069;
 				itemDef.zoom2d = 2300;
@@ -1879,7 +1879,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 935, 931, 27538, 27541, 27544, 27547, 27548, 27550, 27552, 27556,
 					27558, 27573 };
-				itemDef.modelId = 50070;
+				itemDef.inventory_model = 50070;
 				itemDef.maleModel0 = 50071;
 				itemDef.femaleModel0 = 50071;
 				itemDef.zoom2d = 2300;
@@ -1899,7 +1899,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 11, 0, 58779, 58782, 58785, 58788, 58789, 57891, 58793, 58797,
 					58799, 58814 };
-				itemDef.modelId = 50072;
+				itemDef.inventory_model = 50072;
 				itemDef.maleModel0 = 50073;
 				itemDef.femaleModel0 = 50073;
 				itemDef.zoom2d = 2300;
@@ -1919,7 +1919,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 25109, 24088, 6693, 6696, 6699, 6702, 6703, 6705, 6707, 6711,
 					6713, 6728 };
-				itemDef.modelId = 50074;
+				itemDef.inventory_model = 50074;
 				itemDef.maleModel0 = 50075;
 				itemDef.femaleModel0 = 50075;
 				itemDef.zoom2d = 2300;
@@ -1939,10 +1939,7 @@ public final class ItemDefinition implements RSItemComposition {
 		for (int count = 0; count < 10; count++)
 			if (cache[count].id == itemId)
 				return cache[count];
-		if (itemId > streamIndices.length)
-			itemId = 0;
-		if (itemId == -1)
-			itemId = 0;
+
 		cacheIndex = (cacheIndex + 1) % 10;
 		ItemDefinition itemDef = cache[cacheIndex];
 		if (itemId > 0)
@@ -1954,6 +1951,8 @@ public final class ItemDefinition implements RSItemComposition {
 		if (itemDef.noted_item_id != -1)
 			itemDef.toNote();
 
+
+		//newCustomItems(itemId);
 		customItems(itemId);
 
 		return itemDef;
@@ -1961,7 +1960,7 @@ public final class ItemDefinition implements RSItemComposition {
 
 
 	void method2789(ItemDefinition var1, ItemDefinition var2) {
-		modelId = var1.modelId * 1;
+		inventory_model = var1.inventory_model * 1;
 		zoom2d = var1.zoom2d * 1;
 		xan2d = 1 * var1.xan2d;
 		yan2d = 1 * var1.yan2d;
@@ -2000,7 +1999,7 @@ public final class ItemDefinition implements RSItemComposition {
 	}
 
 	void toPlaceholder(ItemDefinition var1, ItemDefinition var2) {
-		modelId = var1.modelId * 1;
+		inventory_model = var1.inventory_model * 1;
 		zoom2d = 1 * var1.zoom2d;
 		xan2d = var1.xan2d * 1;
 		yan2d = var1.yan2d * 1;
@@ -2015,11 +2014,85 @@ public final class ItemDefinition implements RSItemComposition {
 		name = var2.name;
 		cost = 0;
 	}
-
 	public static Sprite getSmallSprite(int itemId) {
 		return getSmallSprite(itemId, 1);
 	}
+	public static Sprite getSmallSprite(int itemId, int stackSize) {
 
+		ItemDefinition itemDef = lookup(itemId);
+		if (itemDef.countObj == null)
+			stackSize = -1;
+		if (stackSize > 1) {
+			int stack_item_id = -1;
+			for (int j1 = 0; j1 < 10; j1++)
+				if (stackSize >= itemDef.countCo[j1] && itemDef.countCo[j1] != 0)
+					stack_item_id = itemDef.countObj[j1];
+
+			if (stack_item_id != -1)
+				itemDef = lookup(stack_item_id);
+		}
+		Model model = itemDef.getModel(1);
+		if (model == null)
+			return null;
+		Sprite sprite = null;
+		if (itemDef.noted_item_id != -1) {
+			sprite = getSprite(itemDef.unnoted_item_id, 10, -1);
+			if (sprite == null)
+				return null;
+		}
+		Sprite enabledSprite = new Sprite(18, 18);
+		int centerX = Rasterizer3D.originViewX;
+		int centerY = Rasterizer3D.originViewY;
+		int[] lineOffsets = Rasterizer3D.scanOffsets;
+		int[] pixels = Rasterizer2D.pixels;
+		int width = Rasterizer2D.width;
+		int height = Rasterizer2D.height;
+		int vp_left = Rasterizer2D.leftX;
+		int vp_right = Rasterizer2D.bottomX;
+		int vp_top = Rasterizer2D.topY;
+		int vp_bottom = Rasterizer2D.bottomY;
+		Rasterizer3D.world = false;
+		Rasterizer3D.aBoolean1464 = false;
+		Rasterizer2D.initDrawingArea(18, 18, enabledSprite.myPixels);
+		Rasterizer2D.drawItemBox(0, 0, 18, 18, 0);
+		Rasterizer3D.useViewport();
+		int k3 = itemDef.zoom2d;
+
+		int l3 = Rasterizer3D.SINE[itemDef.xan2d] * k3 >> 16;
+		int i4 = Rasterizer3D.COSINE[itemDef.xan2d] * k3 >> 16;
+		Rasterizer3D.renderOnGpu = true;
+		model.renderModel(itemDef.yan2d, itemDef.zan2d, itemDef.xan2d, itemDef.xOffset2d,
+				l3 + model.modelBaseY / 2 + itemDef.yOffset2d, i4 + itemDef.yOffset2d);
+
+		enabledSprite.outline(1);
+
+		Rasterizer2D.initDrawingArea(32, 32, enabledSprite.myPixels);
+
+		if (itemDef.noted_item_id != -1) {
+			int old_w = sprite.maxWidth;
+			int old_h = sprite.maxHeight;
+			sprite.maxWidth = 18;
+			sprite.maxHeight = 18;
+			sprite.drawSprite(0, 0);
+			sprite.maxWidth = old_w;
+			sprite.maxHeight = old_h;
+		}
+
+		sprites.put(enabledSprite, itemId);
+		Rasterizer2D.initDrawingArea(height, width, pixels);
+		Rasterizer2D.setDrawingArea(vp_bottom, vp_left, vp_right, vp_top);
+		Rasterizer3D.originViewX = centerX;
+		Rasterizer3D.originViewY = centerY;
+		Rasterizer3D.scanOffsets = lineOffsets;
+		Rasterizer3D.aBoolean1464 = true;
+		Rasterizer3D.world = true;
+		if (itemDef.stackable)
+			enabledSprite.maxWidth = 18;
+		else
+			enabledSprite.maxWidth = 18;
+		enabledSprite.maxHeight = stackSize;
+		return enabledSprite;
+	}
 	public static Sprite getSprite(int itemId, int stackSize, int outlineColor, boolean noted, int border,int shadow) {
 		if (outlineColor == 0) {
 			Sprite sprite = (Sprite) sprites.get(itemId);
@@ -2093,7 +2166,7 @@ public final class ItemDefinition implements RSItemComposition {
 		int i4 = Rasterizer3D.COSINE[definition.xan2d] * k3 >> 16;
 		Rasterizer3D.renderOnGpu = true;
 		model.renderModel(definition.yan2d, definition.zan2d, definition.xan2d, definition.xOffset2d,
-			l3 + model.modelBaseY / 2 + definition.yOffset2d, i4 + definition.yOffset2d);
+				l3 + model.modelBaseY / 2 + definition.yOffset2d, i4 + definition.yOffset2d);
 		Rasterizer3D.renderOnGpu = false;
 
 		enabledSprite.highlight(1);
@@ -2129,7 +2202,6 @@ public final class ItemDefinition implements RSItemComposition {
 		enabledSprite.maxHeight = stackSize;
 		return enabledSprite;
 	}
-
 
 	public static Sprite getSprite(int itemId, int stackSize, int outlineColor) {
 		if (outlineColor == 0) {
@@ -2188,7 +2260,7 @@ public final class ItemDefinition implements RSItemComposition {
 		int i4 = Rasterizer3D.COSINE[itemDef.xan2d] * k3 >> 16;
 		Rasterizer3D.renderOnGpu = true;
 		model.renderModel(itemDef.yan2d, itemDef.zan2d, itemDef.xan2d, itemDef.xOffset2d,
-			l3 + model.modelBaseY / 2 + itemDef.yOffset2d, i4 + itemDef.yOffset2d);
+				l3 + model.modelBaseY / 2 + itemDef.yOffset2d, i4 + itemDef.yOffset2d);
 
 		enabledSprite.outline(1);
 		if (outlineColor > 0) {
@@ -2222,83 +2294,6 @@ public final class ItemDefinition implements RSItemComposition {
 			enabledSprite.maxWidth = 33;
 		else
 			enabledSprite.maxWidth = 32;
-		enabledSprite.maxHeight = stackSize;
-		return enabledSprite;
-	}
-
-	public static Sprite getSmallSprite(int itemId, int stackSize) {
-
-		ItemDefinition itemDef = lookup(itemId);
-		if (itemDef.countObj == null)
-			stackSize = -1;
-		if (stackSize > 1) {
-			int stack_item_id = -1;
-			for (int j1 = 0; j1 < 10; j1++)
-				if (stackSize >= itemDef.countCo[j1] && itemDef.countCo[j1] != 0)
-					stack_item_id = itemDef.countObj[j1];
-
-			if (stack_item_id != -1)
-				itemDef = lookup(stack_item_id);
-		}
-		Model model = itemDef.getModel(1);
-		if (model == null)
-			return null;
-		Sprite sprite = null;
-		if (itemDef.noted_item_id != -1) {
-			sprite = getSprite(itemDef.unnoted_item_id, 10, -1);
-			if (sprite == null)
-				return null;
-		}
-		Sprite enabledSprite = new Sprite(18, 18);
-		int centerX = Rasterizer3D.originViewX;
-		int centerY = Rasterizer3D.originViewY;
-		int[] lineOffsets = Rasterizer3D.scanOffsets;
-		int[] pixels = Rasterizer2D.pixels;
-		int width = Rasterizer2D.width;
-		int height = Rasterizer2D.height;
-		int vp_left = Rasterizer2D.leftX;
-		int vp_right = Rasterizer2D.bottomX;
-		int vp_top = Rasterizer2D.topY;
-		int vp_bottom = Rasterizer2D.bottomY;
-		Rasterizer3D.world = false;
-		Rasterizer3D.aBoolean1464 = false;
-		Rasterizer2D.initDrawingArea(18, 18, enabledSprite.myPixels);
-		Rasterizer2D.drawItemBox(0, 0, 18, 18, 0);
-		Rasterizer3D.useViewport();
-		int k3 = itemDef.zoom2d;
-
-		int l3 = Rasterizer3D.SINE[itemDef.xan2d] * k3 >> 16;
-		int i4 = Rasterizer3D.COSINE[itemDef.xan2d] * k3 >> 16;
-		Rasterizer3D.renderOnGpu = true;
-		model.renderModel(itemDef.yan2d, itemDef.zan2d, itemDef.xan2d, itemDef.xOffset2d,
-			l3 + model.modelBaseY / 2 + itemDef.yOffset2d, i4 + itemDef.yOffset2d);
-
-		enabledSprite.outline(1);
-
-		Rasterizer2D.initDrawingArea(32, 32, enabledSprite.myPixels);
-
-		if (itemDef.noted_item_id != -1) {
-			int old_w = sprite.maxWidth;
-			int old_h = sprite.maxHeight;
-			sprite.maxWidth = 18;
-			sprite.maxHeight = 18;
-			sprite.drawSprite(0, 0);
-			sprite.maxWidth = old_w;
-			sprite.maxHeight = old_h;
-		}
-
-		sprites.put(enabledSprite, itemId);
-		Rasterizer2D.initDrawingArea(height, width, pixels);
-		Rasterizer2D.setDrawingArea(vp_bottom, vp_left, vp_right, vp_top);
-		Rasterizer3D.originViewX = centerX;
-		Rasterizer3D.originViewY = centerY;
-		Rasterizer3D.scanOffsets = lineOffsets;
-		Rasterizer3D.aBoolean1464 = true;
-		Rasterizer3D.world = true;
-		if (itemDef.stackable)
-			enabledSprite.maxWidth = 18;
-		else
-			enabledSprite.maxWidth = 18;
 		enabledSprite.maxHeight = stackSize;
 		return enabledSprite;
 	}
@@ -2340,7 +2335,7 @@ public final class ItemDefinition implements RSItemComposition {
 		Rasterizer3D.renderOnGpu = true;
 
 		model.renderModel(itemDef.yan2d, itemDef.zan2d, itemDef.xan2d, itemDef.xOffset2d,
-			l3 + model.modelBaseY / 2 + itemDef.yOffset2d, i4 + itemDef.yOffset2d);
+				l3 + model.modelBaseY / 2 + itemDef.yOffset2d, i4 + itemDef.yOffset2d);
 
 		Rasterizer3D.renderOnGpu = false;
 		sprite.outline(1);
@@ -2427,26 +2422,6 @@ public final class ItemDefinition implements RSItemComposition {
 		return cached;
 	}
 
-	public void createCustomSprite(String img) {
-		customSpriteLocation = getCustomSprite(img);
-	}
-
-	public void createSmallCustomSprite(String img) {
-		customSmallSpriteLocation = getCustomSprite(img);
-	}
-
-
-	private byte[] getCustomSprite(String img) {
-		String location = (Sprite.location + Configuration.CUSTOM_ITEM_SPRITES_DIRECTORY + img).toLowerCase();
-		byte[] spriteData = FileOperations.readFile(location);
-		Preconditions.checkState(spriteData != null, "No sprite: " + location);
-		return spriteData;
-	}
-
-	public byte[] customSpriteLocation;
-	public byte[] customSmallSpriteLocation;
-
-
 	public Model getEquippedModel(int gender) {
 		int primaryModel = maleModel0;
 		int secondaryModel = maleModel1;
@@ -2490,10 +2465,8 @@ public final class ItemDefinition implements RSItemComposition {
 	}
 
 	private void setDefaults() {
-		customSpriteLocation = null;
-		customSmallSpriteLocation = null;
 		equipActions = new String[]{"Remove", null, "Operate", null, null};
-		modelId = 0;
+		inventory_model = 0;
 		name = null;
 		colorReplace = null;
 		colorFind = null;
@@ -2546,14 +2519,14 @@ public final class ItemDefinition implements RSItemComposition {
 		zoom2d = copy.zoom2d;
 		xOffset2d = copy.xOffset2d;
 		yOffset2d = copy.yOffset2d;
-		modelId = copy.modelId;
+		inventory_model = copy.inventory_model;
 		stackable = copy.stackable;
 
 	}
 
 	private void toNote() {
 		ItemDefinition itemDef = lookup(noted_item_id);
-		modelId = itemDef.modelId;
+		inventory_model = itemDef.inventory_model;
 		zoom2d = itemDef.zoom2d;
 		xan2d = itemDef.xan2d;
 		yan2d = itemDef.yan2d;
@@ -2667,7 +2640,7 @@ public final class ItemDefinition implements RSItemComposition {
 		Model model = (Model) models.get(id);
 		if (model != null)
 			return model;
-		model = Model.getModel(modelId);
+		model = Model.getModel(inventory_model);
 		if (model == null)
 			return null;
 		if (resizeX != 128 || resizeY != 128 || resizeZ != 128)
@@ -2688,7 +2661,24 @@ public final class ItemDefinition implements RSItemComposition {
 		models.put(model, id);
 		return model;
 	}
+	public void createCustomSprite(String img) {
+		customSpriteLocation = getCustomSprite(img);
+	}
 
+	public void createSmallCustomSprite(String img) {
+		customSmallSpriteLocation = getCustomSprite(img);
+	}
+
+
+	private byte[] getCustomSprite(String img) {
+		String location = (Sprite.location + Configuration.CUSTOM_ITEM_SPRITES_DIRECTORY + img).toLowerCase();
+		byte[] spriteData = FileOperations.readFile(location);
+		Preconditions.checkState(spriteData != null, "No sprite: " + location);
+		return spriteData;
+	}
+
+	public byte[] customSpriteLocation;
+	public byte[] customSmallSpriteLocation;
 	@Override
 	public int getInventoryModel() {
 		return 0;
@@ -2729,7 +2719,7 @@ public final class ItemDefinition implements RSItemComposition {
 			if (stack_item_id != -1)
 				return lookup(stack_item_id).getUnshadedModel(1);
 		}
-		Model model = Model.getModel(modelId);
+		Model model = Model.getModel(inventory_model);
 		if (model == null)
 			return null;
 		if (colorReplace != null) {
@@ -2746,7 +2736,7 @@ public final class ItemDefinition implements RSItemComposition {
 			if (opcode == 0)
 				return;
 			if (opcode == 1)
-				modelId = buffer.readUShort();
+				inventory_model = buffer.readUShort();
 			else if (opcode == 2)
 				name = buffer.readStrings();
 			else if (opcode == 3)

@@ -85,7 +85,12 @@ public final class NpcDefinition implements RSNPCComposition {
             entityDef.actions[0] = "Talk-to";
             entityDef.actions[2] = "View rewards";
         }
-
+        if (i == 3169) {//Daily tasks
+            entityDef.name = "Aviansie";
+            entityDef.actions = new String[5];
+            entityDef.standingAnimation = 6952;
+            entityDef.actions[0] = "Attack";
+        }
         if (i == 5567) {//Death
 
             entityDef.actions = new String[5];
