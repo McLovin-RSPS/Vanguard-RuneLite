@@ -1,7 +1,6 @@
 package com.client.definitions;
 
 import com.client.*;
-import com.client.sign.Signlink;
 import com.client.utilities.FileOperations;
 import com.google.common.base.Preconditions;
 import net.runelite.api.IterableHashTable;
@@ -12,124 +11,143 @@ import java.util.HashMap;
 
 public final class ItemDefinition implements RSItemComposition {
 
-    public static ReferenceCache sprites = new ReferenceCache(100);
-    public static ReferenceCache models = new ReferenceCache(50);
-    public static boolean isMembers = true;
-    public static int totalItems;
-    public static ItemDefinition[] cache;
-    private static int cacheIndex;
-    private static Buffer1 item_data;
-    private static int[] streamIndices;
-    public int cost;
-    public int[] colorReplace;
-    public int id;
-    public int[] colorFind;
-    public boolean members;
-    public int noted_item_id;
-    public int femaleModel1;
-    public int maleModel0;
-    public String[] options;
-    public int xOffset2d;
-    public String name;
-    public int inventory_model;
-    public int maleHeadModel;
-    public boolean stackable;
-    public int unnoted_item_id;
-    public int zoom2d;
-    public int maleModel1;
-    public String[] interfaceOptions;
-    public int xan2d;
-    public int[] countObj;
-    public int yOffset2d;//
-    public int femaleHeadModel;
-    public int yan2d;
-    public int femaleModel0;
-    public int[] countCo;
-    public int team;
-    public int zan2d;
-    public String[] equipActions;
-    public boolean tradeable;
-    public HashMap<Integer, Object> params;
-    public int glowColor = -1;
-    private short[] textureReplace;
-    private short[] textureFind;
-    private byte femaleOffset;
-    private int femaleModel2;
-    private int maleHeadModel2;
-    private int resizeX;
-    private int femaleHeadModel2;
-    private int contrast;
-    private int maleModel2;
-    private int resizeZ;
-    private int resizeY;
-    private int ambient;
-    private byte maleOffset;
-    private int shiftClickIndex = -2;
-    private int category;
-    private int bought_id;
-    private int bought_template_id;
-    private int placeholder_id;
-    private int placeholder_template_id;
+	public static ReferenceCache sprites = new ReferenceCache(100);
+	public static ReferenceCache models = new ReferenceCache(50);
+	public static boolean isMembers = true;
+	public static int totalItems;
+	public static ItemDefinition[] cache;
+	private static int cacheIndex;
+	private static Buffer1 item_data;
+	private static int[] streamIndices;
+	public int cost;
+	public int[] colorReplace;
+	public int id;
+	public int[] colorFind;
+	public boolean members;
+	public int noted_item_id;
+	public int femaleModel1;
+	public int maleModel0;
+	public String[] options;
+	public int xOffset2d;
+	public String name;
+	public int modelId;
+	public int maleHeadModel;
+	public boolean stackable;
+	public int unnoted_item_id;
+	public int zoom2d;
+	public int maleModel1;
+	public String[] interfaceOptions;
+	public int xan2d;
+	public int[] countObj;
+	public int yOffset2d;//
+	public int femaleHeadModel;
+	public int yan2d;
+	public int femaleModel0;
+	public int[] countCo;
+	public int team;
+	public int zan2d;
+	public String[] equipActions;
+	public boolean tradeable;
+	public HashMap<Integer, Object> params;
+	public int glowColor = -1;
+	private short[] textureReplace;
+	private short[] textureFind;
+	private byte femaleOffset;
+	private int femaleModel2;
+	private int maleHeadModel2;
+	private int resizeX;
+	private int femaleHeadModel2;
+	private int contrast;
+	private int maleModel2;
+	private int resizeZ;
+	private int resizeY;
+	private int ambient;
+	private byte maleOffset;
+	private int shiftClickIndex = -2;
+	private int category;
+	private int bought_id;
+	private int bought_template_id;
+	private int placeholder_id;
+	private int placeholder_template_id;
 
-    private ItemDefinition() {
-        id = -1;
-    }
+	private ItemDefinition() {
+		id = -1;
+	}
 
-    public static void clear() {
-        models = null;
-        sprites = null;
-        streamIndices = null;
-        cache = null;
-        item_data = null;
-    }
+	public void createCustomSprite(String img) {
+		customSpriteLocation = getCustomSprite(img);
+	}
 
-    public static void init(FileArchive archive) {
-        item_data = new Buffer1(archive.readFile("obj.dat"));
-        Buffer1 stream = new Buffer1(archive.readFile("obj.idx"));
-
-        totalItems = stream.readUShort();
-        streamIndices = new int[totalItems + 20_000];
-        int offset = 2;
-
-        for (int _ctr = 0; _ctr < totalItems; _ctr++) {
-            streamIndices[_ctr] = offset;
-            offset += stream.readUShort();
-        }
-
-        cache = new ItemDefinition[10];
-
-        for (int _ctr = 0; _ctr < 10; _ctr++) {
-            cache[_ctr] = new ItemDefinition();
-        }
-
-        System.out.println("Loaded: " + totalItems + " items");
-    }
+	public void createSmallCustomSprite(String img) {
+		customSmallSpriteLocation = getCustomSprite(img);
+	}
 
 
+	private byte[] getCustomSprite(String img) {
+		String location = (Sprite.location + Configuration.CUSTOM_ITEM_SPRITES_DIRECTORY + img).toLowerCase();
+		byte[] spriteData = FileOperations.readFile(location);
+		Preconditions.checkState(spriteData != null, "No sprite: " + location);
+		return spriteData;
+	}
 
-    public static ItemDefinition copy(ItemDefinition itemDef, int newId, int copyingItemId, String newName, String...actions) {
-        ItemDefinition copyItemDef = lookup(copyingItemId);
-        itemDef.id = newId;
-        itemDef.name = newName;
-        itemDef.colorFind = copyItemDef.colorFind;
-        itemDef.colorReplace = copyItemDef.colorReplace;
-        itemDef.inventory_model = copyItemDef.inventory_model;
-        itemDef.maleModel0 = copyItemDef.maleModel0;
-        itemDef.femaleModel0 = copyItemDef.femaleModel0;
-        itemDef.zoom2d = copyItemDef.zoom2d;
-        itemDef.xan2d = copyItemDef.xan2d;
-        itemDef.yan2d = copyItemDef.yan2d;
-        itemDef.xOffset2d = copyItemDef.xOffset2d;
-        itemDef.yOffset2d = copyItemDef.yOffset2d;
-        itemDef.interfaceOptions = copyItemDef.interfaceOptions;
-        itemDef.interfaceOptions = new String[5];
-        if (actions != null) {
-            for (int index = 0; index < actions.length; index++) {
-                itemDef.interfaceOptions[index] = actions[index];
-            }
-        }
-        return itemDef;
-    }
+	public byte[] customSpriteLocation;
+	public byte[] customSmallSpriteLocation;
+
+
+	public static void clear() {
+		models = null;
+		sprites = null;
+		streamIndices = null;
+		cache = null;
+		item_data = null;
+	}
+
+	public static void init(FileArchive archive) {
+		item_data = new Buffer1(archive.readFile("obj.dat"));
+		Buffer1 stream = new Buffer1(archive.readFile("obj.idx"));
+
+		totalItems = stream.readUShort();
+		streamIndices = new int[totalItems + 30_000];
+		int offset = 2;
+
+		for (int _ctr = 0; _ctr < totalItems; _ctr++) {
+			streamIndices[_ctr] = offset;
+			offset += stream.readUShort();
+		}
+
+		cache = new ItemDefinition[10];
+
+		for (int _ctr = 0; _ctr < 10; _ctr++) {
+			cache[_ctr] = new ItemDefinition();
+		}
+
+		System.out.println("Loaded: " + totalItems + " items");
+	}
+
+
+	public static ItemDefinition copy(ItemDefinition itemDef, int newId, int copyingItemId, String newName, String...actions) {
+		ItemDefinition copyItemDef = lookup(copyingItemId);
+		itemDef.id = newId;
+		itemDef.name = newName;
+		itemDef.colorFind = copyItemDef.colorFind;
+		itemDef.colorReplace = copyItemDef.colorReplace;
+		itemDef.modelId = copyItemDef.modelId;
+		itemDef.maleModel0 = copyItemDef.maleModel0;
+		itemDef.femaleModel0 = copyItemDef.femaleModel0;
+		itemDef.zoom2d = copyItemDef.zoom2d;
+		itemDef.xan2d = copyItemDef.xan2d;
+		itemDef.yan2d = copyItemDef.yan2d;
+		itemDef.xOffset2d = copyItemDef.xOffset2d;
+		itemDef.yOffset2d = copyItemDef.yOffset2d;
+		itemDef.interfaceOptions = copyItemDef.interfaceOptions;
+		itemDef.interfaceOptions = new String[5];
+		if (actions != null) {
+			for (int index = 0; index < actions.length; index++) {
+				itemDef.interfaceOptions[index] = actions[index];
+			}
+		}
+		return itemDef;
+	}
 
 
 	private static void customItems(int itemId) {
@@ -149,13 +167,11 @@ public final class ItemDefinition implements RSItemComposition {
 			case 22375:
 				copy(itemDef, 22375, 22374, "Mossy key");
 				break;
-
 			case 33056:
 				itemDef.setDefaults();
 				itemDef.id = 33056;
-				itemDef.inventory_model = 65270;
+				itemDef.modelId = 65270;
 				itemDef.name = "Completionist cape";
-				////itemDef.description = "A cape worn by those who've overachieved.";
 
 				itemDef.zoom2d = 1385;
 				itemDef.xan2d = 279;
@@ -177,9 +193,8 @@ public final class ItemDefinition implements RSItemComposition {
 			case 33057:
 				itemDef.setDefaults();
 				itemDef.id = 33057;
-				itemDef.inventory_model = 65273;
+				itemDef.modelId = 65273;
 				itemDef.name = "Completionist hood";
-				////itemDef.description = "A hood worn by those who've over achieved.";
 
 				itemDef.zoom2d = 760;
 				itemDef.xan2d = 11;
@@ -195,6 +210,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.interfaceOptions = new String[5];
 				itemDef.interfaceOptions[1] = "Wear";
 				break;
+
 
 			case 26784://colossal pouch
 				itemDef.interfaceOptions = new String[] { "Fill", "Empty", "Check", null, null };
@@ -247,7 +263,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 23145:
 				itemDef.name = "Twisted crossbow";
 				//itemDef.description = "Twisted crossbow.";
-				itemDef.inventory_model = 62777;
+				itemDef.modelId = 62777;
 				itemDef.maleModel0 = 62776;
 				itemDef.femaleModel0 = 62776;
 				itemDef.zoom2d = 926;
@@ -278,7 +294,7 @@ public final class ItemDefinition implements RSItemComposition {
 
 			case 12468://New dragon kite shield
 				itemDef.name = "Dragon Kiteshield new";
-				itemDef.inventory_model = 13701;
+				itemDef.modelId = 13701;
 				itemDef.maleModel0 = 13700;
 				itemDef.femaleModel0 = 13700;
 				itemDef.zoom2d = 1560;
@@ -332,7 +348,7 @@ public final class ItemDefinition implements RSItemComposition {
 
 			case 20999:
 				itemDef.name = "Bow of faerdhinen";
-				itemDef.inventory_model = 42605;
+				itemDef.modelId = 42605;
 				itemDef.maleModel0 = 42602;
 				itemDef.femaleModel0 = 42602;
 				itemDef.zoom2d = 1570;
@@ -357,7 +373,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 24111:
 				itemDef.name = "Zilyana's godbow";
 				//itemDef.description = "A bow that belonged to Zilyana.";
-				itemDef.inventory_model = 53122;
+				itemDef.modelId = 53122;
 				itemDef.maleModel0 = 53121;
 				itemDef.femaleModel0 = 53121;
 				itemDef.zoom2d = 2000;
@@ -401,7 +417,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 24158:
 				itemDef.name = "K'ril swords";
 				//itemDef.description = "Swords dropped by the almighty K'ril.";
-				itemDef.inventory_model = 62556;
+				itemDef.modelId = 62556;
 				itemDef.maleModel0 = 62557;
 				itemDef.femaleModel0 = 62557;
 				itemDef.zoom2d = 1650;
@@ -419,7 +435,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 23582:
 				itemDef.name = "Elder multi-axe";
 				//itemDef.description = "A multifunctional axe where you can mine or woodcut with.";
-				itemDef.inventory_model = 49503;
+				itemDef.modelId = 49503;
 				itemDef.maleModel0 = 49502;
 				itemDef.femaleModel0 = 49502;
 				itemDef.interfaceOptions = new String[] { null, "Wield", null, null, "Drop" };
@@ -440,7 +456,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.setDefaults();
 				itemDef.name = "Vorkath platebody";
 				//itemDef.description = "Vorkath armour.";
-				itemDef.inventory_model = 53100;
+				itemDef.modelId = 53100;
 				itemDef.maleModel0 = 53099;
 				itemDef.femaleModel0 = 53099;
 				itemDef.zoom2d = 1513;
@@ -457,7 +473,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 24105:
 				itemDef.name = "Vorkath helmet";
 				//itemDef.description = "Vorkath armour.";
-				itemDef.inventory_model = 53108;
+				itemDef.modelId = 53108;
 				itemDef.maleModel0 = 53107;
 				itemDef.femaleModel0 = 53107;
 				itemDef.zoom2d = 1010;
@@ -474,7 +490,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 24102:
 				itemDef.name = "Vorkath platelegs";
 				//itemDef.description = "Vorkath armour.";
-				itemDef.inventory_model = 53102;
+				itemDef.modelId = 53102;
 				itemDef.maleModel0 = 53101;
 				itemDef.femaleModel0 = 53101;
 				itemDef.zoom2d = 1753;
@@ -491,7 +507,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 24103:
 				itemDef.name = "Vorkath boots";
 				//itemDef.description = "Vorkath armour.";
-				itemDef.inventory_model = 53104;
+				itemDef.modelId = 53104;
 				itemDef.maleModel0 = 53103;
 				itemDef.femaleModel0 = 53103;
 				itemDef.zoom2d = 855;
@@ -508,7 +524,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 24104:
 				itemDef.name = "Vorkath gloves";
 				//itemDef.description = "Vorkath armour.";
-				itemDef.inventory_model = 53106;
+				itemDef.modelId = 53106;
 				itemDef.maleModel0 = 53105;
 				itemDef.femaleModel0 = 53105;
 				itemDef.zoom2d = 855;
@@ -525,7 +541,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 24106:
 				itemDef.name = "Vorkath blowpipe";
 				//itemDef.description = "Vorkath blowpipe.";
-				itemDef.inventory_model = 53126;
+				itemDef.modelId = 53126;
 				itemDef.maleModel0 = 53125;
 				itemDef.femaleModel0 = 53125;
 				itemDef.zoom2d = 1158;
@@ -545,7 +561,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 24107:
 				itemDef.name = "Vorkath blowpipe(empty)";
 				//itemDef.description = "Vorkath blowpipe.";
-				itemDef.inventory_model = 53126;
+				itemDef.modelId = 53126;
 				itemDef.maleModel0 = 53125;
 				itemDef.femaleModel0 = 53125;
 				itemDef.zoom2d = 1158;
@@ -563,7 +579,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 24119:
 				itemDef.name = "Black dragon hunter crossbow";
 				//itemDef.description = "Black dragon hunter crossbow.";
-				itemDef.inventory_model = 53124;
+				itemDef.modelId = 53124;
 				itemDef.maleModel0 = 53123;
 				itemDef.femaleModel0 = 53123;
 				itemDef.zoom2d = 1554;
@@ -582,7 +598,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.setDefaults();
 				itemDef.name = "@red@Death cape";
 				//itemDef.description = "This cape gives 5% drop rate boost.";
-				itemDef.inventory_model = 50205;
+				itemDef.modelId = 50205;
 				itemDef.maleModel0 = 50205;
 				itemDef.femaleModel0 = 50205;
 				itemDef.zoom2d = 2300;
@@ -1396,7 +1412,7 @@ public final class ItemDefinition implements RSItemComposition {
 			case 15098:
 				itemDef.name = "Dice (up to 100)";
 				//itemDef.description = "A 100-sided dice.";
-				itemDef.inventory_model = 31223;
+				itemDef.modelId = 31223;
 				itemDef.zoom2d = 1104;
 				itemDef.yan2d = 215;
 				itemDef.xan2d = 94;
@@ -1467,7 +1483,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 677, 801, 43540, 43543, 43546, 43549, 43550, 43552, 43554, 43558,
 					43560, 43575 };
-				itemDef.inventory_model = 50030;
+				itemDef.modelId = 50030;
 				itemDef.maleModel0 = 50031;
 				itemDef.femaleModel0 = 50031;
 				itemDef.zoom2d = 2300;
@@ -1487,7 +1503,7 @@ public final class ItemDefinition implements RSItemComposition {
 				// 4 //7 //10 //13 //14//16//18//22 //24//39
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 7104, 9151, 911, 914, 917, 920, 921, 923, 925, 929, 931, 946 };
-				itemDef.inventory_model = 50032;
+				itemDef.modelId = 50032;
 				itemDef.maleModel0 = 50033;
 				itemDef.femaleModel0 = 50033;
 				itemDef.zoom2d = 2300;
@@ -1508,7 +1524,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 6061, 5945, 6327, 6330, 6333, 6336, 6337, 6339, 6341, 6345, 6347,
 					6362 };
-				itemDef.inventory_model = 50034;
+				itemDef.modelId = 50034;
 				itemDef.maleModel0 = 50035;
 				itemDef.femaleModel0 = 50035;
 				itemDef.zoom2d = 2300;
@@ -1529,7 +1545,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 920, 920, 51856, 51859, 51862, 51865, 51866, 51868, 51870, 51874,
 					51876, 51891 };
-				itemDef.inventory_model = 50036;
+				itemDef.modelId = 50036;
 				itemDef.maleModel0 = 50037;
 				itemDef.femaleModel0 = 50037;
 				itemDef.zoom2d = 2300;
@@ -1550,7 +1566,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 9142, 9152, 4511, 4514, 4517, 4520, 4521, 4523, 4525, 4529, 4531,
 					4546 };
-				itemDef.inventory_model = 50038;
+				itemDef.modelId = 50038;
 				itemDef.maleModel0 = 50039;
 				itemDef.femaleModel0 = 50039;
 				itemDef.zoom2d = 2300;
@@ -1571,7 +1587,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 10460, 10473, 41410, 41413, 41416, 41419, 41420, 41422, 41424,
 					41428, 41430, 41445 };
-				itemDef.inventory_model = 50040;
+				itemDef.modelId = 50040;
 				itemDef.maleModel0 = 50041;
 				itemDef.femaleModel0 = 50041;
 				itemDef.zoom2d = 2300;
@@ -1592,7 +1608,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 14775, 14792, 22026, 22029, 22032, 22035, 22036, 22038, 22040,
 					22044, 22046, 22061 };
-				itemDef.inventory_model = 50042;
+				itemDef.modelId = 50042;
 				itemDef.maleModel0 = 50043;
 				itemDef.femaleModel0 = 50043;
 				itemDef.zoom2d = 2300;
@@ -1613,7 +1629,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 8125, 9152, 4015, 4018, 4021, 4024, 4025, 4027, 4029, 4033, 4035,
 					4050 };
-				itemDef.inventory_model = 50044;
+				itemDef.modelId = 50044;
 				itemDef.maleModel0 = 50045;
 				itemDef.femaleModel0 = 50045;
 				itemDef.zoom2d = 2300;
@@ -1634,7 +1650,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 9144, 9152, 38202, 38205, 38208, 38211, 38212, 38214, 38216,
 					38220, 38222, 38237 };
-				itemDef.inventory_model = 50046;
+				itemDef.modelId = 50046;
 				itemDef.maleModel0 = 50047;
 				itemDef.femaleModel0 = 50047;
 				itemDef.zoom2d = 2300;
@@ -1655,7 +1671,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 6067, 9152, 33670, 33673, 33676, 33679, 33680, 33682, 33684,
 					33688, 33690, 33705 };
-				itemDef.inventory_model = 50048;
+				itemDef.modelId = 50048;
 				itemDef.maleModel0 = 50049;
 				itemDef.femaleModel0 = 50049;
 				itemDef.zoom2d = 2300;
@@ -1676,7 +1692,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 9145, 9156, 22414, 22417, 22420, 22423, 22424, 22426, 22428,
 					22432, 22434, 22449 };
-				itemDef.inventory_model = 50050;
+				itemDef.modelId = 50050;
 				itemDef.maleModel0 = 50051;
 				itemDef.femaleModel0 = 50051;
 				itemDef.zoom2d = 2300;
@@ -1697,7 +1713,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 818, 951, 8291, 8294, 8297, 8300, 8301, 8303, 8305, 8309, 8311,
 					8319 };
-				itemDef.inventory_model = 50052;
+				itemDef.modelId = 50052;
 				itemDef.maleModel0 = 50053;
 				itemDef.femaleModel0 = 50053;
 				itemDef.zoom2d = 2300;
@@ -1719,7 +1735,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 5262, 6020, 8472, 8475, 8478, 8481, 8482, 8484, 8486, 8490, 8492,
 					8507 };
-				itemDef.inventory_model = 50054;
+				itemDef.modelId = 50054;
 				itemDef.maleModel0 = 50055;
 				itemDef.femaleModel0 = 50055;
 				itemDef.zoom2d = 2300;
@@ -1740,7 +1756,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 43569, 43685, 6336, 6339, 6342, 6345, 6346, 6348, 6350, 6354,
 					6356, 6371 };
-				itemDef.inventory_model = 50056;
+				itemDef.modelId = 50056;
 				itemDef.maleModel0 = 50057;
 				itemDef.femaleModel0 = 50057;
 				itemDef.zoom2d = 2300;
@@ -1761,7 +1777,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 36296, 36279, 10386, 10389, 10392, 10395, 10396, 10398, 10400,
 					10404, 10406, 10421 };
-				itemDef.inventory_model = 50058;
+				itemDef.modelId = 50058;
 				itemDef.maleModel0 = 50059;
 				itemDef.femaleModel0 = 50059;
 				itemDef.zoom2d = 2300;
@@ -1781,7 +1797,7 @@ public final class ItemDefinition implements RSItemComposition {
 				// 4 //7 //10 //13 //14//16//18//22 //24//39
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 9163, 9168, 117, 120, 123, 126, 127, 127, 127, 127, 127, 127 };
-				itemDef.inventory_model = 50060;
+				itemDef.modelId = 50060;
 				itemDef.maleModel0 = 50061;
 				itemDef.femaleModel0 = 50061;
 				itemDef.zoom2d = 2300;
@@ -1802,7 +1818,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 3755, 3998, 15122, 15125, 15128, 15131, 15132, 15134, 15136,
 					15140, 15142, 15157 };
-				itemDef.inventory_model = 50062;
+				itemDef.modelId = 50062;
 				itemDef.maleModel0 = 50063;
 				itemDef.femaleModel0 = 50063;
 				itemDef.zoom2d = 2300;
@@ -1823,7 +1839,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 9152, 8128, 10318, 10321, 10324, 10327, 10328, 10330, 10332,
 					10336, 10338, 10353 };
-				itemDef.inventory_model = 50064;
+				itemDef.modelId = 50064;
 				itemDef.maleModel0 = 50065;
 				itemDef.femaleModel0 = 50065;
 				itemDef.zoom2d = 2300;
@@ -1842,7 +1858,7 @@ public final class ItemDefinition implements RSItemComposition {
 				//itemDef.description = "	A cape worn by those who've overachieved.";
 				itemDef.colorFind = new int[] { 57022, 48811 };
 				itemDef.colorReplace = new int[] { 912, 920 };
-				itemDef.inventory_model = 50066;
+				itemDef.modelId = 50066;
 				itemDef.maleModel0 = 50067;
 				itemDef.femaleModel0 = 50067;
 				itemDef.zoom2d = 2300;
@@ -1862,7 +1878,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 8115, 9148, 10386, 10389, 10392, 10395, 10396, 10398, 10400,
 					10404, 10406, 10421 };
-				itemDef.inventory_model = 50068;
+				itemDef.modelId = 50068;
 				itemDef.maleModel0 = 50069;
 				itemDef.femaleModel0 = 50069;
 				itemDef.zoom2d = 2300;
@@ -1882,7 +1898,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 935, 931, 27538, 27541, 27544, 27547, 27548, 27550, 27552, 27556,
 					27558, 27573 };
-				itemDef.inventory_model = 50070;
+				itemDef.modelId = 50070;
 				itemDef.maleModel0 = 50071;
 				itemDef.femaleModel0 = 50071;
 				itemDef.zoom2d = 2300;
@@ -1902,7 +1918,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 11, 0, 58779, 58782, 58785, 58788, 58789, 57891, 58793, 58797,
 					58799, 58814 };
-				itemDef.inventory_model = 50072;
+				itemDef.modelId = 50072;
 				itemDef.maleModel0 = 50073;
 				itemDef.femaleModel0 = 50073;
 				itemDef.zoom2d = 2300;
@@ -1922,7 +1938,7 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.colorFind = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
 				itemDef.colorReplace = new int[] { 25109, 24088, 6693, 6696, 6699, 6702, 6703, 6705, 6707, 6711,
 					6713, 6728 };
-				itemDef.inventory_model = 50074;
+				itemDef.modelId = 50074;
 				itemDef.maleModel0 = 50075;
 				itemDef.femaleModel0 = 50075;
 				itemDef.zoom2d = 2300;
@@ -1938,87 +1954,219 @@ public final class ItemDefinition implements RSItemComposition {
 		}
 	}
 
-    public static ItemDefinition lookup(int itemId) {
-        for (int count = 0; count < 10; count++)
-            if (cache[count].id == itemId)
-                return cache[count];
+	public static ItemDefinition lookup(int itemId) {
+		for (int count = 0; count < 10; count++)
+			if (cache[count].id == itemId)
+				return cache[count];
+
 		if (itemId > streamIndices.length)
 			itemId = 0;
 		if (itemId == -1)
 			itemId = 0;
-        cacheIndex = (cacheIndex + 1) % 10;
-        ItemDefinition itemDef = cache[cacheIndex];
-        if (itemId > 0)
-            item_data.currentPosition = streamIndices[itemId];
-        itemDef.id = itemId;
-        itemDef.setDefaults();
-        itemDef.decode(item_data);
+		cacheIndex = (cacheIndex + 1) % 10;
+		ItemDefinition itemDef = cache[cacheIndex];
+		if (itemId > 0)
+			item_data.currentPosition = streamIndices[itemId];
+		itemDef.id = itemId;
+		itemDef.setDefaults();
+		itemDef.decode(item_data);
 
-        if (itemDef.noted_item_id != -1)
-            itemDef.toNote();
+		if (itemDef.noted_item_id != -1) {
+			itemDef.toNote();
+		}
 
-
-        customItems(itemId);
-
-        return itemDef;
-    }
+		customItems(itemId);
 
 
-    void method2789(ItemDefinition var1, ItemDefinition var2) {
-        inventory_model = var1.inventory_model * 1;
-        zoom2d = var1.zoom2d * 1;
-        xan2d = 1 * var1.xan2d;
-        yan2d = 1 * var1.yan2d;
-        zan2d = 1 * var1.zan2d;
-        xOffset2d = 1 * var1.xOffset2d;
-        yOffset2d = var1.yOffset2d * 1;
-        colorReplace = var2.colorReplace;
-        colorFind = var2.colorFind;
-        // originalTextureColors = var2.originalTextureColors;
-        // modifiedTextureColors = var2.modifiedTextureColors;
-        name = var2.name;
-        members = var2.members;
-        stackable = var2.stackable;
-        maleModel0 = 1 * var2.maleModel0;
-        maleModel1 = 1 * var2.maleModel1;
-        maleModel2 = 1 * var2.maleModel2;
-        femaleModel0 = var2.femaleModel0 * 1;
-        femaleModel1 = var2.femaleModel1 * 1;
-        femaleModel2 = 1 * var2.femaleModel2;
-        maleHeadModel = 1 * var2.maleHeadModel;
-        maleHeadModel2 = var2.maleHeadModel2 * 1;
-        femaleHeadModel = var2.femaleHeadModel * 1;
-        femaleHeadModel2 = var2.femaleHeadModel2 * 1;
-        team = var2.team * 1;
-        options = var2.options;
-        interfaceOptions = new String[5];
-        equipActions = new String[5];
-        if (null != var2.interfaceOptions) {
-            for (int var4 = 0; var4 < 4; ++var4) {
-                interfaceOptions[var4] = var2.interfaceOptions[var4];
-            }
-        }
+		return itemDef;
+	}
 
-        interfaceOptions[4] = "Discard";
-        cost = 0;
-    }
+	void method2790(ItemDefinition var1, ItemDefinition var2) {
+		modelId = var1.modelId * 1;
+		zoom2d = 1 * var1.zoom2d;
+		xan2d = var1.xan2d * 1;
+		yan2d = var1.yan2d * 1;
+		zan2d = var1.zan2d * 1;
+		xOffset2d = 1 * var1.xOffset2d;
+		yOffset2d = var1.yOffset2d * 1;
+		colorReplace = var1.colorReplace;
+		colorFind = var1.colorFind;
+		textureFind = var1.textureFind;
+		textureReplace = var1.textureReplace;
+		stackable = var1.stackable;
+		name = var2.name;
+		cost = 0;
+	}
 
-    void toPlaceholder(ItemDefinition var1, ItemDefinition var2) {
-        inventory_model = var1.inventory_model * 1;
-        zoom2d = 1 * var1.zoom2d;
-        xan2d = var1.xan2d * 1;
-        yan2d = var1.yan2d * 1;
-        zan2d = var1.zan2d * 1;
-        xOffset2d = 1 * var1.xOffset2d;
-        yOffset2d = var1.yOffset2d * 1;
-        colorReplace = var1.colorReplace;
-        colorFind = var1.colorFind;
-        textureFind = var1.textureFind;
-        textureReplace = var1.textureReplace;
-        stackable = var1.stackable;
-        name = var2.name;
-        cost = 0;
-    }
+	void method2789(ItemDefinition var1, ItemDefinition var2) {
+		modelId = var1.modelId * 1;
+		zoom2d = var1.zoom2d * 1;
+		xan2d = 1 * var1.xan2d;
+		yan2d = 1 * var1.yan2d;
+		zan2d = 1 * var1.zan2d;
+		xOffset2d = 1 * var1.xOffset2d;
+		yOffset2d = var1.yOffset2d * 1;
+		colorReplace = var2.colorReplace;
+		colorFind = var2.colorFind;
+		// originalTextureColors = var2.originalTextureColors;
+		// modifiedTextureColors = var2.modifiedTextureColors;
+		name = var2.name;
+		members = var2.members;
+		stackable = var2.stackable;
+		maleModel0 = 1 * var2.maleModel0;
+		maleModel1 = 1 * var2.maleModel1;
+		maleModel2 = 1 * var2.maleModel2;
+		femaleModel0 = var2.femaleModel0 * 1;
+		femaleModel1 = var2.femaleModel1 * 1;
+		femaleModel2 = 1 * var2.femaleModel2;
+		maleHeadModel = 1 * var2.maleHeadModel;
+		maleHeadModel2 = var2.maleHeadModel2 * 1;
+		femaleHeadModel = var2.femaleHeadModel * 1;
+		femaleHeadModel2 = var2.femaleHeadModel2 * 1;
+		team = var2.team * 1;
+		options = var2.options;
+		interfaceOptions = new String[5];
+		equipActions = new String[5];
+		if (null != var2.interfaceOptions) {
+			for (int var4 = 0; var4 < 4; ++var4) {
+				interfaceOptions[var4] = var2.interfaceOptions[var4];
+			}
+		}
+
+		interfaceOptions[4] = "Discard";
+		cost = 0;
+	}
+
+	void toPlaceholder(ItemDefinition var1, ItemDefinition var2) {
+		modelId = var1.modelId * 1;
+		zoom2d = 1 * var1.zoom2d;
+		xan2d = var1.xan2d * 1;
+		yan2d = var1.yan2d * 1;
+		zan2d = var1.zan2d * 1;
+		xOffset2d = 1 * var1.xOffset2d;
+		yOffset2d = var1.yOffset2d * 1;
+		colorReplace = var1.colorReplace;
+		colorFind = var1.colorFind;
+		textureFind = var1.textureFind;
+		textureReplace = var1.textureReplace;
+		stackable = var1.stackable;
+		name = var2.name;
+		cost = 0;
+	}
+
+	public static Sprite getSprite(int itemId, int stackSize, int outlineColor, boolean noted, int border,int shadow) {
+		if (outlineColor == 0) {
+			Sprite sprite = (Sprite) sprites.get(itemId);
+
+			if (sprite != null && sprite.maxHeight != stackSize && sprite.maxHeight != -1) {
+				sprite.unlink();
+				sprite = null;
+			}
+
+			if (sprite != null) {
+				return sprite;
+			}
+		}
+
+		ItemDefinition definition = lookup(itemId);
+
+		if (definition.countObj == null) {
+			stackSize = -1;
+		}
+
+		if (stackSize > 1) {
+			int stack_item_id = -1;
+
+			for (int j1 = 0; j1 < 10; j1++) {
+				if (stackSize >= definition.countCo[j1] && definition.countCo[j1] != 0) {
+					stack_item_id = definition.countObj[j1];
+				}
+			}
+
+			if (stack_item_id != -1) {
+				definition = lookup(stack_item_id);
+			}
+		}
+
+		Model model = definition.getModel(1);
+
+		if (model == null) {
+			return null;
+		}
+
+		Sprite sprite = null;
+
+
+		Sprite enabledSprite = new Sprite(32, 32);
+		int centerX = Rasterizer3D.originViewX;
+		int centerY = Rasterizer3D.originViewY;
+		int[] lineOffsets = Rasterizer3D.scanOffsets;
+		int[] pixels = Rasterizer2D.pixels;
+		int width = Rasterizer2D.width;
+		int height = Rasterizer2D.height;
+		int vp_left = Rasterizer2D.leftX;
+		int vp_right = Rasterizer2D.bottomX;
+		int vp_top = Rasterizer2D.topY;
+		int vp_bottom = Rasterizer2D.bottomY;
+		Rasterizer3D.world = false;
+		Rasterizer3D.aBoolean1464 = false;
+		Rasterizer2D.initDrawingArea(32, 32, enabledSprite.myPixels);
+		Rasterizer2D.drawItemBox(0, 0, 32, 32, 0);
+		Rasterizer3D.useViewport();
+		int k3 = definition.zoom2d;
+
+		if (outlineColor == -1) {
+			k3 = (int) (k3 * 1.5D);
+		}
+
+		if (outlineColor > 0) {
+			k3 = (int) (k3 * 1.04D);
+		}
+
+		int l3 = Rasterizer3D.SINE[definition.xan2d] * k3 >> 16;
+		int i4 = Rasterizer3D.COSINE[definition.xan2d] * k3 >> 16;
+		Rasterizer3D.renderOnGpu = true;
+		model.renderModel(definition.yan2d, definition.zan2d, definition.xan2d, definition.xOffset2d,
+			l3 + model.modelBaseY / 2 + definition.yOffset2d, i4 + definition.yOffset2d);
+		Rasterizer3D.renderOnGpu = false;
+
+		enabledSprite.highlight(1);
+
+		if (outlineColor == 0) {
+			enabledSprite.shadow(3153952);
+		}
+
+		Rasterizer2D.initDrawingArea(32, 32, enabledSprite.myPixels);
+
+		if (noted) {
+			int old_w = sprite.maxWidth;
+			int old_h = sprite.maxHeight;
+			sprite.maxWidth = 32;
+			sprite.maxHeight = 32;
+			sprite.drawSprite(0, 0);
+			sprite.maxWidth = old_w;
+			sprite.maxHeight = old_h;
+		}
+
+		if (outlineColor == 0) {
+			sprites.put(enabledSprite, itemId);
+		}
+
+		Rasterizer2D.initDrawingArea(height, width, pixels);
+		Rasterizer2D.setDrawingArea(vp_bottom, vp_left, vp_right, vp_top);
+		Rasterizer3D.originViewX = centerX;
+		Rasterizer3D.originViewY = centerY;
+		Rasterizer3D.scanOffsets = lineOffsets;
+		Rasterizer3D.aBoolean1464 = true;
+		Rasterizer3D.world = true;
+		enabledSprite.maxWidth = definition.stackable ? 33 : 32;
+		enabledSprite.maxHeight = stackSize;
+		return enabledSprite;
+	}
+
+	public static Sprite getSmallSprite(int itemId) {
+		return getSmallSprite(itemId, 1);
+	}
 
 	public static Sprite getSmallSprite(int itemId, int stackSize) {
 
@@ -2066,7 +2214,7 @@ public final class ItemDefinition implements RSItemComposition {
 		Rasterizer3D.renderOnGpu = true;
 		model.renderModel(itemDef.yan2d, itemDef.zan2d, itemDef.xan2d, itemDef.xOffset2d,
 			l3 + model.modelBaseY / 2 + itemDef.yOffset2d, i4 + itemDef.yOffset2d);
-
+		Rasterizer3D.renderOnGpu = false;
 		enabledSprite.outline(1);
 
 		Rasterizer2D.initDrawingArea(32, 32, enabledSprite.myPixels);
@@ -2097,831 +2245,704 @@ public final class ItemDefinition implements RSItemComposition {
 		return enabledSprite;
 	}
 
-    public static Sprite getSprite(int itemId, int stackSize, int outlineColor, boolean noted, int border,int shadow) {
-        if (outlineColor == 0) {
-            Sprite sprite = (Sprite) sprites.get(itemId);
 
-            if (sprite != null && sprite.maxHeight != stackSize && sprite.maxHeight != -1) {
-                sprite.unlink();
-                sprite = null;
-            }
+	public static Sprite getSprite(int itemId, int stackSize, int outlineColor) {
+		if (outlineColor == 0) {
+			Sprite sprite = (Sprite) sprites.get(itemId);
+			if (sprite != null && sprite.maxHeight != stackSize && sprite.maxHeight != -1) {
 
-            if (sprite != null) {
-                return sprite;
-            }
-        }
+				sprite.unlink();
+				sprite = null;
+			}
+			if (sprite != null)
+				return sprite;
+		}
+		ItemDefinition itemDef = lookup(itemId);
+		if (itemDef.countObj == null)
+			stackSize = -1;
+		if (stackSize > 1) {
+			int stack_item_id = -1;
+			for (int j1 = 0; j1 < 10; j1++)
+				if (stackSize >= itemDef.countCo[j1] && itemDef.countCo[j1] != 0)
+					stack_item_id = itemDef.countObj[j1];
 
-        ItemDefinition definition = lookup(itemId);
+			if (stack_item_id != -1)
+				itemDef = lookup(stack_item_id);
+		}
+		Model model = itemDef.getModel(1);
+		if (model == null)
+			return null;
+		Sprite sprite = null;
+		if (itemDef.noted_item_id != -1) {
+			sprite = getSprite(itemDef.unnoted_item_id, 10, -1);
+			if (sprite == null)
+				return null;
+		}
+		Sprite enabledSprite = new Sprite(32, 32);
+		int centerX = Rasterizer3D.originViewX;
+		int centerY = Rasterizer3D.originViewY;
+		int[] lineOffsets = Rasterizer3D.scanOffsets;
+		int[] pixels = Rasterizer2D.pixels;
+		int width = Rasterizer2D.width;
+		int height = Rasterizer2D.height;
+		int vp_left = Rasterizer2D.leftX;
+		int vp_right = Rasterizer2D.bottomX;
+		int vp_top = Rasterizer2D.topY;
+		int vp_bottom = Rasterizer2D.bottomY;
+		Rasterizer3D.world = false;
+		Rasterizer3D.aBoolean1464 = false;
+		Rasterizer2D.initDrawingArea(32, 32, enabledSprite.myPixels);
+		Rasterizer2D.drawItemBox(0, 0, 32, 32, 0);
+		Rasterizer3D.useViewport();
+		int k3 = itemDef.zoom2d;
+		if (outlineColor == -1)
+			k3 = (int) ((double) k3 * 1.5D);
+		if (outlineColor > 0)
+			k3 = (int) ((double) k3 * 1.04D);
+		int l3 = Rasterizer3D.SINE[itemDef.xan2d] * k3 >> 16;
+		int i4 = Rasterizer3D.COSINE[itemDef.xan2d] * k3 >> 16;
+		Rasterizer3D.renderOnGpu = true;
+		model.renderModel(itemDef.yan2d, itemDef.zan2d, itemDef.xan2d, itemDef.xOffset2d,
+			l3 + model.modelBaseY / 2 + itemDef.yOffset2d, i4 + itemDef.yOffset2d);
+		Rasterizer3D.renderOnGpu = false;
+		enabledSprite.outline(1);
+		if (outlineColor > 0) {
+			enabledSprite.outline(16777215);
+		}
+		if (outlineColor == 0) {
+			enabledSprite.shadow(3153952);
+		}
 
-        if (definition.countObj == null) {
-            stackSize = -1;
-        }
+		Rasterizer2D.initDrawingArea(32, 32, enabledSprite.myPixels);
 
-        if (stackSize > 1) {
-            int stack_item_id = -1;
+		if (itemDef.noted_item_id != -1) {
+			int old_w = sprite.maxWidth;
+			int old_h = sprite.maxHeight;
+			sprite.maxWidth = 32;
+			sprite.maxHeight = 32;
+			sprite.drawSprite(0, 0);
+			sprite.maxWidth = old_w;
+			sprite.maxHeight = old_h;
+		}
+		if (outlineColor == 0)
+			sprites.put(enabledSprite, itemId);
+		Rasterizer2D.initDrawingArea(height, width, pixels);
+		Rasterizer2D.setDrawingArea(vp_bottom, vp_left, vp_right, vp_top);
+		Rasterizer3D.originViewX = centerX;
+		Rasterizer3D.originViewY = centerY;
+		Rasterizer3D.scanOffsets = lineOffsets;
+		Rasterizer3D.aBoolean1464 = true;
+		Rasterizer3D.world = true;
+		if (itemDef.stackable)
+			enabledSprite.maxWidth = 33;
+		else
+			enabledSprite.maxWidth = 32;
+		enabledSprite.maxHeight = stackSize;
+		return enabledSprite;
+	}
 
-            for (int j1 = 0; j1 < 10; j1++) {
-                if (stackSize >= definition.countCo[j1] && definition.countCo[j1] != 0) {
-                    stack_item_id = definition.countObj[j1];
-                }
-            }
+	public static Sprite getSprite(int itemId, int stackSize, int zoom, int outlineColor) {
+		ItemDefinition itemDef = lookup(itemId);
+		if (itemDef.countObj == null)
+			stackSize = -1;
+		if (stackSize > 1) {
+			int stack_item_id = -1;
+			for (int j1 = 0; j1 < 10; j1++)
+				if (stackSize >= itemDef.countCo[j1] && itemDef.countCo[j1] != 0)
+					stack_item_id = itemDef.countObj[j1];
 
-            if (stack_item_id != -1) {
-                definition = lookup(stack_item_id);
-            }
-        }
+			if (stack_item_id != -1)
+				itemDef = lookup(stack_item_id);
+		}
+		Model model = itemDef.getModel(1);
+		if (model == null)
+			return null;
+		Sprite sprite = new Sprite(90, 90);
+		int centerX = Rasterizer3D.originViewX;
+		int centerY = Rasterizer3D.originViewY;
+		int[] lineOffsets = Rasterizer3D.scanOffsets;
+		int[] pixels = Rasterizer2D.pixels;
+		int width = Rasterizer2D.width;
+		int height = Rasterizer2D.height;
+		int vp_left = Rasterizer2D.leftX;
+		int vp_right = Rasterizer2D.bottomX;
+		int vp_top = Rasterizer2D.topY;
+		int vp_bottom = Rasterizer2D.bottomY;
+		Rasterizer3D.world = false;
+		Rasterizer3D.aBoolean1464 = false;
+		Rasterizer2D.initDrawingArea(90, 90, sprite.myPixels);
+		Rasterizer2D.drawItemBox(0, 0, 90, 90, 0);
+		Rasterizer3D.useViewport();
+		int l3 = Rasterizer3D.SINE[itemDef.xan2d] * zoom >> 15;
+		int i4 = Rasterizer3D.COSINE[itemDef.xan2d] * zoom >> 15;
+		Rasterizer3D.renderOnGpu = true;
 
-        Model model = definition.getModel(1);
+		model.renderModel(itemDef.yan2d, itemDef.zan2d, itemDef.xan2d, itemDef.xOffset2d,
+			l3 + model.modelBaseY / 2 + itemDef.yOffset2d, i4 + itemDef.yOffset2d);
 
-        if (model == null) {
-            return null;
-        }
+		Rasterizer3D.renderOnGpu = false;
+		sprite.outline(1);
+		if (outlineColor > 0) {
+			sprite.outline(16777215);
+		}
+		if (outlineColor == 0) {
+			sprite.shadow(3153952);
+		}
+		Rasterizer2D.initDrawingArea(90, 90, sprite.myPixels);
+		Rasterizer2D.initDrawingArea(height, width, pixels);
+		Rasterizer2D.setDrawingArea(vp_bottom, vp_left, vp_right, vp_top);
+		Rasterizer3D.originViewX = centerX;
+		Rasterizer3D.originViewY = centerY;
+		Rasterizer3D.scanOffsets = lineOffsets;
+		Rasterizer3D.aBoolean1464 = true;
+		Rasterizer3D.world = true;
+		if (itemDef.stackable)
+			sprite.maxWidth = 33;
+		else
+			sprite.maxWidth = 32;
+		sprite.maxHeight = stackSize;
+		return sprite;
+	}
 
-        Sprite sprite = null;
-
-
-        Sprite enabledSprite = new Sprite(32, 32);
-        int centerX = Rasterizer3D.originViewX;
-        int centerY = Rasterizer3D.originViewY;
-        int[] lineOffsets = Rasterizer3D.scanOffsets;
-        int[] pixels = Rasterizer2D.pixels;
-        int width = Rasterizer2D.width;
-        int height = Rasterizer2D.height;
-        int vp_left = Rasterizer2D.leftX;
-        int vp_right = Rasterizer2D.bottomX;
-        int vp_top = Rasterizer2D.topY;
-        int vp_bottom = Rasterizer2D.bottomY;
-        Rasterizer3D.world = false;
-        Rasterizer3D.aBoolean1464 = false;
-        Rasterizer2D.initDrawingArea(32, 32, enabledSprite.myPixels);
-        Rasterizer2D.drawItemBox(0, 0, 32, 32, 0);
-        Rasterizer3D.useViewport();
-        int k3 = definition.zoom2d;
-
-        if (outlineColor == -1) {
-            k3 = (int) (k3 * 1.5D);
-        }
-
-        if (outlineColor > 0) {
-            k3 = (int) (k3 * 1.04D);
-        }
-
-        int l3 = Rasterizer3D.SINE[definition.xan2d] * k3 >> 16;
-        int i4 = Rasterizer3D.COSINE[definition.xan2d] * k3 >> 16;
-        Rasterizer3D.renderOnGpu = true;
-        model.renderModel(definition.yan2d, definition.zan2d, definition.xan2d, definition.xOffset2d,
-                l3 + model.modelBaseY / 2 + definition.yOffset2d, i4 + definition.yOffset2d);
-        Rasterizer3D.renderOnGpu = false;
-
-        enabledSprite.highlight(1);
-
-        if (outlineColor == 0) {
-            enabledSprite.shadow(3153952);
-        }
-
-        Rasterizer2D.initDrawingArea(32, 32, enabledSprite.myPixels);
-
-        if (noted) {
-            int old_w = sprite.maxWidth;
-            int old_h = sprite.maxHeight;
-            sprite.maxWidth = 32;
-            sprite.maxHeight = 32;
-            sprite.drawSprite(0, 0);
-            sprite.maxWidth = old_w;
-            sprite.maxHeight = old_h;
-        }
-
-        if (outlineColor == 0) {
-            sprites.put(enabledSprite, itemId);
-        }
-
-        Rasterizer2D.initDrawingArea(height, width, pixels);
-        Rasterizer2D.setDrawingArea(vp_bottom, vp_left, vp_right, vp_top);
-        Rasterizer3D.originViewX = centerX;
-        Rasterizer3D.originViewY = centerY;
-        Rasterizer3D.scanOffsets = lineOffsets;
-        Rasterizer3D.aBoolean1464 = true;
-        Rasterizer3D.world = true;
-        enabledSprite.maxWidth = definition.stackable ? 33 : 32;
-        enabledSprite.maxHeight = stackSize;
-        return enabledSprite;
-    }
-
-    public static Sprite getSprite(int itemId, int stackSize, int outlineColor) {
-        if (outlineColor == 0) {
-            Sprite sprite = (Sprite) sprites.get(itemId);
-            if (sprite != null && sprite.maxHeight != stackSize && sprite.maxHeight != -1) {
-
-                sprite.unlink();
-                sprite = null;
-            }
-            if (sprite != null)
-                return sprite;
-        }
-        ItemDefinition itemDef = lookup(itemId);
-        if (itemDef.countObj == null)
-            stackSize = -1;
-        if (stackSize > 1) {
-            int stack_item_id = -1;
-            for (int j1 = 0; j1 < 10; j1++)
-                if (stackSize >= itemDef.countCo[j1] && itemDef.countCo[j1] != 0)
-                    stack_item_id = itemDef.countObj[j1];
-
-            if (stack_item_id != -1)
-                itemDef = lookup(stack_item_id);
-        }
-        Model model = itemDef.getModel(1);
-        if (model == null)
-            return null;
-        Sprite sprite = null;
-        if (itemDef.noted_item_id != -1) {
-            sprite = getSprite(itemDef.unnoted_item_id, 10, -1);
-            if (sprite == null)
-                return null;
-        }
-        Sprite enabledSprite = new Sprite(32, 32);
-        int centerX = Rasterizer3D.originViewX;
-        int centerY = Rasterizer3D.originViewY;
-        int[] lineOffsets = Rasterizer3D.scanOffsets;
-        int[] pixels = Rasterizer2D.pixels;
-        int width = Rasterizer2D.width;
-        int height = Rasterizer2D.height;
-        int vp_left = Rasterizer2D.leftX;
-        int vp_right = Rasterizer2D.bottomX;
-        int vp_top = Rasterizer2D.topY;
-        int vp_bottom = Rasterizer2D.bottomY;
-        Rasterizer3D.world = false;
-        Rasterizer3D.aBoolean1464 = false;
-        Rasterizer2D.initDrawingArea(32, 32, enabledSprite.myPixels);
-        Rasterizer2D.drawItemBox(0, 0, 32, 32, 0);
-        Rasterizer3D.useViewport();
-        int k3 = itemDef.zoom2d;
-        if (outlineColor == -1)
-            k3 = (int) ((double) k3 * 1.5D);
-        if (outlineColor > 0)
-            k3 = (int) ((double) k3 * 1.04D);
-        int l3 = Rasterizer3D.SINE[itemDef.xan2d] * k3 >> 16;
-        int i4 = Rasterizer3D.COSINE[itemDef.xan2d] * k3 >> 16;
-        Rasterizer3D.renderOnGpu = true;
-        model.renderModel(itemDef.yan2d, itemDef.zan2d, itemDef.xan2d, itemDef.xOffset2d,
-                l3 + model.modelBaseY / 2 + itemDef.yOffset2d, i4 + itemDef.yOffset2d);
-
-        enabledSprite.outline(1);
-        if (outlineColor > 0) {
-            enabledSprite.outline(16777215);
-        }
-        if (outlineColor == 0) {
-            enabledSprite.shadow(3153952);
-        }
-
-        Rasterizer2D.initDrawingArea(32, 32, enabledSprite.myPixels);
-
-        if (itemDef.noted_item_id != -1) {
-            int old_w = sprite.maxWidth;
-            int old_h = sprite.maxHeight;
-            sprite.maxWidth = 32;
-            sprite.maxHeight = 32;
-            sprite.drawSprite(0, 0);
-            sprite.maxWidth = old_w;
-            sprite.maxHeight = old_h;
-        }
-        if (outlineColor == 0)
-            sprites.put(enabledSprite, itemId);
-        Rasterizer2D.initDrawingArea(height, width, pixels);
-        Rasterizer2D.setDrawingArea(vp_bottom, vp_left, vp_right, vp_top);
-        Rasterizer3D.originViewX = centerX;
-        Rasterizer3D.originViewY = centerY;
-        Rasterizer3D.scanOffsets = lineOffsets;
-        Rasterizer3D.aBoolean1464 = true;
-        Rasterizer3D.world = true;
-        if (itemDef.stackable)
-            enabledSprite.maxWidth = 33;
-        else
-            enabledSprite.maxWidth = 32;
-        enabledSprite.maxHeight = stackSize;
-        return enabledSprite;
-    }
-
-    public static Sprite getSprite(int itemId, int stackSize, int zoom, int outlineColor) {
-        ItemDefinition itemDef = lookup(itemId);
-        if (itemDef.countObj == null)
-            stackSize = -1;
-        if (stackSize > 1) {
-            int stack_item_id = -1;
-            for (int j1 = 0; j1 < 10; j1++)
-                if (stackSize >= itemDef.countCo[j1] && itemDef.countCo[j1] != 0)
-                    stack_item_id = itemDef.countObj[j1];
-
-            if (stack_item_id != -1)
-                itemDef = lookup(stack_item_id);
-        }
-        Model model = itemDef.getModel(1);
-        if (model == null)
-            return null;
-        Sprite sprite = new Sprite(90, 90);
-        int centerX = Rasterizer3D.originViewX;
-        int centerY = Rasterizer3D.originViewY;
-        int[] lineOffsets = Rasterizer3D.scanOffsets;
-        int[] pixels = Rasterizer2D.pixels;
-        int width = Rasterizer2D.width;
-        int height = Rasterizer2D.height;
-        int vp_left = Rasterizer2D.leftX;
-        int vp_right = Rasterizer2D.bottomX;
-        int vp_top = Rasterizer2D.topY;
-        int vp_bottom = Rasterizer2D.bottomY;
-        Rasterizer3D.world = false;
-        Rasterizer3D.aBoolean1464 = false;
-        Rasterizer2D.initDrawingArea(90, 90, sprite.myPixels);
-        Rasterizer2D.drawItemBox(0, 0, 90, 90, 0);
-        Rasterizer3D.useViewport();
-        int l3 = Rasterizer3D.SINE[itemDef.xan2d] * zoom >> 15;
-        int i4 = Rasterizer3D.COSINE[itemDef.xan2d] * zoom >> 15;
-        Rasterizer3D.renderOnGpu = true;
-
-        model.renderModel(itemDef.yan2d, itemDef.zan2d, itemDef.xan2d, itemDef.xOffset2d,
-                l3 + model.modelBaseY / 2 + itemDef.yOffset2d, i4 + itemDef.yOffset2d);
-
-        Rasterizer3D.renderOnGpu = false;
-        sprite.outline(1);
-        if (outlineColor > 0) {
-            sprite.outline(16777215);
-        }
-        if (outlineColor == 0) {
-            sprite.shadow(3153952);
-        }
-        Rasterizer2D.initDrawingArea(90, 90, sprite.myPixels);
-        Rasterizer2D.initDrawingArea(height, width, pixels);
-        Rasterizer2D.setDrawingArea(vp_bottom, vp_left, vp_right, vp_top);
-        Rasterizer3D.originViewX = centerX;
-        Rasterizer3D.originViewY = centerY;
-        Rasterizer3D.scanOffsets = lineOffsets;
-        Rasterizer3D.aBoolean1464 = true;
-        Rasterizer3D.world = true;
-        if (itemDef.stackable)
-            sprite.maxWidth = 33;
-        else
-            sprite.maxWidth = 32;
-        sprite.maxHeight = stackSize;
-        return sprite;
-    }
-
-    public boolean isDialogueModelCached(int gender) {
-        int model_1 = maleHeadModel;
-        int model_2 = maleHeadModel2;
-        if (gender == 1) {
-            model_1 = femaleHeadModel;
-            model_2 = femaleHeadModel2;
-        }
-        if (model_1 == -1)
-            return true;
-        boolean cached = Model.isCached(model_1);
+	public boolean isDialogueModelCached(int gender) {
+		int model_1 = maleHeadModel;
+		int model_2 = maleHeadModel2;
+		if (gender == 1) {
+			model_1 = femaleHeadModel;
+			model_2 = femaleHeadModel2;
+		}
+		if (model_1 == -1)
+			return true;
+		boolean cached = Model.isCached(model_1);
 		if (model_2 != -1 && !Model.isCached(model_2))
-            cached = false;
-        return cached;
-    }
+			cached = false;
+		return cached;
+	}
 
-    public Model getChatEquipModel(int gender) {
-        int dialogueModel = maleHeadModel;
-        int dialogueHatModel = maleHeadModel2;
-        if (gender == 1) {
-            dialogueModel = femaleHeadModel;
-            dialogueHatModel = femaleHeadModel2;
-        }
-        if (dialogueModel == -1)
-            return null;
-        Model dialogueModel_ = Model.getModel(dialogueModel);
-        if (dialogueHatModel != -1) {
-            Model hatModel_ = Model.getModel(dialogueHatModel);
-            Model[] models = {dialogueModel_, hatModel_};
-            dialogueModel_ = new Model(2, models);
-        }
-        if (colorReplace != null) {
-            for (int i1 = 0; i1 < colorReplace.length; i1++)
-                dialogueModel_.recolor(colorReplace[i1], colorFind[i1]);
+	public Model getChatEquipModel(int gender) {
+		int dialogueModel = maleHeadModel;
+		int dialogueHatModel = maleHeadModel2;
+		if (gender == 1) {
+			dialogueModel = femaleHeadModel;
+			dialogueHatModel = femaleHeadModel2;
+		}
+		if (dialogueModel == -1)
+			return null;
+		Model dialogueModel_ = Model.getModel(dialogueModel);
+		if (dialogueHatModel != -1) {
+			Model hatModel_ = Model.getModel(dialogueHatModel);
+			Model[] models = {dialogueModel_, hatModel_};
+			dialogueModel_ = new Model(2, models);
+		}
+		if (colorReplace != null) {
+			for (int i1 = 0; i1 < colorReplace.length; i1++)
+				dialogueModel_.recolor(colorReplace[i1], colorFind[i1]);
 
-        }
-        if (textureReplace != null) {
-            for (int i1 = 0; i1 < textureReplace.length; i1++)
-                dialogueModel_.retexture(textureReplace[i1], textureFind[i1]);
-        }
-        return dialogueModel_;
-    }
+		}
+		if (textureReplace != null) {
+			for (int i1 = 0; i1 < textureReplace.length; i1++)
+				dialogueModel_.retexture(textureReplace[i1], textureFind[i1]);
+		}
+		return dialogueModel_;
+	}
 
-    public boolean isEquippedModelCached(int gender) {
-        int primaryModel = maleModel0;
-        int secondaryModel = maleModel1;
-        int emblem = maleModel2;
-        if (gender == 1) {
-            primaryModel = femaleModel0;
-            secondaryModel = femaleModel1;
-            emblem = femaleModel2;
-        }
-        if (primaryModel == -1)
-            return true;
-        boolean cached = Model.isCached(primaryModel);
+	public boolean isEquippedModelCached(int gender) {
+		int primaryModel = maleModel0;
+		int secondaryModel = maleModel1;
+		int emblem = maleModel2;
+		if (gender == 1) {
+			primaryModel = femaleModel0;
+			secondaryModel = femaleModel1;
+			emblem = femaleModel2;
+		}
+		if (primaryModel == -1)
+			return true;
+		boolean cached = Model.isCached(primaryModel);
 		if (secondaryModel != -1 && !Model.isCached(secondaryModel))
-            cached = false;
-        if (emblem != -1 && !Model.isCached(emblem))
-            cached = false;
-        return cached;
-    }
-
-    public Model getEquippedModel(int gender) {
-        int primaryModel = maleModel0;
-        int secondaryModel = maleModel1;
-        int emblem = maleModel2;
-
-        if (gender == 1) {
-            primaryModel = femaleModel0;
-            secondaryModel = femaleModel1;
-            emblem = femaleModel2;
-        }
-
-        if (primaryModel == -1)
-            return null;
-        Model primaryModel_ = Model.getModel(primaryModel);
-        if (secondaryModel != -1)
-            if (emblem != -1) {
-                Model secondaryModel_ = Model.getModel(secondaryModel);
-                Model emblemModel = Model.getModel(emblem);
-                Model[] models = {primaryModel_, secondaryModel_, emblemModel};
-                primaryModel_ = new Model(3, models);
-            } else {
-                Model model_2 = Model.getModel(secondaryModel);
-                Model[] models = {primaryModel_, model_2};
-                primaryModel_ = new Model(2, models);
-            }
-        if (gender == 0 && maleOffset != 0)
-            primaryModel_.offsetBy(0, maleOffset, 0);
-        if (gender == 1 && femaleOffset != 0)
-            primaryModel_.offsetBy(0, femaleOffset, 0);
-
-        if (colorReplace != null) {
-            for (int i1 = 0; i1 < colorReplace.length; i1++)
-                primaryModel_.recolor(colorReplace[i1], colorFind[i1]);
-
-        }
-        if (textureReplace != null) {
-            for (int i1 = 0; i1 < textureReplace.length; i1++)
-                primaryModel_.retexture(textureReplace[i1], textureFind[i1]);
-        }
-        return primaryModel_;
-    }
-
-    private void setDefaults() {
-        equipActions = new String[]{"Remove", null, "Operate", null, null};
-        inventory_model = 0;
-        name = null;
-        colorReplace = null;
-        colorFind = null;
-        textureReplace = null;
-        textureFind = null;
-
-        zoom2d = 2000;
-        xan2d = 0;
-        yan2d = 0;
-        zan2d = 0;
-        xOffset2d = 0;
-        yOffset2d = 0;
-        stackable = false;
-        cost = 1;
-        members = false;
-        options = null;
-        interfaceOptions = null;
-        maleModel0 = -1;
-        maleModel1 = -1;
-        maleOffset = 0;
-        femaleModel0 = -1;
-        femaleModel1 = -1;
-        femaleOffset = 0;
-        maleModel2 = -1;
-        femaleModel2 = -1;
-        maleHeadModel = -1;
-        maleHeadModel2 = -1;
-        femaleHeadModel = -1;
-        femaleHeadModel2 = -1;
-        countObj = null;
-        countCo = null;
-        unnoted_item_id = -1;
-        noted_item_id = -1;
-        resizeX = 128;
-        resizeY = 128;
-        resizeZ = 128;
-        ambient = 0;
-        contrast = 0;
-        team = 0;
-        glowColor = -1;
-    }
-
-    private void copy(ItemDefinition copy) {
-        yan2d = copy.yan2d;
-        xan2d = copy.xan2d;
-        zan2d = copy.zan2d;
-        resizeX = copy.resizeX;
-        resizeY = copy.resizeY;
-        resizeZ = copy.resizeZ;
-        zoom2d = copy.zoom2d;
-        xOffset2d = copy.xOffset2d;
-        yOffset2d = copy.yOffset2d;
-        inventory_model = copy.inventory_model;
-        stackable = copy.stackable;
-
-    }
-
-    private void toNote() {
-        ItemDefinition itemDef = lookup(noted_item_id);
-        inventory_model = itemDef.inventory_model;
-        zoom2d = itemDef.zoom2d;
-        xan2d = itemDef.xan2d;
-        yan2d = itemDef.yan2d;
-
-        zan2d = itemDef.zan2d;
-        xOffset2d = itemDef.xOffset2d;
-        yOffset2d = itemDef.yOffset2d;
-
-        ItemDefinition itemDef_1 = lookup(unnoted_item_id);
-        name = itemDef_1.name;
-        members = itemDef_1.members;
-        cost = itemDef_1.cost;
-        stackable = true;
-    }
-
-    @Override
-    public String getName() {
-        return null;
-    }
-
-    @Override
-    public void setName(String name) {
-
-    }
-
-    @Override
-    public int getId() {
-        return 0;
-    }
-
-    @Override
-    public int getNote() {
-        return 0;
-    }
-
-    @Override
-    public int getLinkedNoteId() {
-        return 0;
-    }
-
-    @Override
-    public int getPlaceholderId() {
-        return 0;
-    }
-
-    @Override
-    public int getPlaceholderTemplateId() {
-        return 0;
-    }
-
-    @Override
-    public int getPrice() {
-        return 0;
-    }
-
-    @Override
-    public boolean isMembers() {
-        return false;
-    }
-
-    @Override
-    public boolean isTradeable() {
-        return false;
-    }
-
-    @Override
-    public void setTradeable(boolean yes) {
-
-    }
-
-    @Override
-    public int getIsStackable() {
-        return 0;
-    }
-
-    @Override
-    public int getMaleModel() {
-        return 0;
-    }
-
-    @Override
-    public String[] getInventoryActions() {
-        return new String[0];
-    }
-
-    @Override
-    public String[] getGroundActions() {
-        return new String[0];
-    }
-
-    @Override
-    public int getShiftClickActionIndex() {
-        return 0;
-    }
-
-    @Override
-    public void setShiftClickActionIndex(int shiftClickActionIndex) {
-
-    }
-
-    public Model getModel(int stack_size) {
-        if (countObj != null && stack_size > 1) {
-            int stack_item_id = -1;
-            for (int k = 0; k < 10; k++)
-                if (stack_size >= countCo[k] && countCo[k] != 0)
-                    stack_item_id = countObj[k];
-
-            if (stack_item_id != -1)
-                return lookup(stack_item_id).getModel(1);
-        }
-        Model model = (Model) models.get(id);
-        if (model != null)
-            return model;
-        model = Model.getModel(inventory_model);
-        if (model == null)
-            return null;
-        if (resizeX != 128 || resizeY != 128 || resizeZ != 128)
-            model.scale(resizeX, resizeZ, resizeY);
-        if (colorReplace != null) {
-            for (int l = 0; l < colorReplace.length; l++)
-                model.recolor(colorReplace[l], colorFind[l]);
-
-        }
-        if (textureReplace != null) {
-            for (int i1 = 0; i1 < textureReplace.length; i1++)
-                model.retexture(textureReplace[i1], textureFind[i1]);
-        }
-        int lightInt = 64 + ambient;
-        int lightMag = 768 + contrast;
-        model.light(lightInt, lightMag, -50, -10, -50, true);
-        model.singleTile = true;
-        models.put(model, id);
-        return model;
-    }
-
-    @Override
-    public int getInventoryModel() {
-        return 0;
-    }
-
-    @Override
-    public short[] getColorToReplaceWith() {
-        return new short[0];
-    }
-
-    @Override
-    public short[] getTextureToReplaceWith() {
-        return new short[0];
-    }
-
-    @Override
-    public RSIterableNodeHashTable getParams() {
-        return null;
-    }
-
-    @Override
-    public void setParams(IterableHashTable params) {
-
-    }
-
-    @Override
-    public void setParams(RSIterableNodeHashTable params) {
-
-    }
-
-    public Model getUnshadedModel(int stack_size) {
-        if (countObj != null && stack_size > 1) {
-            int stack_item_id = -1;
-            for (int count = 0; count < 10; count++)
-                if (stack_size >= countCo[count] && countCo[count] != 0)
-                    stack_item_id = countObj[count];
-
-            if (stack_item_id != -1)
-                return lookup(stack_item_id).getUnshadedModel(1);
-        }
-        Model model = Model.getModel(inventory_model);
-        if (model == null)
-            return null;
-        if (colorReplace != null) {
-            for (int colorPtr = 0; colorPtr < colorReplace.length; colorPtr++)
-                model.recolor(colorReplace[colorPtr], colorFind[colorPtr]);
-
-        }
-        return model;
-    }
-
-	public void createCustomSprite(String img) {
-		customSpriteLocation = getCustomSprite(img);
+			cached = false;
+		if (emblem != -1 && !Model.isCached(emblem))
+			cached = false;
+		return cached;
 	}
 
+	public Model getEquippedModel(int gender) {
+		int primaryModel = maleModel0;
+		int secondaryModel = maleModel1;
+		int emblem = maleModel2;
 
-	public void createSmallCustomSprite(String img) {
-		customSmallSpriteLocation = getCustomSprite(img);
+		if (gender == 1) {
+			primaryModel = femaleModel0;
+			secondaryModel = femaleModel1;
+			emblem = femaleModel2;
+		}
+
+		if (primaryModel == -1)
+			return null;
+		Model primaryModel_ = Model.getModel(primaryModel);
+		if (secondaryModel != -1)
+			if (emblem != -1) {
+				Model secondaryModel_ = Model.getModel(secondaryModel);
+				Model emblemModel = Model.getModel(emblem);
+				Model[] models = {primaryModel_, secondaryModel_, emblemModel};
+				primaryModel_ = new Model(3, models);
+			} else {
+				Model model_2 = Model.getModel(secondaryModel);
+				Model[] models = {primaryModel_, model_2};
+				primaryModel_ = new Model(2, models);
+			}
+		if (gender == 0 && maleOffset != 0)
+			primaryModel_.offsetBy(0, maleOffset, 0);
+		if (gender == 1 && femaleOffset != 0)
+			primaryModel_.offsetBy(0, femaleOffset, 0);
+
+		if (colorReplace != null) {
+			for (int i1 = 0; i1 < colorReplace.length; i1++)
+				primaryModel_.recolor(colorReplace[i1], colorFind[i1]);
+
+		}
+		if (textureReplace != null) {
+			for (int i1 = 0; i1 < textureReplace.length; i1++)
+				primaryModel_.retexture(textureReplace[i1], textureFind[i1]);
+		}
+		return primaryModel_;
 	}
 
+	private void setDefaults() {
+		customSpriteLocation = null;
+		customSmallSpriteLocation = null;
+		equipActions = new String[]{"Remove", null, "Operate", null, null};
+		modelId = 0;
+		name = null;
+		colorReplace = null;
+		colorFind = null;
+		textureReplace = null;
+		textureFind = null;
 
-	private byte[] getCustomSprite(String img) {
-		String location = (Sprite.location + Configuration.CUSTOM_ITEM_SPRITES_DIRECTORY + img).toLowerCase();
-		byte[] spriteData = FileOperations.readFile(location);
-		Preconditions.checkState(spriteData != null, "No sprite: " + location);
-		return spriteData;
+		zoom2d = 2000;
+		xan2d = 0;
+		yan2d = 0;
+		zan2d = 0;
+		xOffset2d = 0;
+		yOffset2d = 0;
+		stackable = false;
+		cost = 1;
+		members = false;
+		options = null;
+		interfaceOptions = null;
+		maleModel0 = -1;
+		maleModel1 = -1;
+		maleOffset = 0;
+		femaleModel0 = -1;
+		femaleModel1 = -1;
+		femaleOffset = 0;
+		maleModel2 = -1;
+		femaleModel2 = -1;
+		maleHeadModel = -1;
+		maleHeadModel2 = -1;
+		femaleHeadModel = -1;
+		femaleHeadModel2 = -1;
+		countObj = null;
+		countCo = null;
+		unnoted_item_id = -1;
+		noted_item_id = -1;
+		resizeX = 128;
+		resizeY = 128;
+		resizeZ = 128;
+		ambient = 0;
+		contrast = 0;
+		team = 0;
+		glowColor = -1;
 	}
 
-	public byte[] customSpriteLocation;
-	public byte[] customSmallSpriteLocation;
+	private void copy(ItemDefinition copy) {
+		yan2d = copy.yan2d;
+		xan2d = copy.xan2d;
+		zan2d = copy.zan2d;
+		resizeX = copy.resizeX;
+		resizeY = copy.resizeY;
+		resizeZ = copy.resizeZ;
+		zoom2d = copy.zoom2d;
+		xOffset2d = copy.xOffset2d;
+		yOffset2d = copy.yOffset2d;
+		modelId = copy.modelId;
+		stackable = copy.stackable;
+
+	}
+
+	private void toNote() {
+		ItemDefinition itemDef = lookup(noted_item_id);
+		modelId = itemDef.modelId;
+		zoom2d = itemDef.zoom2d;
+		xan2d = itemDef.xan2d;
+		yan2d = itemDef.yan2d;
+
+		zan2d = itemDef.zan2d;
+		xOffset2d = itemDef.xOffset2d;
+		yOffset2d = itemDef.yOffset2d;
+
+		ItemDefinition itemDef_1 = lookup(unnoted_item_id);
+		name = itemDef_1.name;
+		members = itemDef_1.members;
+		cost = itemDef_1.cost;
+		stackable = true;
+	}
+
+	@Override
+	public String getName() {
+		return null;
+	}
+
+	@Override
+	public void setName(String name) {
+
+	}
+
+	@Override
+	public int getId() {
+		return 0;
+	}
+
+	@Override
+	public int getNote() {
+		return 0;
+	}
+
+	@Override
+	public int getLinkedNoteId() {
+		return 0;
+	}
+
+	@Override
+	public int getPlaceholderId() {
+		return 0;
+	}
+
+	@Override
+	public int getPlaceholderTemplateId() {
+		return 0;
+	}
+
+	@Override
+	public int getPrice() {
+		return 0;
+	}
+
+	@Override
+	public boolean isMembers() {
+		return false;
+	}
+
+	@Override
+	public boolean isTradeable() {
+		return false;
+	}
+
+	@Override
+	public void setTradeable(boolean yes) {
+
+	}
+
+	@Override
+	public int getIsStackable() {
+		return 0;
+	}
+
+	@Override
+	public int getMaleModel() {
+		return 0;
+	}
+
+	@Override
+	public String[] getInventoryActions() {
+		return new String[0];
+	}
+
+	@Override
+	public String[] getGroundActions() {
+		return new String[0];
+	}
+
+	@Override
+	public int getShiftClickActionIndex() {
+		return 0;
+	}
+
+	@Override
+	public void setShiftClickActionIndex(int shiftClickActionIndex) {
+
+	}
+
+	public Model getModel(int stack_size) {
+		if (countObj != null && stack_size > 1) {
+			int stack_item_id = -1;
+			for (int k = 0; k < 10; k++)
+				if (stack_size >= countCo[k] && countCo[k] != 0)
+					stack_item_id = countObj[k];
+
+			if (stack_item_id != -1)
+				return lookup(stack_item_id).getModel(1);
+		}
+		Model model = (Model) models.get(id);
+		if (model != null)
+			return model;
+		model = Model.getModel(modelId);
+		if (model == null)
+			return null;
+		if (resizeX != 128 || resizeY != 128 || resizeZ != 128)
+			model.scale(resizeX, resizeZ, resizeY);
+		if (colorReplace != null) {
+			for (int l = 0; l < colorReplace.length; l++)
+				model.recolor(colorReplace[l], colorFind[l]);
+
+		}
+		if (textureReplace != null) {
+			for (int i1 = 0; i1 < textureReplace.length; i1++)
+				model.retexture(textureReplace[i1], textureFind[i1]);
+		}
+		int lightInt = 64 + ambient;
+		int lightMag = 768 + contrast;
+		model.light(lightInt, lightMag, -50, -10, -50, true);
+		model.singleTile = true;
+		models.put(model, id);
+		return model;
+	}
+
+	@Override
+	public int getInventoryModel() {
+		return 0;
+	}
+
+	@Override
+	public short[] getColorToReplaceWith() {
+		return new short[0];
+	}
+
+	@Override
+	public short[] getTextureToReplaceWith() {
+		return new short[0];
+	}
+
+	@Override
+	public RSIterableNodeHashTable getParams() {
+		return null;
+	}
+
+	@Override
+	public void setParams(IterableHashTable params) {
+
+	}
+
+	@Override
+	public void setParams(RSIterableNodeHashTable params) {
+
+	}
+
+	public Model getUnshadedModel(int stack_size) {
+		if (countObj != null && stack_size > 1) {
+			int stack_item_id = -1;
+			for (int count = 0; count < 10; count++)
+				if (stack_size >= countCo[count] && countCo[count] != 0)
+					stack_item_id = countObj[count];
+
+			if (stack_item_id != -1)
+				return lookup(stack_item_id).getUnshadedModel(1);
+		}
+		Model model = Model.getModel(modelId);
+		if (model == null)
+			return null;
+		if (colorReplace != null) {
+			for (int colorPtr = 0; colorPtr < colorReplace.length; colorPtr++)
+				model.recolor(colorReplace[colorPtr], colorFind[colorPtr]);
+
+		}
+		return model;
+	}
 
 	private void decode(Buffer1 buffer) {
-        while (true) {
-            int opcode = buffer.readUnsignedByte();
-            if (opcode == 0)
-                return;
-            if (opcode == 1)
-                inventory_model = buffer.readUShort();
-            else if (opcode == 2)
-                name = buffer.readStrings();
-            else if (opcode == 3)
-                buffer.readStrings();
-            else if (opcode == 4)
-                zoom2d = buffer.readUShort();
-            else if (opcode == 5)
-                xan2d = buffer.readUShort();
-            else if (opcode == 6)
-                yan2d = buffer.readUShort();
-            else if (opcode == 7) {
-                xOffset2d = buffer.readUShort();
-                if (xOffset2d > 32767)
-                    xOffset2d -= 0x10000;
-            } else if (opcode == 8) {
-                yOffset2d = buffer.readUShort();
-                if (yOffset2d > 32767)
-                    yOffset2d -= 0x10000;
-            } else if (opcode == 11)
-                stackable = true;
-            else if (opcode == 12) {
-                cost = buffer.readInt();
-            } else if (opcode == 16)
-                members = true;
-            else if (opcode == 23) {
-                maleModel0 = buffer.readUShort();
-                maleOffset = buffer.readSignedByte();
-            } else if (opcode == 24)
-                maleModel1 = buffer.readUShort();
-            else if (opcode == 25) {
-                femaleModel0 = buffer.readUShort();
-                femaleOffset = buffer.readSignedByte();
-            } else if (opcode == 26)
-                femaleModel1 = buffer.readUShort();
-            else if (opcode >= 30 && opcode < 35) {
-                if (options == null)
-                    options = new String[5];
-                options[opcode - 30] = buffer.readString();
-                if (options[opcode - 30].equalsIgnoreCase("hidden"))
-                    options[opcode - 30] = null;
-            } else if (opcode >= 35 && opcode < 40) {
-                if (interfaceOptions == null)
-                    interfaceOptions = new String[5];
-                interfaceOptions[opcode - 35] = buffer.readString();
-            } else if (opcode == 40) {
-                int length = buffer.readUnsignedByte();
-                colorReplace = new int[length];
-                colorFind = new int[length];
-                for (int index = 0; index < length; index++) {
-                    colorFind[index] = buffer.readUShort();
-                    colorReplace[index] = buffer.readUShort();
-                }
-            } else if (opcode == 41) {
-                int length = buffer.readUnsignedByte();
-                textureFind = new short[length];
-                textureReplace = new short[length];
-                for (int index = 0; index < length; index++) {
-                    textureFind[index] = (short) buffer.readUShort();
-                    textureReplace[index] = (short) buffer.readUShort();
-                }
-            } else if (opcode == 42) {
-                shiftClickIndex = buffer.readUnsignedByte();
-            } else if (opcode == 65) {
-                tradeable = true;
-            } else if (opcode == 78)
-                maleModel2 = buffer.readUShort();
-            else if (opcode == 79)
-                femaleModel2 = buffer.readUShort();
-            else if (opcode == 90)
-                maleHeadModel = buffer.readUShort();
-            else if (opcode == 91)
-                femaleHeadModel = buffer.readUShort();
-            else if (opcode == 92)
-                maleHeadModel2 = buffer.readUShort();
-            else if (opcode == 93)
-                femaleHeadModel2 = buffer.readUShort();
-            else if (opcode == 94)
-                category = buffer.readUShort();
+		while (true) {
+			int opcode = buffer.readUnsignedByte();
+			if (opcode == 0)
+				return;
+			if (opcode == 1)
+				modelId = buffer.readUShort();
+			else if (opcode == 2)
+				name = buffer.readStrings();
+			else if (opcode == 3)
+				buffer.readStrings();
+			else if (opcode == 4)
+				zoom2d = buffer.readUShort();
+			else if (opcode == 5)
+				xan2d = buffer.readUShort();
+			else if (opcode == 6)
+				yan2d = buffer.readUShort();
+			else if (opcode == 7) {
+				xOffset2d = buffer.readUShort();
+				if (xOffset2d > 32767)
+					xOffset2d -= 0x10000;
+			} else if (opcode == 8) {
+				yOffset2d = buffer.readUShort();
+				if (yOffset2d > 32767)
+					yOffset2d -= 0x10000;
+			} else if (opcode == 11)
+				stackable = true;
+			else if (opcode == 12) {
+				cost = buffer.readInt();
+			} else if (opcode == 16)
+				members = true;
+			else if (opcode == 23) {
+				maleModel0 = buffer.readUShort();
+				maleOffset = buffer.readSignedByte();
+			} else if (opcode == 24)
+				maleModel1 = buffer.readUShort();
+			else if (opcode == 25) {
+				femaleModel0 = buffer.readUShort();
+				femaleOffset = buffer.readSignedByte();
+			} else if (opcode == 26)
+				femaleModel1 = buffer.readUShort();
+			else if (opcode >= 30 && opcode < 35) {
+				if (options == null)
+					options = new String[5];
+				options[opcode - 30] = buffer.readString();
+				if (options[opcode - 30].equalsIgnoreCase("hidden"))
+					options[opcode - 30] = null;
+			} else if (opcode >= 35 && opcode < 40) {
+				if (interfaceOptions == null)
+					interfaceOptions = new String[5];
+				interfaceOptions[opcode - 35] = buffer.readString();
+			} else if (opcode == 40) {
+				int length = buffer.readUnsignedByte();
+				colorReplace = new int[length];
+				colorFind = new int[length];
+				for (int index = 0; index < length; index++) {
+					colorFind[index] = buffer.readUShort();
+					colorReplace[index] = buffer.readUShort();
+				}
+			} else if (opcode == 41) {
+				int length = buffer.readUnsignedByte();
+				textureFind = new short[length];
+				textureReplace = new short[length];
+				for (int index = 0; index < length; index++) {
+					textureFind[index] = (short) buffer.readUShort();
+					textureReplace[index] = (short) buffer.readUShort();
+				}
+			} else if (opcode == 42) {
+				shiftClickIndex = buffer.readUnsignedByte();
+			} else if (opcode == 65) {
+				tradeable = true;
+			} else if (opcode == 78)
+				maleModel2 = buffer.readUShort();
+			else if (opcode == 79)
+				femaleModel2 = buffer.readUShort();
+			else if (opcode == 90)
+				maleHeadModel = buffer.readUShort();
+			else if (opcode == 91)
+				femaleHeadModel = buffer.readUShort();
+			else if (opcode == 92)
+				maleHeadModel2 = buffer.readUShort();
+			else if (opcode == 93)
+				femaleHeadModel2 = buffer.readUShort();
+			else if (opcode == 94)
+				category = buffer.readUShort();
 
-            else if (opcode == 95)
-                zan2d = buffer.readUShort();
-            else if (opcode == 97)
-                unnoted_item_id = buffer.readUShort();
-            else if (opcode == 98)
-                noted_item_id = buffer.readUShort();
-            else if (opcode == 110)
-                resizeX = buffer.readUShort();
-            else if (opcode == 111)
-                resizeY = buffer.readUShort();
-            else if (opcode == 112)
-                resizeZ = buffer.readUShort();
-            else if (opcode == 113)
-                ambient = buffer.readSignedByte();
-            else if (opcode == 114)
-                contrast = buffer.readSignedByte() * 5;
-            else if (opcode >= 100 && opcode < 110) {
-                if (countObj == null) {
-                    countObj = new int[10];
-                    countCo = new int[10];
-                }
-                countObj[opcode - 100] = buffer.readUShort();
-                countCo[opcode - 100] = buffer.readUShort();
-            } else if (opcode == 110)
-                resizeX = buffer.readUShort();
-            else if (opcode == 111)
-                resizeY = buffer.readUShort();
-            else if (opcode == 112)
-                resizeZ = buffer.readUShort();
-            else if (opcode == 113)
-                ambient = buffer.readSignedByte();
-            else if (opcode == 114)
-                contrast = buffer.readSignedByte() * 5;
-            else if (opcode == 115)
-                team = buffer.readUnsignedByte();
-            else if (opcode == 139)
-                bought_id = buffer.readUShort();
-            else if (opcode == 140)
-                bought_template_id = buffer.readUShort();
-            else if (opcode == 148)
-                placeholder_id = buffer.readUShort();
-            else if (opcode == 149) {
-                placeholder_template_id = buffer.readUShort();
-            } else if (opcode == 249) {
-                int length = buffer.readUnsignedByte();
+			else if (opcode == 95)
+				zan2d = buffer.readUShort();
+			else if (opcode == 97)
+				unnoted_item_id = buffer.readUShort();
+			else if (opcode == 98)
+				noted_item_id = buffer.readUShort();
+			else if (opcode == 110)
+				resizeX = buffer.readUShort();
+			else if (opcode == 111)
+				resizeY = buffer.readUShort();
+			else if (opcode == 112)
+				resizeZ = buffer.readUShort();
+			else if (opcode == 113)
+				ambient = buffer.readSignedByte();
+			else if (opcode == 114)
+				contrast = buffer.readSignedByte() * 5;
+			else if (opcode >= 100 && opcode < 110) {
+				if (countObj == null) {
+					countObj = new int[10];
+					countCo = new int[10];
+				}
+				countObj[opcode - 100] = buffer.readUShort();
+				countCo[opcode - 100] = buffer.readUShort();
+			} else if (opcode == 110)
+				resizeX = buffer.readUShort();
+			else if (opcode == 111)
+				resizeY = buffer.readUShort();
+			else if (opcode == 112)
+				resizeZ = buffer.readUShort();
+			else if (opcode == 113)
+				ambient = buffer.readSignedByte();
+			else if (opcode == 114)
+				contrast = buffer.readSignedByte() * 5;
+			else if (opcode == 115)
+				team = buffer.readUnsignedByte();
+			else if (opcode == 139)
+				bought_id = buffer.readUShort();
+			else if (opcode == 140)
+				bought_template_id = buffer.readUShort();
+			else if (opcode == 148)
+				placeholder_id = buffer.readUShort();
+			else if (opcode == 149) {
+				placeholder_template_id = buffer.readUShort();
+			} else if (opcode == 249) {
+				int length = buffer.readUnsignedByte();
 
-                params = new HashMap<>(length);
+				params = new HashMap<>(length);
 
-                for (int i = 0; i < length; i++) {
-                    boolean isString = buffer.readUnsignedByte() == 1;
-                    int key = buffer.read24Int();
-                    Object value;
+				for (int i = 0; i < length; i++) {
+					boolean isString = buffer.readUnsignedByte() == 1;
+					int key = buffer.read24Int();
+					Object value;
 
-                    if (isString) {
-                        value = buffer.readString();
-                    } else {
-                        value = buffer.readInt();
-                    }
+					if (isString) {
+						value = buffer.readString();
+					} else {
+						value = buffer.readInt();
+					}
 
-                    params.put(key, value);
-                }
-            } else {
-                System.err.printf("Error unrecognised {Items} opcode: %d%n%n", opcode);
-            }
-        }
-    }
+					params.put(key, value);
+				}
+			} else {
+				System.err.printf("Error unrecognised {Items} opcode: %d%n%n", opcode);
+			}
+		}
+	}
 
-    @Override
-    public int getHaPrice() {
-        return 0;
-    }
+	@Override
+	public int getHaPrice() {
+		return 0;
+	}
 
-    @Override
-    public boolean isStackable() {
-        return false;
-    }
+	@Override
+	public boolean isStackable() {
+		return false;
+	}
 
-    @Override
-    public void resetShiftClickActionIndex() {
+	@Override
+	public void resetShiftClickActionIndex() {
 
-    }
+	}
 
-    @Override
-    public int getIntValue(int paramID) {
-        return 0;
-    }
+	@Override
+	public int getIntValue(int paramID) {
+		return 0;
+	}
 
-    @Override
-    public void setValue(int paramID, int value) {
+	@Override
+	public void setValue(int paramID, int value) {
 
-    }
+	}
 
-    @Override
-    public String getStringValue(int paramID) {
-        return null;
-    }
+	@Override
+	public String getStringValue(int paramID) {
+		return null;
+	}
 
-    @Override
-    public void setValue(int paramID, String value) {
+	@Override
+	public void setValue(int paramID, String value) {
 
-    }
+	}
 }

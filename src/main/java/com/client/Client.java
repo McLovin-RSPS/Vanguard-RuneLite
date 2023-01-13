@@ -2995,7 +2995,7 @@ public class Client extends GameEngine implements RSClient {
 					mouseY = drawingAreaHeight - hover.height;
 				}
 
-				Rasterizer2D.setDrawingArea(Client.instance.getViewportHeight(), 0, Client.instance.getViewportWidth(), 0);
+
 				drawInterface(0, mouseX, hover, mouseY, true);
 			}
 		} else {

@@ -23,9 +23,9 @@ public class Configuration {
 	 * Cache version is written to the cache folder inside a version file.
 	 * This is read on startup to tell if the cache is out of date or not.
 	 */
-	public static final int CACHE_VERSION = 103; // Change this up one when making cache updates.
+	public static final int CACHE_VERSION = 104; // Change this up one when making cache updates.
 
-	public static final String CACHE_LINK = "https://www.dropbox.com/s/hbyh05fm8ax8hft/cacheRL.zip?dl=1";
+	public static final String CACHE_LINK = "https://www.dropbox.com/s/72uinrtftz926gw/cacheRL.zip?dl=1";
 
 	/**
 	 * The server version. The cache path is append with a _v1/2/3 etc for the version number
