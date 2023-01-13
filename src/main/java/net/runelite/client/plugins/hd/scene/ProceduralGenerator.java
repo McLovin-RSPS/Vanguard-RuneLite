@@ -24,9 +24,20 @@
  */
 package net.runelite.client.plugins.hd.scene;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.*;
+import net.runelite.api.Client;
+import net.runelite.api.Perspective;
+import net.runelite.api.Scene;
+import net.runelite.api.SceneTileModel;
+import net.runelite.api.SceneTilePaint;
+import net.runelite.api.Tile;
 import net.runelite.client.plugins.hd.HdPlugin;
+import net.runelite.client.plugins.hd.HdPluginConfig;
 import net.runelite.client.plugins.hd.data.WaterType;
 import net.runelite.client.plugins.hd.data.materials.Material;
 import net.runelite.client.plugins.hd.data.materials.Overlay;
@@ -35,12 +46,6 @@ import net.runelite.client.plugins.hd.scene.model_overrides.ModelOverride;
 import net.runelite.client.plugins.hd.scene.model_overrides.ObjectType;
 import net.runelite.client.plugins.hd.scene.model_overrides.TzHaarRecolorType;
 import net.runelite.client.plugins.hd.utils.HDUtils;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 import static net.runelite.api.Constants.MAX_Z;
 import static net.runelite.api.Constants.SCENE_SIZE;

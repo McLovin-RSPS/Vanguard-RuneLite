@@ -26,13 +26,12 @@
 package net.runelite.client.plugins.gpu;
 
 import com.google.common.annotations.VisibleForTesting;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.runelite.client.plugins.gpu.template.Template;
 import org.lwjgl.opengl.GL43C;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Shader
 {

@@ -26,10 +26,11 @@
 package net.runelite.client.plugins.hd;
 
 import net.runelite.client.config.*;
-import net.runelite.client.plugins.hd.config.*;
 
 import static net.runelite.client.plugins.hd.HdPlugin.MAX_DISTANCE;
 import static net.runelite.client.plugins.hd.HdPlugin.MAX_FOG_DEPTH;
+
+import net.runelite.client.plugins.hd.config.*;
 
 @ConfigGroup("hd")
 public interface HdPluginConfig extends Config

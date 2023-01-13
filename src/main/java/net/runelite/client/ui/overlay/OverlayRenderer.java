@@ -755,6 +755,7 @@ public class OverlayRenderer extends MouseAdapter implements KeyListener
 		}
 		catch (Exception ex)
 		{
+			ex.printStackTrace();
 			log.warn(DEDUPLICATE, "Error during overlay rendering", ex);
 			return;
 		}
@@ -765,12 +766,7 @@ public class OverlayRenderer extends MouseAdapter implements KeyListener
 
 	private OverlayPosition getCorrectedOverlayPosition(final Overlay overlay)
 	{
-		OverlayPosition overlayPosition = overlay.getPosition();
-
-		if (overlay.getPreferredPosition() != null)
-		{
-			overlayPosition = overlay.getPreferredPosition();
-		}
+		OverlayPosition overlayPosition = overlay.getPreferredPosition() != null ? overlay.getPreferredPosition() : OverlayPosition.DYNAMIC;
 
 		if (!isResizeable)
 		{

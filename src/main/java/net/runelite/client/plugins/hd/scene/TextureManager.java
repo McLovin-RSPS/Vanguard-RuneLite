@@ -28,14 +28,14 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Texture;
 import net.runelite.api.TextureProvider;
 import net.runelite.client.callback.ClientThread;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.EXTTextureFilterAnisotropic;
+import org.lwjgl.opengl.GL;
 import net.runelite.client.plugins.hd.HdPlugin;
 import net.runelite.client.plugins.hd.HdPluginConfig;
 import net.runelite.client.plugins.hd.data.materials.Material;
 import net.runelite.client.plugins.hd.utils.Env;
 import net.runelite.client.plugins.hd.utils.ResourcePath;
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.EXTTextureFilterAnisotropic;
-import org.lwjgl.opengl.GL;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -48,10 +48,10 @@ import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.HashSet;
 
+import static org.lwjgl.opengl.GL43C.*;
 import static net.runelite.client.plugins.hd.HdPlugin.TEXTURE_UNIT_GAME;
 import static net.runelite.client.plugins.hd.HdPlugin.TEXTURE_UNIT_UI;
 import static net.runelite.client.plugins.hd.utils.ResourcePath.path;
-import static org.lwjgl.opengl.GL43C.*;
 
 @Singleton
 @Slf4j

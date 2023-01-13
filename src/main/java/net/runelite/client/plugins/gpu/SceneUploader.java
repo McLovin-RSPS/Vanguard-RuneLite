@@ -25,12 +25,24 @@
 package net.runelite.client.plugins.gpu;
 
 import com.google.common.base.Stopwatch;
-import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.*;
-
+import java.util.Arrays;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.Arrays;
+import lombok.extern.slf4j.Slf4j;
+import net.runelite.api.Client;
+import net.runelite.api.Constants;
+import net.runelite.api.DecorativeObject;
+import net.runelite.api.GameObject;
+import net.runelite.api.GroundObject;
+import net.runelite.api.Model;
+import net.runelite.api.Perspective;
+import net.runelite.api.Point;
+import net.runelite.api.Renderable;
+import net.runelite.api.Scene;
+import net.runelite.api.SceneTileModel;
+import net.runelite.api.SceneTilePaint;
+import net.runelite.api.Tile;
+import net.runelite.api.WallObject;
 
 @Singleton
 @Slf4j

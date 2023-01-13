@@ -1,9 +1,15 @@
 package com.client;
 // Decompiled by Jad v1.5.8f. Copyright 2001 Pavel Kouznetsov.
 // Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) 
+// Decompiler options: packimports(3)
 
-public final class Deque {
+import net.runelite.rs.api.RSNode;
+import net.runelite.rs.api.RSNodeDeque;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Iterator;
+
+public final class Deque implements RSNodeDeque {
 
 	public Deque() {
 		head = new Linkable();
@@ -40,7 +46,7 @@ public final class Deque {
 		class3.next.prev = class3;
 	}
 
-	
+
 	public Linkable popHead() {
 		Linkable node = head.prev;
 		if (node == head) {
@@ -107,4 +113,45 @@ public final class Deque {
 
 	public final Linkable head;
 	private Linkable current;
+
+	@Override
+	public Iterator iterator() {
+		return null;
+	}
+
+	@Override
+	public RSNode getCurrent() {
+		return current;
+	}
+
+	@Override
+	public RSNode getSentinel() {
+		return head;
+	}
+
+	@Override
+	public RSNode last() {
+		return getFirst();
+	}
+
+	@Override
+	public RSNode previous() {
+		return reverseGetFirst();
+	}
+
+	@Override
+	public void addFirst(RSNode val) {
+		insertHead((Linkable) val);
+	}
+
+	@Override
+	public RSNode removeLast() {
+		return reverseGetNext();
+	}
+
+	@Override
+	public void clear() {
+		removeAll();
+	}
+
 }

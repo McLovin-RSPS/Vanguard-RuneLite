@@ -26,6 +26,9 @@ package net.runelite.client.plugins.skybox;
 
 import com.google.inject.Inject;
 import com.google.inject.Provides;
+import java.awt.Color;
+import java.io.IOException;
+import java.io.InputStream;
 import net.runelite.api.Client;
 import net.runelite.api.Constants;
 import net.runelite.api.GameState;
@@ -38,10 +41,6 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-
-import java.awt.*;
-import java.io.IOException;
-import java.io.InputStream;
 
 @PluginDescriptor(
 	name = "Skybox",

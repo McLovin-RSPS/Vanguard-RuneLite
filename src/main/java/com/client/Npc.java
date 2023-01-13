@@ -23,13 +23,13 @@ import java.awt.image.BufferedImage;
 public final class Npc extends Entity implements RSNPC {
 
 	private Model method450() {
-		if (super.anim >= 0 && super.anInt1529 == 0) {
-			int k = AnimationDefinition.anims[super.anim].primaryFrames[super.animFrameIndex];
+		if (super.emoteAnimation >= 0 && super.animationDelay == 0) {
+			int k = AnimationDefinition.anims[super.emoteAnimation].primaryFrames[super.animFrameIndex];
 			int i1 = -1;
-			if (super.anInt1517 >= 0 && super.anInt1517 != super.anInt1511)
+			if (super.anInt1517 >= 0 && super.anInt1517 != super.idleAnimation)
 				i1 = AnimationDefinition.anims[super.anInt1517].primaryFrames[super.anInt1518];
 			return desc.method164(i1, k,
-					AnimationDefinition.anims[super.anim].interleaveOrder);
+					AnimationDefinition.anims[super.emoteAnimation].interleaveOrder);
 		}
 		int l = -1;
 		if (super.anInt1517 >= 0)
@@ -96,10 +96,6 @@ public final class Npc extends Entity implements RSNPC {
 		return null;
 	}
 
-	@Override
-	public void onDefinitionChanged(NPCComposition composition) {
-
-	}
 
 	@Override
 	public int getId() {
@@ -219,6 +215,168 @@ public final class Npc extends Entity implements RSNPC {
 	}
 
 	@Override
+	public int getActionOpcode(int action)
+	{
+		return 0;
+	}
+
+	@Override
+	public String[] getRawActions()
+	{
+		return new String[0];
+	}
+
+	@Override
+	public void interact(int action)
+	{
+
+	}
+
+	@Override
+	public void interact(String action)
+	{
+
+	}
+
+	@Override
+	public void interact(int index, int opcode)
+	{
+
+	}
+
+	@Override
+	public void interact(int identifier, int opcode, int param0, int param1)
+	{
+
+	}
+
+	@Override
+	public long getTag()
+	{
+		return 0;
+	}
+
+	@Override
+	public int getCombatLevelOverride()
+	{
+		return 0;
+	}
+
+	@Override
+	public boolean instantTurn()
+	{
+		return false;
+	}
+
+	@Override
+	public int getFacedDirection()
+	{
+		return 0;
+	}
+
+	@Override
+	public int getAnimationDelay()
+	{
+		return 0;
+	}
+
+	@Override
+	public int getAnimationFrameIndex()
+	{
+		return 0;
+	}
+
+	@Override
+	public int exactMoveDeltaX1()
+	{
+		return 0;
+	}
+
+	@Override
+	public int exactMoveDeltaX2()
+	{
+		return 0;
+	}
+
+	@Override
+	public int exactMoveDeltaY1()
+	{
+		return 0;
+	}
+
+	@Override
+	public int exactMoveDeltaY2()
+	{
+		return 0;
+	}
+
+	@Override
+	public int exactMoveArrive1Cycle()
+	{
+		return 0;
+	}
+
+	@Override
+	public int exactMoveArrive2Cycle()
+	{
+		return 0;
+	}
+
+	@Override
+	public int exactMoveDirection()
+	{
+		return 0;
+	}
+
+	@Override
+	public int recolourStartCycle()
+	{
+		return 0;
+	}
+
+	@Override
+	public int recolourEndCycle()
+	{
+		return 0;
+	}
+
+	@Override
+	public byte recolourHue()
+	{
+		return 0;
+	}
+
+	@Override
+	public byte recolourSaturation()
+	{
+		return 0;
+	}
+
+	@Override
+	public byte recolourLuminance()
+	{
+		return 0;
+	}
+
+	@Override
+	public byte recolourAmount()
+	{
+		return 0;
+	}
+
+	@Override
+	public int getGraphicStartCycle()
+	{
+		return 0;
+	}
+
+	@Override
+	public boolean showPublicPlayerChat()
+	{
+		return false;
+	}
+
+	@Override
 	public boolean isHidden() {
 		return false;
 	}
@@ -300,6 +458,18 @@ public final class Npc extends Entity implements RSNPC {
 
 	@Override
 	public void setGraphic(int id) {
+
+	}
+
+	@Override
+	public int getGraphicHeight()
+	{
+		return 0;
+	}
+
+	@Override
+	public void setGraphicHeight(int height)
+	{
 
 	}
 

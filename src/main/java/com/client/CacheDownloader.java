@@ -44,7 +44,7 @@ public class CacheDownloader {
 			return -1;
 		}
 	}
-
+	
 //	private int getRemoteVersion() {
 //		try {
 //			URL versionUrl = new URL(Configuration.VERSION_URL);
@@ -53,7 +53,7 @@ public class CacheDownloader {
 //			}
 //		} catch (Exception e) {
 //			return 0;
-	//	}
+//		}
 //	}
 
 	public void writeVersion(int version) {
@@ -99,8 +99,15 @@ public class CacheDownloader {
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			//ClientWindow.popupMessage("Could not download the cache file.",
+					//"The website might be down or experiencing interruptions.",
+					//Signlink.getCacheDirectory());
 		} catch (Exception e) {
 			e.printStackTrace();
+			//ClientWindow.popupMessage("An error occurred while installing the cache.",
+					//"You may experience crashes or gameplay interruptions.",
+					//"Try deleting the cache and restarting the client.",
+					//Signlink.getCacheDirectory());
 		}
 		return null;
 	}
@@ -130,7 +137,7 @@ public class CacheDownloader {
 			long numWritten = 0;
 			int fileSize = conn.getContentLength();
 			long startTime = System.currentTimeMillis();
-
+	
 			while ((numRead = in.read(data)) != -1) {
 				out.write(data, 0, numRead);
 				numWritten += numRead;
@@ -138,7 +145,7 @@ public class CacheDownloader {
 				int percentage = (int) (((double) numWritten / (double) fileSize) * 100D);
 				long elapsedTime = System.currentTimeMillis() - startTime;
 				int downloadSpeed = (int) ((numWritten / 1024) / (1 + (elapsedTime / 1000)));
-
+				
 				float speedInBytes = 1000f * numWritten / elapsedTime;
 				int timeRemaining =  (int) ((fileSize - numWritten) / speedInBytes);
 
@@ -195,6 +202,7 @@ public class CacheDownloader {
 				unzip(zin, Signlink.getCacheDirectory() + e.getName());
 			}
 		}
+		in.close();
 		zin.close();
 	}
 
@@ -217,5 +225,5 @@ public class CacheDownloader {
 				out.write(b, 0, len);
 		}
 	}
-
+	
 }

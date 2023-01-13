@@ -124,7 +124,7 @@ public final class OnDemandFetcher extends OnDemandFetcherParent implements Runn
 	public void dumpModels() {
 		if (!new File("./temp/index1/").exists())
 			new File("./temp/index1/").mkdirs();
-		for (int i = 35769; i < 100_000; i++) {
+		for (int i = 0; i < getModelCount(); i++) {
 			try {
 				byte abyte[] = clientInstance.decompressors[1].read(i);
 				if (abyte == null || abyte.length == 0)
@@ -271,7 +271,7 @@ public final class OnDemandFetcher extends OnDemandFetcherParent implements Runn
 	}
 
 	public int getModelCount() {
-		return 30999;
+		return 77136;
 	}
 
 	public void provide(int i, int j) {

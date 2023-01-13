@@ -3,6 +3,9 @@ package com.client;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.PixelGrabber;
+import java.awt.image.Raster;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
@@ -15,14 +18,35 @@ import com.client.utilities.FileUtils;
 import net.runelite.rs.api.RSSpritePixels;
 
 public final class Sprite extends Rasterizer2D implements RSSpritePixels {
-	public static String location = null;
-
 
 	public Sprite(int i, int j) {
 		myPixels = new int[i * j];
 		myWidth = maxWidth = i;
 		myHeight = maxHeight = j;
 		drawOffsetX = drawOffsetY = 0;
+	}
+
+	public Sprite(byte[] data, int file) {
+		try {
+
+			InputStream is = new ByteArrayInputStream(data);
+			BufferedImage image = ImageIO.read(is);
+
+			myWidth = image.getWidth();
+			myHeight = image.getHeight();
+			maxWidth = myWidth;
+			maxHeight = myHeight;
+			drawOffsetX = 0;
+			drawOffsetY = 0;
+			myPixels = new int[myWidth * myHeight];
+			PixelGrabber pixelgrabber = new PixelGrabber(image, 0, 0, myWidth, myHeight, myPixels, 0, myWidth);
+			pixelgrabber.grabPixels();
+			Color color = Color.MAGENTA;
+			setTransparency(color.getRed(), color.getGreen(), color.getBlue());
+		} catch(Exception _ex) {
+			System.out.println("Could not load Image: " + file);
+			_ex.printStackTrace();
+		}
 	}
 
 	public Sprite(int width, int height, int offsetX, int offsetY, int[] pixels) {
@@ -99,6 +123,18 @@ public final class Sprite extends Rasterizer2D implements RSSpritePixels {
 		myPixels = raster;
 	}
 
+	public static String location = null;
+
+
+	public static void start() {
+//		if (Configuration.developerMode && new File("./sprites/").exists()) {
+//			location = "./sprites/";
+//		} else {
+		location = Signlink.getCacheDirectory() + "sprites/";
+		//}
+	}
+
+
 	public void outline(int color) {
 		if (this == EMPTY_SPRITE) {
 			return;
@@ -123,6 +159,110 @@ public final class Sprite extends Rasterizer2D implements RSSpritePixels {
 			}
 		}
 		myPixels = raster;
+	}
+
+	public static BufferedImage crop(BufferedImage image) {
+		int minY = 0, maxY = 0, minX = Integer.MAX_VALUE, maxX = 0;
+		boolean isBlank, minYIsDefined = false;
+		Raster raster = image.getRaster();
+
+		for (int y = 0; y < image.getHeight(); y++) {
+			isBlank = true;
+
+			for (int x = 0; x < image.getWidth(); x++) {
+				//Change condition to (raster.getSample(x, y, 3) != 0)
+				//for better performance
+				if (raster.getPixel(x, y, (int[]) null)[3] != 0) {
+					isBlank = false;
+
+					if (x < minX) minX = x;
+					if (x > maxX) maxX = x;
+				}
+			}
+
+			if (!isBlank) {
+				if (!minYIsDefined) {
+					minY = y;
+					minYIsDefined = true;
+				} else {
+					if (y > maxY) maxY = y;
+				}
+			}
+		}
+
+		return image.getSubimage(minX, minY, maxX - minX + 1, maxY - minY + 1);
+	}
+
+	public void crop() {
+		int minX = 0;
+		int maxX = 0;
+		int minY = 0;
+		int maxY = 0;
+
+		boolean foundMinX = false;
+		for (int x = 0; x < myWidth; x++) {
+			if (foundMinX) {
+				break;
+			}
+			for (int y = 0; y < myHeight; y++) {
+				if (myPixels[y * myWidth + x] != 0) {
+					minX = x;
+					foundMinX = true;
+					break;
+				}
+			}
+		}
+		boolean foundMaxX = false;
+		for (int x = myWidth - 1; x >= 0; x--) {
+			if (foundMaxX) {
+				break;
+			}
+			for (int y = 0; y < myHeight; y++) {
+				if (myPixels[y * myWidth + x] != 0) {
+					maxX = x;
+					foundMaxX = true;
+					break;
+				}
+			}
+		}
+		boolean foundMinY = false;
+		for (int y = 0; y < myHeight; y++) {
+			if (foundMinY) {
+				break;
+			}
+			for (int x = 0; x < myWidth; x++) {
+				if (myPixels[y * myWidth + x] != 0) {
+					minY = y;
+					foundMinY = true;
+					break;
+				}
+			}
+		}
+		boolean foundMaxY = false;
+		for (int y = myHeight - 1; y >= 0; y--) {
+			if (foundMaxY) {
+				break;
+			}
+			for (int x = 0; x < myWidth; x++) {
+				if (myPixels[y * myWidth + x] != 0) {
+					maxY = y + 1;
+					foundMaxY = true;
+					break;
+				}
+			}
+		}
+
+		int width = (maxX - minX);
+		int height = (maxY - minY);
+		int[] newPixels = new int[(maxX - minX) * (maxY - minY)];
+		for (int x = minX; x < maxX; x++) {
+			for (int y = minY; y < maxY; y++) {
+				newPixels[(x - minX) + (y - minY) * width] = myPixels[x + y * myWidth];
+			}
+		}
+		myWidth = width;
+		myHeight = height;
+		myPixels = newPixels;
 	}
 
 	public void shadow(int color) {
@@ -406,15 +546,6 @@ public final class Sprite extends Rasterizer2D implements RSSpritePixels {
 		Rasterizer2D.initDrawingArea(myHeight, myWidth, myPixels);
 	}
 
-	public static void start() {
-//		if (Configuration.developerMode && new File("./sprites/").exists()) {
-//			location = "./sprites/";
-//		} else {
-		location = Signlink.getCacheDirectory() + "sprites/";
-		//}
-	}
-
-
 	public void method344(int i, int j, int k) {
 		for (int i1 = 0; i1 < myPixels.length; i1++) {
 			int j1 = myPixels[i1];
@@ -648,44 +779,6 @@ public final class Sprite extends Rasterizer2D implements RSSpritePixels {
 		if(!(width <= 0 || height <= 0))
 		{
 			method349(Rasterizer2D.pixels, myPixels, imageClip, rasterClip, width, height, rasterOffset, imageOffset);
-		}
-	}
-
-	public void flashSprite(int i, int j, int k) {
-		i += drawOffsetX;
-		j += drawOffsetY;
-		int i1 = i + j * Rasterizer2D.width;
-		int j1 = 0;
-		int k1 = myHeight;
-		int l1 = myWidth;
-		int i2 = Rasterizer2D.width - l1;
-		int j2 = 0;
-		if (j < Rasterizer2D.topY) {
-			int k2 = Rasterizer2D.topY - j;
-			k1 -= k2;
-			j = Rasterizer2D.topY;
-			j1 += k2 * l1;
-			i1 += k2 * Rasterizer2D.width;
-		}
-		if (j + k1 > Rasterizer2D.bottomY)
-			k1 -= (j + k1) - Rasterizer2D.bottomY;
-		if (i < Rasterizer2D.leftX) {
-			int l2 = Rasterizer2D.leftX - i;
-			l1 -= l2;
-			i = Rasterizer2D.leftX;
-			j1 += l2;
-			i1 += l2;
-			j2 += l2;
-			i2 += l2;
-		}
-		if (i + l1 > Rasterizer2D.bottomX) {
-			int i3 = (i + l1) - Rasterizer2D.bottomX;
-			l1 -= i3;
-			j2 += i3;
-			i2 += i3;
-		}
-		if (!(l1 <= 0 || k1 <= 0)) {
-			method351(j1, l1, Rasterizer2D.pixels, myPixels, j2, k1, i2, k, i1);
 		}
 	}
 

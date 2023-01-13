@@ -30,6 +30,7 @@ import net.runelite.api.Client;
 import net.runelite.api.Tile;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.client.plugins.hd.HdPlugin;
+import net.runelite.client.plugins.hd.HdPluginConfig;
 import net.runelite.client.plugins.hd.data.WaterType;
 import net.runelite.client.plugins.hd.data.environments.Area;
 

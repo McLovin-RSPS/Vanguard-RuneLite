@@ -24,11 +24,10 @@
  */
 package net.runelite.client.plugins.hd.data.environments;
 
+import java.awt.Color;
 import lombok.Getter;
 
-import java.awt.*;
-
-import static net.runelite.client.plugins.hd.utils.HDUtils.rgb;
+import static net.runelite.client.plugins.hd.utils.HDUtils.*;
 
 @Getter
 public enum Environment

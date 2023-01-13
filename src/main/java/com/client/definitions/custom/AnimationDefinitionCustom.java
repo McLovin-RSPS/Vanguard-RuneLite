@@ -18,14 +18,9 @@ public class AnimationDefinitionCustom {
             anims[j].priority = -1;
         }
 
-
-
         AnimationDefinition anim = anims[j];
 
         switch (j) {
-
-
-
             case 451:
                 anim.frameCount = 10;
                 anim.loopOffset = -1;
@@ -38,7 +33,7 @@ public class AnimationDefinitionCustom {
                 anim.priority = 0;
                 anim.frameCount = 10;
                 anim.primaryFrames = new int[] {13566245, 13566247, 13566248, 13566249, 13566250, 13566251, 13566252, 13566253, 13566254, 13566246, };
-                anim.chatFrameIds = new int[] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, };
+                anim.secondaryFrames = new int[] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, };
                 anim.durations = new int[] {4, 4, 4, 4, 8, 2, 1, 1, 8, 3, };
                 anim.interleaveOrder = new int[] {1, 2, 9, 11, 13, 15, 17, 19, 37, 39, 41, 43, 45, 164, 166, 168, 170, 172, 174, 176, 178, 180, 182, 183, 185, 191, 192, 9999999, };
                 break;
@@ -55,7 +50,7 @@ public class AnimationDefinitionCustom {
                 anim.priority = 2;
                 anim.frameCount = 19;
                 anim.primaryFrames = new int[] {71303232, 71303242, 71303243, 71303244, 71303245, 71303246, 71303247, 71303248, 71303249, 71303233, 71303234, 71303235, 71303236, 71303237, 71303238, 71303239, 71303240, 71303241, 71303417, };
-                anim.chatFrameIds = new int[] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, };
+                anim.secondaryFrames = new int[] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, };
                 anim.durations = new int[] {10, 5, 4, 4, 3, 3, 5, 11, 3, 4, 5, 6, 3, 3, 3, 3, 3, 2, 1, };
                 anim.interleaveOrder = new int[] {1, 2, 9, 11, 13, 15, 17, 19, 37, 39, 41, 43, 45, 164, 166, 168, 170, 172, 174, 176, 178, 180, 182, 183, 185, 191, 192, 9999999, };
                 break;
@@ -72,7 +67,7 @@ public class AnimationDefinitionCustom {
                 anim.priority = 2;
                 anim.frameCount = 15;
                 anim.primaryFrames = new int[] {19333185, 19333186, 19333187, 19333188, 19333189, 19333190, 19333189, 19333190, 19333189, 19333190, 19333189, 19333188, 19333187, 19333186, 19333185, };
-                anim.chatFrameIds = new int[] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, };
+                anim.secondaryFrames = new int[] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, };
                 anim.durations = new int[] {4, 4, 4, 4, 15, 4, 15, 4, 15, 4, 15, 4, 4, 4, 10, };
                 anim.interleaveOrder = new int[] {1, 2, 9, 11, 13, 15, 17, 19, 37, 39, 41, 43, 45, 164, 166, 168, 170, 172, 174, 176, 178, 180, 182, 183, 185, 191, 192, 9999999, };
                 break;
@@ -88,7 +83,7 @@ public class AnimationDefinitionCustom {
                 anim.priority = 0;
                 anim.frameCount = 32;
                 anim.primaryFrames = new int[] {114295046, 114294857, 114294950, 114295170, 114295018, 114295015, 114295196, 114295207, 114295218, 114294913, 114295205, 114295172, 114294938, 114294875, 114294870, 114295330, 114295099, 114295141, 114295143, 114295159, 114294807, 114294896, 114295197, 114294795, 114294882, 114295115, 114294921, 114294911, 114295148, 114295191, 114295044, 114294988, };
-                anim.chatFrameIds = new int[] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, };
+                anim.secondaryFrames = new int[] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, };
                 anim.durations = new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, };
                 anim.interleaveOrder = null;
                 break;
@@ -104,7 +99,7 @@ public class AnimationDefinitionCustom {
                 anim.priority = 0;
                 anim.frameCount = 16;
                 anim.primaryFrames = new int[] {114295005, 114295075, 114294836, 114295094, 114294844, 114295103, 114295080, 114294869, 114295021, 114295030, 114295010, 114295278, 114295023, 114295057, 114295035, 114294948, };
-                anim.chatFrameIds = new int[] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, };
+                anim.secondaryFrames = new int[] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, };
                 anim.durations = new int[] {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, };
                 anim.interleaveOrder = null;
                 break;
@@ -121,7 +116,7 @@ public class AnimationDefinitionCustom {
                 anim.priority = 0;
                 anim.frameCount = 16;
                 anim.primaryFrames = new int[] {114295279, 114295319, 114295285, 114295089, 114294786, 114294917, 114295216, 114295325, 114295322, 114295069, 114295160, 114295151, 114294874, 114295154, 114295165, 114294975, };
-                anim.chatFrameIds = new int[] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, };
+                anim.secondaryFrames = new int[] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, };
                 anim.durations = new int[] {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, };
                 anim.interleaveOrder = null;
                 break;
@@ -138,7 +133,7 @@ public class AnimationDefinitionCustom {
                 anim.priority = 0;
                 anim.frameCount = 21;
                 anim.primaryFrames = new int[] {15663188, 15663199, 15663202, 15663203, 15663204, 15663205, 15663206, 15663207, 15663208, 15663189, 15663190, 15663191, 15663192, 15663193, 15663194, 15663195, 15663196, 15663197, 15663198, 15663200, 15663201, };
-                anim.chatFrameIds = new int[] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, };
+                anim.secondaryFrames = new int[] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, };
                 anim.durations = new int[] {4, 4, 3, 4, 8, 3, 5, 5, 8, 3, 5, 5, 8, 3, 5, 5, 8, 3, 5, 5, 5, };
                 anim.interleaveOrder = null;
                 break;

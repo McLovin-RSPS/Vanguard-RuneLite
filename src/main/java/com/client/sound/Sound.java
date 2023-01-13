@@ -1,12 +1,20 @@
 package com.client.sound;
 
-import com.client.sign.Signlink;
-
-import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.BooleanControl;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.SourceDataLine;
+
+
+import com.client.sign.Signlink;
 
 public class Sound {
 
@@ -21,14 +29,7 @@ public class Sound {
         return SINGLETON;
     }
 
-    private static File getSound(int id, SoundType soundType) {
-        switch (soundType) {
-            case MUSIC:
-                return new File(Signlink.getCacheDirectory() + "jingle/" + id + ".wav");
-            case SOUND:
-            case AREA_SOUND:
-                return new File(Signlink.getCacheDirectory() + "sounds/" + id + ".wav");
-        }
+    private static File getSound(int id) {
         return new File(Signlink.getCacheDirectory() + "sounds/" + id + ".wav");
     }
 
@@ -36,17 +37,16 @@ public class Sound {
     }
 
     public void playSound(int id, SoundType soundType, double distanceFromOrigin) {
-        if (!executor.isShutdown() && getSound(id, soundType).exists()) {
-            executor.submit(() -> {
-                try {
-//                    System.out.println(soundType + " / " + id);
-                    sound(getSound(id, soundType), soundType, distanceFromOrigin);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    executor.shutdown();
-                }
-            });
-        }
+//        if (!executor.isShutdown() && getSound(id).exists()) {
+//            executor.submit(() -> {
+//                try {
+//                    sound(getSound(id), soundType, distanceFromOrigin);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                    executor.shutdown();
+//                }
+//            });
+//        }
     }
 
     public float calculateVolume(SoundType soundType, double distanceFromOrigin) {
@@ -57,11 +57,6 @@ public class Sound {
     }
 
     private void sound(File soundFile, SoundType soundType, double distanceFromOrigin) throws Exception {
-        if (soundType == SoundType.MUSIC) {
-            WavPlayer.main(soundFile.getAbsolutePath());
-            System.out.println(soundFile.getAbsolutePath());
-            return;
-        }
         AudioInputStream in = AudioSystem.getAudioInputStream(soundFile);
         AudioFormat outFormat = getOutFormat(in.getFormat());
         DataLine.Info info = new DataLine.Info(SourceDataLine.class, outFormat);
@@ -74,7 +69,7 @@ public class Sound {
                 int volume = (int) (30d * calculateVolume(soundType, distanceFromOrigin));
                 FloatControl gainControl = (FloatControl) line.getControl(FloatControl.Type.MASTER_GAIN);
                 BooleanControl muteControl = (BooleanControl) line.getControl(BooleanControl.Type.MUTE);
-//                System.out.println("Volume at playtime: " + volume + ", factor: "  + calculateVolume(soundType, distanceFromOrigin));
+                System.out.println("Volume at playtime: " + volume + ", factor: "  + calculateVolume(soundType, distanceFromOrigin));
                 if (volume < 5)
                 {
                     muteControl.setValue(true);

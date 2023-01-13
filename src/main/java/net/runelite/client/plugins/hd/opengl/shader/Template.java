@@ -25,9 +25,6 @@
 package net.runelite.client.plugins.hd.opengl.shader;
 
 import com.google.common.io.CharStreams;
-import lombok.extern.slf4j.Slf4j;
-import net.runelite.client.plugins.hd.utils.ResourcePath;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -36,6 +33,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 import java.util.function.Function;
+import lombok.extern.slf4j.Slf4j;
+import net.runelite.client.plugins.hd.utils.ResourcePath;
 
 @Slf4j
 public class Template

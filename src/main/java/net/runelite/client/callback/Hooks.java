@@ -43,6 +43,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.MainBufferProvider;
 import net.runelite.api.RenderOverview;
+import net.runelite.api.Renderable;
 import net.runelite.api.Skill;
 import net.runelite.api.WorldMapManager;
 import net.runelite.api.events.BeforeRender;
@@ -220,6 +221,12 @@ public class Hooks implements Callbacks
 	}
 
 	@Override
+	public void tickEnd()
+	{
+		
+	}
+
+	@Override
 	public void frame()
 	{
 		eventBus.post(BEFORE_RENDER);
@@ -322,6 +329,12 @@ public class Hooks implements Callbacks
 	public void keyTyped(KeyEvent keyEvent)
 	{
 		keyManager.processKeyTyped(keyEvent);
+	}
+
+	@Override
+	public boolean draw(Renderable renderable, boolean drawingUi)
+	{
+		return false;
 	}
 
 	@Override

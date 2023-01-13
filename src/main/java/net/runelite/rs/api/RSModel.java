@@ -83,7 +83,7 @@ public interface RSModel extends RSRenderable, Model
 
 	@Import("faceRenderPriorities")
 	@Override
-	byte[] getFaceRenderPriorities();
+    byte[] getFaceRenderPriorities();
 
 	@Import("vertexLabels")
 	int[][] getVertexGroups();
@@ -144,7 +144,7 @@ public interface RSModel extends RSRenderable, Model
 	@Import("bottomY")
 	@Override
 	int getBottomY();;
-
+	
 	@Import("drawFace")
 	@Override
 	void drawFace(int face);

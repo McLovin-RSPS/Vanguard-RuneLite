@@ -14,7 +14,6 @@ import javax.annotation.Nullable;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
-
 import static net.runelite.client.plugins.hd.utils.GsonUtils.parseIDArray;
 import static net.runelite.client.plugins.hd.utils.GsonUtils.writeIDArray;
 

@@ -29,8 +29,8 @@ import com.google.common.annotations.VisibleForTesting;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.client.plugins.hd.utils.Env;
 import org.lwjgl.BufferUtils;
+import net.runelite.client.plugins.hd.utils.Env;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -41,8 +41,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static net.runelite.client.plugins.hd.utils.ResourcePath.path;
 import static org.lwjgl.opengl.GL43C.*;
+import static net.runelite.client.plugins.hd.utils.ResourcePath.path;
 
 @Slf4j
 public class Shader

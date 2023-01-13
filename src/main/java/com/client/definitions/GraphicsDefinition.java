@@ -24,12 +24,12 @@ public final class GraphicsDefinition {
 			if (j == 65535) {
 				j = -1;
 			}
-			cache[j].index = j;
+			cache[j].id = j;
 			cache[j].setDefault();
 			cache[j].readValues(stream);
 		}
 		cache[1282] = new GraphicsDefinition();
-		cache[1282].index = 1282;
+		cache[1282].id = 1282;
 		cache[1282].modelId = 44811;
 		cache[1282].animationId = 7155;
 		cache[1282].animationSequence = AnimationDefinition.anims[cache[1282].animationId];
@@ -124,7 +124,7 @@ public final class GraphicsDefinition {
 	}
 
 	public Model getModel() {
-		Model model = (Model) aMRUNodes_415.get(index);
+		Model model = (Model) aMRUNodes_415.get(id);
 		if (model != null)
 			return model;
 		model = Model.getModel(modelId);
@@ -137,7 +137,7 @@ public final class GraphicsDefinition {
 			for (int i1 = 0; i1 < textureReplace.length; i1++)
 				model.retexture(textureReplace[i1], textureFind[i1]);
 		}
-		aMRUNodes_415.put(model, index);
+		aMRUNodes_415.put(model, id);
 		return model;
 	}
 	
@@ -167,12 +167,12 @@ public final class GraphicsDefinition {
 	}
 	
 	public int getIndex() {
-		return index;
+		return id;
 	}
 
 	public final int anInt400;
 	public static GraphicsDefinition cache[];
-	private int index;
+	public int id;
 	private int modelId;
 	public int animationId;
 	public AnimationDefinition animationSequence;

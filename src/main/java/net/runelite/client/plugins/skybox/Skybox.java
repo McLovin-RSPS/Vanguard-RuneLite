@@ -24,15 +24,18 @@
  */
 package net.runelite.client.plugins.skybox;
 
-import net.runelite.api.Client;
-
-import java.awt.*;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import net.runelite.api.Client;
 
 class Skybox
 {

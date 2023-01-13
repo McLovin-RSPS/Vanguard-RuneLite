@@ -26,8 +26,6 @@ import net.runelite.rs.api.RSNPCComposition;
 
 public final class NpcDefinition implements RSNPCComposition {
 
-    public byte boundDim;
-
     public static NpcDefinition lookup(int i) {
         for (int j = 0; j < 20; j++)
             if (cache[j].npcId == i)
@@ -38,1138 +36,1137 @@ public final class NpcDefinition implements RSNPCComposition {
         stream.currentPosition = streamIndices[i];
         entityDef.npcId = i;
         entityDef.readValues(stream);
-        if (i == Npcs.BOB_BARTER_HERBS) {
-            entityDef.actions = new String[] { "Talk-to", "Prices", "Decant", "Clean", null };
-        }
-        if (i == Npcs.ZAHUR)
-            entityDef.actions[0] = "Trade";
-        if (i == Npcs.JOSSIK) {
-            entityDef.actions = new String[5];
-            entityDef.actions[0] = "Talk-to";
-            entityDef.actions[2] = "Trade";
-        }
-        if (i == 9460 || i == 1150 || i == 2912 || i == 2911 || i == 2910 || i == 6481
-                || i == 3500 || i == 9459 || i == 9457 || i == 9458) {
-            // Setting combat to zero to npcs that can't be attacked
-            entityDef.combatLevel = 0;
-        }
-        if (i == Npcs.PERDU) {
-            entityDef.actions = new String[] { "Talk-to", null, "Reclaim-lost", null, null};
-        }
-
-        if (i == 1830) {//pet Shark
-            entityDef.name = "Pet shark";
-            entityDef.combatLevel = 0;
-            entityDef.onMinimap = false;
-            entityDef.actions = new String[5];
-            entityDef.actions[0] = "Pick-up";
-        }
-
-        if (i == 4420) {//Tournament
-            entityDef.actions = new String[5];
-            entityDef.actions[0] = "Enter-tournament";
-        }
-
-        if (i == 1017) {//Lottery
-            entityDef.name = "@yel@[Lottery]";
-            entityDef.actions = new String[5];
-            entityDef.actions[0] = "Talk-to";
-            entityDef.actions[2] = "Enter-lottery";
-            entityDef.actions[3] = "Check-pot";
-            entityDef.actions[4] = "View-hiscores";
-        }
-
-        if (i == 3362) {//Daily tasks
-            entityDef.name = "Daily task manager";
-            entityDef.actions = new String[5];
-            entityDef.actions[0] = "Talk-to";
-            entityDef.actions[2] = "View rewards";
-        }
-        if (i == 3169) {//Daily tasks
-            entityDef.name = "Aviansie";
-            entityDef.actions = new String[5];
-            entityDef.standingAnimation = 6952;
-            entityDef.actions[0] = "Attack";
-        }
-        if (i == 5567) {//Death
-
-            entityDef.actions = new String[5];
-            entityDef.actions[0] = "Talk-to";
-            entityDef.actions[2] = null;
-        }
-
-        if (i == 1101) {//Giant sea snake
-            entityDef.name = "Powerful sea snake";
-            entityDef.combatLevel = 650;
-            entityDef.rotationSpeed = 64;
-            entityDef.npcHeight = 250;
-            entityDef.npcWidth = 250;
-            //	entityDef.combatLevel = 0;
-            entityDef.size = 6;
-        }
-
-
-
-        if (i == 3406) {//Mini solak
-            entityDef.name = "Mini Solak";
-            entityDef.combatLevel = 0;
-            entityDef.models = new int[] { 50204 };
-            entityDef.standingAnimation = 5893;
-            entityDef.walkingAnimation = 5892;
-            entityDef.onMinimap = false;
-            entityDef.actions = new String[5];
-            entityDef.actions[0] = "Pick-up";
-            entityDef.rotationSpeed = 64;
-            entityDef.npcWidth = 60;
-            entityDef.npcHeight = 60;
-
-        }
-
-        if (i == 5000) {//revenant maledictus
-            NpcDefinition k = lookup(11246);
-            entityDef.name = "Mini Maledictus";
-            entityDef.actions = new String[5];
-            entityDef.actions[0] = "Pick-up";
-            entityDef.models = new int[1];
-            entityDef.models = k.models;
-            entityDef.standingAnimation = k.standingAnimation;
-            entityDef.walkingAnimation = k.walkingAnimation;
-            entityDef.rotationSpeed = 64;
-            entityDef.npcHeight = 40;
-            entityDef.npcWidth = 40;
-            entityDef.combatLevel = 0;
-            entityDef.size = 1;
-        }
-
-
-        if (i == 11246) {//Enranged maledictus
-            entityDef.name = "Enranged Revenant Maledictus";
-
-        }
-
-        if (i == 5001) {//revenant maledictus
-            NpcDefinition k = lookup(11246);
-            entityDef.name = "Revenant Maledictus";
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { null, "Attack", null, null, null };
-            entityDef.models = new int[1];
-            entityDef.models = k.models;
-            entityDef.standingAnimation = k.standingAnimation;
-            entityDef.walkingAnimation = k.walkingAnimation;
-            entityDef.rotationSpeed = 64;
-            entityDef.npcHeight = 112;
-            entityDef.npcWidth = 112;
-            entityDef.combatLevel = 0;
-            entityDef.size = 5;
-        }
-
-
-        if (i == 6005) {//normal minikratos
-            NpcDefinition k = lookup(7668);
-            entityDef.name = "Mini Kratos";
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { null, "Attack", null, null, null };
-            entityDef.models = new int[1];
-            entityDef.models = k.models;
-            entityDef.standingAnimation = k.standingAnimation;
-            entityDef.walkingAnimation = k.walkingAnimation;
-            entityDef.rotationSpeed = 64;
-            entityDef.npcHeight = 90;
-            entityDef.npcWidth = 90;
-            entityDef.combatLevel = 0;
-        }
-
-        if (i == 6006) {
-            entityDef.name = "Engraged mini kratos";
-            entityDef.models = new int[] { 45500, 45501, 45502 };
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { null, "Attack", null, null, null };
-            entityDef.originalColors = null;
-            entityDef.newColors = null;
-            entityDef.standingAnimation = 7017;
-            entityDef.walkingAnimation = 7016;
-            entityDef.rotationSpeed = 64;
-            entityDef.npcWidth = 90; //WIDTH
-            entityDef.npcHeight = 90; // HEIGH
-            entityDef.combatLevel = 0;
-        }
-
-
-        if (i == 6008) {
-            entityDef.name = "Enranged kratos";
-            entityDef.models = new int[] { 45500, 45501, 45502 };
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { null, "Attack", null, null, null };
-            entityDef.originalColors = null;
-            entityDef.newColors = null;
-            entityDef.standingAnimation = 7017;
-            entityDef.walkingAnimation = 7016;
-            entityDef.rotationSpeed = 64;
-            entityDef.npcWidth = 320; //WIDTH
-            entityDef.npcHeight = 320; // HEIGH
-            entityDef.combatLevel = 785;
-        }
-
-
-        if (i == 6009) {//normal kratos
-            NpcDefinition k = lookup(7668);
-            entityDef.name = "Kratos";
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { null, "Attack", null, null, null };
-            entityDef.models = new int[1];
-            entityDef.models = k.models;
-            entityDef.standingAnimation = k.standingAnimation;
-            entityDef.walkingAnimation = k.walkingAnimation;
-            entityDef.rotationSpeed = 64;
-            entityDef.npcHeight = 240;
-            entityDef.npcWidth = 240;
-            entityDef.combatLevel = 328;
-        }
-
-
-
-        if (i == 3097) {//Estate agent
-
-            entityDef.actions = new String[5];
-            entityDef.actions[0] = "Open";
-            entityDef.actions[2] = "Teleport to house";
-        }
-
-
-        if (i == 6480) {//Galvek pet
-            NpcDefinition dh = lookup(8095);
-            entityDef.name = "Mini Galvek";
-            entityDef.actions = new String[5];
-            entityDef.actions[0] = "Pick-up";
-            entityDef.models = new int[1];
-            entityDef.models = dh.models;
-            entityDef.standingAnimation = dh.standingAnimation;
-            entityDef.walkingAnimation = dh.walkingAnimation;
-            entityDef.npcHeight = 40;
-            entityDef.npcWidth = 40;
-            entityDef.combatLevel = 0;
-        }
-
-
-
-
-        if (i == 6479) {
-            NpcDefinition dh = lookup(1673);
-            entityDef.name = "Dharok pet";
-            entityDef.actions = new String[5];
-            entityDef.actions[0] = "Pick-up";
-            entityDef.models = new int[1];
-            entityDef.models = dh.models;
-            entityDef.standingAnimation = dh.standingAnimation;
-            entityDef.walkingAnimation = dh.walkingAnimation;
-            entityDef.npcHeight = 80;
-            entityDef.npcWidth = 80;
-            entityDef.combatLevel = 0;
-        }
-
-        if (i == 6477) {
-            entityDef.name = "Tarn Razorlor";
-            entityDef.combatLevel = 500;
-            entityDef.models = new int[] { 60322 };
-            entityDef.standingAnimation = 5616;
-            entityDef.walkingAnimation = 5615;
-            entityDef.onMinimap = true;
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { null, "Attack", null, null, null };
-            entityDef.rotationSpeed = 64;
-            entityDef.npcHeight = 220;
-            entityDef.npcWidth = 220;
-        }
-
-
-        if (i == 3833) {
-            entityDef.name = "The Nightmare";
-            entityDef.combatLevel = 666;
-            entityDef.models = new int[] {60959};
-            entityDef.standingAnimation = 7191;
-            entityDef.walkingAnimation = 7195;
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { null, "Attack", null, null, null };
-            entityDef.rotationSpeed = 64;
-            entityDef.npcHeight = 180;
-            entityDef.npcWidth = 180;
-            entityDef.size = 3;
-        }
-
-
-        if (i == 3407) {
-            entityDef.name = "Solak";
-            entityDef.combatLevel = 546;
-            entityDef.models = new int[] { 50204 };
-            entityDef.standingAnimation = 5893;
-            entityDef.walkingAnimation = 5892;
-            entityDef.onMinimap = true;
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { null, "Attack", null, null, null };;
-            entityDef.rotationSpeed = 64;
-            entityDef.size = 3;
-            entityDef.npcWidth = 180;
-            entityDef.npcHeight = 180;
-
-        }
-
-        if (i == 4804) { //lava dragon
-            NpcDefinition lava = lookup(6593);
-            entityDef.models = new int[4];
-            entityDef.models = new int[]{28300, 28301, 28302, 17423};
-            entityDef.originalColors = new int[]{40};
-            entityDef.newColors = new int[]{59};
-            entityDef.name = "Infernal dragon";
-            entityDef.description = "It's dripping with infernal lava";
-            entityDef.walkingAnimation = lava.walkingAnimation;
-            entityDef.standingAnimation = lava.standingAnimation;
-            entityDef.actions = new String[5];
-            entityDef.actions[1] = "Attack";
-            entityDef.onMinimap = true;
-            entityDef.combatLevel = 313;
-            entityDef.rotationSpeed = 64;
-            entityDef.npcHeight = 120;
-            entityDef.npcWidth = 120;
-            entityDef.boundDim = 4;
-        }
-
-
-        if (i == 7117) {
-            entityDef.name = "Lms Store";
-            entityDef.actions = new String[5];
-            entityDef.actions[0] = "Open";
-        }
-
-        if (i == 8007) {
-            entityDef.name = "Afk Store";
-            entityDef.actions = new String[5];
-            entityDef.actions[0] = "Open";
-        }
-
-        if (i == 6876) {
-            entityDef.name = "Trivia Store";
-            entityDef.actions = new String[5];
-            entityDef.actions[0] = "Open";
-        }
-
-        if (i == 8184) {
-            entityDef.name = "Theatre Of Blood Wizard";
-            entityDef.actions = new String[5];
-            entityDef.actions[0] = "Teleport";
-        }
-        if (i == 7599) {
-            entityDef.name = "Vanguard Guide";
-        }
-        if (i == 4305) {
-            entityDef.name = "Drunken cannoneer";
-            entityDef.actions = new String[5];
-            entityDef.actions[0] = "Pickpocket";
-        }
-        if (i == 3247) {
-            entityDef.name = "Wizard";
-            entityDef.actions = new String[5];
-            entityDef.actions[0] = "Teleport";
-        }
-        if (i == 6517) {
-            entityDef.name = "Daily-reward wizard";
-            entityDef.actions = new String[5];
-            entityDef.actions[0] = "Talk-to";
-            entityDef.actions[2] = "View rewards";
-        }
-        if (i == 3428 || i == 3429) {
-            entityDef.name = "Elf warrior";
-        }
-        if (i == 5044) { // sanfew (decant)
-            entityDef.actions = new String[5];
-            entityDef.actions[0] = "Decant-potions";
-        }
-        if (i == 8026) {
-            entityDef.combatLevel = 392;
-        }
-        if (i == 7913) {
-            entityDef.combatLevel = 0;
-            entityDef.name = "Ironman shop keeper";
-            entityDef.description = "A shop specifically for iron men.";
-        }
-        if (i == 8906) {
-            entityDef.combatLevel = 0;
-            entityDef.name = "Santa's little elf";
-            entityDef.description = "A helper sent from santa himself.";
-            entityDef.actions = new String[] { "Talk-To", null, "Christmas Shop", "Return-Items", null };
-        }
-        if (i == 954) {
-            entityDef.combatLevel = 0;
-            entityDef.name = "Crystal Seed Trader";
-            entityDef.description = "Use a seed on me to get a Crystal Bow.";
-
-        }
-        if (i == 6970) {
-            entityDef.combatLevel = 0;
-            entityDef.name = "Theif";
-            entityDef.actions = new String[] { null, null, "Pickpocket",  null,  null };
-        }
-        if (i == 8761) {
-            entityDef.combatLevel = 0;
-            entityDef.actions = new String[] { "Talk-to", null, "Assignment", "Trade", "Rewards" };
-
-        }
-        if (i == 9400) {
-            entityDef.name = "Ted O'bombr";
-        }
-        if (i == 8026 || i == 8027 || i == 8028) {
-            entityDef.size = 9;
-        }
-        if (i == 7954) {
-            entityDef.combatLevel = 0;
-            entityDef.name = "Achievement Master";
-            entityDef.actions = new String[] { "Trade", null, "Open Achievements", null, null, };
-
-        }
-        if (i == 5870) {
-            entityDef.combatLevel = 0;
-            entityDef.actions = new String[] { "Talk-to", null, "Assignment", "Trade", "Rewards" };
-
-        }
-        if (i == 3400) {
-            entityDef.combatLevel = 0;
-            entityDef.name = "Giveaway Manager";
-            entityDef.actions = new String[] { "Open-manager", null, null, null, null };
-
-        }
-        if (i == 1013) {
-            entityDef.combatLevel = 0;
-            entityDef.name = "Gambler Shop";
-            entityDef.description = "A shop specifically for gamblers.";
-        }
-        if (i == 308) {
-            entityDef.combatLevel = 0;
-            entityDef.name = "PKP Manager";
-        }
-        if (i == 13) {
-            entityDef.combatLevel = 0;
-            entityDef.name = "Referral Tutor";
-            entityDef.description = "He manages referrals.";
-        }
-        if (i == 5293) {
-            entityDef.combatLevel = 0;
-            entityDef.name = "Elven Keeper";
-        }
-        if(i==3218 || i ==3217){
-            entityDef.combatLevel = 0;
-            entityDef.actions = new String[] { "Trade", null, null, null, null };
-        }
-        if(i==2897){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Trading Post Manager";
-            entityDef.actions = new String[] { "Open", null, "Collect", null, null };
-        }
-        if(i==1306){
-            entityDef.combatLevel = 0;
-            entityDef.actions = new String[] { "Make-over", null, null, null, null };
-        }
-        if(i==3257){
-            entityDef.combatLevel = 0;
-            entityDef.actions = new String[] { "Trade", null, null, null, null };
-        }
-        if(i==1011){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Item Gambler";
-            entityDef.actions = new String[] { "Info", null, "Gamble", null, null };
-        }
-        if(i==3248){
-            entityDef.combatLevel = 0;
-            entityDef.name = Configuration.CLIENT_TITLE + " Wizard";
-            entityDef.actions = new String[] { "Teleport", null, "Previous Location", null, null };
-        }
-        if(i==1520){
-            entityDef.combatLevel = 0;
-            entityDef.actions = new String[] { "Small Net", null, "Harpoon", null, null };
-        }
-        if(i==8920){
-
-            entityDef.actions = new String[] { null, "Attack", null, null, null };
-        }
-        if(i==8921){
-            entityDef.name = "Crystal Whirlwind";
-        }
-        if(i==9120){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Donator Shop";
-            entityDef.actions = new String[] { "Trade", null, "Claim", null, null };
-        }
-        if(i == 2662){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Tournament Manager";
-            entityDef.actions = new String[] { "Open-Shop", null, null, null, null };
-        }
-        if(i==603){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Captain Kraken";
-            entityDef.actions = new String[] { "Talk-to", null, null, null, null };
-        }
-        if(i==7041){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Ticket Exchange";
-            entityDef.actions = new String[] { "Exchange", null, null, null, null };
-        }
-        if(i==3894){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Sigmund The Merchant";
-            entityDef.actions = new String[] { "Trade", null, null, null, null };
-        }
-
-        if (i==7413) {
-            entityDef.name = "Max Dummy";
-            entityDef.actions[0] = null;
-        }
-        if(i==9011){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Vote Shop";
-            entityDef.actions = new String[] { "Trade", null, "Claim", null, null };
-        }
-        if(i==1933){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Mills";
-            entityDef.actions = new String[] { "Trade", null, null, null, null };
-        }
-        if(i==8819){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Boss point shop";
-            entityDef.actions = new String[] { null, null, "Trade", null, null };
-        }
-        if(i==8688){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Fat Tony";
-            entityDef.actions = new String[] { "Trade", null, null, null, null };
-        }
-        if(i==7769){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Shop Keeper";
-            entityDef.actions = new String[] { "Trade", null, null, null, null };
-        }
-        if(i==6987){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Man";
-            entityDef.actions = new String[] { "Talk", null, "Pickpocket", null, null };
-        }
-        if(i==5730){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Master Farmer";
-            entityDef.actions = new String[] { "Pickpocket", null, "Trade", null, null };
-        }
-        if(i==1501){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Hunter Store";
-            entityDef.actions = new String[] { null, null, null, null, "Trade" };
-        }
-        if(i==2913){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Fishing Store";
-            entityDef.actions = new String[] { "Trade", null, null, null, null };
-        }
-        if(i==5809){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Crafting and Tanner";
-            entityDef.actions = new String[] { "Tan", null, "Trade", null, null };
-        }
-        if(i==555){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Sell Me Store";
-            entityDef.actions = new String[] { "Trade", null, null, null, null };
-        }
-        if(i==9168){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Flex";
-            entityDef.actions = new String[] { "Trade", null, null, null, null };
-        }
-        if(i==8208){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Pet Collector";
-            entityDef.actions = new String[] { "Talk-to", null, null, null, null };
-        }
-        if(i==8202){
-            entityDef.actions = new String[] { "Talk-to", "Pick-Up", null, null, null };
-        }
-        if(i==4921){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Supplies";
-            entityDef.actions = new String[] { "Trade", null, null, null, null };
-        }
-        if (i == 5314) {
-            entityDef.combatLevel = 0;
-            entityDef.name = "Mystical Wizard";
-            entityDef.actions = new String[] { "Teleport", "Previous Location", null, null, null };
-            entityDef.description = "This wizard has the power to teleport you to many locations.";
-        }
-        if (i == 8781) {
-            entityDef.name = "@red@Queen Latsyrc";
-            entityDef.combatLevel = 982;
-            entityDef.onMinimap = true;
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { null, "Attack", null, null, null };
-        }
-        if(i==1577){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Melee Shop";
-            entityDef.combatLevel = 0;
-            entityDef.actions = new String[] { "Trade", null, null, null, null };
-        }
-        if(i==1576){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Range Shop";
-            entityDef.combatLevel = 0;
-            entityDef.actions = new String[] { "Trade", null, null, null, null };
-        }
-        if(i==1578){
-            entityDef.combatLevel = 0;
-            entityDef.name = "Mage Shop";
-            entityDef.combatLevel = 0;
-            entityDef.actions = new String[] { "Trade", null, null, null, null };
-        }
-        if (i == 8026) {
-            entityDef.name = "Vorkath";
-            // entityDef.combatLevel = 732;
-            entityDef.models = new int[] { 35023 };
-            entityDef.standingAnimation = 7946;
-            entityDef.onMinimap = true;
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Poke", null, null, null, null };
-            entityDef.npcWidth = 100;
-            entityDef.npcHeight = 100;
-        }
-        if (i == 7852 || i == 7853 || i == 7884) {//Dawn
-            entityDef.standingAnimation = 7775;
-            entityDef.walkingAnimation = 7775;
-        }
-        if (i == 5518) {
-            entityDef.standingAnimation = 185;
-        }
-        if (i == 8019) {
-            entityDef.standingAnimation = 185;
-            entityDef.actions = new String[5];
-            entityDef.actions[0] = "Talk-to";
-            entityDef.actions[2] = "Trade";
-        }
-        if (i == 308) {
-            entityDef.actions = new String[5];
-            entityDef.actions[0] = "Talk-to";
-            entityDef.actions[2] = "Trade";
-            entityDef.actions[3] = "Disable Interface";
-            entityDef.actions[4] = "Skull";
-        }
-        if (i == 6088) {
-            entityDef.standingAnimation = 185;
-            entityDef.actions = new String[5];
-            entityDef.actions[0] = "Talk-to";
-            entityDef.actions[2] = "Travel";
-        }
-        if (i == 1434 || i == 876 || i == 1612) {//gnome fix
-            entityDef.standingAnimation = 185;
-        }
-        if (i == 7674 || i == 8009 || i == 388 || i == 8010) {
-
-            entityDef.combatLevel = 0;
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
-        }
-        if (i == 8492 || i == 8493 || i == 8494 || i == 8495) {
-            entityDef.combatLevel = 0;
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
-        }
-        if (i == 8737 || i == 8738 || i == 8009 || i == 7674) {
-            entityDef.combatLevel = 0;
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
-        }
-        if (i == 326 || i == 327) {
-            entityDef.combatLevel = 0;
-            entityDef.npcWidth = 85;
-            entityDef.npcHeight = 85;
-            entityDef.name = "Vote Pet";
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
-        }
-        if (i >= 7354 && i <=7367) {
-            entityDef.combatLevel = 0;
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
-        }
-        if (i == 5559 || i == 5560) {
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
-        }
-        if (i == 2149 || i == 2150 || i == 2151 || i == 2148) {
-            entityDef.name = "Trading Clerk";
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Bank", null, "Trading Post", null, null };
-        }
-        if (i == 6473) { //terror dog
-            entityDef.combatLevel = 0;
-            entityDef.npcWidth = 50; //WIDTH
-            entityDef.npcHeight = 50; // HEIGH
-        }
-        if (i == 3510) { //outlast shop
-            entityDef.name = "Trader";
-            entityDef.combatLevel = 0;
-            entityDef.onMinimap = true;
-            entityDef.npcWidth = 150; //WIDTH
-            entityDef.npcHeight = 150; // HEIGH
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Open-Shop", null, null, null, null };
-        }
-        if (i == 488) { //rain cloud
-            entityDef.combatLevel = 0;
-            entityDef.size = 1;
-            entityDef.onMinimap = true;
-            entityDef.npcWidth = 150; //WIDTH
-            entityDef.npcHeight = 150; // HEIGH
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-        }
-        if (i == 7668) { //voice of yama
-            entityDef.name = "Kratos";
-            entityDef.size = 2;
-            entityDef.combatLevel = 0;
-            entityDef.npcWidth = 90; //WIDTH
-            entityDef.npcHeight = 90; // HEIGH
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-
-        }
-        if (i == 1377) {
-            entityDef.name = "Ark";
-            entityDef.size = 3;
-            entityDef.combatLevel = 700;
-            entityDef.npcWidth = 300; //WIDTH
-            entityDef.npcHeight = 300; // HEIGH
-            entityDef.actions[0] = null;
-
-
-        }
-        if (i == 2105) {
-            entityDef.size = 4;
-            entityDef.npcWidth = 600; //WIDTH
-            entityDef.npcHeight = 600; // HEIGH
-        }
-        if (i == 2107) {
-            entityDef.size = 4;
-            entityDef.npcWidth = 600; //WIDTH
-            entityDef.npcHeight = 600; // HEIGH
-        }
-        if (i == 2850) {
-            entityDef.name = "GIM Tracker";
-            entityDef.actions = new String[] { "Open", null, null, null, null };
-
-        }
-        if (i == 6119) { //weird monster
-            entityDef.size = 1;
-            entityDef.combatLevel = 0;
-            entityDef.npcWidth = 30; //WIDTH
-            entityDef.npcHeight = 30; // HEIGH
-        }
-        if (i == 763) { //roc
-
-            entityDef.size = 1;
-            entityDef.combatLevel = 0;
-            entityDef.npcWidth = 30; //WIDTH
-            entityDef.npcHeight = 30; // HEIGH
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
-
-
-        }
-        if (i == 762) { //foe small bird
-            entityDef.size = 1;
-            entityDef.combatLevel = 0;
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
-        }
-        if (i == 4987 || i == 6292 || i == 6354 ) { //chronzon
-            entityDef.size = 1;
-            entityDef.combatLevel = 0;
-            entityDef.npcWidth = 45; //WIDTH
-            entityDef.npcHeight = 45; // HEIGH
-        }
-        if (i == 8709) {
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.name = "Corrupt Beast";
-            entityDef.combatLevel = 0;
-            entityDef.npcWidth = 60; //WIDTH
-            entityDef.npcHeight = 60; // HEIGH
-            entityDef.size = 1;
-        }
-        if (i == 7025) { //guard dog
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.npcWidth = 85; //WIDTH
-            entityDef.npcHeight = 85; // HEIGH
-        }
-
-        if (i == 6716) {//prayer
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.npcWidth = 65; //WIDTH
-            entityDef.npcHeight = 65; // HEIGH
-            entityDef.combatLevel = 0;
-
-
-        }
-        if (i == 6723) {//healer
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.npcWidth = 65; //WIDTH
-            entityDef.npcHeight = 65; // HEIGH
-            entityDef.combatLevel = 0;
-
-        }
-        if (i == 1088) {
-            entityDef.name = "Seren";
-            entityDef.models = new int[] { 38605 };
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.npcWidth = 65; //WIDTH
-            entityDef.npcHeight = 65; // HEIGH
-            entityDef.originalColors = null;
-            entityDef.newColors = null;
-            entityDef.combatLevel = 0;
-            entityDef.standingAnimation = 8372;
-            entityDef.walkingAnimation = 8372;
-            entityDef.models = new int[] { 38605 };
-
-        }
-        if (i == 1089) {
-            entityDef.name = "Lil mimic";
-            entityDef.models = new int[] { 37142 };
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.npcWidth = 25; //WIDTH
-            entityDef.npcHeight = 25; // HEIGH
-            entityDef.originalColors = null;
-            entityDef.newColors = null;
-            entityDef.combatLevel = 0;
-            entityDef.standingAnimation = 8307;
-            entityDef.walkingAnimation = 8306;
-            entityDef.models = new int[] { 37142 };
-
-        }
-        if (i == 2120) {
-            entityDef.name = "Shadow Ranger";
-            entityDef.models = new int[] { 29267 };
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.npcWidth = 85; //WIDTH
-            entityDef.npcHeight = 85; // HEIGH
-            entityDef.originalColors = null;
-            entityDef.newColors = null;
-            entityDef.combatLevel = 0;
-            entityDef.standingAnimation = 8526;
-            entityDef.walkingAnimation = 8527;
-            entityDef.models = new int[] { 29267 };
-
-        }
-        if (i == 2121) {
-            entityDef.name = "Shadow Wizard";
-            entityDef.models = new int[] { 29268 };
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.npcWidth = 85; //WIDTH
-            entityDef.npcHeight = 85; // HEIGH
-            entityDef.originalColors = null;
-            entityDef.newColors = null;
-            entityDef.combatLevel = 0;
-            entityDef.standingAnimation = 8526;
-            entityDef.walkingAnimation = 8527;
-            entityDef.models = new int[] { 29268 };
-        }
-        if (i == 2122) {
-            entityDef.name = "Shadow Warrior";
-            entityDef.models = new int[] { 29266 };
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.npcWidth = 85; //WIDTH
-            entityDef.npcHeight = 85; // HEIGH
-            entityDef.originalColors = null;
-            entityDef.newColors = null;
-            entityDef.combatLevel = 0;
-            entityDef.standingAnimation = 8526;
-            entityDef.walkingAnimation = 8527;
-            entityDef.models = new int[] { 29266 };
-        }
-
-        if (i == 7216 || i == 6473) {//green monkey and green dog
-            entityDef.actions = new String[5];
-            entityDef.combatLevel = 0;
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-        }
-        if (i == 6723 || i == 6716 || i == 8709) {
-            entityDef.actions = new String[5];
-            entityDef.combatLevel = 0;
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-        }
-        if (i == 3291) {//postie pete
-            entityDef.actions = new String[5];
-            entityDef.combatLevel = 0;
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-        }
-        if (i == 5738) {//imp
-            entityDef.actions = new String[5];
-            entityDef.combatLevel = 0;
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-
-        }
-        if (i == 5240) {//toucan
-            entityDef.actions = new String[5];
-            entityDef.combatLevel = 0;
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-
-        }
-        if (i == 834) {
-            entityDef.name = "King penguin";
-            entityDef.actions = new String[5];
-            entityDef.combatLevel = 0;
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-
-        }
-        if (i == 1873) {//klik
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.standingAnimation = 3345;
-            entityDef.walkingAnimation = 3346;
-
-        }
-        //dark pets
-        if (i == 2300) {
-            entityDef.models = new int[1];
-            entityDef.name = "Dark postie pete";
-            entityDef.models = new int[] { 46600 };
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.originalColors = null;
-            entityDef.newColors = null;
-            entityDef.combatLevel = 0;
-            entityDef.standingAnimation = 3948;
-            entityDef.walkingAnimation = 3947;
-        }
-        if (i == 2301) {
-            entityDef.name = "Dark imp";
-            entityDef.models = new int[] { 46700 };
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.originalColors = null;
-            entityDef.newColors = null;
-            entityDef.combatLevel = 0;
-            entityDef.standingAnimation = 171;
-            entityDef.walkingAnimation = 168;
-        }
-        if (i == 2302) {
-            entityDef.name = "Dark toucan";
-            entityDef.models = new int[] { 46800, 46801 };
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.originalColors = null;
-            entityDef.newColors = null;
-            entityDef.combatLevel = 0;
-            entityDef.standingAnimation = 6772;
-            entityDef.walkingAnimation = 6774;
-        }
-        if (i == 2303) {
-            entityDef.name = "Dark king penguin";
-            entityDef.models = new int[] { 46200 };
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.originalColors = null;
-            entityDef.newColors = null;
-            entityDef.combatLevel = 0;
-            entityDef.standingAnimation = 5668;
-            entityDef.walkingAnimation = 5666;
-        }
-        if (i == 2304) {
-            entityDef.name = "Dark k'klik";
-            entityDef.models = new int[] { 46300, 46301, 46302 };
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.originalColors = null;
-            entityDef.newColors = null;
-            entityDef.combatLevel = 0;
-            entityDef.standingAnimation = 3346;
-            entityDef.walkingAnimation = -1;
-        }
-        if (i == 2305) {
-            entityDef.name = "Dark shadow warrior";
-            entityDef.models = new int[] { 46100 };
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.originalColors = null;
-            entityDef.newColors = null;
-            entityDef.combatLevel = 0;
-            entityDef.standingAnimation = 8526;
-            entityDef.walkingAnimation = 8527;
-            entityDef.npcWidth = 85; //WIDTH
-            entityDef.npcHeight = 85; // HEIGH
-        }
-        if (i == 2306) {
-            entityDef.name = "Dark shadow archer";
-            entityDef.models = new int[] { 56800 };
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.originalColors = null;
-            entityDef.newColors = null;
-            entityDef.combatLevel = 0;
-            entityDef.standingAnimation = 8526;
-            entityDef.walkingAnimation = 8527;
-            entityDef.npcWidth = 85; //WIDTH
-            entityDef.npcHeight = 85; // HEIGH
-        }
-        if (i == 2307) {
-            entityDef.name = "Dark shadow wizard";
-            entityDef.models = new int[] { 45900 };
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.originalColors = null;
-            entityDef.newColors = null;
-            entityDef.combatLevel = 0;
-            entityDef.standingAnimation = 8526;
-            entityDef.walkingAnimation = 8527;
-            entityDef.npcWidth = 85; //WIDTH
-            entityDef.npcHeight = 85; // HEIGH
-        }
-        if (i == 2308) {
-            entityDef.name = "Dark healer death spawn";
-            entityDef.models = new int[] { 46500, 46501, 46502, 46503, 46504, 46505, 46506,};
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.originalColors = null;
-            entityDef.newColors = null;
-            entityDef.npcWidth = 65; //WIDTH
-            entityDef.npcHeight = 65; // HEIGH
-            entityDef.combatLevel = 0;
-            entityDef.standingAnimation = 1539;
-            entityDef.walkingAnimation = 1539;
-        }
-        if (i == 2309) {
-            entityDef.name = "Dark holy death spawn";
-            entityDef.models = new int[] { 46406, 46405, 46404, 46403, 46402, 46401, 46400 };
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.originalColors = null;
-            entityDef.newColors = null;
-            entityDef.npcWidth = 65; //WIDTH
-            entityDef.npcHeight = 65; // HEIGH
-            entityDef.combatLevel = 0;
-            entityDef.standingAnimation = 1539;
-            entityDef.walkingAnimation = 1539;
-        }
-        if (i == 2310) {
-            entityDef.name = "Dark seren";
-            entityDef.models = new int[] { 46900 };
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.originalColors = null;
-            entityDef.newColors = null;
-            entityDef.combatLevel = 0;
-            entityDef.standingAnimation = 8372;
-            entityDef.walkingAnimation = 8372;
-            entityDef.npcWidth = 65; //WIDTH
-            entityDef.npcHeight = 65; // HEIGH
-        }
-        if (i == 2311) {
-            entityDef.name = "Dark corrupt beast";
-            entityDef.models = new int[] { 45710 };
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.originalColors = null;
-            entityDef.newColors = null;
-            entityDef.combatLevel = 0;
-            entityDef.npcWidth = 60; //WIDTH
-            entityDef.npcHeight = 60; // HEIGH
-            entityDef.size = 1;
-            entityDef.standingAnimation = 5616;
-            entityDef.walkingAnimation = 5615;
-        }
-        if (i == 2312) {
-            entityDef.name = "Dark roc";
-            entityDef.models = new int[] { 45603, 45604 };
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.originalColors = null;
-            entityDef.newColors = null;
-            entityDef.standingAnimation = 5021;
-            entityDef.walkingAnimation = 5022;
-            entityDef.size = 1;
-            entityDef.combatLevel = 0;
-            entityDef.npcWidth = 30; //WIDTH
-            entityDef.npcHeight = 30; // HEIGH
-        }
-
-        if (i == 2318) {
-            entityDef.name = "Dark roc";
-            entityDef.models = new int[] { 45603, 45604 };
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.newColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
-            entityDef.originalColors = new int[] { 677, 801, 43540, 43543, 43546, 43549, 43550, 43552, 43554, 43558,
-                    43560, 43575 };
-            entityDef.standingAnimation = 5021;
-            entityDef.walkingAnimation = 5022;
-            entityDef.size = 1;
-            entityDef.combatLevel = 0;
-            entityDef.npcWidth = 30; //WIDTH
-            entityDef.npcHeight = 30; // HEIGH
-        }
-
-        if (i == 2313) {
-            entityDef.name = "Dark kratos";
-            entityDef.models = new int[] { 45500, 45501, 45502 };
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
-            entityDef.originalColors = null;
-            entityDef.newColors = null;
-            entityDef.standingAnimation = 7017;
-            entityDef.walkingAnimation = 7016;
-            entityDef.size = 2;
-            entityDef.combatLevel = 0;
-            entityDef.npcWidth = 90; //WIDTH
-            entityDef.npcHeight = 90; // HEIGH
-        }
-        if (i == 8027) {
-            entityDef.name = "Vorkath";
-            entityDef.combatLevel = 732;
-            entityDef.models = new int[] { 35023 };
-            entityDef.standingAnimation = 7950;
-            entityDef.onMinimap = true;
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { null, null, null, null, null };
-            entityDef.npcWidth = 100;
-            entityDef.npcHeight = 100;
-        }
-        if (i == 8028) {
-            entityDef.name = "Vorkath";
-            entityDef.combatLevel = 732;
-            entityDef.models = new int[] { 35023 };
-            entityDef.standingAnimation = 7948;
-            entityDef.onMinimap = true;
-            entityDef.actions = new String[5];
-            entityDef.actions = new String[] { null, "Attack", null, null, null };
-            entityDef.npcWidth = 100;
-            entityDef.npcHeight = 100;
-        }
-        if(i==7144){
-            entityDef.anInt75 = 0;
-        }
-        if(i==963){
-            entityDef.anInt75 = 6;
-        }
-        if(i==7145){
-            entityDef.anInt75 = 1;
-        }
-        if(i==7146){
-            entityDef.anInt75 = 2;
-        }
-        if (entityDef.name != null && entityDef.name.toLowerCase().contains("chinchompa") && !entityDef.name.toLowerCase().contains("baby")) {
-            entityDef.actions = new String[5];
-        }
+		if (i == Npcs.BOB_BARTER_HERBS) {
+			entityDef.actions = new String[] { "Talk-to", "Prices", "Decant", "Clean", null };
+		}
+		if (i == Npcs.ZAHUR)
+			entityDef.actions[0] = "Trade";
+		if (i == Npcs.JOSSIK) {
+			entityDef.actions = new String[5];
+			entityDef.actions[0] = "Talk-to";
+			entityDef.actions[2] = "Trade";
+		}
+		if (i == 9460 || i == 1150 || i == 2912 || i == 2911 || i == 2910 || i == 6481
+			|| i == 3500 || i == 9459 || i == 9457 || i == 9458) {
+			// Setting combat to zero to npcs that can't be attacked
+			entityDef.combatLevel = 0;
+		}
+		if (i == Npcs.PERDU) {
+			entityDef.actions = new String[] { "Talk-to", null, "Reclaim-lost", null, null};
+		}
+
+		if (i == 1830) {//pet Shark
+			entityDef.name = "Pet shark";
+			entityDef.combatLevel = 0;
+			entityDef.onMinimap = false;
+			entityDef.actions = new String[5];
+			entityDef.actions[0] = "Pick-up";
+		}
+
+		if (i == 4420) {//Tournament
+			entityDef.actions = new String[5];
+			entityDef.actions[0] = "Enter-tournament";
+		}
+
+		if (i == 1017) {//Lottery
+			entityDef.name = "@yel@[Lottery]";
+			entityDef.actions = new String[5];
+			entityDef.actions[0] = "Talk-to";
+			entityDef.actions[2] = "Enter-lottery";
+			entityDef.actions[3] = "Check-pot";
+			entityDef.actions[4] = "View-hiscores";
+		}
+
+		if (i == 3362) {//Daily tasks
+			entityDef.name = "Daily task manager";
+			entityDef.actions = new String[5];
+			entityDef.actions[0] = "Talk-to";
+			entityDef.actions[2] = "View rewards";
+		}
+		if (i == 3169) {//Daily tasks
+			entityDef.name = "Aviansie";
+			entityDef.actions = new String[5];
+			entityDef.standingAnimation = 6952;
+			entityDef.actions[0] = "Attack";
+		}
+		if (i == 5567) {//Death
+
+			entityDef.actions = new String[5];
+			entityDef.actions[0] = "Talk-to";
+			entityDef.actions[2] = null;
+		}
+
+		if (i == 1101) {//Giant sea snake
+			entityDef.name = "Powerful sea snake";
+			entityDef.combatLevel = 650;
+			entityDef.rotationSpeed = 64;
+			entityDef.npcHeight = 250;
+			entityDef.npcWidth = 250;
+			//	entityDef.combatLevel = 0;
+			entityDef.size = 6;
+		}
+
+
+
+		if (i == 3406) {//Mini solak
+			entityDef.name = "Mini Solak";
+			entityDef.combatLevel = 0;
+			entityDef.models = new int[] { 50204 };
+			entityDef.standingAnimation = 5893;
+			entityDef.walkingAnimation = 5892;
+			entityDef.onMinimap = false;
+			entityDef.actions = new String[5];
+			entityDef.actions[0] = "Pick-up";
+			entityDef.rotationSpeed = 64;
+			entityDef.npcWidth = 60;
+			entityDef.npcHeight = 60;
+
+		}
+
+		if (i == 5000) {//revenant maledictus
+			NpcDefinition k = lookup(11246);
+			entityDef.name = "Mini Maledictus";
+			entityDef.actions = new String[5];
+			entityDef.actions[0] = "Pick-up";
+			entityDef.models = new int[1];
+			entityDef.models = k.models;
+			entityDef.standingAnimation = k.standingAnimation;
+			entityDef.walkingAnimation = k.walkingAnimation;
+			entityDef.rotationSpeed = 64;
+			entityDef.npcHeight = 40;
+			entityDef.npcWidth = 40;
+			entityDef.combatLevel = 0;
+			entityDef.size = 1;
+		}
+
+
+		if (i == 11246) {//Enranged maledictus
+			entityDef.name = "Enranged Revenant Maledictus";
+
+		}
+
+		if (i == 5001) {//revenant maledictus
+			NpcDefinition k = lookup(11246);
+			entityDef.name = "Revenant Maledictus";
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { null, "Attack", null, null, null };
+			entityDef.models = new int[1];
+			entityDef.models = k.models;
+			entityDef.standingAnimation = k.standingAnimation;
+			entityDef.walkingAnimation = k.walkingAnimation;
+			entityDef.rotationSpeed = 64;
+			entityDef.npcHeight = 112;
+			entityDef.npcWidth = 112;
+			entityDef.combatLevel = 0;
+			entityDef.size = 5;
+		}
+
+
+		if (i == 6005) {//normal minikratos
+			NpcDefinition k = lookup(7668);
+			entityDef.name = "Mini Kratos";
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { null, "Attack", null, null, null };
+			entityDef.models = new int[1];
+			entityDef.models = k.models;
+			entityDef.standingAnimation = k.standingAnimation;
+			entityDef.walkingAnimation = k.walkingAnimation;
+			entityDef.rotationSpeed = 64;
+			entityDef.npcHeight = 90;
+			entityDef.npcWidth = 90;
+			entityDef.combatLevel = 0;
+		}
+
+		if (i == 6006) {
+			entityDef.name = "Engraged mini kratos";
+			entityDef.models = new int[] { 45500, 45501, 45502 };
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { null, "Attack", null, null, null };
+			entityDef.originalColors = null;
+			entityDef.newColors = null;
+			entityDef.standingAnimation = 7017;
+			entityDef.walkingAnimation = 7016;
+			entityDef.rotationSpeed = 64;
+			entityDef.npcWidth = 90; //WIDTH
+			entityDef.npcHeight = 90; // HEIGH
+			entityDef.combatLevel = 0;
+		}
+
+
+		if (i == 6008) {
+			entityDef.name = "Enranged kratos";
+			entityDef.models = new int[] { 45500, 45501, 45502 };
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { null, "Attack", null, null, null };
+			entityDef.originalColors = null;
+			entityDef.newColors = null;
+			entityDef.standingAnimation = 7017;
+			entityDef.walkingAnimation = 7016;
+			entityDef.rotationSpeed = 64;
+			entityDef.npcWidth = 320; //WIDTH
+			entityDef.npcHeight = 320; // HEIGH
+			entityDef.combatLevel = 785;
+		}
+
+
+		if (i == 6009) {//normal kratos
+			NpcDefinition k = lookup(7668);
+			entityDef.name = "Kratos";
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { null, "Attack", null, null, null };
+			entityDef.models = new int[1];
+			entityDef.models = k.models;
+			entityDef.standingAnimation = k.standingAnimation;
+			entityDef.walkingAnimation = k.walkingAnimation;
+			entityDef.rotationSpeed = 64;
+			entityDef.npcHeight = 240;
+			entityDef.npcWidth = 240;
+			entityDef.combatLevel = 328;
+		}
+
+
+
+		if (i == 3097) {//Estate agent
+
+			entityDef.actions = new String[5];
+			entityDef.actions[0] = "Open";
+			entityDef.actions[2] = "Teleport to house";
+		}
+
+
+		if (i == 6480) {//Galvek pet
+			NpcDefinition dh = lookup(8095);
+			entityDef.name = "Mini Galvek";
+			entityDef.actions = new String[5];
+			entityDef.actions[0] = "Pick-up";
+			entityDef.models = new int[1];
+			entityDef.models = dh.models;
+			entityDef.standingAnimation = dh.standingAnimation;
+			entityDef.walkingAnimation = dh.walkingAnimation;
+			entityDef.npcHeight = 40;
+			entityDef.npcWidth = 40;
+			entityDef.combatLevel = 0;
+		}
+
+
+
+
+		if (i == 6479) {
+			NpcDefinition dh = lookup(1673);
+			entityDef.name = "Dharok pet";
+			entityDef.actions = new String[5];
+			entityDef.actions[0] = "Pick-up";
+			entityDef.models = new int[1];
+			entityDef.models = dh.models;
+			entityDef.standingAnimation = dh.standingAnimation;
+			entityDef.walkingAnimation = dh.walkingAnimation;
+			entityDef.npcHeight = 80;
+			entityDef.npcWidth = 80;
+			entityDef.combatLevel = 0;
+		}
+
+		if (i == 6477) {
+			entityDef.name = "Tarn Razorlor";
+			entityDef.combatLevel = 500;
+			entityDef.models = new int[] { 60322 };
+			entityDef.standingAnimation = 5616;
+			entityDef.walkingAnimation = 5615;
+			entityDef.onMinimap = true;
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { null, "Attack", null, null, null };
+			entityDef.rotationSpeed = 64;
+			entityDef.npcHeight = 220;
+			entityDef.npcWidth = 220;
+		}
+
+
+		if (i == 3833) {
+			entityDef.name = "The Nightmare";
+			entityDef.combatLevel = 666;
+			entityDef.models = new int[] {60959};
+			entityDef.standingAnimation = 7191;
+			entityDef.walkingAnimation = 7195;
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { null, "Attack", null, null, null };
+			entityDef.rotationSpeed = 64;
+			entityDef.npcHeight = 180;
+			entityDef.npcWidth = 180;
+			entityDef.size = 3;
+		}
+
+
+		if (i == 3407) {
+			entityDef.name = "Solak";
+			entityDef.combatLevel = 546;
+			entityDef.models = new int[] { 50204 };
+			entityDef.standingAnimation = 5893;
+			entityDef.walkingAnimation = 5892;
+			entityDef.onMinimap = true;
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { null, "Attack", null, null, null };;
+			entityDef.rotationSpeed = 64;
+			entityDef.size = 3;
+			entityDef.npcWidth = 180;
+			entityDef.npcHeight = 180;
+
+		}
+
+		if (i == 4804) { //lava dragon
+			NpcDefinition lava = lookup(6593);
+			entityDef.models = new int[4];
+			entityDef.models = new int[]{28300, 28301, 28302, 17423};
+			entityDef.originalColors = new int[]{40};
+			entityDef.newColors = new int[]{59};
+			entityDef.name = "Infernal dragon";
+			entityDef.description = "It's dripping with infernal lava";
+			entityDef.walkingAnimation = lava.walkingAnimation;
+			entityDef.standingAnimation = lava.standingAnimation;
+			entityDef.actions = new String[5];
+			entityDef.actions[1] = "Attack";
+			entityDef.onMinimap = true;
+			entityDef.combatLevel = 313;
+			entityDef.rotationSpeed = 64;
+			entityDef.npcHeight = 120;
+			entityDef.npcWidth = 120;
+		}
+
+
+		if (i == 7117) {
+			entityDef.name = "Lms Store";
+			entityDef.actions = new String[5];
+			entityDef.actions[0] = "Open";
+		}
+
+		if (i == 8007) {
+			entityDef.name = "Afk Store";
+			entityDef.actions = new String[5];
+			entityDef.actions[0] = "Open";
+		}
+
+		if (i == 6876) {
+			entityDef.name = "Trivia Store";
+			entityDef.actions = new String[5];
+			entityDef.actions[0] = "Open";
+		}
+
+		if (i == 8184) {
+			entityDef.name = "Theatre Of Blood Wizard";
+			entityDef.actions = new String[5];
+			entityDef.actions[0] = "Teleport";
+		}
+		if (i == 7599) {
+			entityDef.name = "Vanguard Guide";
+		}
+		if (i == 4305) {
+			entityDef.name = "Drunken cannoneer";
+			entityDef.actions = new String[5];
+			entityDef.actions[0] = "Pickpocket";
+		}
+		if (i == 3247) {
+			entityDef.name = "Wizard";
+			entityDef.actions = new String[5];
+			entityDef.actions[0] = "Teleport";
+		}
+		if (i == 6517) {
+			entityDef.name = "Daily-reward wizard";
+			entityDef.actions = new String[5];
+			entityDef.actions[0] = "Talk-to";
+			entityDef.actions[2] = "View rewards";
+		}
+		if (i == 3428 || i == 3429) {
+			entityDef.name = "Elf warrior";
+		}
+		if (i == 5044) { // sanfew (decant)
+			entityDef.actions = new String[5];
+			entityDef.actions[0] = "Decant-potions";
+		}
+		if (i == 8026) {
+			entityDef.combatLevel = 392;
+		}
+		if (i == 7913) {
+			entityDef.combatLevel = 0;
+			entityDef.name = "Ironman shop keeper";
+			entityDef.description = "A shop specifically for iron men.";
+		}
+		if (i == 8906) {
+			entityDef.combatLevel = 0;
+			entityDef.name = "Santa's little elf";
+			entityDef.description = "A helper sent from santa himself.";
+			entityDef.actions = new String[] { "Talk-To", null, "Christmas Shop", "Return-Items", null };
+		}
+		if (i == 954) {
+			entityDef.combatLevel = 0;
+			entityDef.name = "Crystal Seed Trader";
+			entityDef.description = "Use a seed on me to get a Crystal Bow.";
+
+		}
+		if (i == 6970) {
+			entityDef.combatLevel = 0;
+			entityDef.name = "Theif";
+			entityDef.actions = new String[] { null, null, "Pickpocket",  null,  null };
+		}
+		if (i == 8761) {
+			entityDef.combatLevel = 0;
+			entityDef.actions = new String[] { "Talk-to", null, "Assignment", "Trade", "Rewards" };
+
+		}
+		if (i == 9400) {
+			entityDef.name = "Ted O'bombr";
+		}
+		if (i == 8026 || i == 8027 || i == 8028) {
+			entityDef.size = 9;
+		}
+		if (i == 7954) {
+			entityDef.combatLevel = 0;
+			entityDef.name = "Achievement Master";
+			entityDef.actions = new String[] { "Trade", null, "Open Achievements", null, null, };
+
+		}
+		if (i == 5870) {
+			entityDef.combatLevel = 0;
+			entityDef.actions = new String[] { "Talk-to", null, "Assignment", "Trade", "Rewards" };
+
+		}
+		if (i == 3400) {
+			entityDef.combatLevel = 0;
+			entityDef.name = "Giveaway Manager";
+			entityDef.actions = new String[] { "Open-manager", null, null, null, null };
+
+		}
+		if (i == 1013) {
+			entityDef.combatLevel = 0;
+			entityDef.name = "Gambler Shop";
+			entityDef.description = "A shop specifically for gamblers.";
+		}
+		if (i == 308) {
+			entityDef.combatLevel = 0;
+			entityDef.name = "PKP Manager";
+		}
+		if (i == 13) {
+			entityDef.combatLevel = 0;
+			entityDef.name = "Referral Tutor";
+			entityDef.description = "He manages referrals.";
+		}
+		if (i == 5293) {
+			entityDef.combatLevel = 0;
+			entityDef.name = "Elven Keeper";
+		}
+		if(i==3218 || i ==3217){
+			entityDef.combatLevel = 0;
+			entityDef.actions = new String[] { "Trade", null, null, null, null };
+		}
+		if(i==2897){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Trading Post Manager";
+			entityDef.actions = new String[] { "Open", null, "Collect", null, null };
+		}
+		if(i==1306){
+			entityDef.combatLevel = 0;
+			entityDef.actions = new String[] { "Make-over", null, null, null, null };
+		}
+		if(i==3257){
+			entityDef.combatLevel = 0;
+			entityDef.actions = new String[] { "Trade", null, null, null, null };
+		}
+		if(i==1011){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Item Gambler";
+			entityDef.actions = new String[] { "Info", null, "Gamble", null, null };
+		}
+		if(i==3248){
+			entityDef.combatLevel = 0;
+			entityDef.name = Configuration.CLIENT_TITLE + " Wizard";
+			entityDef.actions = new String[] { "Teleport", null, "Previous Location", null, null };
+		}
+		if(i==1520){
+			entityDef.combatLevel = 0;
+			entityDef.actions = new String[] { "Small Net", null, "Harpoon", null, null };
+		}
+		if(i==8920){
+
+			entityDef.actions = new String[] { null, "Attack", null, null, null };
+		}
+		if(i==8921){
+			entityDef.name = "Crystal Whirlwind";
+		}
+		if(i==9120){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Donator Shop";
+			entityDef.actions = new String[] { "Trade", null, "Claim", null, null };
+		}
+		if(i == 2662){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Tournament Manager";
+			entityDef.actions = new String[] { "Open-Shop", null, null, null, null };
+		}
+		if(i==603){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Captain Kraken";
+			entityDef.actions = new String[] { "Talk-to", null, null, null, null };
+		}
+		if(i==7041){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Ticket Exchange";
+			entityDef.actions = new String[] { "Exchange", null, null, null, null };
+		}
+		if(i==3894){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Sigmund The Merchant";
+			entityDef.actions = new String[] { "Trade", null, null, null, null };
+		}
+
+		if (i==7413) {
+			entityDef.name = "Max Dummy";
+			entityDef.actions[0] = null;
+		}
+		if(i==9011){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Vote Shop";
+			entityDef.actions = new String[] { "Trade", null, "Claim", null, null };
+		}
+		if(i==1933){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Mills";
+			entityDef.actions = new String[] { "Trade", null, null, null, null };
+		}
+		if(i==8819){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Boss point shop";
+			entityDef.actions = new String[] { null, null, "Trade", null, null };
+		}
+		if(i==8688){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Fat Tony";
+			entityDef.actions = new String[] { "Trade", null, null, null, null };
+		}
+		if(i==7769){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Shop Keeper";
+			entityDef.actions = new String[] { "Trade", null, null, null, null };
+		}
+		if(i==6987){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Man";
+			entityDef.actions = new String[] { "Talk", null, "Pickpocket", null, null };
+		}
+		if(i==5730){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Master Farmer";
+			entityDef.actions = new String[] { "Pickpocket", null, "Trade", null, null };
+		}
+		if(i==1501){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Hunter Store";
+			entityDef.actions = new String[] { null, null, null, null, "Trade" };
+		}
+		if(i==2913){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Fishing Store";
+			entityDef.actions = new String[] { "Trade", null, null, null, null };
+		}
+		if(i==5809){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Crafting and Tanner";
+			entityDef.actions = new String[] { "Tan", null, "Trade", null, null };
+		}
+		if(i==555){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Sell Me Store";
+			entityDef.actions = new String[] { "Trade", null, null, null, null };
+		}
+		if(i==9168){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Flex";
+			entityDef.actions = new String[] { "Trade", null, null, null, null };
+		}
+		if(i==8208){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Pet Collector";
+			entityDef.actions = new String[] { "Talk-to", null, null, null, null };
+		}
+		if(i==8202){
+			entityDef.actions = new String[] { "Talk-to", "Pick-Up", null, null, null };
+		}
+		if(i==4921){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Supplies";
+			entityDef.actions = new String[] { "Trade", null, null, null, null };
+		}
+		if (i == 5314) {
+			entityDef.combatLevel = 0;
+			entityDef.name = "Mystical Wizard";
+			entityDef.actions = new String[] { "Teleport", "Previous Location", null, null, null };
+			entityDef.description = "This wizard has the power to teleport you to many locations.";
+		}
+		if (i == 8781) {
+			entityDef.name = "@red@Queen Latsyrc";
+			entityDef.combatLevel = 982;
+			entityDef.onMinimap = true;
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { null, "Attack", null, null, null };
+		}
+		if(i==1577){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Melee Shop";
+			entityDef.combatLevel = 0;
+			entityDef.actions = new String[] { "Trade", null, null, null, null };
+		}
+		if(i==1576){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Range Shop";
+			entityDef.combatLevel = 0;
+			entityDef.actions = new String[] { "Trade", null, null, null, null };
+		}
+		if(i==1578){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Mage Shop";
+			entityDef.combatLevel = 0;
+			entityDef.actions = new String[] { "Trade", null, null, null, null };
+		}
+		if (i == 8026) {
+			entityDef.name = "Vorkath";
+			// entityDef.combatLevel = 732;
+			entityDef.models = new int[] { 35023 };
+			entityDef.standingAnimation = 7946;
+			entityDef.onMinimap = true;
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Poke", null, null, null, null };
+			entityDef.npcWidth = 100;
+			entityDef.npcHeight = 100;
+		}
+		if (i == 7852 || i == 7853 || i == 7884) {//Dawn
+			entityDef.standingAnimation = 7775;
+			entityDef.walkingAnimation = 7775;
+		}
+		if (i == 5518) {
+			entityDef.standingAnimation = 185;
+		}
+		if (i == 8019) {
+			entityDef.standingAnimation = 185;
+			entityDef.actions = new String[5];
+			entityDef.actions[0] = "Talk-to";
+			entityDef.actions[2] = "Trade";
+		}
+		if (i == 308) {
+			entityDef.actions = new String[5];
+			entityDef.actions[0] = "Talk-to";
+			entityDef.actions[2] = "Trade";
+			entityDef.actions[3] = "Disable Interface";
+			entityDef.actions[4] = "Skull";
+		}
+		if (i == 6088) {
+			entityDef.standingAnimation = 185;
+			entityDef.actions = new String[5];
+			entityDef.actions[0] = "Talk-to";
+			entityDef.actions[2] = "Travel";
+		}
+		if (i == 1434 || i == 876 || i == 1612) {//gnome fix
+			entityDef.standingAnimation = 185;
+		}
+		if (i == 7674 || i == 8009 || i == 388 || i == 8010) {
+
+			entityDef.combatLevel = 0;
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
+		}
+		if (i == 8492 || i == 8493 || i == 8494 || i == 8495) {
+			entityDef.combatLevel = 0;
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
+		}
+		if (i == 8737 || i == 8738 || i == 8009 || i == 7674) {
+			entityDef.combatLevel = 0;
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
+		}
+		if (i == 326 || i == 327) {
+			entityDef.combatLevel = 0;
+			entityDef.npcWidth = 85;
+			entityDef.npcHeight = 85;
+			entityDef.name = "Vote Pet";
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
+		}
+		if (i >= 7354 && i <=7367) {
+			entityDef.combatLevel = 0;
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
+		}
+		if (i == 5559 || i == 5560) {
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
+		}
+		if (i == 2149 || i == 2150 || i == 2151 || i == 2148) {
+			entityDef.name = "Trading Clerk";
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Bank", null, "Trading Post", null, null };
+		}
+		if (i == 6473) { //terror dog
+			entityDef.combatLevel = 0;
+			entityDef.npcWidth = 50; //WIDTH
+			entityDef.npcHeight = 50; // HEIGH
+		}
+		if (i == 3510) { //outlast shop
+			entityDef.name = "Trader";
+			entityDef.combatLevel = 0;
+			entityDef.onMinimap = true;
+			entityDef.npcWidth = 150; //WIDTH
+			entityDef.npcHeight = 150; // HEIGH
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Open-Shop", null, null, null, null };
+		}
+		if (i == 488) { //rain cloud
+			entityDef.combatLevel = 0;
+			entityDef.size = 1;
+			entityDef.onMinimap = true;
+			entityDef.npcWidth = 150; //WIDTH
+			entityDef.npcHeight = 150; // HEIGH
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+		}
+		if (i == 7668) { //voice of yama
+			entityDef.name = "Kratos";
+			entityDef.size = 2;
+			entityDef.combatLevel = 0;
+			entityDef.npcWidth = 90; //WIDTH
+			entityDef.npcHeight = 90; // HEIGH
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+
+		}
+		if (i == 1377) {
+			entityDef.name = "Ark";
+			entityDef.size = 3;
+			entityDef.combatLevel = 700;
+			entityDef.npcWidth = 300; //WIDTH
+			entityDef.npcHeight = 300; // HEIGH
+			entityDef.actions[0] = null;
+
+
+		}
+		if (i == 2105) {
+			entityDef.size = 4;
+			entityDef.npcWidth = 600; //WIDTH
+			entityDef.npcHeight = 600; // HEIGH
+		}
+		if (i == 2107) {
+			entityDef.size = 4;
+			entityDef.npcWidth = 600; //WIDTH
+			entityDef.npcHeight = 600; // HEIGH
+		}
+		if (i == 2850) {
+			entityDef.name = "GIM Tracker";
+			entityDef.actions = new String[] { "Open", null, null, null, null };
+
+		}
+		if (i == 6119) { //weird monster
+			entityDef.size = 1;
+			entityDef.combatLevel = 0;
+			entityDef.npcWidth = 30; //WIDTH
+			entityDef.npcHeight = 30; // HEIGH
+		}
+		if (i == 763) { //roc
+
+			entityDef.size = 1;
+			entityDef.combatLevel = 0;
+			entityDef.npcWidth = 30; //WIDTH
+			entityDef.npcHeight = 30; // HEIGH
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
+
+
+		}
+		if (i == 762) { //foe small bird
+			entityDef.size = 1;
+			entityDef.combatLevel = 0;
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
+		}
+		if (i == 4987 || i == 6292 || i == 6354 ) { //chronzon
+			entityDef.size = 1;
+			entityDef.combatLevel = 0;
+			entityDef.npcWidth = 45; //WIDTH
+			entityDef.npcHeight = 45; // HEIGH
+		}
+		if (i == 8709) {
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.name = "Corrupt Beast";
+			entityDef.combatLevel = 0;
+			entityDef.npcWidth = 60; //WIDTH
+			entityDef.npcHeight = 60; // HEIGH
+			entityDef.size = 1;
+		}
+		if (i == 7025) { //guard dog
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.npcWidth = 85; //WIDTH
+			entityDef.npcHeight = 85; // HEIGH
+		}
+
+		if (i == 6716) {//prayer
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.npcWidth = 65; //WIDTH
+			entityDef.npcHeight = 65; // HEIGH
+			entityDef.combatLevel = 0;
+
+
+		}
+		if (i == 6723) {//healer
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.npcWidth = 65; //WIDTH
+			entityDef.npcHeight = 65; // HEIGH
+			entityDef.combatLevel = 0;
+
+		}
+		if (i == 1088) {
+			entityDef.name = "Seren";
+			entityDef.models = new int[] { 38605 };
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.npcWidth = 65; //WIDTH
+			entityDef.npcHeight = 65; // HEIGH
+			entityDef.originalColors = null;
+			entityDef.newColors = null;
+			entityDef.combatLevel = 0;
+			entityDef.standingAnimation = 8372;
+			entityDef.walkingAnimation = 8372;
+			entityDef.models = new int[] { 38605 };
+
+		}
+		if (i == 1089) {
+			entityDef.name = "Lil mimic";
+			entityDef.models = new int[] { 37142 };
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.npcWidth = 25; //WIDTH
+			entityDef.npcHeight = 25; // HEIGH
+			entityDef.originalColors = null;
+			entityDef.newColors = null;
+			entityDef.combatLevel = 0;
+			entityDef.standingAnimation = 8307;
+			entityDef.walkingAnimation = 8306;
+			entityDef.models = new int[] { 37142 };
+
+		}
+		if (i == 2120) {
+			entityDef.name = "Shadow Ranger";
+			entityDef.models = new int[] { 29267 };
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.npcWidth = 85; //WIDTH
+			entityDef.npcHeight = 85; // HEIGH
+			entityDef.originalColors = null;
+			entityDef.newColors = null;
+			entityDef.combatLevel = 0;
+			entityDef.standingAnimation = 8526;
+			entityDef.walkingAnimation = 8527;
+			entityDef.models = new int[] { 29267 };
+
+		}
+		if (i == 2121) {
+			entityDef.name = "Shadow Wizard";
+			entityDef.models = new int[] { 29268 };
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.npcWidth = 85; //WIDTH
+			entityDef.npcHeight = 85; // HEIGH
+			entityDef.originalColors = null;
+			entityDef.newColors = null;
+			entityDef.combatLevel = 0;
+			entityDef.standingAnimation = 8526;
+			entityDef.walkingAnimation = 8527;
+			entityDef.models = new int[] { 29268 };
+		}
+		if (i == 2122) {
+			entityDef.name = "Shadow Warrior";
+			entityDef.models = new int[] { 29266 };
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.npcWidth = 85; //WIDTH
+			entityDef.npcHeight = 85; // HEIGH
+			entityDef.originalColors = null;
+			entityDef.newColors = null;
+			entityDef.combatLevel = 0;
+			entityDef.standingAnimation = 8526;
+			entityDef.walkingAnimation = 8527;
+			entityDef.models = new int[] { 29266 };
+		}
+
+		if (i == 7216 || i == 6473) {//green monkey and green dog
+			entityDef.actions = new String[5];
+			entityDef.combatLevel = 0;
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+		}
+		if (i == 6723 || i == 6716 || i == 8709) {
+			entityDef.actions = new String[5];
+			entityDef.combatLevel = 0;
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+		}
+		if (i == 3291) {//postie pete
+			entityDef.actions = new String[5];
+			entityDef.combatLevel = 0;
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+		}
+		if (i == 5738) {//imp
+			entityDef.actions = new String[5];
+			entityDef.combatLevel = 0;
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+
+		}
+		if (i == 5240) {//toucan
+			entityDef.actions = new String[5];
+			entityDef.combatLevel = 0;
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+
+		}
+		if (i == 834) {
+			entityDef.name = "King penguin";
+			entityDef.actions = new String[5];
+			entityDef.combatLevel = 0;
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+
+		}
+		if (i == 1873) {//klik
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.standingAnimation = 3345;
+			entityDef.walkingAnimation = 3346;
+
+		}
+		//dark pets
+		if (i == 2300) {
+			entityDef.models = new int[1];
+			entityDef.name = "Dark postie pete";
+			entityDef.models = new int[] { 46600 };
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.originalColors = null;
+			entityDef.newColors = null;
+			entityDef.combatLevel = 0;
+			entityDef.standingAnimation = 3948;
+			entityDef.walkingAnimation = 3947;
+		}
+		if (i == 2301) {
+			entityDef.name = "Dark imp";
+			entityDef.models = new int[] { 46700 };
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.originalColors = null;
+			entityDef.newColors = null;
+			entityDef.combatLevel = 0;
+			entityDef.standingAnimation = 171;
+			entityDef.walkingAnimation = 168;
+		}
+		if (i == 2302) {
+			entityDef.name = "Dark toucan";
+			entityDef.models = new int[] { 46800, 46801 };
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.originalColors = null;
+			entityDef.newColors = null;
+			entityDef.combatLevel = 0;
+			entityDef.standingAnimation = 6772;
+			entityDef.walkingAnimation = 6774;
+		}
+		if (i == 2303) {
+			entityDef.name = "Dark king penguin";
+			entityDef.models = new int[] { 46200 };
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.originalColors = null;
+			entityDef.newColors = null;
+			entityDef.combatLevel = 0;
+			entityDef.standingAnimation = 5668;
+			entityDef.walkingAnimation = 5666;
+		}
+		if (i == 2304) {
+			entityDef.name = "Dark k'klik";
+			entityDef.models = new int[] { 46300, 46301, 46302 };
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.originalColors = null;
+			entityDef.newColors = null;
+			entityDef.combatLevel = 0;
+			entityDef.standingAnimation = 3346;
+			entityDef.walkingAnimation = -1;
+		}
+		if (i == 2305) {
+			entityDef.name = "Dark shadow warrior";
+			entityDef.models = new int[] { 46100 };
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.originalColors = null;
+			entityDef.newColors = null;
+			entityDef.combatLevel = 0;
+			entityDef.standingAnimation = 8526;
+			entityDef.walkingAnimation = 8527;
+			entityDef.npcWidth = 85; //WIDTH
+			entityDef.npcHeight = 85; // HEIGH
+		}
+		if (i == 2306) {
+			entityDef.name = "Dark shadow archer";
+			entityDef.models = new int[] { 56800 };
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.originalColors = null;
+			entityDef.newColors = null;
+			entityDef.combatLevel = 0;
+			entityDef.standingAnimation = 8526;
+			entityDef.walkingAnimation = 8527;
+			entityDef.npcWidth = 85; //WIDTH
+			entityDef.npcHeight = 85; // HEIGH
+		}
+		if (i == 2307) {
+			entityDef.name = "Dark shadow wizard";
+			entityDef.models = new int[] { 45900 };
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.originalColors = null;
+			entityDef.newColors = null;
+			entityDef.combatLevel = 0;
+			entityDef.standingAnimation = 8526;
+			entityDef.walkingAnimation = 8527;
+			entityDef.npcWidth = 85; //WIDTH
+			entityDef.npcHeight = 85; // HEIGH
+		}
+		if (i == 2308) {
+			entityDef.name = "Dark healer death spawn";
+			entityDef.models = new int[] { 46500, 46501, 46502, 46503, 46504, 46505, 46506,};
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.originalColors = null;
+			entityDef.newColors = null;
+			entityDef.npcWidth = 65; //WIDTH
+			entityDef.npcHeight = 65; // HEIGH
+			entityDef.combatLevel = 0;
+			entityDef.standingAnimation = 1539;
+			entityDef.walkingAnimation = 1539;
+		}
+		if (i == 2309) {
+			entityDef.name = "Dark holy death spawn";
+			entityDef.models = new int[] { 46406, 46405, 46404, 46403, 46402, 46401, 46400 };
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.originalColors = null;
+			entityDef.newColors = null;
+			entityDef.npcWidth = 65; //WIDTH
+			entityDef.npcHeight = 65; // HEIGH
+			entityDef.combatLevel = 0;
+			entityDef.standingAnimation = 1539;
+			entityDef.walkingAnimation = 1539;
+		}
+		if (i == 2310) {
+			entityDef.name = "Dark seren";
+			entityDef.models = new int[] { 46900 };
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.originalColors = null;
+			entityDef.newColors = null;
+			entityDef.combatLevel = 0;
+			entityDef.standingAnimation = 8372;
+			entityDef.walkingAnimation = 8372;
+			entityDef.npcWidth = 65; //WIDTH
+			entityDef.npcHeight = 65; // HEIGH
+		}
+		if (i == 2311) {
+			entityDef.name = "Dark corrupt beast";
+			entityDef.models = new int[] { 45710 };
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.originalColors = null;
+			entityDef.newColors = null;
+			entityDef.combatLevel = 0;
+			entityDef.npcWidth = 60; //WIDTH
+			entityDef.npcHeight = 60; // HEIGH
+			entityDef.size = 1;
+			entityDef.standingAnimation = 5616;
+			entityDef.walkingAnimation = 5615;
+		}
+		if (i == 2312) {
+			entityDef.name = "Dark roc";
+			entityDef.models = new int[] { 45603, 45604 };
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.originalColors = null;
+			entityDef.newColors = null;
+			entityDef.standingAnimation = 5021;
+			entityDef.walkingAnimation = 5022;
+			entityDef.size = 1;
+			entityDef.combatLevel = 0;
+			entityDef.npcWidth = 30; //WIDTH
+			entityDef.npcHeight = 30; // HEIGH
+		}
+
+		if (i == 2318) {
+			entityDef.name = "Dark roc";
+			entityDef.models = new int[] { 45603, 45604 };
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.newColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+			entityDef.originalColors = new int[] { 677, 801, 43540, 43543, 43546, 43549, 43550, 43552, 43554, 43558,
+				43560, 43575 };
+			entityDef.standingAnimation = 5021;
+			entityDef.walkingAnimation = 5022;
+			entityDef.size = 1;
+			entityDef.combatLevel = 0;
+			entityDef.npcWidth = 30; //WIDTH
+			entityDef.npcHeight = 30; // HEIGH
+		}
+
+		if (i == 2313) {
+			entityDef.name = "Dark kratos";
+			entityDef.models = new int[] { 45500, 45501, 45502 };
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.originalColors = null;
+			entityDef.newColors = null;
+			entityDef.standingAnimation = 7017;
+			entityDef.walkingAnimation = 7016;
+			entityDef.size = 2;
+			entityDef.combatLevel = 0;
+			entityDef.npcWidth = 90; //WIDTH
+			entityDef.npcHeight = 90; // HEIGH
+		}
+		if (i == 8027) {
+			entityDef.name = "Vorkath";
+			entityDef.combatLevel = 732;
+			entityDef.models = new int[] { 35023 };
+			entityDef.standingAnimation = 7950;
+			entityDef.onMinimap = true;
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { null, null, null, null, null };
+			entityDef.npcWidth = 100;
+			entityDef.npcHeight = 100;
+		}
+		if (i == 8028) {
+			entityDef.name = "Vorkath";
+			entityDef.combatLevel = 732;
+			entityDef.models = new int[] { 35023 };
+			entityDef.standingAnimation = 7948;
+			entityDef.onMinimap = true;
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { null, "Attack", null, null, null };
+			entityDef.npcWidth = 100;
+			entityDef.npcHeight = 100;
+		}
+		if(i==7144){
+			entityDef.anInt75 = 0;
+		}
+		if(i==963){
+			entityDef.anInt75 = 6;
+		}
+		if(i==7145){
+			entityDef.anInt75 = 1;
+		}
+		if(i==7146){
+			entityDef.anInt75 = 2;
+		}
+		if (entityDef.name != null && entityDef.name.toLowerCase().contains("chinchompa") && !entityDef.name.toLowerCase().contains("baby")) {
+			entityDef.actions = new String[5];
+		}
         return entityDef;
     }
 
@@ -1386,13 +1383,13 @@ public final class NpcDefinition implements RSNPCComposition {
         }
     }
 
-    public Model model() {
+    public Model method160() {
         if (configs != null) {
             NpcDefinition entityDef = method161();
             if (entityDef == null)
                 return null;
             else
-                return entityDef.model();
+                return entityDef.method160();
         }
         if (chatheadModels == null) {
             return null;

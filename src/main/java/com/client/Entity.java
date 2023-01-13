@@ -45,8 +45,8 @@ public class Entity extends Renderable {
 	}
 
 	public final void setPos(int i, int j, boolean flag) {
-		if (anim != -1 && AnimationDefinition.anims[anim].priority == 1)
-			anim = -1;
+		if (emoteAnimation != -1 && AnimationDefinition.anims[emoteAnimation].priority == 1)
+			emoteAnimation = -1;
 		if (!flag) {
 			int k = i - pathX[0];
 			int l = j - pathY[0];
@@ -116,8 +116,8 @@ public class Entity extends Renderable {
 			j++;
 			k--;
 		}
-		if (anim != -1 && AnimationDefinition.anims[anim].priority == 1)
-			anim = -1;
+		if (emoteAnimation != -1 && AnimationDefinition.anims[emoteAnimation].priority == 1)
+			emoteAnimation = -1;
 		if (smallXYIndex < 9)
 			smallXYIndex++;
 		for (int l = smallXYIndex; l > 0; l--) {
@@ -142,25 +142,25 @@ public class Entity extends Renderable {
 		pathY = new int[10];
 		interactingEntity = -1;
 		anInt1504 = 32;
-		anInt1505 = -1;
+		runAnimIndex = -1;
 		height = 200;
-		anInt1511 = -1;
-		anInt1512 = -1;
+		idleAnimation = -1;
+		standTurnAnimIndex = -1;
 		hitArray = new int[4];
 		hitMarkTypes = new int[4];
 		hitsLoopCycle = new int[4];
 		anInt1517 = -1;
 		anInt1520 = -1;
-		anim = -1;
+		emoteAnimation = -1;
 		loopCycleStatus = -1000;
 		textCycle = 100;
 		anInt1540 = 1;
 		aBoolean1541 = false;
 		aBooleanArray1553 = new boolean[10];
-		anInt1554 = -1;
-		anInt1555 = -1;
-		anInt1556 = -1;
-		anInt1557 = -1;
+		walkAnimIndex = -1;
+		turn180AnimIndex = -1;
+		turn90CWAnimIndex = -1;
+		turn90CCWAnimIndex = -1;
 	}
 
 	public final int[] pathX;
@@ -168,13 +168,13 @@ public class Entity extends Renderable {
 	public int interactingEntity;
 	int anInt1503;
 	int anInt1504;
-	int anInt1505;
+	int runAnimIndex;
 	public String textSpoken;
 	public String lastForceChat;
 	public int height;
 	private int turnDirection;
-	int anInt1511;
-	int anInt1512;
+	int idleAnimation;
+	int standTurnAnimIndex;
 	int anInt1513;
 	final int[] hitArray;
 	final int[] hitMarkTypes;
@@ -188,10 +188,10 @@ public class Entity extends Renderable {
 	int anInt1523;
 	int anInt1524;
 	int smallXYIndex;
-	public int anim;
+	public int emoteAnimation;
 	int animFrameIndex;
 	int anInt1528;
-	int anInt1529;
+	int animationDelay;
 	int anInt1530;
 	int anInt1531;
 	public int loopCycleStatus;
@@ -213,12 +213,12 @@ public class Entity extends Renderable {
 	int forceMovementDirection;
 	public int x;
 	public int y;
-	int anInt1552;
+	int orientation;
 	final boolean[] aBooleanArray1553;
-	int anInt1554;
-	int anInt1555;
-	int anInt1556;
-	int anInt1557;
+	int walkAnimIndex;
+	int turn180AnimIndex;
+	int turn90CWAnimIndex;
+	int turn90CCWAnimIndex;
 
 	public int getTurnDirection() {
 		return turnDirection;

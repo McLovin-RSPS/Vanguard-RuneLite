@@ -4,6 +4,7 @@ import lombok.NonNull;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.runelite.client.plugins.hd.HdPlugin;
+import net.runelite.client.plugins.hd.HdPluginConfig;
 import net.runelite.client.plugins.hd.data.WaterType;
 import net.runelite.client.plugins.hd.data.environments.Area;
 

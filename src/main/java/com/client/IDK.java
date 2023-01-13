@@ -103,7 +103,7 @@ public final class IDK {
 		return model;
 	}
 
-	public boolean method539() {
+	public boolean headLoaded() {
 		boolean flag1 = true;
 		for (int i = 0; i < 5; i++)
 			if (models[i] != -1 && !Model.isCached(models[i]))
@@ -112,7 +112,7 @@ public final class IDK {
 		return flag1;
 	}
 
-	public Model method540() {
+	public Model headModel() {
 		Model aclass30_sub2_sub4_sub6s[] = new Model[5];
 		int j = 0;
 		for (int k = 0; k < 5; k++)

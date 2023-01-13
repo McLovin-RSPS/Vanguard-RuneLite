@@ -487,7 +487,7 @@ public final class MapRegion {
 		int modY = flag ? (sizeX >> 1) + y : y;
 		int modY1 = flag ? y + (sizeX + 1 >> 1) : y + 1;
 
-		int center = tileHeights[z %= 4][modX][modY];
+		int center = tileHeights[z][modX][modY];
 		int east = tileHeights[z][modX1][modY];
 		int northEast = tileHeights[z][modX1][modY1];
 		int north = tileHeights[z][modX][modY1];
@@ -1352,7 +1352,7 @@ public final class MapRegion {
 		Buffer stream = new Buffer(is);
 		int i_252_ = -1;
 		for (;;) {
-			int i_253_ = stream.getUIncrementalSmart();
+			int i_253_ = stream.readUSmart();
 			if (i_253_ == 0)
 				break;
 			i_252_ += i_253_;
@@ -1392,7 +1392,7 @@ public final class MapRegion {
 			Buffer stream = new Buffer(abyte0);
 			int l = -1;
 			do {
-				int i1 = stream.getUIncrementalSmart();
+				int i1 = stream.readUSmart();
 				if (i1 == 0)
 					break label0;
 				l += i1;

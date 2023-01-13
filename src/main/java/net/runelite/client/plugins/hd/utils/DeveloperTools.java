@@ -4,8 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.client.config.Keybind;
 import net.runelite.client.input.KeyListener;
 import net.runelite.client.input.KeyManager;
-import net.runelite.client.plugins.hd.overlays.TileInfoOverlay;
 import net.runelite.client.ui.overlay.OverlayManager;
+import net.runelite.client.plugins.hd.overlays.TileInfoOverlay;
 
 import javax.inject.Inject;
 import java.awt.event.InputEvent;

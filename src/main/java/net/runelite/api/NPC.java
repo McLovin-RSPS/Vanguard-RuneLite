@@ -35,7 +35,7 @@ public interface NPC extends Actor
 	 * Gets the ID of the NPC.
 	 *
 	 * @return the ID of the NPC
-	 * //@see NpcID
+	 * @see NpcID
 	 */
 	int getId();
 
@@ -68,6 +68,4 @@ public interface NPC extends Actor
 	 */
 	@Nullable
 	NPCComposition getTransformedComposition();
-
-	void onDefinitionChanged(NPCComposition composition);
 }

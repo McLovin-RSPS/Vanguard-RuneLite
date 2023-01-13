@@ -40,6 +40,9 @@ public final class WidgetID
 	public static final int FAIRY_RING_GROUP_ID = 100001;
 	public static final int LOGOUT_PANEL_ID = 100002;
 
+	// Custom menu world map
+	public static final int MINIMAP_GROUP_ID = 40500;
+
 	public static final int SHOP = 3900;
 	public static final int PRICE_CHECKER = 18500;
 	public static final int ITEMS_KEPT_ON_DEATH = 17110;
@@ -79,7 +82,6 @@ public final class WidgetID
 	public static final int PEST_CONTROL_BOAT_GROUP_ID = 100019;
 	public static final int PEST_CONTROL_GROUP_ID = 100020;
 	public static final int FRIENDS_CHAT_GROUP_ID = 100021;
-	public static final int MINIMAP_GROUP_ID = 100022;
 	public static final int LOGIN_CLICK_TO_PLAY_GROUP_ID = 100023;
 	public static final int CLUE_SCROLL_GROUP_ID = 100024;
 	public static final int FIXED_VIEWPORT_GROUP_ID = 548;

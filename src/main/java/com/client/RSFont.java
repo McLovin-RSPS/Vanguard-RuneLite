@@ -1,6 +1,6 @@
 package com.client;
 
-import com.client.util.AssetUtils;
+import com.util.AssetUtils;
 import org.apache.commons.io.IOUtils;
 
 import java.awt.Color;

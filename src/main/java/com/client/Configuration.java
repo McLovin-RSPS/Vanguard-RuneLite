@@ -25,7 +25,7 @@ public class Configuration {
 	 */
 	public static final int CACHE_VERSION = 101; // Change this up one when making cache updates.
 
-	public static final String CACHE_LINK = "";
+	public static final String CACHE_LINK = "https://www.dropbox.com/s/2da7kxuk2i8qwma/.vanguard_v1.zip?dl=1";
 
 	/**
 	 * The server version. The cache path is append with a _v1/2/3 etc for the version number
@@ -38,7 +38,7 @@ public class Configuration {
 
 	public static final String CLIENT_TITLE = "Vanguard | ";
 	public static final String WEBSITE = "https://discord.gg/g6hBw3ws6w";
-	public static final String DEDICATED_SERVER_ADDRESS = "0.0.0.0";// put ur vps ip here
+	public static final String DEDICATED_SERVER_ADDRESS = LOCAL_HOST ? "158.69.62.205" : "158.69.62.205";// put ur vps ip here
 	public static final String TEST_SERVER_ADDRESS = LOCAL_HOST ? "158.69.62.205" : "158.69.62.205";
 	public static final int PORT = 43594;
 	public static final int TEST_PORT = 43595;
@@ -67,10 +67,10 @@ public class Configuration {
 	public static final LocalDateTime LAUNCH_TIME = LocalDateTime.now();
 	public static final String ERROR_LOG_DIRECTORY = "error_logs/";
 	public static String ERROR_LOG_FILE = ("error_log_"
-			+ LAUNCH_TIME.getYear() + "_"
-			+ LAUNCH_TIME.getMonth() + "_"
-			+ LAUNCH_TIME.getDayOfMonth()
-			+ ".txt").toLowerCase();
+		+ LAUNCH_TIME.getYear() + "_"
+		+ LAUNCH_TIME.getMonth() + "_"
+		+ LAUNCH_TIME.getDayOfMonth()
+		+ ".txt").toLowerCase();
 
 	/**
 	 * Attack option priorities 0 -> Depends on combat level 1 -> Always right-click

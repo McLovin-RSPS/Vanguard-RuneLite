@@ -33,7 +33,11 @@ import net.runelite.api.annotations.VisibleForDevtools;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldArea;
 import net.runelite.api.coords.WorldPoint;
+import net.runelite.api.events.AutomatedMenu;
 
+/**
+ * Represents a RuneScape actor/entity.
+ */
 /**
  * Represents a RuneScape actor/entity.
  */
@@ -51,7 +55,7 @@ public interface Actor extends Renderable, Locatable
 	 *
 	 * @return the name
 	 */
-	@Nullable
+//	@Nullable
 	String getName();
 
 	/**
@@ -148,24 +152,8 @@ public interface Actor extends Renderable, Locatable
 	 */
 	int getPoseAnimation();
 
-	/**
-	 * Set the idle pose animation.
-	 * @param animation
-	 * @see AnimationID
-	 */
+	@VisibleForDevtools
 	void setPoseAnimation(int animation);
-
-	/**
-	 * Get the frame of the idle animation the actor is performing
-	 * @return
-	 */
-	int getPoseAnimationFrame();
-
-	/**
-	 * Set the frame of the idle animation the actor is performing
-	 * @param frame
-	 */
-	void setPoseAnimationFrame(int frame);
 
 	/**
 	 * The idle pose animation. If the actor is not walking or otherwise animating, this will be used
@@ -297,6 +285,18 @@ public interface Actor extends Renderable, Locatable
 	void setGraphic(int graphic);
 
 	/**
+	 * Get the height of the graphic/spotanim on the actor
+	 * @return
+	 */
+	int getGraphicHeight();
+
+	/**
+	 * Set the height of the graphic/spotanim on the actor
+	 * @param height
+	 */
+	void setGraphicHeight(int height);
+
+	/**
 	 * Get the frame of the currently playing spotanim
 	 *
 	 * @return
@@ -424,5 +424,61 @@ public interface Actor extends Renderable, Locatable
 	 */
 	boolean isDead();
 
+	void setDead(boolean dead);
+
 	boolean isMoving();
+
+	default boolean isAnimating()
+	{
+		return getAnimation() != -1;
+	}
+
+	int getActionOpcode(int action);
+
+	String[] getRawActions();
+
+	void interact(int action);
+
+	void interact(String action);
+
+	void interact(int index, int opcode);
+
+	void interact(int identifier, int opcode, int param0, int param1);
+
+	default AutomatedMenu getMenu(int identifier, int opcode, int param0, int param1) {
+		return new AutomatedMenu(identifier, opcode, param0, param1, -1, -1);
+	}
+
+	long getTag();
+
+
+	// Kris changes
+
+	int getCombatLevelOverride();
+
+	boolean instantTurn();
+
+	int getFacedDirection();
+
+	int getAnimationDelay();
+
+	int getAnimationFrameIndex();
+
+
+	int exactMoveDeltaX1();
+	int exactMoveDeltaX2();
+	int exactMoveDeltaY1();
+	int exactMoveDeltaY2();
+	int exactMoveArrive1Cycle();
+	int exactMoveArrive2Cycle();
+	int exactMoveDirection();
+
+	int recolourStartCycle();
+	int recolourEndCycle();
+	byte recolourHue();
+	byte recolourSaturation();
+	byte recolourLuminance();
+	byte recolourAmount();
+	int getGraphicStartCycle();
+	boolean showPublicPlayerChat();
 }

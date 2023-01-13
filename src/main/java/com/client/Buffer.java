@@ -209,9 +209,10 @@ public final class Buffer extends Cacheable {
         payload[currentPosition++] = 10;
     }
 
-    public void writeWordBigEndian(int i) {
-        payload[currentPosition++] = (byte) i;
-    }
+
+	public void writeWordBigEndian(int i) {
+		payload[currentPosition++] = (byte) i;
+	}
 
     public void writeBytes(byte abyte0[], int length, int startingPosition) {
         for (int k = startingPosition; k < startingPosition + length; k++)

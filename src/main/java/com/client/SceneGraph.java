@@ -1087,8 +1087,8 @@ public final class SceneGraph implements RSScene {
         if (!isGpu && skyboxColor != 0)
         {
             Client.instance.rasterizerFillRectangle(
-                   0,
-                    0,
+                    Client.instance.getViewportXOffset(),
+                    Client.instance.getViewportYOffset(),
                     Client.instance.getViewportWidth(),
                     Client.instance.getViewportHeight(),
                     skyboxColor

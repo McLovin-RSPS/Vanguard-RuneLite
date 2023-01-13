@@ -100,7 +100,7 @@ public interface Model extends Renderable
 
 	int getXYZMag();
 	boolean isClickable();
-
+	
 	void drawFace(int face);
 
 	int[] getVertexNormalsX();

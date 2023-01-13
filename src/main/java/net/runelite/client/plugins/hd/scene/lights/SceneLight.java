@@ -1,12 +1,12 @@
 package net.runelite.client.plugins.hd.scene.lights;
 
+import java.util.Random;
+
 import lombok.NonNull;
 import net.runelite.api.GraphicsObject;
 import net.runelite.api.NPC;
 import net.runelite.api.Projectile;
 import net.runelite.api.TileObject;
-
-import java.util.Random;
 
 public class SceneLight extends Light
 {

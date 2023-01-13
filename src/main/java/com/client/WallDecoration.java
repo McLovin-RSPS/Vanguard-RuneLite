@@ -1,10 +1,5 @@
 package com.client;
 
-import java.awt.Graphics2D;
-import java.awt.Polygon;
-import java.awt.Shape;
-
-
 import com.client.definitions.ObjectDefinition;
 import com.client.utilities.ObjectKeyUtil;
 import net.runelite.api.Model;
@@ -17,17 +12,23 @@ import net.runelite.rs.api.RSModel;
 import net.runelite.rs.api.RSRenderable;
 import net.runelite.rs.api.RSWallDecoration;
 
+import java.awt.*;
+
 public final class WallDecoration implements RSWallDecoration {
 
-	public int zLoc;
-	public int tileHeights;
-	public int xPos;
+	public WallDecoration() {
+	}
+
+	int zLoc;
+	int tileHeights;
+	int xPos;
 	public int yPos;
-	public int orientation;
-	public int orientation2;
+	int orientation;
+	int orientation2;
 	public Renderable renderable;
 	public long uid;
-	public byte mask;
+
+	byte mask;
 
 	@Override
 	public Shape getConvexHull() {
@@ -64,12 +65,12 @@ public final class WallDecoration implements RSWallDecoration {
 		return ObjectKeyUtil.getObjectId(uid);
 	}
 	@Override
-	public Point getCanvasLocation() {
+	public net.runelite.api.Point getCanvasLocation() {
 		return Perspective.localToCanvas(Client.instance, getLocalLocation(), getPlane(), 0);
 	}
 
 	@Override
-	public Point getCanvasLocation(int zOffset) {
+	public net.runelite.api.Point getCanvasLocation(int zOffset) {
 		return Perspective.localToCanvas(Client.instance, this.getLocalLocation(), this.getPlane(), zOffset);
 	}
 
@@ -79,7 +80,7 @@ public final class WallDecoration implements RSWallDecoration {
 	}
 
 	@Override
-	public Point getCanvasTextLocation(Graphics2D graphics, String text, int zOffset) {
+	public net.runelite.api.Point getCanvasTextLocation(Graphics2D graphics, String text, int zOffset) {
 		return Perspective.getCanvasTextLocation(Client.instance, graphics, getLocalLocation(), text, zOffset);
 	}
 
@@ -98,7 +99,7 @@ public final class WallDecoration implements RSWallDecoration {
 
 		RSModel model;
 
-		if (renderable instanceof Model)
+		if (renderable instanceof net.runelite.api.Model)
 		{
 			model = (RSModel) renderable;
 		}
@@ -214,7 +215,9 @@ public final class WallDecoration implements RSWallDecoration {
 	}
 
 	@Override
-	public int getConfig() {
+	public int getConfig()
+	{
 		return mask;
 	}
+
 }

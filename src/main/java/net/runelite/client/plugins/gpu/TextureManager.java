@@ -24,15 +24,14 @@
  */
 package net.runelite.client.plugins.gpu;
 
+import java.nio.ByteBuffer;
+import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Texture;
 import net.runelite.api.TextureProvider;
 import org.lwjgl.opengl.EXTTextureFilterAnisotropic;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL43C;
-
-import javax.inject.Singleton;
-import java.nio.ByteBuffer;
 
 @Singleton
 @Slf4j

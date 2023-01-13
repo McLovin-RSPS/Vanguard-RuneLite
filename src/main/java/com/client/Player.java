@@ -14,6 +14,7 @@ import net.runelite.api.Point;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldArea;
 import net.runelite.api.coords.WorldPoint;
+import net.runelite.api.kit.KitType;
 import net.runelite.rs.api.*;
 import org.jetbrains.annotations.Nullable;
 
@@ -98,7 +99,7 @@ public final class Player extends Entity implements RSPlayer {
 		healthState = stream.readUnsignedByte();
 		headIcon = stream.readUnsignedByte();
 		skullIcon = stream.readUnsignedByte();
-		desc = null;
+		npcDefinition = null;
 		team = 0;
 		for (int j = 0; j < 12; j++) {
 			int k = stream.readUnsignedByte();
@@ -109,7 +110,7 @@ public final class Player extends Entity implements RSPlayer {
 			int i1 = stream.readUnsignedByte();
 			equipment[j] = (k << 8) + i1;
 			if (j == 0 && equipment[0] == 65535) {
-				desc = NpcDefinition.lookup(stream.readUShort());
+				npcDefinition = NpcDefinition.lookup(stream.readUShort());
 				break;
 			}
 			if (j == 8) {
@@ -129,30 +130,30 @@ public final class Player extends Entity implements RSPlayer {
 			int j1 = stream.readUnsignedByte();
 			if (j1 < 0 || j1 >= Client.anIntArrayArray1003[l].length)
 				j1 = 0;
-			anIntArray1700[l] = j1;
+			appearanceColors[l] = j1;
 		}
 
-		super.anInt1511 = stream.readUShort();
-		if (super.anInt1511 == 65535)
-			super.anInt1511 = -1;
-		super.anInt1512 = stream.readUShort();
-		if (super.anInt1512 == 65535)
-			super.anInt1512 = -1;
-		super.anInt1554 = stream.readUShort();
-		if (super.anInt1554 == 65535)
-			super.anInt1554 = -1;
-		super.anInt1555 = stream.readUShort();
-		if (super.anInt1555 == 65535)
-			super.anInt1555 = -1;
-		super.anInt1556 = stream.readUShort();
-		if (super.anInt1556 == 65535)
-			super.anInt1556 = -1;
-		super.anInt1557 = stream.readUShort();
-		if (super.anInt1557 == 65535)
-			super.anInt1557 = -1;
-		super.anInt1505 = stream.readUShort();
-		if (super.anInt1505 == 65535)
-			super.anInt1505 = -1;
+		super.idleAnimation = stream.readUShort();
+		if (super.idleAnimation == 65535)
+			super.idleAnimation = -1;
+		super.standTurnAnimIndex = stream.readUShort();
+		if (super.standTurnAnimIndex == 65535)
+			super.standTurnAnimIndex = -1;
+		super.walkAnimIndex = stream.readUShort();
+		if (super.walkAnimIndex == 65535)
+			super.walkAnimIndex = -1;
+		super.turn180AnimIndex = stream.readUShort();
+		if (super.turn180AnimIndex == 65535)
+			super.turn180AnimIndex = -1;
+		super.turn90CWAnimIndex = stream.readUShort();
+		if (super.turn90CWAnimIndex == 65535)
+			super.turn90CWAnimIndex = -1;
+		super.turn90CCWAnimIndex = stream.readUShort();
+		if (super.turn90CCWAnimIndex == 65535)
+			super.turn90CCWAnimIndex = -1;
+		super.runAnimIndex = stream.readUShort();
+		if (super.runAnimIndex == 65535)
+			super.runAnimIndex = -1;
 		displayName = stream.readString();
 		visible = stream.readUnsignedByte() == 0;
 		combatLevel = stream.readUnsignedByte();
@@ -172,7 +173,7 @@ public final class Player extends Entity implements RSPlayer {
 			aLong1718 += equipment[1] - 256 >> 8;
 		for (int i2 = 0; i2 < 5; i2++) {
 			aLong1718 <<= 3;
-			aLong1718 += anIntArray1700[i2];
+			aLong1718 += appearanceColors[i2];
 		}
 
 		aLong1718 <<= 1;
@@ -180,13 +181,13 @@ public final class Player extends Entity implements RSPlayer {
 	}
 
 	public Model method452() {
-		if (desc != null) {
+		if (npcDefinition != null) {
 			int j = -1;
-			if (super.anim >= 0 && super.anInt1529 == 0)
-				j = AnimationDefinition.anims[super.anim].primaryFrames[super.animFrameIndex];
+			if (super.emoteAnimation >= 0 && super.animationDelay == 0)
+				j = AnimationDefinition.anims[super.emoteAnimation].primaryFrames[super.animFrameIndex];
 			else if (super.anInt1517 >= 0)
 				j = AnimationDefinition.anims[super.anInt1517].primaryFrames[super.anInt1518];
-			Model model = desc.method164(-1, j, null);
+			Model model = npcDefinition.method164(-1, j, null);
 			return model;
 		}
 		long l = aLong1718;
@@ -194,10 +195,10 @@ public final class Player extends Entity implements RSPlayer {
 		int i1 = -1;
 		int j1 = -1;
 		int k1 = -1;
-		if (super.anim >= 0 && super.anInt1529 == 0) {
-			AnimationDefinition animation = AnimationDefinition.anims[super.anim];
+		if (super.emoteAnimation >= 0 && super.animationDelay == 0) {
+			AnimationDefinition animation = AnimationDefinition.anims[super.emoteAnimation];
 			k = animation.primaryFrames[super.animFrameIndex];
-			if (super.anInt1517 >= 0 && super.anInt1517 != super.anInt1511)
+			if (super.anInt1517 >= 0 && super.anInt1517 != super.idleAnimation)
 				i1 = AnimationDefinition.anims[super.anInt1517].primaryFrames[super.anInt1518];
 			if (animation.playerOffhand >= 0) {
 				j1 = animation.playerOffhand;
@@ -255,12 +256,12 @@ public final class Player extends Entity implements RSPlayer {
 
 			model_1 = new Model(j2, aclass30_sub2_sub4_sub6s);
 			for (int j3 = 0; j3 < 5; j3++)
-				if (anIntArray1700[j3] != 0) {
+				if (appearanceColors[j3] != 0) {
 					model_1.recolor(Client.anIntArrayArray1003[j3][0],
-							Client.anIntArrayArray1003[j3][anIntArray1700[j3]]);
+							Client.anIntArrayArray1003[j3][appearanceColors[j3]]);
 					if (j3 == 1)
-						model_1.recolor(Client.anIntArray1204[0],
-								Client.anIntArray1204[anIntArray1700[j3]]);
+						model_1.recolor(Client.PLAYER_BODY_RECOLOURS[0],
+								Client.PLAYER_BODY_RECOLOURS[appearanceColors[j3]]);
 				}
 
 			model_1.generateBones();
@@ -274,7 +275,7 @@ public final class Player extends Entity implements RSPlayer {
 		Model model_2 = Model.emptyModel;
 		model_2.replaceModel(model_1, Frame.noAnimationInProgress(k) & Frame.noAnimationInProgress(i1));
 		if (k != -1 && i1 != -1)
-			model_2.animate2(AnimationDefinition.anims[super.anim].interleaveOrder, i1, k);
+			model_2.animate2(AnimationDefinition.anims[super.emoteAnimation].interleaveOrder, i1, k);
 		else if (k != -1)
 			model_2.animate(k);
 		model_2.calculateBoundsCylinder();
@@ -312,15 +313,15 @@ public final class Player extends Entity implements RSPlayer {
 		return PlayerRights.hasRightsBetween(rights, low, high);
 	}
 
-	public Model getHeadModel() {
+	public Model method453() {
 		if (!visible)
 			return null;
-		if (desc != null)
-			return desc.model();
+		if (npcDefinition != null)
+			return npcDefinition.method160();
 		boolean flag = false;
 		for (int i = 0; i < 12; i++) {
 			int j = equipment[i];
-			if (j >= 256 && j < 512 && !IDK.cache[j - 256].method539())
+			if (j >= 256 && j < 512 && !IDK.cache[j - 256].headLoaded())
 				flag = true;
 			if (j >= 512 && !ItemDefinition.lookup(j - 512).isDialogueModelCached(myGender))
 				flag = true;
@@ -333,7 +334,7 @@ public final class Player extends Entity implements RSPlayer {
 		for (int l = 0; l < 12; l++) {
 			int i1 = equipment[l];
 			if (i1 >= 256 && i1 < 512) {
-				Model model_1 = IDK.cache[i1 - 256].method540();
+				Model model_1 = IDK.cache[i1 - 256].headModel();
 				if (model_1 != null)
 					aclass30_sub2_sub4_sub6s[k++] = model_1;
 			}
@@ -346,21 +347,21 @@ public final class Player extends Entity implements RSPlayer {
 
 		Model model = new Model(k, aclass30_sub2_sub4_sub6s);
 		for (int j1 = 0; j1 < 5; j1++)
-			if (anIntArray1700[j1] != 0) {
+			if (appearanceColors[j1] != 0) {
 				model.recolor(Client.anIntArrayArray1003[j1][0],
-						Client.anIntArrayArray1003[j1][anIntArray1700[j1]]);
+						Client.anIntArrayArray1003[j1][appearanceColors[j1]]);
 				if (j1 == 1)
-					model.recolor(Client.anIntArray1204[0],
-							Client.anIntArray1204[anIntArray1700[j1]]);
+					model.recolor(Client.PLAYER_BODY_RECOLOURS[0],
+							Client.PLAYER_BODY_RECOLOURS[appearanceColors[j1]]);
 			}
 
 		return model;
 	}
 
-	Player() {
+	public Player() {
 		aLong1697 = -1L;
 		aBoolean1699 = false;
-		anIntArray1700 = new int[5];
+		appearanceColors = new int[5];
 		visible = false;
 		equipment = new int[12];
 	}
@@ -389,12 +390,12 @@ public final class Player extends Entity implements RSPlayer {
 		return healthState;
 	}
 
-	private PlayerRights[] rights = new PlayerRights[] {PlayerRights.PLAYER};
+	public PlayerRights[] rights = new PlayerRights[] {PlayerRights.PLAYER};
 	private List<PlayerRights> displayedRights = new ArrayList<>();
 	private long aLong1697;
-	public NpcDefinition desc;
+	public NpcDefinition npcDefinition;
 	boolean aBoolean1699;
-	final int[] anIntArray1700;
+	public int[] appearanceColors;
 	public int team;
 	public int myGender;
 	public String displayName;
@@ -411,7 +412,7 @@ public final class Player extends Entity implements RSPlayer {
 	int anInt1712;
 	int anInt1713;
 	Model aModel_1714;
-	public final int[] equipment;
+	public int[] equipment;
 	private long aLong1718;
 	int anInt1719;
 	int anInt1720;
@@ -419,6 +420,251 @@ public final class Player extends Entity implements RSPlayer {
 	int anInt1722;
 	int skill;
 	private int healthState;
+
+	@Override
+	public int getRSInteracting() {
+		return 0;
+	}
+
+	@Override
+	public String getOverheadText() {
+		return "";
+	}
+
+	@Override
+	public void setOverheadText(String overheadText) {
+
+	}
+
+	@Override
+	public int getX() {
+		return x;
+	}
+
+	@Override
+	public int getY() {
+		return y;
+	}
+
+	@Override
+	public int[] getPathX() {
+		return pathX;
+	}
+
+	@Override
+	public int[] getPathY() {
+		return pathY;
+	}
+
+	@Override
+	public int getAnimation() {
+		return emoteAnimation;
+	}
+
+	@Override
+	public void setAnimation(int animation) {
+		emoteAnimation = animation;
+	}
+
+	@Override
+	public int getAnimationFrame() {
+		return 0;
+	}
+
+	@Override
+	public int getActionFrame() {
+		return 0;
+	}
+
+	@Override
+	public void setAnimationFrame(int frame) {
+	}
+
+	@Override
+	public void setActionFrame(int frame) {
+	}
+
+	@Override
+	public int getActionFrameCycle() {
+		return 0;
+	}
+
+	@Override
+	public int getGraphic() {
+		return 0;
+	}
+
+	@Override
+	public void setGraphic(int id) {
+
+	}
+
+	@Override
+	public int getGraphicHeight()
+	{
+		return 0;
+	}
+
+	@Override
+	public void setGraphicHeight(int height)
+	{
+
+	}
+
+
+	@Override
+	public int getSpotAnimFrame() {
+		return 0;
+	}
+
+	@Override
+	public void setSpotAnimFrame(int id) {
+	}
+
+	@Override
+	public int getSpotAnimationFrameCycle() {
+		return 0;
+	}
+
+	@Override
+	public int getIdlePoseAnimation() {
+		return 0;
+	}
+
+	@Override
+	public void setIdlePoseAnimation(int animation) {
+	}
+
+	@Override
+	public int getPoseAnimation() {
+		return 0;
+	}
+
+	@Override
+	public void setPoseAnimation(int animation) {
+
+	}
+
+	@Override
+	public int getPoseFrame() {
+		return 0;
+	}
+
+	@Override
+	public void setPoseFrame(int frame) {
+	}
+
+	@Override
+	public int getPoseFrameCycle() {
+		return 0;
+	}
+
+	@Override
+	public int getLogicalHeight() {
+		return height;
+	}
+
+	@Override
+	public int getOrientation() {
+		return orientation;
+	}
+
+	@Override
+	public int getCurrentOrientation() {
+		return orientation;
+	}
+
+	@Override
+	public RSIterableNodeDeque getHealthBars() {
+		return null;
+	}
+
+	@Override
+	public int[] getHitsplatValues() {
+		return null;
+	}
+
+	@Override
+	public int[] getHitsplatTypes() {
+		return hitMarkTypes;
+	}
+
+	@Override
+	public int[] getHitsplatCycles() {
+		return hitsLoopCycle;
+	}
+
+	@Override
+	public int getIdleRotateLeft() {
+		return 0;
+	}
+
+	@Override
+	public int getIdleRotateRight() {
+		return 0;
+	}
+
+	@Override
+	public int getWalkAnimation() {
+		return 0;
+	}
+
+	@Override
+	public int getWalkRotate180() {
+		return 0;
+	}
+
+	@Override
+	public int getWalkRotateLeft() {
+		return 0;
+	}
+
+	@Override
+	public int getWalkRotateRight() {
+		return 0;
+	}
+
+	@Override
+	public int getRunAnimation() {
+		return 0;
+	}
+
+	@Override
+	public void setDead(boolean dead) {
+	}
+
+	@Override
+	public int getPathLength() {
+		return 0;
+	}
+
+	@Override
+	public int getOverheadCycle() {
+		return 0;
+	}
+
+	@Override
+	public void setOverheadCycle(int cycle) {
+	}
+
+	@Override
+	public RSModel getModel() {
+		return getRotatedModel();
+	}
+
+	@Override
+	public RSNode getNext() {
+		return null;
+	}
+
+	@Override
+	public RSNode getPrevious() {
+		return null;
+	}
+
+	@Override
+	public void onUnlink() {
+	}
 
 	@Override
 	public String getName() {
@@ -470,37 +716,30 @@ public final class Player extends Entity implements RSPlayer {
 
 	@Override
 	public void setIdleRotateLeft(int animationID) {
-
 	}
 
 	@Override
 	public void setIdleRotateRight(int animationID) {
-
 	}
 
 	@Override
 	public void setWalkAnimation(int animationID) {
-
 	}
 
 	@Override
 	public void setWalkRotateLeft(int animationID) {
-
 	}
 
 	@Override
 	public void setWalkRotateRight(int animationID) {
-
 	}
 
 	@Override
 	public void setWalkRotate180(int animationID) {
-
 	}
 
 	@Override
 	public void setRunAnimation(int animationID) {
-
 	}
 
 	@Override
@@ -525,11 +764,11 @@ public final class Player extends Entity implements RSPlayer {
 		return null;
 	}
 
-
 	@Override
 	public Point getMinimapLocation() {
 		return Perspective.localToMinimap(Client.instance, getLocalLocation());
 	}
+
 	@Override
 	public Shape getConvexHull() {
 		RSModel model = getModel();
@@ -542,6 +781,7 @@ public final class Player extends Entity implements RSPlayer {
 
 		return model.getConvexHull(getX(), getY(), getOrientation(), tileHeight);
 	}
+
 	@Override
 	public WorldArea getWorldArea() {
 		return new WorldArea(getWorldLocation(), 1, 1);
@@ -554,6 +794,168 @@ public final class Player extends Entity implements RSPlayer {
 
 	@Override
 	public boolean isMoving() {
+		return false;
+	}
+
+	@Override
+	public int getActionOpcode(int action)
+	{
+		return 0;
+	}
+
+	@Override
+	public String[] getRawActions()
+	{
+		return new String[0];
+	}
+
+	@Override
+	public void interact(int action)
+	{
+
+	}
+
+	@Override
+	public void interact(String action)
+	{
+
+	}
+
+	@Override
+	public void interact(int index, int opcode)
+	{
+
+	}
+
+	@Override
+	public void interact(int identifier, int opcode, int param0, int param1)
+	{
+
+	}
+
+	@Override
+	public long getTag()
+	{
+		return 0;
+	}
+
+	@Override
+	public int getCombatLevelOverride()
+	{
+		return 0;
+	}
+
+	@Override
+	public boolean instantTurn()
+	{
+		return false;
+	}
+
+	@Override
+	public int getFacedDirection()
+	{
+		return 0;
+	}
+
+	@Override
+	public int getAnimationDelay()
+	{
+		return 0;
+	}
+
+	@Override
+	public int getAnimationFrameIndex()
+	{
+		return 0;
+	}
+
+	@Override
+	public int exactMoveDeltaX1()
+	{
+		return 0;
+	}
+
+	@Override
+	public int exactMoveDeltaX2()
+	{
+		return 0;
+	}
+
+	@Override
+	public int exactMoveDeltaY1()
+	{
+		return 0;
+	}
+
+	@Override
+	public int exactMoveDeltaY2()
+	{
+		return 0;
+	}
+
+	@Override
+	public int exactMoveArrive1Cycle()
+	{
+		return 0;
+	}
+
+	@Override
+	public int exactMoveArrive2Cycle()
+	{
+		return 0;
+	}
+
+	@Override
+	public int exactMoveDirection()
+	{
+		return 0;
+	}
+
+	@Override
+	public int recolourStartCycle()
+	{
+		return 0;
+	}
+
+	@Override
+	public int recolourEndCycle()
+	{
+		return 0;
+	}
+
+	@Override
+	public byte recolourHue()
+	{
+		return 0;
+	}
+
+	@Override
+	public byte recolourSaturation()
+	{
+		return 0;
+	}
+
+	@Override
+	public byte recolourLuminance()
+	{
+		return 0;
+	}
+
+	@Override
+	public byte recolourAmount()
+	{
+		return 0;
+	}
+
+	@Override
+	public int getGraphicStartCycle()
+	{
+		return 0;
+	}
+
+	@Override
+	public boolean showPublicPlayerChat()
+	{
 		return false;
 	}
 
@@ -600,272 +1002,15 @@ public final class Player extends Entity implements RSPlayer {
 		return (Polygon[]) polys.toArray(new Polygon[0]);
 	}
 
-	@Nullable
+
 	@Override
 	public HeadIcon getOverheadIcon() {
 		return null;
 	}
 
-	@Nullable
 	@Override
 	public SkullIcon getSkullIcon() {
 		return null;
-	}
-
-	@Override
-	public boolean isHidden() {
-		return false;
-	}
-
-	@Override
-	public int getRSInteracting() {
-		return 0;
-	}
-
-	@Override
-	public String getOverheadText() {
-		return null;
-	}
-
-	@Override
-	public void setOverheadText(String overheadText) {
-
-	}
-
-
-	@Override
-	public int getX() {
-		return x;
-	}
-
-	@Override
-	public int getY() {
-		return y;
-	}
-
-	@Override
-	public int[] getPathX() {
-		return pathX;
-	}
-
-	@Override
-	public int[] getPathY() {
-		return pathY;
-	}
-
-	@Override
-	public int getAnimation() {
-		return 0;
-	}
-
-	@Override
-	public void setAnimation(int animation) {
-
-	}
-
-	@Override
-	public int getAnimationFrame() {
-		return 0;
-	}
-
-	@Override
-	public int getActionFrame() {
-		return 0;
-	}
-
-	@Override
-	public void setAnimationFrame(int frame) {
-
-	}
-
-	@Override
-	public void setActionFrame(int frame) {
-
-	}
-
-	@Override
-	public int getActionFrameCycle() {
-		return 0;
-	}
-
-	@Override
-	public int getGraphic() {
-		return 0;
-	}
-
-	@Override
-	public void setGraphic(int id) {
-
-	}
-
-	@Override
-	public int getSpotAnimFrame() {
-		return 0;
-	}
-
-	@Override
-	public void setSpotAnimFrame(int id) {
-
-	}
-
-	@Override
-	public int getSpotAnimationFrameCycle() {
-		return 0;
-	}
-
-	@Override
-	public int getIdlePoseAnimation() {
-		return 0;
-	}
-
-	@Override
-	public void setIdlePoseAnimation(int animation) {
-
-	}
-
-	@Override
-	public int getPoseAnimation() {
-		return 0;
-	}
-
-	@Override
-	public void setPoseAnimation(int animation) {
-
-	}
-
-	@Override
-	public int getPoseFrame() {
-		return 0;
-	}
-
-	@Override
-	public void setPoseFrame(int frame) {
-
-	}
-
-	@Override
-	public int getPoseFrameCycle() {
-		return 0;
-	}
-
-	@Override
-	public int getLogicalHeight() {
-		return 0;
-	}
-
-	@Override
-	public int getOrientation() {
-		return 0;
-	}
-
-	@Override
-	public int getCurrentOrientation() {
-		return 0;
-	}
-
-	@Override
-	public RSIterableNodeDeque getHealthBars() {
-		return null;
-	}
-
-	@Override
-	public int[] getHitsplatValues() {
-		return new int[0];
-	}
-
-	@Override
-	public int[] getHitsplatTypes() {
-		return new int[0];
-	}
-
-	@Override
-	public int[] getHitsplatCycles() {
-		return new int[0];
-	}
-
-	@Override
-	public int getIdleRotateLeft() {
-		return 0;
-	}
-
-	@Override
-	public int getIdleRotateRight() {
-		return 0;
-	}
-
-	@Override
-	public int getWalkAnimation() {
-		return 0;
-	}
-
-	@Override
-	public int getWalkRotate180() {
-		return 0;
-	}
-
-	@Override
-	public int getWalkRotateLeft() {
-		return 0;
-	}
-
-	@Override
-	public int getWalkRotateRight() {
-		return 0;
-	}
-
-	@Override
-	public int getRunAnimation() {
-		return 0;
-	}
-
-	@Override
-	public void setDead(boolean dead) {
-
-	}
-
-	@Override
-	public int getPathLength() {
-		return 0;
-	}
-
-	@Override
-	public int getOverheadCycle() {
-		return 0;
-	}
-
-	@Override
-	public void setOverheadCycle(int cycle) {
-
-	}
-
-	@Override
-	public int getPoseAnimationFrame() {
-		return 0;
-	}
-
-	@Override
-	public void setPoseAnimationFrame(int frame) {
-
-	}
-
-	@Override
-	public RSNode getNext() {
-		return null;
-	}
-
-	@Override
-	public long getHash() {
-		return 0;
-	}
-
-	@Override
-	public RSNode getPrevious() {
-		return null;
-	}
-
-	@Override
-	public void onUnlink() {
-
 	}
 
 	@Override
@@ -880,12 +1025,51 @@ public final class Player extends Entity implements RSPlayer {
 
 	@Override
 	public RSPlayerComposition getPlayerComposition() {
-		return null;
+		return new RSPlayerComposition() {
+			@Override
+			public boolean isFemale() {
+				return myGender == 1;
+			}
+
+			@Override
+			public int[] getColors() {
+				return appearanceColors;
+			}
+
+			@Override
+			public int[] getEquipmentIds() {
+				return equipment;
+			}
+
+			@Override
+			public int getEquipmentId(KitType type) {
+				return 0;
+			}
+
+			@Override
+			public void setTransformedNpcId(int id) {
+
+			}
+
+			@Override
+			public int getKitId(KitType type) {
+				return equipment[type.getIndex()];
+			}
+
+			@Override
+			public long getHash() {
+				return 0;
+			}
+
+			@Override
+			public void setHash() {
+			}
+		};
 	}
 
 	@Override
 	public int getCombatLevel() {
-		return 0;
+		return combatLevel;
 	}
 
 	@Override
@@ -895,7 +1079,7 @@ public final class Player extends Entity implements RSPlayer {
 
 	@Override
 	public int getTeam() {
-		return 0;
+		return team;
 	}
 
 	@Override
@@ -910,7 +1094,7 @@ public final class Player extends Entity implements RSPlayer {
 
 	@Override
 	public boolean isFriend() {
-		return false;
+		return Client.instance.isFriended(displayName, true);
 	}
 
 	@Override
@@ -920,12 +1104,12 @@ public final class Player extends Entity implements RSPlayer {
 
 	@Override
 	public int getRsOverheadIcon() {
-		return 0;
+		return headIcon;
 	}
 
 	@Override
 	public int getRsSkullIcon() {
-		return 0;
+		return skullIcon;
 	}
 
 	@Override
@@ -935,26 +1119,16 @@ public final class Player extends Entity implements RSPlayer {
 
 	@Override
 	public String[] getActions() {
-		return new String[0];
+		return null;
 	}
 
 	@Override
-	public int getModelHeight() {
+	public int getPoseAnimationFrame() {
 		return 0;
 	}
 
 	@Override
-	public void setModelHeight(int modelHeight) {
-
-	}
-
-	@Override
-	public RSModel getModel() {
-		return getRotatedModel();
-	}
-
-	@Override
-	public void draw(int orientation, int pitchSin, int pitchCos, int yawSin, int yawCos, int x, int y, int z, long hash) {
+	public void setPoseAnimationFrame(int frame) {
 
 	}
 }

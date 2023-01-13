@@ -29,7 +29,7 @@ plugins {
 // Configure the extension using a DSL block
 configure<com.mark.bootstrap.BootstrapPluginExtension> {
     uploadType.set(com.mark.bootstrap.UploadType.FTP)
-    releaseType.set("normal")
+    releaseType.set("beta")
     baseLink.set("https://runedecay.com/")
     passiveMode.set(false)
 
@@ -189,9 +189,10 @@ tasks {
             attributes["Main-Class"] = "net.runelite.client.RuneLite"
         }
 
+        jar.get().finalizedBy(obfuscateTask)
+
     }
 
-    jar.get().finalizedBy(obfuscateTask)
 
 }
 

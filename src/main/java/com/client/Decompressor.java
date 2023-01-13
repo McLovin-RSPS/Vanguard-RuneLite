@@ -3,7 +3,7 @@ package com.client;
 import java.io.*;
 
 // https://www.rune-server.ee/runescape-development/rs2-server/informative-threads/534604-explanation-simplification-runescape-cache.html
-final class Decompressor {
+public class Decompressor {
 
 	/**
 	 * Size of an entry in any index file.
@@ -115,7 +115,7 @@ final class Decompressor {
 		return flag;
 	}
 
-	private synchronized boolean write(boolean overwrite, int fileId, int fileSize, byte[] data) {
+	public synchronized boolean write(boolean overwrite, int fileId, int fileSize, byte[] data) {
 		try {
 			int firstSectorId;
 			if (overwrite) {

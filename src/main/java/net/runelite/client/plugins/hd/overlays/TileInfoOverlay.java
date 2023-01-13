@@ -1,23 +1,7 @@
 package net.runelite.client.plugins.hd.overlays;
 
 import com.google.inject.Inject;
-import net.runelite.api.Point;
-import net.runelite.api.*;
-import net.runelite.api.coords.LocalPoint;
-import net.runelite.api.coords.WorldPoint;
-import net.runelite.client.plugins.hd.HdPlugin;
-import net.runelite.client.plugins.hd.data.materials.Material;
-import net.runelite.client.plugins.hd.data.materials.Overlay;
-import net.runelite.client.plugins.hd.data.materials.Underlay;
-import net.runelite.client.plugins.hd.utils.HDUtils;
-import net.runelite.client.plugins.hd.utils.ModelHash;
-import net.runelite.client.ui.FontManager;
-import net.runelite.client.ui.overlay.OverlayLayer;
-import net.runelite.client.ui.overlay.OverlayPosition;
-import net.runelite.client.ui.overlay.OverlayUtil;
-import org.apache.commons.lang3.tuple.Pair;
 
-import javax.annotation.Nonnull;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
@@ -25,8 +9,28 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.function.Function;
+import javax.annotation.Nonnull;
+
+import net.runelite.api.*;
 
 import static net.runelite.api.Perspective.*;
+import static net.runelite.api.Perspective.LOCAL_TILE_SIZE;
+import static net.runelite.api.Perspective.SCENE_SIZE;
+
+import net.runelite.api.Point;
+import net.runelite.api.coords.LocalPoint;
+import net.runelite.api.coords.WorldPoint;
+import net.runelite.client.ui.FontManager;
+import net.runelite.client.ui.overlay.OverlayLayer;
+import net.runelite.client.ui.overlay.OverlayPosition;
+import net.runelite.client.ui.overlay.OverlayUtil;
+import org.apache.commons.lang3.tuple.Pair;
+import net.runelite.client.plugins.hd.HdPlugin;
+import net.runelite.client.plugins.hd.data.materials.Material;
+import net.runelite.client.plugins.hd.data.materials.Overlay;
+import net.runelite.client.plugins.hd.data.materials.Underlay;
+import net.runelite.client.plugins.hd.utils.HDUtils;
+import net.runelite.client.plugins.hd.utils.ModelHash;
 
 public class TileInfoOverlay extends net.runelite.client.ui.overlay.Overlay
 {

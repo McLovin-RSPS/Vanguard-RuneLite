@@ -25,22 +25,32 @@
 package net.runelite.client.plugins.hd.opengl.compute;
 
 import com.google.common.base.Charsets;
-import lombok.extern.slf4j.Slf4j;
-import net.runelite.client.plugins.hd.HdPlugin;
-import net.runelite.client.plugins.hd.opengl.shader.Template;
-import net.runelite.client.plugins.hd.utils.buffer.GLBuffer;
-import net.runelite.client.util.OSType;
-import net.runelite.rlawt.AWTContext;
-import org.jocl.*;
-import org.lwjgl.BufferUtils;
-
-import javax.inject.Singleton;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Objects;
-
+import javax.inject.Singleton;
+import lombok.extern.slf4j.Slf4j;
+import net.runelite.client.util.OSType;
+import net.runelite.rlawt.AWTContext;
+import org.jocl.CL;
 import static org.jocl.CL.*;
+import org.jocl.CLException;
+import org.jocl.Pointer;
+import org.jocl.Sizeof;
+import org.jocl.cl_command_queue;
+import org.jocl.cl_context;
+import org.jocl.cl_context_properties;
+import org.jocl.cl_device_id;
+import org.jocl.cl_event;
+import org.jocl.cl_kernel;
+import org.jocl.cl_mem;
+import org.jocl.cl_platform_id;
+import org.jocl.cl_program;
+import org.lwjgl.BufferUtils;
+import net.runelite.client.plugins.hd.HdPlugin;
+import net.runelite.client.plugins.hd.opengl.shader.Template;
+import net.runelite.client.plugins.hd.utils.buffer.GLBuffer;
 
 @SuppressWarnings("deprecation")
 @Singleton

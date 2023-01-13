@@ -24,9 +24,8 @@
  */
 package net.runelite.client.plugins.hd.data.materials;
 
-import lombok.Getter;
-
 import java.util.Random;
+import lombok.Getter;
 
 @Getter
 public enum GroundMaterial

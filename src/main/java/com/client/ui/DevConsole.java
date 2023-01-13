@@ -108,7 +108,7 @@ public class DevConsole {
             if(scroller)
                 client().draw_scrollbar(494, 22, 0, 270, scroller_offset, 18, 17, 0);
 
-            Rasterizer2D.setDrawingArea(512, 0, 334, 0);
+            Client.rasterProvider.setRaster();
         }
     }
 

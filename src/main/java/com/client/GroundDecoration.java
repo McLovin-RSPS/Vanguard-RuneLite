@@ -1,10 +1,5 @@
 package com.client;
 
-import java.awt.Graphics2D;
-import java.awt.Polygon;
-import java.awt.Shape;
-
-
 import com.client.definitions.ObjectDefinition;
 import com.client.utilities.ObjectKeyUtil;
 import net.runelite.api.Model;
@@ -15,6 +10,8 @@ import net.runelite.api.coords.WorldPoint;
 import net.runelite.rs.api.RSFloorDecoration;
 import net.runelite.rs.api.RSModel;
 import net.runelite.rs.api.RSRenderable;
+
+import java.awt.*;
 
 public final class GroundDecoration implements RSFloorDecoration
 {
@@ -32,7 +29,7 @@ public final class GroundDecoration implements RSFloorDecoration
 	public byte mask;
 
 	@Override
-	public Model getModel() {
+	public net.runelite.api.Model getModel() {
 		RSRenderable entity = getRenderable();
 		if (entity == null)
 		{
@@ -74,12 +71,12 @@ public final class GroundDecoration implements RSFloorDecoration
 	}
 
 	@Override
-	public Point getCanvasLocation() {
+	public net.runelite.api.Point getCanvasLocation() {
 		return Perspective.localToCanvas(Client.instance, getLocalLocation(), getPlane(), 0);
 	}
 
 	@Override
-	public Point getCanvasLocation(int zOffset) {
+	public net.runelite.api.Point getCanvasLocation(int zOffset) {
 		return Perspective.localToCanvas((net.runelite.api.Client) Client.instance, this.getLocalLocation(), this.getPlane(), zOffset);
 	}
 
@@ -89,7 +86,7 @@ public final class GroundDecoration implements RSFloorDecoration
 	}
 
 	@Override
-	public Point getCanvasTextLocation(Graphics2D graphics, String text, int zOffset) {
+	public net.runelite.api.Point getCanvasTextLocation(Graphics2D graphics, String text, int zOffset) {
 		return Perspective.getCanvasTextLocation(Client.instance, graphics, getLocalLocation(), text, zOffset);
 	}
 
@@ -149,7 +146,8 @@ public final class GroundDecoration implements RSFloorDecoration
 	}
 
 	@Override
-	public int getConfig() {
+	public int getConfig()
+	{
 		return mask;
 	}
 }

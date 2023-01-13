@@ -2,6 +2,7 @@ package com.client;
 
 import com.client.definitions.ItemDefinition;
 import net.runelite.api.Tile;
+import net.runelite.api.events.ItemQuantityChanged;
 import net.runelite.rs.api.RSTileItem;
 // Decompiled by Jad v1.5.8f. Copyright 2001 Pavel Kouznetsov.
 // Jad home page: http://www.kpdus.com/jad.html
@@ -77,4 +78,14 @@ final class Item extends Renderable implements RSTileItem {
 		Tile[][][] tiles = Client.instance.getScene().getTiles();
 		return tiles[Client.instance.getPlane()][x][y];
 	}
+
+	public void quantityChanged(int quantity) {
+		Client.instance.getLogger().debug("Item quantity changed: {} ({} -> {})", getId(), getQuantity(), quantity);
+
+		ItemQuantityChanged itemQuantityChanged = new ItemQuantityChanged(this, getTile(), getQuantity(), quantity);
+		Client.instance.getCallbacks().post(itemQuantityChanged);
+
+	}
+
+
 }

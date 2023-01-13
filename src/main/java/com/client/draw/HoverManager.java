@@ -192,120 +192,106 @@ public class HoverManager {
         return true;
     }
 
-    public static void drawHintMenu() {
-        int mouseX = MouseHandler.mouseX;
-        int mouseY = MouseHandler.mouseY;
+	public static void drawHintMenu() {
+		int mouseX = MouseHandler.mouseX;
+		int mouseY = MouseHandler.mouseY;
 
-        if (!canDraw()) {
-            return;
-        }
+		if (!canDraw()) {
+			return;
+		}
 
-        if (Client.instance.isResized()) {
-            if (MouseHandler.mouseY < Client.canvasHeight - 450
-                    && MouseHandler.mouseX < Client.canvasWidth - 200) {
-                return;
-            }
-            mouseX -= 100;
-            mouseY -= 50;
-        }
-        if (!Client.instance.isResized()) {
-            if (MouseHandler.mouseY < 210 || MouseHandler.mouseX < 561) {
-            } else {
-                mouseX -= 516;
-                mouseY -= 158;
-            }
-            if (MouseHandler.mouseX > 600 && MouseHandler.mouseX < 685) {
-                mouseX -= 60;
+		if (Client.instance.isResized()) {
+			if (MouseHandler.mouseY < Client.canvasHeight - 450
+				&& MouseHandler.mouseX < Client.canvasWidth - 200) {
+				return;
+			}
+			mouseX -= 100;
+			mouseY -= 50;
+		}
+		if (!Client.instance.isResized()) {
+			if (MouseHandler.mouseY < 210 || MouseHandler.mouseX < 561) {
+			} else {
+				mouseX -= 516;
+				mouseY -= 158;
+			}
+			if (MouseHandler.mouseX > 600 && MouseHandler.mouseX < 685) {
+				mouseX -= 60;
 
-            }
-            if (MouseHandler.mouseX > 685) {
-                mouseX -= 80;
-            }
-        }
-        if (Client.controlIsDown) {
-            drawStatMenu();
-            return;
-        }
+			}
+			if (MouseHandler.mouseX > 685) {
+				mouseX -= 80;
+			}
+		}
+		if (Client.controlIsDown) {
+			drawStatMenu();
+			return;
+		}
 
-        if (lastDraw != hintId) {
-            lastDraw = hintId;
-            itemDisplay = new int[4];
-        }
+		if (lastDraw != hintId) {
+			lastDraw = hintId;
+			itemDisplay = new int[4];
+		}
 
-        HoverMenu menu = menus.get(hintId);
+		HoverMenu menu = menus.get(hintId);
 
-        if (menu != null) {
-            String text[] = split(menu.text, 20).split("\n");
+		if (menu != null) {
+			String text[] = split(menu.text, 20).split("\n");
 
-            int height = (text.length * 12) + (menu.items != null ? 40 : 0);
+			int height = (text.length * 12) + (menu.items != null ? 40 : 0);
 
-            int width = (16 + text[0].length() * 5) + (menu.items != null ? 30 : 0);
-            if (!Client.instance.isResized()) {
-                if (drawType() == 1) {
-                    if (width + mouseX > 500) {
-                        mouseX = 500 - width;
-                    }
-                } else {
-                    if (width + mouseX > 250) {
-                        mouseX = 245 - width;
-                    }
+			int width = (16 + text[0].length() * 5) + (menu.items != null ? 30 : 0);
 
-                    if (height + mouseY > 250) {
-                        mouseY = 250 - height;
-                    }
-                }
-            }
-            Rasterizer2D.drawBoxOutline(mouseX, mouseY + 5, width + 4, 26 + height, 0x696969);
-            Rasterizer2D.drawTransparentBox(mouseX + 1, mouseY + 6, width + 2, 24 + height, 0x000000, 150);
+			Rasterizer2D.drawBoxOutline(mouseX, mouseY + 5, width + 4, 26 + height, 0x696969);
+			Rasterizer2D.drawTransparentBox(mouseX + 1, mouseY + 6, width + 2, 24 + height, 0x000000, 150);
 
-            Client.instance.newSmallFont.drawBasicString("@lre@" + hintName, (int) (mouseX + 4), mouseY + 19,
-                    BACKGROUND_COLOUR, 1);
-            int y = 0;
+			Client.instance.newSmallFont.drawBasicString("@lre@" + hintName, (int) (mouseX + 4), mouseY + 19,
+				BACKGROUND_COLOUR, 1);
+			int y = 0;
 
-            for (String string : text) {
-                Client.instance.newSmallFont.drawBasicString(string, mouseX + 4, mouseY + 35 + y, BACKGROUND_COLOUR, 1);
-                y += 12;
-            }
+			for (String string : text) {
+				Client.instance.newSmallFont.drawBasicString(string, mouseX + 4, mouseY + 35 + y, BACKGROUND_COLOUR, 1);
+				y += 12;
+			}
 
-            if (menu.items != null) {
-                int spriteX = 10;
+			if (menu.items != null) {
+				int spriteX = 10;
 
-                if (System.currentTimeMillis() - displayDelay > 300) {
-                    displayDelay = System.currentTimeMillis();
-                    displayIndex++;
-                    if (displayIndex == menu.items.size()) {
-                        displayIndex = 0;
-                    }
+				if (System.currentTimeMillis() - displayDelay > 300) {
+					displayDelay = System.currentTimeMillis();
+					displayIndex++;
+					if (displayIndex == menu.items.size()) {
+						displayIndex = 0;
+					}
 
-                    if (menu.items.size() <= 4) {
-                        for (int i = 0; i < menu.items.size(); i++) {
-                            itemDisplay[i] = menu.items.get(i);
-                        }
-                    } else {
-                        if (displayIndex >= menu.items.size() - 1) {
-                            displayIndex = menu.items.size() - 1;
-                        }
-                        int next = menu.items.get(displayIndex);
-                        for (int i = 0; i < itemDisplay.length - 1; i++) {
-                            itemDisplay[i] = itemDisplay[i + 1];
-                        }
-                        itemDisplay[3] = next;
-                    }
-                }
+					if (menu.items.size() <= 4) {
+						for (int i = 0; i < menu.items.size(); i++) {
+							itemDisplay[i] = menu.items.get(i);
+						}
+					} else {
+						if (displayIndex >= menu.items.size() - 1) {
+							displayIndex = menu.items.size() - 1;
+						}
+						int next = menu.items.get(displayIndex);
+						for (int i = 0; i < itemDisplay.length - 1; i++) {
+							itemDisplay[i] = itemDisplay[i + 1];
+						}
+						itemDisplay[3] = next;
+					}
+				}
 
-                for (int id : itemDisplay) {
-                    if (id < 1) {
-                        continue;
-                    }
-                    Sprite item = ItemDefinition.getSprite(id, 1, 0);
-                    if (item != null) {
-                        item.drawSprite(mouseX + spriteX, mouseY + 35 + y);
-                        spriteX += 40;
-                    }
-                }
-            }
-            return;
-        }
+				for (int id : itemDisplay) {
+					if (id < 1) {
+						continue;
+					}
+					Sprite item = ItemDefinition.getSprite(id, 1, 0);
+					if (item != null) {
+						item.drawSprite(mouseX + spriteX, mouseY + 35 + y);
+						spriteX += 40;
+					}
+				}
+			}
+			return;
+		}
 
 		/*DrawingArea.drawBoxOutline(mouseX, mouseY + 5, 150, 36, 0x696969);
 		DrawingArea.drawTransparentBox(mouseX + 1, mouseY + 6, 150, 35, 0x000000, 90);
@@ -313,9 +299,10 @@ public class HoverManager {
 		Client.instance.newSmallFont.drawBasicString("@lre@" + hintName, mouseX + 4, mouseY + 18, BACKGROUND_COLOUR, 1);
 		Client.instance.newSmallFont.drawBasicString("Press CTRL to view the stats", mouseX + 4, mouseY + 35,
 				BACKGROUND_COLOUR, 1);*/
-    }
+	}
 
-    public static void drawStatMenu() {
+
+	public static void drawStatMenu() {
         if (!canDraw()) {
             return;
         }

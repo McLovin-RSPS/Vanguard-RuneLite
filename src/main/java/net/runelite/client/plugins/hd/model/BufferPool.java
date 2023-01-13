@@ -1,8 +1,8 @@
 package net.runelite.client.plugins.hd.model;
 
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.client.plugins.hd.HdPlugin;
 import org.lwjgl.system.MemoryUtil;
+import net.runelite.client.plugins.hd.HdPlugin;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;

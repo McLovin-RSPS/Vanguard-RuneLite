@@ -41,6 +41,17 @@ import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.events.PluginChanged;
 import net.runelite.client.plugins.*;
 import net.runelite.client.plugins.entityhider.EntityHiderPlugin;
+import net.runelite.client.plugins.skybox.SkyboxPlugin;
+import net.runelite.client.ui.DrawManager;
+import net.runelite.client.util.OSType;
+import net.runelite.rlawt.AWTContext;
+import org.jocl.CL;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GLCapabilities;
+import org.lwjgl.opengl.GLUtil;
+import org.lwjgl.system.Callback;
+import org.lwjgl.system.Configuration;
 import net.runelite.client.plugins.hd.config.*;
 import net.runelite.client.plugins.hd.data.WaterType;
 import net.runelite.client.plugins.hd.data.materials.Material;
@@ -54,23 +65,13 @@ import net.runelite.client.plugins.hd.opengl.shader.ShaderException;
 import net.runelite.client.plugins.hd.opengl.shader.Template;
 import net.runelite.client.plugins.hd.scene.*;
 import net.runelite.client.plugins.hd.scene.lights.SceneLight;
+import net.runelite.client.plugins.hd.scene.ModelOverrideManager;
 import net.runelite.client.plugins.hd.scene.model_overrides.ModelOverride;
 import net.runelite.client.plugins.hd.scene.model_overrides.ObjectType;
 import net.runelite.client.plugins.hd.utils.*;
 import net.runelite.client.plugins.hd.utils.buffer.GLBuffer;
 import net.runelite.client.plugins.hd.utils.buffer.GpuFloatBuffer;
 import net.runelite.client.plugins.hd.utils.buffer.GpuIntBuffer;
-import net.runelite.client.plugins.skybox.SkyboxPlugin;
-import net.runelite.client.ui.DrawManager;
-import net.runelite.client.util.OSType;
-import net.runelite.rlawt.AWTContext;
-import org.jocl.CL;
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GLCapabilities;
-import org.lwjgl.opengl.GLUtil;
-import org.lwjgl.system.Callback;
-import org.lwjgl.system.Configuration;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
@@ -88,10 +89,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.runelite.client.plugins.hd.HdPluginConfig.*;
-import static net.runelite.client.plugins.hd.utils.ResourcePath.path;
 import static org.jocl.CL.*;
 import static org.lwjgl.opengl.GL43C.*;
+import static net.runelite.client.plugins.hd.HdPluginConfig.*;
+import static net.runelite.client.plugins.hd.utils.ResourcePath.path;
 
 @PluginDescriptor(
 	name = "117 HD",

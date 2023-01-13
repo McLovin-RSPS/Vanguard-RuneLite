@@ -45,33 +45,33 @@ public class Rasterizer2D extends Cacheable implements RSRasterizer2D {
         fillCircleAlpha(x, y, radius + 8, colour, 2);
     }
 
-    public static void fillCircle(int x, int y, int radius, int color) {
-        int y1 = y - radius;
-        if (y1 < 0) {
-            y1 = 0;
-        }
-        int y2 = y + radius;
-        if (y2 >= height) {
-            y2 = height - 1;
-        }
-        for (int iy = y1; iy <= y2; iy++) {
-            int dy = iy - y;
-            int dist = (int) Math.sqrt(radius * radius - dy * dy);
-            int x1 = x - dist;
-            if (x1 < 0) {
-                x1 = 0;
-            }
-            int x2 = x + dist;
-            if (x2 >= width) {
-                x2 = width - 1;
-            }
-            int pos = x1 + iy * width;
-            for (int ix = x1; ix <= x2; ix++) {
-                pixels[pos++] = color;
-            }
-        }
-    }
 
+	public static void fillCircle(int x, int y, int radius, int color) {
+		int y1 = y - radius;
+		if (y1 < 0) {
+			y1 = 0;
+		}
+		int y2 = y + radius;
+		if (y2 >= height) {
+			y2 = height - 1;
+		}
+		for (int iy = y1; iy <= y2; iy++) {
+			int dy = iy - y;
+			int dist = (int) Math.sqrt(radius * radius - dy * dy);
+			int x1 = x - dist;
+			if (x1 < 0) {
+				x1 = 0;
+			}
+			int x2 = x + dist;
+			if (x2 >= width) {
+				x2 = width - 1;
+			}
+			int pos = x1 + iy * width;
+			for (int ix = x1; ix <= x2; ix++) {
+				pixels[pos++] = color;
+			}
+		}
+	}
     public static void fillCircleAlpha(int posX, int posY, int radius, int colour, int alpha) {
         int dest_intensity = 256 - alpha;
         int src_red = (colour >> 16 & 0xff) * alpha;
