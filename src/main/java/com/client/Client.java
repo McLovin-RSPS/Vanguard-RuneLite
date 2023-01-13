@@ -10788,7 +10788,7 @@ public class Client extends GameEngine implements RSClient {
 		}
 
 
-		//new CacheDownloader(this).downloadCache();
+		new CacheDownloader(this).downloadCache();
 
 		SpriteLoader1.loadSprites();
 		cacheSprite1 = SpriteLoader1.sprites;
