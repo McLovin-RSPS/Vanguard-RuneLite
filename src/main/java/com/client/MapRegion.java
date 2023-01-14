@@ -1352,7 +1352,7 @@ public final class MapRegion {
 		Buffer stream = new Buffer(is);
 		int i_252_ = -1;
 		for (;;) {
-			int i_253_ = stream.readUSmart();
+			int i_253_ = stream.getUIncrementalSmart();
 			if (i_253_ == 0)
 				break;
 			i_252_ += i_253_;
@@ -1392,7 +1392,7 @@ public final class MapRegion {
 			Buffer stream = new Buffer(abyte0);
 			int l = -1;
 			do {
-				int i1 = stream.readUSmart();
+				int i1 = stream.getUIncrementalSmart();
 				if (i1 == 0)
 					break label0;
 				l += i1;
