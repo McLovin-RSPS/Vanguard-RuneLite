@@ -14,7 +14,11 @@ public class Bank extends RSInterface {
     public static final int SEARCH_CONTAINER = 41583;
     public static final int SEARCH_BUTTON = 18937;
     public static final int TITLE_INTERFACE_ID = 58064;
-    public static final int BANK_CONTAINER_HEIGHT = 130;
+    public static final int BANK_CONTAINER_HEIGHT = 115;
+
+    public static final int CLOSE_BUTTON_SMALL = 37302;
+
+    public static final int CLOSE_BUTTON_SMALL_HOVER = 37303;
 
     /**
      * The main container for each tab and the top container in the main tab.
@@ -22,7 +26,8 @@ public class Bank extends RSInterface {
     public static final int OLD_CONTAINER_INTERFACE_ID = 5382;
 
     /**
-     * Displays the x/350 item count at the top of the bank.
+     * Displays the x/350
+     * +item count at the top of the bank.
      */
     public static final int ITEM_COUNT_INTERFACE_ID = 58061;
 
@@ -251,7 +256,7 @@ public class Bank extends RSInterface {
 
             // Hide/display the main tab containers
             if (getCurrentBankTab() == 0) {
-                int height = 4;
+                int height = 7; // item heights
                 for (int index = 0; index < ITEM_CONTAINERS.length; index++) {
                     RSInterface container = interfaceCache[ITEM_CONTAINERS[index]];
                     if (index != 0 && moreTabsBelow(index - 1)) {
@@ -321,7 +326,7 @@ public class Bank extends RSInterface {
         bankScrollable = interfaceCache[5385];
 
         // Fixing container placement on interface
-        bankScrollable.height -= 2;
+        bankScrollable.height -= 1;
         RSInterface bank = interfaceCache[BANK_INTERFACE_ID];
         for (int index = 0; index < bank.children.length; index++) {
             if (bank.children[index] == bankScrollable.id) {
@@ -341,7 +346,7 @@ public class Bank extends RSInterface {
         // Adding new container for main tab
         int newContainersStartIndex = expandChildren(ITEM_CONTAINERS.length, bankScrollable);
         for (int index = 0; index < ITEM_CONTAINERS.length; index++) {
-            RSInterface container = addInventoryContainer(ITEM_CONTAINERS[index], 10, BANK_CONTAINER_HEIGHT,12, 0, true);
+            RSInterface container = addInventoryContainer(ITEM_CONTAINERS[index], 10, BANK_CONTAINER_HEIGHT,12, 5, true);
             container.actions = new String[] {"Withdraw 1", "Withdraw 5", "Withdraw 10", "Withdraw All", "Withdraw X", "Withdraw All but one"};
             container.contentType = 206;
             mainTabChildren[index] = newContainersStartIndex;
@@ -360,11 +365,11 @@ public class Bank extends RSInterface {
     public void bank(TextDrawingArea[] tda) {
         RSInterface rs = addInterface(BANK_INTERFACE_ID);
         rs.message = "";
-        setChildren(41, rs);
-        addSprite(58001, 0, "BankTab/07/BANK");
+        setChildren(40, rs);
+        addSprites(58001, "BankTab/07/BANK", 0, 0);
         addHoverButton(5384, "BankTab/updated/CLOSE", 97, 21, 21, "Close Window", 250, 5380, 3);
         addHoveredButton(5380, "BankTab/updated/CLOSE", 98, 21, 21, 5379);
-        addHoverButton(5294, "BankTab/07/BANK", 7, 37, 29, "Set/Edit Your Account-Pin", 250, 5295, 4);
+
         addHoveredButton(5295, "BankTab/BANK", 4, 100, 33, 5296);
 
 
@@ -396,6 +401,7 @@ public class Bank extends RSInterface {
                         new String[] {"Price Check", "Collapse", "View"}, 1, 34 + i);
                 RSInterface.interfaceCache[58031 + i].ignoreConfigClicking = true;
             }
+            //AddtoTabItemGroup -.- fml...
             addToItemGroup(58040 + i, 1, 1, 0, 0, false, "", "", "");
         }
 
@@ -425,8 +431,7 @@ public class Bank extends RSInterface {
         addText(18945, "Item", tda, 1, 0xE68A00, true, true);
         addText(18946, "Note", tda, 1, 0xE68A00, true, true);
 
-        addBankHover1(18947, 5, 18948, 0, "Presets/OPEN", 36, 36, "Open Preset Interface", 18949, 4, "Presets/OPEN",
-                18950, "Open Preset Interface", 0, 1);
+
 
         //addInputField(58063, 50, 0xE68A00, "Search", 235, 23, false, true);
         RSInterface Interface = interfaceCache[5385];
@@ -434,15 +439,15 @@ public class Bank extends RSInterface {
         Interface.width = 481;
 
 
-        setBounds(58001, 14, 3, 0, rs);
-        setBounds(5384, 474, 10, 1, rs);
-        setBounds(5380, 474, 10, 2, rs);
-        setBounds(5294, 312, 292, 3, rs); // Bank pin
+        setBounds(58001, 17, 5, 0, rs);
+        setBounds(5384, 477, 12, 1, rs);
+        setBounds(5380, 477, 10, 2, rs);
+
         setBounds(5295, 312, 297, 4, rs);
-        setBounds(58002, 20, 306, 5, rs); // Rearrange mode
-        setBounds(58003, 20, 306, 6, rs);
-        setBounds(58010, 120, 306, 7, rs); // Noting
-        setBounds(58011, 120, 306, 8, rs);
+        setBounds(58002, 25, 306, 5, rs); // Rearrange mode
+        setBounds(58003, 25, 306, 6, rs);
+        setBounds(58010, 125, 306, 7, rs); // Noting
+        setBounds(58011, 125, 306, 8, rs);
 
         setBounds(58018, 423, 292, 9, rs); // Items
         setBounds(58019, 423, 292, 10, rs);
@@ -458,21 +463,21 @@ public class Bank extends RSInterface {
             RSInterface rsi = interfaceCache[58050 + i];
             setChildren(2, rsi);
             setBounds(58031 + i, x, 38, 0, rsi);
-            setBounds(58040 + i, x + 5, 42, 1, rsi);
+            setBounds(58040 + i, x + 5, 42, 1, rsi);//Tab Icon's -.-
             x += 41;
         }
         // 0-350
-        setBounds(58061, 36, 9, 24, rs);
-        setBounds(58062, 36, 21, 25, rs);
+        setBounds(58061, 38, 10, 24, rs);
+        setBounds(58062, 38, 22, 25, rs);
 
 //		setBounds(58063, 25, 298, 26, rs); // Search
-        setBounds(58064, 250, 13, 26, rs);
+        setBounds(58064, 260, 15, 26, rs);
 
-        setBounds(18929, 70, 306, 27, rs); // Swap items
-        setBounds(18930, 70, 306, 28, rs);
+        setBounds(18929, 75, 306, 27, rs); // Swap items
+        setBounds(18930, 75, 306, 28, rs);
 
-        setBounds(18933, 170, 306, 29, rs); // Noting
-        setBounds(18934, 170, 306, 30, rs);
+        setBounds(18933, 175, 306, 29, rs); // Noting
+        setBounds(18934, 175, 306, 30, rs);
 
         setBounds(18937, 386, 292, 31, rs); // Search
         setBounds(18938, 386, 292, 32, rs);
@@ -480,15 +485,15 @@ public class Bank extends RSInterface {
 //
         setBounds(58014, 349, 292, 33, rs); // Placeholder
 
-        setBounds(18941, 22, 291, 34, rs); // Titles
-        setBounds(18942, 170, 291, 35, rs); // Titles
+        setBounds(18941, 27, 291, 34, rs); // Rearrange mode
+        setBounds(18942, 175, 291, 35, rs); // Withdraw as
 
-        setBounds(18943, 45, 309, 36, rs); // Titles
-        setBounds(18944, 95, 309, 37, rs); // Titles
-        setBounds(18945, 145, 309, 38, rs); // Titles
-        setBounds(18946, 195, 309, 39, rs); // Titles
+        setBounds(18943, 50, 309, 36, rs); // Titles
+        setBounds(18944, 100, 309, 37, rs); // Titles
+        setBounds(18945, 150, 309, 38, rs); // Titles
+        setBounds(18946, 200, 309, 39, rs); // Titles
 
-        setBounds(18947, 275, 292, 40, rs); // Titles
+
 
         editBank(tda);
     }
