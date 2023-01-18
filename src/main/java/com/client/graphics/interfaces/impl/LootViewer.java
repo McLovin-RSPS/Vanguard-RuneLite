@@ -16,7 +16,6 @@ public class LootViewer extends RSInterface {
 
     private enum Button {
         VOTE_KEY("Vote key", 22093),
-        //PORAZDIRS_KEY("Porazdir's key", 4185),
         HUNNLEFS_KEY("Hunnlef's key", 23776),
         GLOD_KEY("Glod chest", 6792),
         SOLAK_KEY("Solak chest", 22374),

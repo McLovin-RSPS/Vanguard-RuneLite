@@ -253,8 +253,8 @@ public final class ObjectDefinition implements RSObjectComposition {
 				objectDef.actions = new String[] { "View", null, null, null, null };
 				break;
 			case 33320:
-				objectDef.name = "Fire of Exchange";
-				objectDef.actions = new String[] { "Burn", "Burn Rates", null, null, null };
+				objectDef.name = "Shatter Shards";
+				objectDef.actions = new String[] { "Shatter", "Burn Rates", null, null, null };
 				break;
 			case 33318:
 				objectDef.name = "Fire of Destruction";

@@ -167,6 +167,10 @@ public final class ItemDefinition implements RSItemComposition {
 			case 22375:
 				copy(itemDef, 22375, 22374, "Mossy key");
 				break;
+			case 20999:
+				copy(itemDef, 20999, 25865, "Bow of Faerdhinen", "Wear");
+				break;
+
 			case 33056:
 				itemDef.setDefaults();
 				itemDef.id = 33056;
@@ -346,20 +350,20 @@ public final class ItemDefinition implements RSItemComposition {
 
 
 
-			case 20999:
-				itemDef.name = "Bow of faerdhinen";
-				itemDef.modelId = 42605;
-				itemDef.maleModel0 = 42602;
-				itemDef.femaleModel0 = 42602;
-				itemDef.zoom2d = 1570;
-				itemDef.xan2d = 636;
-				itemDef.yan2d = 1010;
-				itemDef.xOffset2d = 1;
-				itemDef.yOffset2d = 0;
-				itemDef.interfaceOptions = new String[5];
-				itemDef.interfaceOptions[1] = "Wear";
-				itemDef.interfaceOptions[2] = null;
-				break;
+//			case 20999:
+//				itemDef.name = "Bow of faerdhinen";
+//				itemDef.modelId = 42605;
+//				itemDef.maleModel0 = 42602;
+//				itemDef.femaleModel0 = 42602;
+//				itemDef.zoom2d = 1570;
+//				itemDef.xan2d = 636;
+//				itemDef.yan2d = 1010;
+//				itemDef.xOffset2d = 1;
+//				itemDef.yOffset2d = 0;
+//				itemDef.interfaceOptions = new String[5];
+//				itemDef.interfaceOptions[1] = "Wear";
+//				itemDef.interfaceOptions[2] = null;
+//				break;
 
 
 
@@ -544,11 +548,11 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.modelId = 53126;
 				itemDef.maleModel0 = 53125;
 				itemDef.femaleModel0 = 53125;
-				itemDef.zoom2d = 1158;
-				itemDef.xan2d = 768;
-				itemDef.yan2d = 189;
-				itemDef.xOffset2d = -7;
-				itemDef.yOffset2d = 4;
+				itemDef.zoom2d = 1509;
+				itemDef.xan2d = 570;
+				itemDef.yan2d = 286;
+				itemDef.xOffset2d = -4;
+				itemDef.yOffset2d = 0;
 				itemDef.interfaceOptions = new String[5];
 				itemDef.interfaceOptions[1] = "Wear";
 				itemDef.interfaceOptions[2] = "Check";
@@ -845,12 +849,21 @@ public final class ItemDefinition implements RSItemComposition {
 				itemDef.name = "@red@YT Stream Giveaway Box (t2)";
 				//itemDef.description = "Spawns items to giveaway for your youtube stream.";
 				itemDef.interfaceOptions = new String[] { "Giveaway", null, null, null, "Drop" };
-
 				break;
 			case 13190:
-				itemDef.name = "@yel@100m OSRS GP";
+				itemDef.name = "@or1@Starter Box";
+				itemDef.modelId = 65000;
+				itemDef.zoom2d = 1180;
+				itemDef.xan2d = 160;
+				itemDef.yan2d = 172;
+				itemDef.xOffset2d = 0;
+				itemDef.yOffset2d = -14;
 				itemDef.interfaceOptions = new String[] { "Redeem", null, null, null, "Drop" };
-				//itemDef.description = "Redeem for 100m OSRS GP!";
+				break;
+			case 6466:
+				itemDef.name = "Shattered Shard";
+				itemDef.modelId = 65001;
+				itemDef.interfaceOptions = new String[] { "Open-rates", null, "Open-upgrades", null, "Drop" };
 				break;
 			case 6121:
 				itemDef.name = "Break Vials Instruction";
@@ -1050,12 +1063,12 @@ public final class ItemDefinition implements RSItemComposition {
 			case 11739:
 				itemDef.name = "@gre@Vote Mystery Box";
 				//itemDef.description = "Probably contains cosmetics, or maybe not...";
-				itemDef.interfaceOptions = new String[] { "Open", null, null, null, "Drop" };
+				itemDef.interfaceOptions = new String[] { "Open", null, "View-Loots", null, "Drop" };
 				break;
 			case 6828:
 				itemDef.name = "Super Mystery Box";
 				//itemDef.description = "Mystery box that contains goodies.";
-				itemDef.interfaceOptions = new String[] { "Open", null, "View-Loots", "Quick-Open", "Drop" };
+				itemDef.interfaceOptions = new String[] { "Open", null, "View-Loots", null, "Drop" };
 				itemDef.createCustomSprite("Mystery_Box.png");
 				itemDef.createSmallCustomSprite("Mystery_Box_Small.png");
 				itemDef.stackable = false;
@@ -1188,20 +1201,20 @@ public final class ItemDefinition implements RSItemComposition {
 			case 6199:
 				itemDef.name = "Mystery Box";
 				//itemDef.description = "Mystery box that contains goodies.";
-				itemDef.interfaceOptions = new String[] { "Open", null, null, "Quick-Open", "Drop" };
+				itemDef.interfaceOptions = new String[] { "Open", null, "View-Loots", null, "Drop" };
 				break;
 			case 12789:
 				itemDef.name = "@red@Youtube Mystery Box";
 				//itemDef.description = "Mystery box that contains goodies.";
-				itemDef.interfaceOptions = new String[] { "Open", null, null, null, "Drop" };
+				itemDef.interfaceOptions = new String[] { "Open", null, "View-Loots", null, "Drop" };
 				break;
 			case 13346:
 				itemDef.name = "@red@Ultra Mystery Box";
-				itemDef.interfaceOptions = new String[] { "Open", null, null, "Quick-Open", "Drop" };
+				itemDef.interfaceOptions = new String[] { "Open", null, "View-Loots", null, "Drop" };
 				break;
 			case 8167://
 				itemDef.name = "@red@Insane Mystery Box (locked)";
-				itemDef.interfaceOptions = new String[] { "Unlock", null, null, "Quick-Open", "Drop" };
+				itemDef.interfaceOptions = new String[] { "Unlock", null, "View-Loots", null, "Drop" };
 				break;
 			case 13438:
 				itemDef.name = "Slayer Mystery Chest";

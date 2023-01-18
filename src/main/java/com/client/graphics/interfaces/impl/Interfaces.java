@@ -188,33 +188,33 @@ public final class Interfaces extends RSInterface {
 	public static void fireofExchange(TextDrawingArea[] tda) {
 		RSInterface inter = addInterface(33400);
 		addSprite(33401, 0, "Interfaces/FireOfExchange/SPRITE");
-		addText(33402, "Fire of Exchange", tda, 2, 0xff9933, true, true);
+		addText(33402, "Shard Exchange", tda, 2, 0xff9933, true, true);
 		addHoverButton(33932, "Interfaces/HelpInterface/IMAGE", 2, 16, 16, "Close", -1, 33932, 3);
 		addHoveredButton(33933, "Interfaces/HelpInterface/IMAGE", 3, 16, 16, 33933);
 		addSprite(33406, 1, "Interfaces/FireOfExchange/SPRITE");
-		addText(33407, "Exchange Value:", tda, 2, 0xff9933, true, true);
-		addText(33408, "Total Exchange Points:", tda, 2, 0xff9933, true, true);
+		addText(33407, "Shard Value:", tda, 2, 0xff9933, true, true);
+		//addText(33408, "Total Exchange Points:", tda, 2, 0xff9933, true, true);
 		addText(33409, "0", tda, 2, 0xff0000, true, true);
-		addText(33410, "00", tda, 2, 0xff0000, true, true);
-		addButton(33411, 1, "Interfaces/FireOfExchange/BUTTON", "Open Exchange Store");
+		//addText(33410, "00", tda, 2, 0xff0000, true, true);
+		//addButton(33411, 1, "Interfaces/FireOfExchange/BUTTON", "Open Exchange Store");
 		addButton(47003, 527, "Interfaces/MysteryBox/SPRITE", "Close");
-		addText(33412, "Exchange Store", tda, 2, 0xffffff, true, true);
+		//addText(33412, "Exchange Store", tda, 2, 0xffffff, true, true);
 		addButton(33413, 2, "Interfaces/FireOfExchange/ARROW", "Exchange Item");
 		inter.totalChildren(14);
-		setBounds(33401, 88, 77, 0, inter);
-		setBounds(33402, 260, 92, 1, inter);
-		setBounds(33932, 402, 93, 3, inter);
-		setBounds(33933, 402, 93, 4, inter);
-		setBounds(33406, 146, 139, 5, inter);
-		setBounds(33407, 166, 185, 6, inter);
-		setBounds(33408, 332, 139, 7, inter);
-		setBounds(33409, 166, 205, 8, inter);
-		setBounds(33410, 332, 159, 9, inter);
-		setBounds(33411, 261, 197, 10, inter);
-		setBounds(33412, 332, 206, 11, inter);
+		setBounds(33401, 175, 77, 0, inter);
+		setBounds(33402, 247, 92, 1, inter);
+		setBounds(33932, 310, 91, 4, inter);
+		setBounds(33933, 310, 91, 3, inter);
+		setBounds(33406, 210, 142, 5, inter);
+		setBounds(33407, 257, 185, 6, inter);
+		//setBounds(33408, 332, 139, 7, inter);
+		setBounds(33409, 260, 205, 8, inter);
+		//setBounds(33410, 332, 159, 9, inter);
+		//setBounds(33411, 261, 197, 10, inter);
+		//setBounds(33412, 332, 206, 11, inter);
 		addItemContainer(33403, 1, 1, 0, 0, false);
-		setBounds(33403, 150, 142, 12, inter);
-		setBounds(33413, 201, 146, 13, inter);
+		setBounds(33403, 215, 142, 12, inter);
+		setBounds(33413, 281, 146, 13, inter);
 
 
 		inter = addInterface(33404);
@@ -732,35 +732,30 @@ public final class Interfaces extends RSInterface {
 		//Config = 519
 		RSInterface widget = addInterface(23110);
 		int childId = 23111;
-		
+
 		addSprite(childId++, 0, "Interfaces/CollectionLog/BACKGROUND");
-		
+
 		addText(childId++, "Collection Log", tda, 2, 0xFF9300, true, true);
-		
+
 		addHoverButton(childId++, "Interfaces/CollectionLog/CLOSE", 0, 16, 16, "Close", -1, childId, 1);
 		addHoveredButton(childId++, "Interfaces/CollectionLog/CLOSE", 1, 16, 16, childId++);
-		
+
 		addConfigButton(childId++, 618, 0, 1, "Interfaces/CollectionLog/TAB", 96, 20, "Select Bosses", 1, 1, 519);
 		addText(childId++, "Bosses", tda, 1, 0xFF9300, true, true);
-		
+
 		addText(childId++, "Boss Name Here", tda, 2, 0xFF9300, false, true);
 		addText(childId++, "Obtained: @red@10/11", tda, 0, 0xFF9300, false, true);
 		addText(childId++, "Boss Name count: @whi@125", tda, 0, 0xFF9300, true, true);
 
-	//	addText(61019, "    <img=15></img> Rewards for completing the collection log:", tda, 0, 0xff981f, false, true);
-	//	addHoverButton(61020,1844, 70, 39, "Collect", -1, 61021, 1);
-	//	addHoveredButton(61021, 1845, 70, 39, 61022);
-	//	addText(61023, "Claim", tda, 2, 0xff981f, false, true);                        //MAYBE ADD IN FUTURE FOR COLLECTION LOG REWARDS
-	//	addItemContainer(61024, 5, 1, 7, 5, false);
 
 		RSInterface tableView = addInterface(childId++);
 		int scrollChildId = childId;
 		int scrollFrame = 0;
 		tableView.width = 187;
 		tableView.height = 246;
-		tableView.scrollMax = 750;
+		tableView.scrollMax = 550;
 		tableView.totalChildren(50 * 2);
-		
+
 		int scrollX = 0;
 		int scrollY = 0;
 		for(int i = 0; i < 50; i++) {
@@ -770,73 +765,85 @@ public final class Interfaces extends RSInterface {
 				addConfigButton(scrollChildId, 23122, 2, 1, "Interfaces/CollectionLog/CELL", 187, 15, "Select Boss", 1, 1, 520 + i);
 			}
 			tableView.child(scrollFrame++, scrollChildId++, scrollX, scrollY);
-			
+
 			addText(scrollChildId, "Boss Name Here", tda, 1, 0xFF9300, false, true);
 			tableView.child(scrollFrame++, scrollChildId++, scrollX + 4, scrollY);
-			
+
 			scrollY += 15;
 		}
 
-		int x = 10, y = 10;
-		widget.totalChildren(childId - 23111 - 1 + (8) + 1);//from 1 to 6 for the collection log rewards
+		widget.totalChildren(childId - 23111 - 1 + (8) + 2);
 		childId = 23111;
 		int frame = 0;
-		
+
 		widget.child(frame++, childId++, 9, 11);//Background
 		widget.child(frame++, childId++, 257, 20);//Title
-		
+
 		widget.child(frame++, childId++, 482, 20);
 		widget.child(frame++, childId++, 482, 20);
 		childId++;
-		
+
 		widget.child(frame++, childId++, 19, 47);
 		widget.child(frame++, childId++, 60, 50);
-		
+
 		widget.child(frame++, childId++, 230, 70);
 		widget.child(frame++, childId++, 230, 94);
 		widget.child(frame++, childId++, 433, 94);
-		
+
 		widget.child(frame++, childId++, 20, 68);
 
-	//	widget.child(frame++, 61019, 216+x, 242+y);//for collection log rewards
-	//	widget.child(frame++, 61020, 415+x, 259+y);
-	//	widget.child(frame++, 61021, 415+x, 259+y);  // MAYBE ADD IN FUTURE FOR COLLECTION LOG REWARDS
-	//	widget.child(frame++, 61023, 432+x, 276+y);
-	//	widget.child(frame++, 61024, 222+x, 260+y);
-		
 		//Had to add these on
 		int nextChildId = scrollChildId;
 		addConfigButton(nextChildId, 23111, 0, 1, "Interfaces/CollectionLog/TAB", 96, 20, "Select Wilderness", 1, 1, 571);
 		widget.child(frame++, nextChildId++, 19 + 96, 47);
 		addText(nextChildId, "Wilderness", tda, 1, 0xFF9300, true, true);
 		widget.child(frame++, nextChildId++, 60 + 96, 50);
-		
+
 		addConfigButton(nextChildId, 23111, 0, 1, "Interfaces/CollectionLog/TAB", 96, 20, "Select Raids", 1, 1, 572);
 		widget.child(frame++, nextChildId++, 19 + 96 + 96, 47);
 		addText(nextChildId, "Raids", tda, 1, 0xFF9300, true, true);
 		widget.child(frame++, nextChildId++, 60 + 96 + 96, 50);
-		
+
 		addConfigButton(nextChildId, 23111, 0, 1, "Interfaces/CollectionLog/TAB", 96, 20, "Select Minigames", 1, 1, 573);
 		widget.child(frame++, nextChildId++, 19 + 96 + 96 + 96, 47);
 		addText(nextChildId, "Minigames", tda, 1, 0xFF9300, true, true);
 		widget.child(frame++, nextChildId++, 60 + 96 + 96 + 96, 50);
-		
+
 		addConfigButton(nextChildId, 23111, 0, 1, "Interfaces/CollectionLog/TAB", 96, 20, "Select Clue Scroll", 1, 1, 574);
 		widget.child(frame++, nextChildId++, 19 + 96 + 96 + 96 + 96, 47);
 		addText(nextChildId, "Other", tda, 1, 0xFF9300, true, true);
 		widget.child(frame++, nextChildId++, 60 + 96 + 96 + 96 + 96, 50);
-		
+
 		int itemScrollId = nextChildId;
 		RSInterface scroll = addInterface(itemScrollId);
 		widget.child(frame++, itemScrollId++, 232, 114);
 		int itemScrollFrame = 0;
 		scroll.width = 250;
-		scroll.height = 200;
-		scroll.scrollMax = 2000;
+		scroll.height = 150;
+		scroll.scrollMax = 1000;
 		scroll.totalChildren(1);
-		
+
 		addToItemGroup(itemScrollId, 6, 33, 9, 6, false, null, null, null);
 		scroll.child(itemScrollFrame++, itemScrollId++, 0, 0);
+
+		int claimID = itemScrollId;
+		RSInterface claim = addInterface(claimID);
+		System.out.println(claimID);
+		widget.child(frame++, claimID++, 223, 255);
+		int itemClaimFrame = 0;
+		claim.totalChildren(5);
+		addSprite(claimID + 1, 0, "Interfaces/CollectionLog/box");
+		addToItemGroup(claimID + 2, 6, 20, 5, 6, false, "", "", "");
+		configHoverButtonNew(claimID+3, "Claim", "Interfaces/CollectionLog/claim", 0, 1, 0, 1, false);
+		addText(claimID+4, "@cr1@ Rewards for completing log:", tda, 0, 16750623, false, true);
+		addText(claimID+5, "Claim", tda, 2, 16750623, true, true);
+
+		claim.child(itemClaimFrame++, claimID+1, 2, 12);
+		claim.child(itemClaimFrame++, claimID+2, 7, 21);
+		claim.child(itemClaimFrame++, claimID+3, 200, 16);
+		claim.child(itemClaimFrame++, claimID+4, 6, 1);
+		claim.child(itemClaimFrame++, claimID+5, 236, 36);
+
 	}
 	
 	/**

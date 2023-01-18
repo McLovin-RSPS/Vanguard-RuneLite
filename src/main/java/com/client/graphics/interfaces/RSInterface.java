@@ -2356,6 +2356,22 @@ public class RSInterface {
 
 	public int spriteOpacity;
 
+	public static void configHoverButtonNew(int id, String tooltip, String spriteName, int sprite2, int sprite1, int enabledAltSprite, int disabledAltSprite, boolean active, int... buttonsToDisable) {
+		RSInterface tab = addInterface(id);
+		tab.tooltip = tooltip;
+		tab.atActionType = 1;
+		tab.type = 11;
+		tab.sprite2 = imageLoader(sprite2, spriteName);
+		tab.sprite1 = imageLoader(sprite1, spriteName);
+		tab.width = tab.sprite2.myWidth;
+		tab.height = tab.sprite1.myHeight;
+		tab.enabledAltSprite = imageLoader(enabledAltSprite, spriteName);
+		tab.disabledAltSprite = imageLoader(disabledAltSprite, spriteName);
+		tab.buttonsToDisable = buttonsToDisable;
+		tab.active = active;
+		tab.toggled = active;
+		tab.spriteOpacity = 255;
+	}
 	public static void configHoverButton(int id, String tooltip, int sprite2, int sprite1, int enabledAltSprite,
 										  int disabledAltSprite, boolean active, int... buttonsToDisable) {
 		RSInterface tab = addInterface(id);

@@ -38,7 +38,7 @@ public class Configuration {
 
 	public static final String CLIENT_TITLE = "Vanguard | ";
 	public static final String WEBSITE = "https://discord.gg/g6hBw3ws6w";
-	public static final String DEDICATED_SERVER_ADDRESS = LOCAL_HOST ? "158.69.62.205" : "158.69.62.205";// put ur vps ip here
+	public static final String DEDICATED_SERVER_ADDRESS = "0.0.0.0"; //158.69.62.205
 	public static final String TEST_SERVER_ADDRESS = LOCAL_HOST ? "158.69.62.205" : "158.69.62.205";
 	public static final int PORT = 43594;
 	public static final int TEST_PORT = 43595;
