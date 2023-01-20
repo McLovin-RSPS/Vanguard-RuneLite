@@ -17,7 +17,7 @@ public class Configuration {
 	 * the player has the most up-to-date client, otherwise they
 	 * will receive an error on login to update their client.
 	 */
-	public static final int CLIENT_VERSION = 231;
+	public static final int CLIENT_VERSION = 230;
 
 	/**
 	 * Cache version is written to the cache folder inside a version file.
