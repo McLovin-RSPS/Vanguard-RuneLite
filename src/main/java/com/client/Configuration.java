@@ -17,15 +17,15 @@ public class Configuration {
 	 * the player has the most up-to-date client, otherwise they
 	 * will receive an error on login to update their client.
 	 */
-	public static final int CLIENT_VERSION = 230;
-// alright imma take off for few ill call message when im back
+	public static final int CLIENT_VERSION = 231;
+
 	/**
 	 * Cache version is written to the cache folder inside a version file.
 	 * This is read on startup to tell if the cache is out of date or not.
 	 */
-	public static final int CACHE_VERSION = 104; // Change this up one when making cache updates.
+	public static final int CACHE_VERSION = 105; // Change this up one when making cache updates.
 
-	public static final String CACHE_LINK = "https://www.dropbox.com/s/72uinrtftz926gw/cacheRL.zip?dl=1";
+	public static final String CACHE_LINK = "http://vanguard317.com/resources/cache.zip";
 
 	/**
 	 * The server version. The cache path is append with a _v1/2/3 etc for the version number
@@ -38,7 +38,7 @@ public class Configuration {
 
 	public static final String CLIENT_TITLE = "Vanguard | ";
 	public static final String WEBSITE = "https://discord.gg/g6hBw3ws6w";
-	public static final String DEDICATED_SERVER_ADDRESS = "0.0.0.0"; //158.69.62.205
+	public static final String DEDICATED_SERVER_ADDRESS = "158.69.62.205"; //158.69.62.205
 	public static final String TEST_SERVER_ADDRESS = LOCAL_HOST ? "158.69.62.205" : "158.69.62.205";
 	public static final int PORT = 43594;
 	public static final int TEST_PORT = 43595;

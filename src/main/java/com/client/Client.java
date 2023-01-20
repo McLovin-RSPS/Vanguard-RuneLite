@@ -10864,7 +10864,7 @@ public class Client extends GameEngine implements RSClient {
 				//repackCacheIndex(2);
 			}
 
-			packCustomModels();
+			//packCustomModels();
 			//packCustomMaps();
 
 
