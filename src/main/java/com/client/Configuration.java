@@ -8,7 +8,7 @@ public class Configuration {
 	public static int frameHeight = 503;
 
 	// set this to true for local host false for live vps server
-	public static boolean LOCAL_HOST = false;// Change to false for live client.
+	public static boolean LOCAL_HOST = true;// Change to false for live client.
 
 	public static boolean DEBUG_MODE = false;
 
@@ -38,8 +38,8 @@ public class Configuration {
 
 	public static final String CLIENT_TITLE = "Vanguard | ";
 	public static final String WEBSITE = "https://discord.gg/g6hBw3ws6w";
-	public static final String DEDICATED_SERVER_ADDRESS = "158.69.62.205"; //158.69.62.205
-	public static final String TEST_SERVER_ADDRESS = LOCAL_HOST ? "158.69.62.205" : "158.69.62.205";
+	public static final String DEDICATED_SERVER_ADDRESS = "127.0.0.1"; //127.0.0.1
+	public static final String TEST_SERVER_ADDRESS = LOCAL_HOST ? "127.0.0.1" : "127.0.0.1";
 	public static final int PORT = 43594;
 	public static final int TEST_PORT = 43595;
 	public static final int CACHE_FOLDER_VERSION = 1;
